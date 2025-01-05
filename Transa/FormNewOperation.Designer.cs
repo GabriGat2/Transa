@@ -34,6 +34,9 @@ namespace Transa
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.butAggiorna = new System.Windows.Forms.Button();
+            this.comboBoxTipoOperazione = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.textDataOperazione = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -44,7 +47,7 @@ namespace Transa
             this.textTotaleValoreSorgente = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBoxTipoOperazioneSorgente = new System.Windows.Forms.ComboBox();
+            this.comboBoxTipoSottocontiSorgente = new System.Windows.Forms.ComboBox();
             this.radioOperazioneSorgenteMultipla = new System.Windows.Forms.RadioButton();
             this.butAggiornaSorgente = new System.Windows.Forms.Button();
             this.textNotaSorgente = new System.Windows.Forms.TextBox();
@@ -62,7 +65,7 @@ namespace Transa
             this.radioOperazioneDestinazioneMultipla = new System.Windows.Forms.RadioButton();
             this.textTotaleValoreDestinazione = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxTipoOperazioneDestinazione = new System.Windows.Forms.ComboBox();
+            this.comboBoxTipoSottocontiDestinazione = new System.Windows.Forms.ComboBox();
             this.butAggiornaDestinazione = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textNotaDestinazione = new System.Windows.Forms.TextBox();
@@ -133,6 +136,9 @@ namespace Transa
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.butAggiorna);
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxTipoOperazione);
+            this.splitContainer1.Panel1.Controls.Add(this.label14);
             this.splitContainer1.Panel1.Controls.Add(this.textDataOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -147,11 +153,42 @@ namespace Transa
             this.splitContainer1.SplitterDistance = 80;
             this.splitContainer1.TabIndex = 4;
             // 
+            // butAggiorna
+            // 
+            this.butAggiorna.Location = new System.Drawing.Point(1068, 48);
+            this.butAggiorna.Name = "butAggiorna";
+            this.butAggiorna.Size = new System.Drawing.Size(75, 23);
+            this.butAggiorna.TabIndex = 13;
+            this.butAggiorna.Text = "Aggiorna";
+            this.butAggiorna.UseVisualStyleBackColor = true;
+            this.butAggiorna.Click += new System.EventHandler(this.butAggiorna_Click);
+            // 
+            // comboBoxTipoOperazione
+            // 
+            this.comboBoxTipoOperazione.FormattingEnabled = true;
+            this.comboBoxTipoOperazione.Items.AddRange(new object[] {
+            "@",
+            "Cnt",
+            "Dep"});
+            this.comboBoxTipoOperazione.Location = new System.Drawing.Point(911, 48);
+            this.comboBoxTipoOperazione.Name = "comboBoxTipoOperazione";
+            this.comboBoxTipoOperazione.Size = new System.Drawing.Size(150, 21);
+            this.comboBoxTipoOperazione.TabIndex = 11;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(822, 48);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(83, 13);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "Tipo operazione";
+            // 
             // textDataOperazione
             // 
-            this.textDataOperazione.Location = new System.Drawing.Point(861, 22);
+            this.textDataOperazione.Location = new System.Drawing.Point(911, 22);
             this.textDataOperazione.Name = "textDataOperazione";
-            this.textDataOperazione.Size = new System.Drawing.Size(132, 20);
+            this.textDataOperazione.Size = new System.Drawing.Size(150, 20);
             this.textDataOperazione.TabIndex = 6;
             // 
             // label7
@@ -195,7 +232,7 @@ namespace Transa
             this.splitContainer4.Panel1.Controls.Add(this.textTotaleValoreSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.label10);
             this.splitContainer4.Panel1.Controls.Add(this.label8);
-            this.splitContainer4.Panel1.Controls.Add(this.comboBoxTipoOperazioneSorgente);
+            this.splitContainer4.Panel1.Controls.Add(this.comboBoxTipoSottocontiSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.radioOperazioneSorgenteMultipla);
             this.splitContainer4.Panel1.Controls.Add(this.butAggiornaSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.textNotaSorgente);
@@ -254,21 +291,21 @@ namespace Transa
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(339, 81);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(83, 13);
+            this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Tipo operazione";
+            this.label8.Text = "Tipo sottoconti";
             // 
-            // comboBoxTipoOperazioneSorgente
+            // comboBoxTipoSottocontiSorgente
             // 
-            this.comboBoxTipoOperazioneSorgente.FormattingEnabled = true;
-            this.comboBoxTipoOperazioneSorgente.Items.AddRange(new object[] {
+            this.comboBoxTipoSottocontiSorgente.FormattingEnabled = true;
+            this.comboBoxTipoSottocontiSorgente.Items.AddRange(new object[] {
             "@",
             "Cnt",
             "Dep"});
-            this.comboBoxTipoOperazioneSorgente.Location = new System.Drawing.Point(467, 75);
-            this.comboBoxTipoOperazioneSorgente.Name = "comboBoxTipoOperazioneSorgente";
-            this.comboBoxTipoOperazioneSorgente.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxTipoOperazioneSorgente.TabIndex = 8;
+            this.comboBoxTipoSottocontiSorgente.Location = new System.Drawing.Point(467, 75);
+            this.comboBoxTipoSottocontiSorgente.Name = "comboBoxTipoSottocontiSorgente";
+            this.comboBoxTipoSottocontiSorgente.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxTipoSottocontiSorgente.TabIndex = 8;
             // 
             // radioOperazioneSorgenteMultipla
             // 
@@ -285,9 +322,9 @@ namespace Transa
             // 
             this.butAggiornaSorgente.Location = new System.Drawing.Point(15, 73);
             this.butAggiornaSorgente.Name = "butAggiornaSorgente";
-            this.butAggiornaSorgente.Size = new System.Drawing.Size(75, 23);
+            this.butAggiornaSorgente.Size = new System.Drawing.Size(114, 23);
             this.butAggiornaSorgente.TabIndex = 6;
-            this.butAggiornaSorgente.Text = "Aggiorna";
+            this.butAggiornaSorgente.Text = "Aggiorna sorgente";
             this.butAggiornaSorgente.UseVisualStyleBackColor = true;
             this.butAggiornaSorgente.Click += new System.EventHandler(this.butAggiornaSorgente_Click);
             // 
@@ -365,7 +402,7 @@ namespace Transa
             this.splitContainer3.Panel1.Controls.Add(this.radioOperazioneDestinazioneMultipla);
             this.splitContainer3.Panel1.Controls.Add(this.textTotaleValoreDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label13);
-            this.splitContainer3.Panel1.Controls.Add(this.comboBoxTipoOperazioneDestinazione);
+            this.splitContainer3.Panel1.Controls.Add(this.comboBoxTipoSottocontiDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.butAggiornaDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label5);
             this.splitContainer3.Panel1.Controls.Add(this.textNotaDestinazione);
@@ -398,9 +435,9 @@ namespace Transa
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(336, 84);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 13);
+            this.label9.Size = new System.Drawing.Size(77, 13);
             this.label9.TabIndex = 11;
-            this.label9.Text = "Tipo operazione";
+            this.label9.Text = "Tipo sottoconti";
             // 
             // label12
             // 
@@ -438,25 +475,25 @@ namespace Transa
             this.label13.TabIndex = 14;
             this.label13.Text = "Totale Valore";
             // 
-            // comboBoxTipoOperazioneDestinazione
+            // comboBoxTipoSottocontiDestinazione
             // 
-            this.comboBoxTipoOperazioneDestinazione.FormattingEnabled = true;
-            this.comboBoxTipoOperazioneDestinazione.Items.AddRange(new object[] {
+            this.comboBoxTipoSottocontiDestinazione.FormattingEnabled = true;
+            this.comboBoxTipoSottocontiDestinazione.Items.AddRange(new object[] {
             "@",
             "Cnt",
             "Dep"});
-            this.comboBoxTipoOperazioneDestinazione.Location = new System.Drawing.Point(464, 78);
-            this.comboBoxTipoOperazioneDestinazione.Name = "comboBoxTipoOperazioneDestinazione";
-            this.comboBoxTipoOperazioneDestinazione.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxTipoOperazioneDestinazione.TabIndex = 10;
+            this.comboBoxTipoSottocontiDestinazione.Location = new System.Drawing.Point(464, 78);
+            this.comboBoxTipoSottocontiDestinazione.Name = "comboBoxTipoSottocontiDestinazione";
+            this.comboBoxTipoSottocontiDestinazione.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxTipoSottocontiDestinazione.TabIndex = 10;
             // 
             // butAggiornaDestinazione
             // 
-            this.butAggiornaDestinazione.Location = new System.Drawing.Point(12, 76);
+            this.butAggiornaDestinazione.Location = new System.Drawing.Point(12, 75);
             this.butAggiornaDestinazione.Name = "butAggiornaDestinazione";
-            this.butAggiornaDestinazione.Size = new System.Drawing.Size(75, 23);
+            this.butAggiornaDestinazione.Size = new System.Drawing.Size(126, 23);
             this.butAggiornaDestinazione.TabIndex = 12;
-            this.butAggiornaDestinazione.Text = "Aggiorna";
+            this.butAggiornaDestinazione.Text = "Aggiorna destinazione";
             this.butAggiornaDestinazione.UseVisualStyleBackColor = true;
             this.butAggiornaDestinazione.Click += new System.EventHandler(this.butAggiornaDestinazione_Click);
             // 
@@ -581,10 +618,10 @@ namespace Transa
         private System.Windows.Forms.DataGridViewTextBoxColumn ColNotaDst;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConContoDst;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColValoreDst;
-        private System.Windows.Forms.ComboBox comboBoxTipoOperazioneSorgente;
+        private System.Windows.Forms.ComboBox comboBoxTipoSottocontiSorgente;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBoxTipoOperazioneDestinazione;
+        private System.Windows.Forms.ComboBox comboBoxTipoSottocontiDestinazione;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textDeltaValoreSorgente;
         private System.Windows.Forms.Label label11;
@@ -595,5 +632,8 @@ namespace Transa
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBoxContoSorgente;
         private System.Windows.Forms.ComboBox comboBoxContoDestinazione;
+        private System.Windows.Forms.ComboBox comboBoxTipoOperazione;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button butAggiorna;
     }
 }

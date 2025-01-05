@@ -145,15 +145,22 @@ namespace Transa
             "GG",
             "LC",
         };
-
+        /// <summary>
+        /// Tipo Sottoconti
+        /// </summary>
+        public string[] TipoSottoconti =
+        {
+            "Single",
+            "Cnt",
+            "Dep",
+            "All"
+        };
         /// <summary>
         /// Tipo Operazione
         /// </summary>
         public string[] TipoOperazione = 
         {
-            "Single",
-            "Cnt",
-            "Dep",
+            "Transition",
             "Open",
             "Close"
         };

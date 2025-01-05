@@ -50,16 +50,24 @@ namespace Transa
         /// </summary>\
         private void Inizializzazione()
         {
-            // inizializza le conmbo box per la selezione del tipo di operazione
-            comboBoxTipoOperazioneSorgente.Items.Clear();
-            comboBoxTipoOperazioneDestinazione.Items.Clear();
+            // inizializza la combobox per la selezione del tipo di operazione
+            comboBoxTipoOperazione.Items.Clear();
             for (int i = 0; i < lData.TipoOperazione.Length; i++)
             {
-                comboBoxTipoOperazioneSorgente.Items.Add(lData.TipoOperazione[i]);
-                comboBoxTipoOperazioneDestinazione.Items.Add(lData.TipoOperazione[i]);
+                comboBoxTipoOperazione.Items.Add(lData.TipoOperazione[i]);
             }
-            comboBoxTipoOperazioneSorgente.SelectedIndex = 0;
-            comboBoxTipoOperazioneDestinazione.SelectedIndex = 0;
+            comboBoxTipoOperazione.SelectedIndex = 0;
+
+            // inizializza le combobox per la selezione del tipo di sottoconti
+            comboBoxTipoSottocontiSorgente.Items.Clear();
+            comboBoxTipoSottocontiDestinazione.Items.Clear();
+            for (int i = 0; i < lData.TipoSottoconti.Length; i++)
+            {
+                comboBoxTipoSottocontiSorgente.Items.Add(lData.TipoSottoconti[i]);
+                comboBoxTipoSottocontiDestinazione.Items.Add(lData.TipoSottoconti[i]);
+            }
+            comboBoxTipoSottocontiSorgente.SelectedIndex = 0;
+            comboBoxTipoSottocontiDestinazione.SelectedIndex = 0;
         }
         /// <summary>
         /// DEBUG: inizializzazione caselle base
@@ -83,53 +91,43 @@ namespace Transa
         /// <param name="e"></param>
         private void butAggiornaSorgente_Click(object sender, EventArgs e)
         {
+            AggiornaSorgente();
+        }
+        // Aggiorna la sezione sorgente
+        private void AggiornaSorgente()
+        {
             string[] subOperazione = new string[3];
 
+            // estra il tipo di sottoconto attivo
+            string contiSelezionati = comboBoxTipoSottocontiSorgente.Text;
 
-            // controlla se è una operazione singola o complessa
-            if (!radioOperazioneSorgenteMultipla.Checked)
+            // esegue l'operazione richiesta
+            switch (contiSelezionati)
             {
-                subOperazione[0] = textNotaSorgente.Text;
-                subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
-                subOperazione[2] = "";
+                case "Single":
+                    subOperazione[0] = textNotaSorgente.Text;
+                    subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
+                    subOperazione[2] = "";
 
-                dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+                    dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+                    break;
+
+                case "Cnt":
+                case "Dep":
+                case "All":
+                    AggiornaSorgenteMultipla(contiSelezionati);
+                    break;
+
+                default:
+                    break;
             }
-            else
-            {
-                // estrae il top di operazione selezionata
-                string TipoOperazione = comboBoxTipoOperazioneSorgente.Text;
-
-                switch (TipoOperazione)
-                {
-                    case "Single":
-                        break;
-                    case "Cnt":
-                    case "Dep":
-                        AggiornaSorgenteMultipla();
-                        break;
-                    case "Open":
-                        OperazioneOpen(true);
-                        break;
-                    case "Close":
-                        //OperazioneOpen(true);
-                        break;
-                    default:
-                        break;
-
-                }    
-
-
-                //AggiornaSorgenteMultipla();
-            }
-
             // Aggiorna i totalizzatori
             AggiornaTotalizzatoriSorgente();
         }
         /// <summary>
         /// Aggiorna la tabella sorgente con i sottoconti multipli
         /// </summary>
-        private void AggiornaSorgenteMultipla()
+        private void AggiornaSorgenteMultipla(string contiSelezionati)
         {
             // svuota la tabella
             int nRows = dataGridViewSorgenteOperazione.Rows.Count - 2;
@@ -142,102 +140,94 @@ namespace Transa
             string contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
             string contoSorgenteBase = GetContoSorgente(SezioneConto.ContoBase);
 
-            // Aggiunge il sottoconto origine
+            // Aggiunge il sottoconto base
             subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase;
             subOperazione[1] = contoSorgenteCompleto;
             subOperazione[2] = "10";
             dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
 
-            switch (comboBoxTipoOperazioneSorgente.Text)
-            { 
-                case "Cnt":
-                    // Aggiunge il sottoconto base
-                    subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt";
-                    subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-                    subOperazione[2] = "20";
+
+            // aggiunge i sotto conti del gruppo Cnt
+            if ((contiSelezionati == "Cnt") || (contiSelezionati == "All"))
+            {
+                // Aggiunge il sottoconto base Cnt
+                subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt";
+                subOperazione[1] = contoSorgenteCompleto + ":Cnt";
+                subOperazione[2] = "20";
+                dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+
+                // aggiunge i sottoconti
+                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                {
+                    subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                    subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                    subOperazione[2] = (100 * (i + 1)).ToString();
                     dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+                }
 
-                    // aggiunge i sottoconti
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                    {
-                        subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt:Cnt-" + lData.ContiMultipli[i]; 
-                        subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[2] = (100 * (i+1)).ToString();
-                        dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
-                    }
-                    break;
+            }
 
-                case "Dep":
-                    // Aggiunge il conto base
-                    subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep";
-                    subOperazione[1] = contoSorgenteCompleto + ":Dep";
-                    subOperazione[2] = "30";
+            // aggiunge i sotto conti del gruppo Dep
+            if ((contiSelezionati == "Dep") || (contiSelezionati == "All"))
+            {
+                // Aggiunge il conto base Dep
+                subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep";
+                subOperazione[1] = contoSorgenteCompleto + ":Dep";
+                subOperazione[2] = "30";
+                dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+
+                // aggiunge i sottoconti del gruppo Dep
+                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                {
+                    subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep:Dep-" + lData.ContiMultipli[i];
+                    subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
+                    subOperazione[2] = (100 * (i + 1)).ToString();
                     dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
-
-                    // aggiunge i sottoconti
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                    {
-                        subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[2] = (100 * (i+1)).ToString();
-                        dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
-                    }
-                    break;
-
-                default:
-                    DialogResult = MessageBox.Show("Selezionare il sottoconto oppure deselezionare Operazione multipla",
-                                                   "Non è selezionato il sottoconto",
-                                                   MessageBoxButtons.OKCancel);
-
-                    break;
+                }
             }
         }
 
         private void butAggiornaDestinazione_Click(object sender, EventArgs e)
         {
+            AggiornaDestinazione();
+        }
+        /// <summary>
+        /// Aggiorna la sezione destinazione
+        /// </summary>
+        private void AggiornaDestinazione()
+        {
             string[] subOperazione = new string[3];
 
-
-            // controlla se è una operazione singola o complessa
-            if (!radioOperazioneDestinazioneMultipla.Checked)
+            // estra il tipo di sottoconto attivo
+            string contiSelezionati = comboBoxTipoSottocontiDestinazione.Text;
+            
+            // esegue l'operazione richiesta
+            switch (contiSelezionati)
             {
-                subOperazione[0] = textNotaDestinazione.Text;
-                subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
-                subOperazione[2] = "";
+                case "Single":
+                    subOperazione[0] = textNotaDestinazione.Text;
+                    subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
+                    subOperazione[2] = "";
 
-                dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+                    dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+                    break;
+
+                case "Cnt":
+                case "Dep":
+                case "All":
+                    AggiornaDestinazioneMultipla(contiSelezionati);
+                    break;
+
+                default:
+                    break;
             }
-            else
-            {
-                // estrae il top di operazione selezionata
-                string TipoOperazione = comboBoxTipoOperazioneSorgente.Text;
-
-                switch (TipoOperazione)
-                {
-                    case "Single":
-                        break;
-                    case "Cnt":
-                    case "Dep":
-                        AggiornaDestinazioneMultipla();
-                        break;
-                    case "Open":
-                        OperazioneOpen(false);
-                        break;
-                    case "Close":
-                        //OperazioneOpen(true);
-                        break;
-                    default:
-                        break;
-
-                }
-                    //AggiornaDestinazioneMultipla();
-            }
-
             // Aggiorna i totalizzatori
             AggiornaTotalizzatoriDestinazione();
         }
-
-        private void AggiornaDestinazioneMultipla()
+        /// <summary>
+        /// Aggiorna la sezione destinazioni con conti multipli
+        /// </summary>
+        private void AggiornaDestinazioneMultipla(string contiSelezionati)
         {
             // svuota la tabella
             int nRows = dataGridViewDestinazioneOperazione.Rows.Count - 2;
@@ -251,55 +241,51 @@ namespace Transa
             string contoDestinazioneBase = GetContoDestinazione(SezioneConto.ContoBase);
 
 
-            // Aggiunge il sottoconto origine
+            // Aggiunge il sottoconto base
             subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase;
             subOperazione[1] = contoDestinazioneCompleto;
             subOperazione[2] = "10";
             dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
 
-            switch (comboBoxTipoOperazioneDestinazione.Text)
+            // aggiunge i sotto conti del gruppo Cnt
+            if ((contiSelezionati == "Cnt") || (contiSelezionati == "All"))
             {
-                case "Cnt":
-                    // Aggiunge il sottoconto base
-                    subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt";
-                    subOperazione[1] = contoDestinazioneCompleto + ":Cnt";
-                    subOperazione[2] = "20";
+                // Aggiunge il sottoconto base Cnt
+                subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt";
+                subOperazione[1] = contoDestinazioneCompleto + ":Cnt";
+                subOperazione[2] = "20";
+                dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+
+                // aggiunge i sottoconti Cnt
+                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                {
+                    subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                    subOperazione[1] = contoDestinazioneCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i]; ;
+                    subOperazione[2] = (100 * (i + 1)).ToString();
                     dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+                }
 
-                    // aggiunge i sottoconti
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                    {
-                        subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoDestinazioneCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i]; ;
-                        subOperazione[2] = (100 * (i+1)).ToString();
-                        dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
-                    }
-                    break;
-
-                case "Dep":
-                    // Aggiunge il conto base
-                    subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep";
-                    subOperazione[1] = contoDestinazioneCompleto + ":Dep";
-                    subOperazione[2] = "20";
-                    dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
-
-                    // aggiunge i sottoconti
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                    {
-                        subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoDestinazioneCompleto + ":Dep:Dep-" + lData.ContiMultipli[i]; ;
-                        subOperazione[2] = (100 * (i+1)).ToString();
-                    dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
-                    }
-                    break;
-
-                default:
-                    DialogResult = MessageBox.Show("Selezionare il sottoconto oppure deselezionare Operazione multipla",
-                                                   "Non è selezionato il sottoconto",
-                                                   MessageBoxButtons.OKCancel);
-
-                    break;
             }
+
+            // aggiunge i sotto conti del gruppo Dep
+            if ((contiSelezionati == "Dep") || (contiSelezionati == "All"))
+            {
+                // Aggiunge il conto base Dep
+                subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep";
+                subOperazione[1] = contoDestinazioneCompleto + ":Dep";
+                subOperazione[2] = "20";
+                dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+
+                // aggiunge i sottoconti Dep
+                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                {
+                    subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep:Dep-" + lData.ContiMultipli[i];
+                    subOperazione[1] = contoDestinazioneCompleto + ":Dep:Dep-" + lData.ContiMultipli[i]; ;
+                    subOperazione[2] = (100 * (i + 1)).ToString();
+                    dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
+                }
+            }
+
         }
 
         /// <summary>
@@ -726,6 +712,57 @@ namespace Transa
         {
             AggiornaTotalizzatoriSorgente();
             AggiornaTotalizzatoriDestinazione();
+        }
+        /// <summary>
+        /// Aggiorna in contemporaneamente i consi sorgente e destinazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butAggiorna_Click(object sender, EventArgs e)
+        {
+            string[] subOperazione = new string[3];
+
+
+            // controlla se è una operazione singola o complessa
+            if (!radioOperazioneSorgenteMultipla.Checked)
+            {
+                subOperazione[0] = textNotaSorgente.Text;
+                subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
+                subOperazione[2] = "";
+
+                dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+            }
+            else
+            {
+                // estrae il top di operazione selezionata
+                string TipoOperazione = comboBoxTipoSottocontiSorgente.Text;
+
+                //switch (TipoOperazione)
+                //{
+                //    case "Single":
+                //        break;
+                //    case "Cnt":
+                //    case "Dep":
+                //        AggiornaSorgenteMultipla();
+                //        break;
+                //    case "Open":
+                //        OperazioneOpen(true);
+                //        break;
+                //    case "Close":
+                //        //OperazioneOpen(true);
+                //        break;
+                //    default:
+                //        break;
+
+                //}
+
+
+                //AggiornaSorgenteMultipla();
+            }
+
+            // Aggiorna i totalizzatori
+            AggiornaTotalizzatoriSorgente();
+
         }
     }
 }
