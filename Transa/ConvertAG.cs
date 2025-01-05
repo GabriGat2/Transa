@@ -9,7 +9,7 @@ namespace Transa
     public static class ConvertAG
     {
         /// <summary>
-        /// Sonverte una stringa in double.
+        /// Converte una stringa in double.
         /// Se la stringa è vuota o cisono problemi rende 0
         /// </summary>
         /// <param name="value"></param>
@@ -29,5 +29,29 @@ namespace Transa
                 return 0;
             }
         }
+        /// <summary>
+        /// Verifica se la stringa può essere convertita in double
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsDouble(string value)
+        {
+            try
+            {
+                double tmp = Convert.ToDouble(value);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+        }
+
+
+
     }
 }

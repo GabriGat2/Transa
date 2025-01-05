@@ -356,36 +356,27 @@ namespace Transa
             // controla se deve filtare il valore del campo
             for (int i = 0; i < transactionDataGridView.Columns.Count; i++)
             {
-                if (true) 
-                //if (! lData.transitionColumnsToFilter[i])
-                { 
-
-                    // assegna il carattere di incapsulamento iniziale
-                    switch (lData.EncapsulationCharacterOfATransitionField[i])
-                    {
-                        case '"':
-                            line += '"';
-                            break;
-                        default:
-                            break;
-                    }
-
-                    // assegna il campo della tabella    
-                    line += transactionDataGridView.Rows[row].Cells[i].Value;
-
-                    // assegna il carattere di incapsulamento finale
-                    switch (lData.EncapsulationCharacterOfATransitionField[i])
-                    {
-                        case '"':
-                            line += '"';
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
+                // assegna il carattere di incapsulamento iniziale
+                switch (lData.EncapsulationCharacterOfATransitionField[i])
                 {
-                    line += lData.FilteredCellValuesOfTheTrasizioneLine[i];
+                    case '"':
+                        line += '"';
+                        break;
+                    default:
+                        break;
+                }
+
+                // assegna il campo della tabella    
+                line += transactionDataGridView.Rows[row].Cells[i].Value;
+
+                // assegna il carattere di incapsulamento finale
+                switch (lData.EncapsulationCharacterOfATransitionField[i])
+                {
+                    case '"':
+                        line += '"';
+                        break;
+                    default:
+                        break;
                 }
 
                 // se non è l'ultimo campo aggiunge il separatore virgola ','
@@ -429,8 +420,14 @@ namespace Transa
         {
             FormNewOperation dlg = new FormNewOperation(ref lData);
 
-            // crea la nuova operazione
-            dlg.ShowDialog();
+            //int cnt = 0;
+            //bool run = true;
+            //while (run)
+            //{ 
+                // crea la nuova operazione
+                dlg.ShowDialog();
+            //    run = --cnt > 0;
+            //}
 
             // Svuota la tabelle delle transizioni
             int nRows = transactionDataGridView.Rows.Count - 2;
@@ -442,22 +439,26 @@ namespace Transa
             // rigenera la tabella delle transizioni
             RigeneratransactionDataGridView();
 
-            // crea le transizioni sorgente
-            bool start = true;
-            string[] campi;
-            while ((campi = dlg.GetNextSourceOperation(start)) != null)
-            {
-                start = false;
-                transactionDataGridView.Rows.Add(campi);
-            }
+            // Estre le trasizioni dell'operazione
+            dlg.GetTransiction(ref transactionDataGridView);
 
-            // crea le transizioni destinazione
-            start = true;
-            while ((campi = dlg.GetNextDestinationOperation(start)) != null)
-            {
-                start = false;
-                transactionDataGridView.Rows.Add(campi);
-            }
+
+            //// crea le transizioni sorgente
+            //bool start = true;
+            //string[] campi;
+            //while ((campi = dlg.GetNextSourceOperation(start)) != null)
+            //{
+            //    start = false;
+            //    transactionDataGridView.Rows.Add(campi);
+            //}
+
+            //// crea le transizioni destinazione
+            //start = true;
+            //while ((campi = dlg.GetNextDestinationOperation(start)) != null)
+            //{
+            //    start = false;
+            //    transactionDataGridView.Rows.Add(campi);
+            //}
         }
 
         /// <summary>
