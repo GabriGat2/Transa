@@ -107,7 +107,7 @@ namespace Transa
                 case "Single":
                     subOperazione[0] = textNotaSorgente.Text;
                     subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
-                    subOperazione[2] = "";
+                    subOperazione[2] = lData.DEBUG_ValoreDefaultSorgente.ToString();
 
                     dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
                     break;
@@ -143,7 +143,7 @@ namespace Transa
             // Aggiunge il sottoconto base
             subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase;
             subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = "10";
+            subOperazione[2] = lData.DEBUG_ValoreDefaultSorgente.ToString();
             dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
 
 
@@ -153,7 +153,7 @@ namespace Transa
                 // Aggiunge il sottoconto base Cnt
                 subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt";
                 subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-                subOperazione[2] = "20";
+                subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * 10).ToString();
                 dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
 
                 // aggiunge i sottoconti
@@ -161,7 +161,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (100 * (i + 1)).ToString();
+                    subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * (10 + i + 1)).ToString();
                     dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
                 }
 
@@ -173,7 +173,7 @@ namespace Transa
                 // Aggiunge il conto base Dep
                 subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep";
                 subOperazione[1] = contoSorgenteCompleto + ":Dep";
-                subOperazione[2] = "30";
+                subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * 20).ToString();
                 dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
@@ -181,7 +181,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep:Dep-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (100 * (i + 1)).ToString();
+                    subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * (20 + i + 1)).ToString();
                     dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
                 }
             }
@@ -207,7 +207,7 @@ namespace Transa
                 case "Single":
                     subOperazione[0] = textNotaDestinazione.Text;
                     subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
-                    subOperazione[2] = "";
+                    subOperazione[2] = lData.DEBUG_ValoreDefaultDestinazione.ToString();
 
                     dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
                     break;
@@ -244,7 +244,7 @@ namespace Transa
             // Aggiunge il sottoconto base
             subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase;
             subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = "10";
+            subOperazione[2] = lData.DEBUG_ValoreDefaultDestinazione.ToString();
             dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
 
             // aggiunge i sotto conti del gruppo Cnt
@@ -253,7 +253,7 @@ namespace Transa
                 // Aggiunge il sottoconto base Cnt
                 subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt";
                 subOperazione[1] = contoDestinazioneCompleto + ":Cnt";
-                subOperazione[2] = "20";
+                subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * 10).ToString();
                 dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
 
                 // aggiunge i sottoconti Cnt
@@ -261,7 +261,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoDestinazioneCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i]; ;
-                    subOperazione[2] = (100 * (i + 1)).ToString();
+                    subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * (10 + i + 1)).ToString();
                     dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
                 }
 
@@ -273,7 +273,7 @@ namespace Transa
                 // Aggiunge il conto base Dep
                 subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep";
                 subOperazione[1] = contoDestinazioneCompleto + ":Dep";
-                subOperazione[2] = "20";
+                subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * 20).ToString(); ;
                 dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
 
                 // aggiunge i sottoconti Dep
@@ -281,7 +281,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep:Dep-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoDestinazioneCompleto + ":Dep:Dep-" + lData.ContiMultipli[i]; ;
-                    subOperazione[2] = (100 * (i + 1)).ToString();
+                    subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * (20 + i + 1)).ToString(); ;
                     dataGridViewDestinazioneOperazione.Rows.Add(subOperazione);
                 }
             }
@@ -720,48 +720,72 @@ namespace Transa
         /// <param name="e"></param>
         private void butAggiorna_Click(object sender, EventArgs e)
         {
-            string[] subOperazione = new string[3];
+            // recupera il tipo di operazione richiesta
+            string TipoOperazione = comboBoxTipoOperazione.Text;
 
 
-            // controlla se è una operazione singola o complessa
-            if (!radioOperazioneSorgenteMultipla.Checked)
+            // Esegue l'operazione richiesta
+            switch (TipoOperazione)
             {
-                subOperazione[0] = textNotaSorgente.Text;
-                subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
-                subOperazione[2] = "";
+                case "Transition":
+                    AggiornaSorgente();
+                    AggiornaDestinazione();
+                    break;
 
-                dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
-            }
-            else
-            {
-                // estrae il top di operazione selezionata
-                string TipoOperazione = comboBoxTipoSottocontiSorgente.Text;
+                case "Open":
+                case "Close":
+                    break;
+                default:
+                    break;
 
-                //switch (TipoOperazione)
-                //{
-                //    case "Single":
-                //        break;
-                //    case "Cnt":
-                //    case "Dep":
-                //        AggiornaSorgenteMultipla();
-                //        break;
-                //    case "Open":
-                //        OperazioneOpen(true);
-                //        break;
-                //    case "Close":
-                //        //OperazioneOpen(true);
-                //        break;
-                //    default:
-                //        break;
-
-                //}
-
-
-                //AggiornaSorgenteMultipla();
             }
 
-            // Aggiorna i totalizzatori
-            AggiornaTotalizzatoriSorgente();
+
+
+
+
+            //string[] subOperazione = new string[3];
+
+
+            //// controlla se è una operazione singola o complessa
+            //if (!radioOperazioneSorgenteMultipla.Checked)
+            //{
+            //    subOperazione[0] = textNotaSorgente.Text;
+            //    subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
+            //    subOperazione[2] = "";
+
+            //    dataGridViewSorgenteOperazione.Rows.Add(subOperazione);
+            //}
+            //else
+            //{
+            //    // estrae il top di operazione selezionata
+            //    string TipoOperazione = comboBoxTipoSottocontiSorgente.Text;
+
+            //    //switch (TipoOperazione)
+            //    //{
+            //    //    case "Single":
+            //    //        break;
+            //    //    case "Cnt":
+            //    //    case "Dep":
+            //    //        AggiornaSorgenteMultipla();
+            //    //        break;
+            //    //    case "Open":
+            //    //        OperazioneOpen(true);
+            //    //        break;
+            //    //    case "Close":
+            //    //        //OperazioneOpen(true);
+            //    //        break;
+            //    //    default:
+            //    //        break;
+
+            //    //}
+
+
+            //    //AggiornaSorgenteMultipla();
+            //}
+
+            //// Aggiorna i totalizzatori
+            //AggiornaTotalizzatoriSorgente();
 
         }
     }

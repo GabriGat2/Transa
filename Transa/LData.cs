@@ -164,6 +164,16 @@ namespace Transa
             "Open",
             "Close"
         };
+
+        //=======================================================================================================
+        //====== DEBUG
+        //=======================================================================================================
+
+        public double DEBUG_ValoreDefaultSorgente = 1;
+        public double DEBUG_ValoreDefaultDestinazione = 1;
+
+
+
         /// <summary>
         /// Costruttore
         /// </summary>
