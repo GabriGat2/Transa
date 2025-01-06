@@ -34,6 +34,7 @@ namespace Transa
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label15 = new System.Windows.Forms.Label();
             this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
             this.butAggiorna = new System.Windows.Forms.Button();
             this.comboBoxTipoOperazione = new System.Windows.Forms.ComboBox();
@@ -74,6 +75,7 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textNumOperazione = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -136,6 +138,8 @@ namespace Transa
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.textNumOperazione);
+            this.splitContainer1.Panel1.Controls.Add(this.label15);
             this.splitContainer1.Panel1.Controls.Add(this.dateTimeOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.butAggiorna);
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxTipoOperazione);
@@ -153,18 +157,27 @@ namespace Transa
             this.splitContainer1.SplitterDistance = 80;
             this.splitContainer1.TabIndex = 4;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1036, 19);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 13);
+            this.label15.TabIndex = 15;
+            this.label15.Text = "Num";
+            // 
             // dateTimeOperazione
             // 
             this.dateTimeOperazione.CustomFormat = "dd/MM/yyyy";
             this.dateTimeOperazione.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeOperazione.Location = new System.Drawing.Point(911, 16);
+            this.dateTimeOperazione.Location = new System.Drawing.Point(871, 19);
             this.dateTimeOperazione.Name = "dateTimeOperazione";
             this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
             this.dateTimeOperazione.TabIndex = 14;
             // 
             // butAggiorna
             // 
-            this.butAggiorna.Location = new System.Drawing.Point(1068, 48);
+            this.butAggiorna.Location = new System.Drawing.Point(1036, 45);
             this.butAggiorna.Name = "butAggiorna";
             this.butAggiorna.Size = new System.Drawing.Size(75, 23);
             this.butAggiorna.TabIndex = 13;
@@ -179,7 +192,7 @@ namespace Transa
             "@",
             "Cnt",
             "Dep"});
-            this.comboBoxTipoOperazione.Location = new System.Drawing.Point(911, 48);
+            this.comboBoxTipoOperazione.Location = new System.Drawing.Point(871, 45);
             this.comboBoxTipoOperazione.Name = "comboBoxTipoOperazione";
             this.comboBoxTipoOperazione.Size = new System.Drawing.Size(150, 21);
             this.comboBoxTipoOperazione.TabIndex = 11;
@@ -187,7 +200,7 @@ namespace Transa
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(822, 48);
+            this.label14.Location = new System.Drawing.Point(782, 48);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(83, 13);
             this.label14.TabIndex = 7;
@@ -196,7 +209,7 @@ namespace Transa
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(822, 22);
+            this.label7.Location = new System.Drawing.Point(782, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 13);
             this.label7.TabIndex = 4;
@@ -557,6 +570,13 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
+            // textNumOperazione
+            // 
+            this.textNumOperazione.Location = new System.Drawing.Point(1068, 16);
+            this.textNumOperazione.Name = "textNumOperazione";
+            this.textNumOperazione.Size = new System.Drawing.Size(112, 20);
+            this.textNumOperazione.TabIndex = 16;
+            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -637,5 +657,7 @@ namespace Transa
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button butAggiorna;
         private System.Windows.Forms.DateTimePicker dateTimeOperazione;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textNumOperazione;
     }
 }
