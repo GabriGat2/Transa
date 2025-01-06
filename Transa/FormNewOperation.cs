@@ -38,11 +38,11 @@ namespace Transa
         /// <summary>
         /// indice per prelevare operazioni dalla tabella sorgente
         /// </summary>
-        private int GetIndexSorgente = 0;
+        //private int GetIndexSorgente = 0;
         /// <summary>
         /// indice per prelevare operazioni dalla tabella destinazione
         /// </summary>
-        private int GetIndexDestinazione = 0;
+        //private int GetIndexDestinazione = 0;
 
         /// <summary>
         /// Costruttore
@@ -87,7 +87,7 @@ namespace Transa
         {
             textDescrizioneOperazione.Text = "Operazione di prova";
             textValoreOperazione.Text = "1200,45";
-            textDataOperazione.Text = "10/01/2025";
+
 
             textNotaSorgente.Text = "Prelievo da: ";
 
@@ -487,51 +487,51 @@ namespace Transa
         /// </summary>
         /// <param name="start"> = True azzera GetIndexSorgente </param>
         /// <returns></returns>
-        public string[] GetNextSourceOperation_DaCANCELLARE(bool start = false)
-        {
-            if (start)
-                GetIndexSorgente = 0;
-            else
-                GetIndexSorgente++;
+        //public string[] GetNextSourceOperation_DaCANCELLARE(bool start = false)
+        //{
+        //    if (start)
+        //        GetIndexSorgente = 0;
+        //    else
+        //        GetIndexSorgente++;
 
-            if (GetIndexSorgente < (dataGridViewSorgenteOperazione.Rows.Count - 1))
-            {
-                string[] campi = new string[lData.NameColumnsTransition.Length];
+        //    if (GetIndexSorgente < (dataGridViewSorgenteOperazione.Rows.Count - 1))
+        //    {
+        //        string[] campi = new string[lData.NameColumnsTransition.Length];
 
 
-                campi[0] = textDataOperazione.Text;                             //  0 "Data",
-                campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
-                campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
+        //        campi[0] = textDataOperazione.Text;                             //  0 "Data",
+        //        campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
+        //        campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
 
-                campi[3] = "== € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;  //  3 "Descrizione",
+        //        campi[3] = "== € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;  //  3 "Descrizione",
 
-                campi[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
-                campi[5] = lData.FilteredCellValuesOfTheTrasizioneLine[5];      //  5 "Commodity/Valuta",
-                campi[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
-                campi[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
+        //        campi[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
+        //        campi[5] = lData.FilteredCellValuesOfTheTrasizioneLine[5];      //  5 "Commodity/Valuta",
+        //        campi[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
+        //        campi[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
 
-                campi[8] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[0].Value.ToString(); //  8 "Promemoria",
-                campi[9] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
+        //        campi[8] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[0].Value.ToString(); //  8 "Promemoria",
+        //        campi[9] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
 
-                string[] porzioniConto = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString().Split(':');
-                campi[10] = porzioniConto[porzioniConto.Length - 1]; // 10 "Nome del conto",
+        //        string[] porzioniConto = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString().Split(':');
+        //        campi[10] = porzioniConto[porzioniConto.Length - 1]; // 10 "Nome del conto",
 
-                string valore = "-" + dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[2].Value.ToString();
-                string valoreSimb = valore + " €";
-                campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
-                campi[12] = valore;                                             // 12 "Importo Num.",
-                campi[13] = valoreSimb;                                         // 13 "Valore con Simb",
-                campi[14] = valore;                                             // 14 "Valore Num.",
+        //        string valore = "-" + dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[2].Value.ToString();
+        //        string valoreSimb = valore + " €";
+        //        campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
+        //        campi[12] = valore;                                             // 12 "Importo Num.",
+        //        campi[13] = valoreSimb;                                         // 13 "Valore con Simb",
+        //        campi[14] = valore;                                             // 14 "Valore Num.",
 
-                campi[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
-                campi[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
-                campi[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
+        //        campi[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
+        //        campi[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
+        //        campi[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
 
-                return campi;
-            }
-            else
-                return null;
-        }
+        //        return campi;
+        //    }
+        //    else
+        //        return null;
+        //}
         /// <summary>
         /// Genera le trasisioni dalla tabella sorgente
         /// </summary>
@@ -544,8 +544,7 @@ namespace Transa
                 // crea la stringa campi
                 string[] campi = new string[lData.NameColumnsTransition.Length];
 
-
-                campi[0] = textDataOperazione.Text;                             //  0 "Data",
+                campi[0] = dateTimeOperazione.Text;                             //  0 "Data",
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
                 campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
 
@@ -556,13 +555,13 @@ namespace Transa
                 campi[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
                 campi[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
 
-                campi[8] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[0].Value.ToString(); //  8 "Promemoria",
-                campi[9] = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
+                campi[8] = dataGridViewSorgenteOperazione.Rows[i].Cells[0].Value.ToString(); //  8 "Promemoria",
+                campi[9] = dataGridViewSorgenteOperazione.Rows[i].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
 
-                string[] porzioniConto = dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[1].Value.ToString().Split(':');
+                string[] porzioniConto = dataGridViewSorgenteOperazione.Rows[i].Cells[1].Value.ToString().Split(':');
                 campi[10] = porzioniConto[porzioniConto.Length - 1]; // 10 "Nome del conto",
 
-                string valore = "-" + dataGridViewSorgenteOperazione.Rows[GetIndexSorgente].Cells[2].Value.ToString();
+                string valore = "-" + dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString();
                 string valoreSimb = valore + " €";
                 campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
                 campi[12] = valore;                                             // 12 "Importo Num.",
@@ -580,29 +579,20 @@ namespace Transa
 
             return 0;
         }
-
-
-
-
         /// <summary>
-        /// Genera una transizione esaminando la tabella destinazione
-        /// GetIndexDestinazione è incrementato automaticamente
+        /// Genera le trasisioni dalla tabella destinazione
         /// </summary>
-        /// <param name="start"> = True azzera GetIndexDestinazione </param>
+        /// <param name="transactionDataGrid"></param>
         /// <returns></returns>
-        public string[] GetNextDestinationOperation(bool start = false)
+        public uint GeneraTransizioniDestinazione(ref DataGridView transactionDataGrid)
         {
-            if (start)
-                GetIndexDestinazione = 0;
-            else
-                GetIndexDestinazione++;
-
-            if (GetIndexDestinazione < (dataGridViewDestinazioneOperazione.Rows.Count - 1))
+            for (int i = 0; i < (dataGridViewDestinazioneOperazione.Rows.Count - 1); i++)
             {
+                // crea la stringa campi
                 string[] campi = new string[lData.NameColumnsTransition.Length];
 
 
-                campi[0] = textDataOperazione.Text;                             //  0 "Data",
+                campi[0] = dateTimeOperazione.Text;                             //  0 "Data",
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
                 campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
 
@@ -613,13 +603,13 @@ namespace Transa
                 campi[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
                 campi[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
 
-                campi[8] = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[0].Value.ToString(); //  8 "Promemoria",
-                campi[9] = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
+                campi[8] = dataGridViewDestinazioneOperazione.Rows[i].Cells[0].Value.ToString(); //  8 "Promemoria",
+                campi[9] = dataGridViewDestinazioneOperazione.Rows[i].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
 
-                string[] porzioniConto = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[1].Value.ToString().Split(':');
+                string[] porzioniConto = dataGridViewDestinazioneOperazione.Rows[i].Cells[1].Value.ToString().Split(':');
                 campi[10] = porzioniConto[porzioniConto.Length - 1]; // 10 "Nome del conto",
 
-                string valore = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[2].Value.ToString();
+                string valore = dataGridViewDestinazioneOperazione.Rows[i].Cells[2].Value.ToString();
                 string valoreSimb = valore + " €";
                 campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
                 campi[12] = valore;                                             // 12 "Importo Num.",
@@ -630,11 +620,67 @@ namespace Transa
                 campi[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
                 campi[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
 
-                return campi;
+                // Assegna la trasizione generata    
+                transactionDataGrid.Rows.Add(campi);
             }
-            else
-                return null;
+
+
+            return 0;
         }
+
+
+
+        /// <summary>
+        /// Genera una transizione esaminando la tabella destinazione
+        /// GetIndexDestinazione è incrementato automaticamente
+        /// </summary>
+        /// <param name="start"> = True azzera GetIndexDestinazione </param>
+        /// <returns></returns>
+        //public string[] GetNextDestinationOperation_DaCANCELLARE(bool start = false)
+        //{
+        //    if (start)
+        //        GetIndexDestinazione = 0;
+        //    else
+        //        GetIndexDestinazione++;
+
+        //    if (GetIndexDestinazione < (dataGridViewDestinazioneOperazione.Rows.Count - 1))
+        //    {
+        //        string[] campi = new string[lData.NameColumnsTransition.Length];
+
+
+        //        campi[0] = textDataOperazione.Text;                             //  0 "Data",
+        //        campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
+        //        campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
+
+        //        campi[3] = "== € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;  //  3 "Descrizione",
+
+        //        campi[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
+        //        campi[5] = lData.FilteredCellValuesOfTheTrasizioneLine[5];      //  5 "Commodity/Valuta",
+        //        campi[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
+        //        campi[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
+
+        //        campi[8] = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[0].Value.ToString(); //  8 "Promemoria",
+        //        campi[9] = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[1].Value.ToString(); //  9 "Nome completo del conto",
+
+        //        string[] porzioniConto = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[1].Value.ToString().Split(':');
+        //        campi[10] = porzioniConto[porzioniConto.Length - 1]; // 10 "Nome del conto",
+
+        //        string valore = dataGridViewDestinazioneOperazione.Rows[GetIndexDestinazione].Cells[2].Value.ToString();
+        //        string valoreSimb = valore + " €";
+        //        campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
+        //        campi[12] = valore;                                             // 12 "Importo Num.",
+        //        campi[13] = valoreSimb;                                         // 13 "Valore con Simb",
+        //        campi[14] = valore;                                             // 14 "Valore Num.",
+
+        //        campi[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
+        //        campi[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
+        //        campi[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
+
+        //        return campi;
+        //    }
+        //    else
+        //        return null;
+        //}
         /// <summary>
         /// aggiorna il form
         /// </summary>
@@ -922,6 +968,7 @@ namespace Transa
                 case "Transition":
                     // estrae le operazioni sorgente 
                     GeneraTransizioniSorgente(ref transactionDataGrid);
+                    GeneraTransizioniDestinazione(ref transactionDataGrid);
                     break;
                 case "Open":
                 case "Close":

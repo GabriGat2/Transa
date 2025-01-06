@@ -34,10 +34,10 @@ namespace Transa
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
             this.butAggiorna = new System.Windows.Forms.Button();
             this.comboBoxTipoOperazione = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textDataOperazione = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
@@ -136,10 +136,10 @@ namespace Transa
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.dateTimeOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.butAggiorna);
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxTipoOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label14);
-            this.splitContainer1.Panel1.Controls.Add(this.textDataOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.textValoreOperazione);
@@ -152,6 +152,15 @@ namespace Transa
             this.splitContainer1.Size = new System.Drawing.Size(1192, 626);
             this.splitContainer1.SplitterDistance = 80;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // dateTimeOperazione
+            // 
+            this.dateTimeOperazione.CustomFormat = "dd/MM/yyyy";
+            this.dateTimeOperazione.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeOperazione.Location = new System.Drawing.Point(911, 16);
+            this.dateTimeOperazione.Name = "dateTimeOperazione";
+            this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
+            this.dateTimeOperazione.TabIndex = 14;
             // 
             // butAggiorna
             // 
@@ -183,13 +192,6 @@ namespace Transa
             this.label14.Size = new System.Drawing.Size(83, 13);
             this.label14.TabIndex = 7;
             this.label14.Text = "Tipo operazione";
-            // 
-            // textDataOperazione
-            // 
-            this.textDataOperazione.Location = new System.Drawing.Point(911, 22);
-            this.textDataOperazione.Name = "textDataOperazione";
-            this.textDataOperazione.Size = new System.Drawing.Size(150, 20);
-            this.textDataOperazione.TabIndex = 6;
             // 
             // label7
             // 
@@ -609,7 +611,6 @@ namespace Transa
         private System.Windows.Forms.TextBox textNotaDestinazione;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textDataOperazione;
         private System.Windows.Forms.DataGridView dataGridViewSorgenteOperazione;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColNotaSrc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContoSrc;
@@ -635,5 +636,6 @@ namespace Transa
         private System.Windows.Forms.ComboBox comboBoxTipoOperazione;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button butAggiorna;
+        private System.Windows.Forms.DateTimePicker dateTimeOperazione;
     }
 }
