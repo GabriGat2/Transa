@@ -417,8 +417,6 @@ namespace Transa
             // Aggiorna i totalizzazori();
             AggiornaTotalizzatoriSorgente();
         }
-
-
         /// <summary>
         /// Operazione Close:
         /// - Preleva dal gruppo del conto sorgente
@@ -531,6 +529,140 @@ namespace Transa
             // Aggiorna i totalizzazori();
             AggiornaTotalizzatoriSorgente();
         }
+        /// <summary>
+        /// Operazione Zip:
+        /// - Operazione 1:
+        ///     - Preleva dal gruppo del conto sorgente
+        ///     - Deposita nel conto base sorgente
+        /// - Operazione 2    
+        ///     - Preleva dal gruppo sorgente
+        ///     - deposita nel gruppo destinazione
+        /// </summary>
+        private void AggiornaOperazioneZip()
+        {
+            // definisce la stringa per la porzione di transizione
+            string[] subOperazione = new string[3];
+
+            // svuota le tabelle
+            ClearDataGridView(ref dataGridViewSorgenteOperazione);
+            ClearDataGridView(ref dataGridViewDestinazioneOperazione);
+
+            // =============================================================================
+            // - Operazione 1:
+            //     - Preleva dal gruppo del conto sorgente
+            //     - Deposita nel conto base sorgente
+            // =============================================================================
+
+            // compone i conti sorgente e destinazione
+            string contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
+            string contoDestinazioneCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
+
+            // compone promemoria base
+            string promemoriaS = "ZIP ->" + textNotaSorgente.Text + contoSorgenteCompleto;
+            string promemoriaD = "ZIP ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
+
+            // assegna il valori di inizializzazione base dei conti
+            double DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
+            double DEBUG_vDestinazione = DEBUG_vSorgente;
+
+
+            
+            // Compone le trasizioni sorgente 1
+            //==================================================================
+
+            // Aggiunge il sottoconto base
+            subOperazione[0] = promemoriaS;
+            subOperazione[1] = contoSorgenteCompleto;
+            subOperazione[2] = DEBUG_vSorgente.ToString();
+            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+
+            // Aggiunge il sottoconto Cnt
+            subOperazione[0] = promemoriaS + ":Cnt";
+            subOperazione[1] = contoSorgenteCompleto + ":Cnt";
+            subOperazione[2] = (DEBUG_vSorgente * 10).ToString();
+            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+
+            // aggiunge i sottoconti del gruppo Cnt
+            for (int i = 0; i < lData.ContiMultipli.Length; i++)
+            {
+                subOperazione[0] = promemoriaS + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                subOperazione[2] = (DEBUG_vSorgente * (10 + i + 1)).ToString();
+                AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+            }
+
+            // Aggiunge il sottoconto Dep
+            subOperazione[0] = promemoriaS + ":Dep";
+            subOperazione[1] = contoSorgenteCompleto + ":Dep";
+            subOperazione[2] = (DEBUG_vSorgente * 20).ToString();
+            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+
+            // aggiunge i sottoconti del gruppo Dep
+            for (int i = 0; i < lData.ContiMultipli.Length; i++)
+            {
+                subOperazione[0] = promemoriaS + ":Dep:Dep-" + lData.ContiMultipli[i];
+                subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
+                subOperazione[2] = (DEBUG_vSorgente * (20 + i + 1)).ToString();
+                AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+            }
+
+
+            
+            // Compone le trasizioni sorgente destinazione 1
+            //==================================================================
+
+            // Aggiunge il sottoconto base
+            subOperazione[0] = promemoriaD;
+            subOperazione[1] = contoDestinazioneCompleto;
+            subOperazione[2] = DEBUG_vDestinazione.ToString();
+            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+
+
+
+            // =============================================================================
+            // - Operazione 2:
+            //     - Preleva nel conto base sorgente
+            //     - Deposita nel conto destinazione
+            // =============================================================================
+
+            // compone i conti sorgente e destinazione
+            contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
+            contoDestinazioneCompleto = GetContoDestinazione(SezioneConto.ContoCompleto);
+
+            // compone promemoria base
+            promemoriaS = "TOT ->" + textNotaSorgente.Text + contoSorgenteCompleto;
+            promemoriaD = "TOT ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
+
+            // assegna il valori di inizializzazione base dei conti
+            DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
+            DEBUG_vDestinazione = DEBUG_vSorgente;
+
+            // Compone le trasizioni sorgente 2
+            //==================================================================
+
+            // Aggiunge il sottoconto base
+            subOperazione[0] = promemoriaS;
+            subOperazione[1] = contoSorgenteCompleto;
+            subOperazione[2] = DEBUG_vSorgente.ToString();
+            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+
+
+            // Compone le trasizioni sorgente destinazione 2
+            //==================================================================
+
+            // Aggiunge il sottoconto base
+            subOperazione[0] = promemoriaD;
+            subOperazione[1] = contoDestinazioneCompleto;
+            subOperazione[2] = DEBUG_vDestinazione.ToString();
+            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+
+
+
+            // Aggiorna i totalizzazori();
+            AggiornaTotalizzatoriSorgente();
+        }
+
+
         /// <summary>
         /// Il valore di una cella sorgente è cambiato, viene ricalcolato il totale dei valori
         /// </summary>
@@ -985,6 +1117,14 @@ namespace Transa
                 case "Close":
                     AggiornaOperazioneClose();
                     break;
+
+                case "Split":
+                    break;
+
+                case "Zip":
+                    AggiornaOperazioneZip();
+                    break;
+
                 default:
                     break;
 
@@ -1181,5 +1321,68 @@ namespace Transa
             return 0;
         }
 
+        private void comboBoxTipoOperazione_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Estrae il tipo di operazione  attiva
+            string tipoDiOperazione = comboBoxTipoOperazione.Text;
+
+            // Inizializza i campi in funzione del tipo di operazione
+            switch (tipoDiOperazione)
+            {
+                case "Transition":
+                    textDescrizioneOperazione.Text = "Transizione ";
+                    textValoreOperazione.Text = "0";
+                    textNumOperazione.Text = "1";
+                    textNotaSorgente.Text = "Prelievo da -> ";
+                    textNotaDestinazione.Text = "Depositato in -> ";
+
+                    butAggiornaSorgente.Enabled = true;
+                    butAggiornaDestinazione.Enabled = true;
+                    break;
+
+                case "Open":
+                    textDescrizioneOperazione.Text = "Bilancio di apertura -> ";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "80000";
+                    textNotaSorgente.Text = "Prelievo da -> ";
+                    textNotaDestinazione.Text = "Depositato in -> ";
+
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+                    break;
+
+                case "Close":
+                    textDescrizioneOperazione.Text = "Bilancio di chiusura -> ";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "80000";
+                    textNotaSorgente.Text = "Prelievo da -> ";
+                    textNotaDestinazione.Text = "Depositato in -> ";
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+                    break;
+
+                case "Zip":
+                    textDescrizioneOperazione.Text = "Operazione ZIP -> ";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "20000";
+                    textNotaSorgente.Text = "Prelievo da -> ";
+                    textNotaDestinazione.Text = "Depositato in -> ";
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+                    break;
+
+                default:
+                    textDescrizioneOperazione.Text = ") ";
+                    textValoreOperazione.Text = "0";
+                    textNumOperazione.Text = "0";
+                    textNotaSorgente.Text = "? ";
+                    textNotaDestinazione.Text = "? ";
+
+                    butAggiornaSorgente.Enabled = true;
+                    butAggiornaDestinazione.Enabled = true;
+                    break;
+            }
+
+        }
     }
 }

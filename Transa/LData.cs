@@ -135,6 +135,33 @@ namespace Transa
         /// </summary>
         public List<string> conti = new List<string>();
         /// <summary>
+        /// Lista dei conti Attività
+        /// </summary>
+        public List<string> contiAttivita = new List<string>();
+        /// <summary>
+        /// Lista dei conti Attività base
+        /// </summary>
+        public List<string> contiAttivitaBase = new List<string>();
+        /// <summary>
+        /// Lista dei conti Capitali
+        /// </summary>
+        public List<string> contiCapitali = new List<string>();
+        /// <summary>
+        /// Lista dei conti Capitali base
+        /// </summary>
+        public List<string> contiCapitaliBase = new List<string>();
+        /// <summary>
+        /// Selezione dei conti
+        /// </summary>
+        public string[] TipoConti =
+        {
+            "All",
+            "Attivita",
+            "AttivitaBase",
+            "Capitali",
+            "CapitaliBase",
+        };
+        /// <summary>
         /// Sotto conti
         /// </summary>
         public string[] ContiMultipli =
@@ -162,7 +189,9 @@ namespace Transa
         {
             "Transition",
             "Open",
-            "Close"
+            "Close",
+            "Split",
+            "Zip"
         };
 
         //=======================================================================================================

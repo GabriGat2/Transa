@@ -31,15 +31,16 @@ namespace Transa
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxFileNameConti = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxNumeroConti = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Conto = new System.Windows.Forms.Label();
             this.comboBoxConti = new System.Windows.Forms.ComboBox();
             this.butLoad = new System.Windows.Forms.Button();
             this.richTextBoxStrConti = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1debug = new System.Windows.Forms.SaveFileDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxNumeroConti = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxFileNameConti = new System.Windows.Forms.TextBox();
+            this.comboBoxTipoConti = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,11 +60,12 @@ namespace Transa
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxTipoConti);
             this.splitContainer1.Panel1.Controls.Add(this.textBoxFileNameConti);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.textBoxNumeroConti);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.Conto);
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxConti);
             this.splitContainer1.Panel1.Controls.Add(this.butLoad);
             // 
@@ -74,14 +76,48 @@ namespace Transa
             this.splitContainer1.SplitterDistance = 60;
             this.splitContainer1.TabIndex = 0;
             // 
-            // label1
+            // textBoxFileNameConti
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(122, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Selezione conti";
+            this.textBoxFileNameConti.Location = new System.Drawing.Point(458, 14);
+            this.textBoxFileNameConti.Name = "textBoxFileNameConti";
+            this.textBoxFileNameConti.ReadOnly = true;
+            this.textBoxFileNameConti.Size = new System.Drawing.Size(330, 20);
+            this.textBoxFileNameConti.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(334, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Nome file struttura conti";
+            // 
+            // textBoxNumeroConti
+            // 
+            this.textBoxNumeroConti.Location = new System.Drawing.Point(198, 12);
+            this.textBoxNumeroConti.Name = "textBoxNumeroConti";
+            this.textBoxNumeroConti.ReadOnly = true;
+            this.textBoxNumeroConti.Size = new System.Drawing.Size(86, 20);
+            this.textBoxNumeroConti.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(122, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Numero conti";
+            // 
+            // Conto
+            // 
+            this.Conto.AutoSize = true;
+            this.Conto.Location = new System.Drawing.Point(122, 40);
+            this.Conto.Name = "Conto";
+            this.Conto.Size = new System.Drawing.Size(79, 13);
+            this.Conto.TabIndex = 1;
+            this.Conto.Text = "Selezione conti";
             // 
             // comboBoxConti
             // 
@@ -110,47 +146,22 @@ namespace Transa
             this.richTextBoxStrConti.TabIndex = 0;
             this.richTextBoxStrConti.Text = "";
             // 
-            // label2
+            // comboBoxTipoConti
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(122, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Numero conti";
+            this.comboBoxTipoConti.FormattingEnabled = true;
+            this.comboBoxTipoConti.Location = new System.Drawing.Point(12, 36);
+            this.comboBoxTipoConti.Name = "comboBoxTipoConti";
+            this.comboBoxTipoConti.Size = new System.Drawing.Size(94, 21);
+            this.comboBoxTipoConti.TabIndex = 6;
+            this.comboBoxTipoConti.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoConti_SelectedIndexChanged);
             // 
-            // textBoxNumeroConti
-            // 
-            this.textBoxNumeroConti.Location = new System.Drawing.Point(198, 12);
-            this.textBoxNumeroConti.Name = "textBoxNumeroConti";
-            this.textBoxNumeroConti.ReadOnly = true;
-            this.textBoxNumeroConti.Size = new System.Drawing.Size(86, 20);
-            this.textBoxNumeroConti.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(334, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Nome file struttura conti";
-            // 
-            // textBoxFileNameConti
-            // 
-            this.textBoxFileNameConti.Location = new System.Drawing.Point(458, 14);
-            this.textBoxFileNameConti.Name = "textBoxFileNameConti";
-            this.textBoxFileNameConti.ReadOnly = true;
-            this.textBoxFileNameConti.Size = new System.Drawing.Size(330, 20);
-            this.textBoxFileNameConti.TabIndex = 5;
-            // 
-            // GstStrConti
+            // FormGstStrConti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "GstStrConti";
+            this.Name = "FormGstStrConti";
             this.Text = "GstStrConti";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -165,7 +176,7 @@ namespace Transa
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Conto;
         private System.Windows.Forms.ComboBox comboBoxConti;
         private System.Windows.Forms.Button butLoad;
         private System.Windows.Forms.RichTextBox richTextBoxStrConti;
@@ -174,5 +185,6 @@ namespace Transa
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxFileNameConti;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxTipoConti;
     }
 }

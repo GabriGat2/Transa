@@ -34,6 +34,7 @@ namespace Transa
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.textNumOperazione = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
             this.butAggiorna = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace Transa
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxTipoSottocontiSorgente = new System.Windows.Forms.ComboBox();
-            this.radioOperazioneSorgenteMultipla = new System.Windows.Forms.RadioButton();
             this.butAggiornaSorgente = new System.Windows.Forms.Button();
             this.textNotaSorgente = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,7 +63,6 @@ namespace Transa
             this.textDeltaValoreDestinazione = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.radioOperazioneDestinazioneMultipla = new System.Windows.Forms.RadioButton();
             this.textTotaleValoreDestinazione = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.comboBoxTipoSottocontiDestinazione = new System.Windows.Forms.ComboBox();
@@ -75,7 +74,6 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textNumOperazione = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -157,6 +155,13 @@ namespace Transa
             this.splitContainer1.SplitterDistance = 80;
             this.splitContainer1.TabIndex = 4;
             // 
+            // textNumOperazione
+            // 
+            this.textNumOperazione.Location = new System.Drawing.Point(1068, 16);
+            this.textNumOperazione.Name = "textNumOperazione";
+            this.textNumOperazione.Size = new System.Drawing.Size(112, 20);
+            this.textNumOperazione.TabIndex = 16;
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -196,6 +201,7 @@ namespace Transa
             this.comboBoxTipoOperazione.Name = "comboBoxTipoOperazione";
             this.comboBoxTipoOperazione.Size = new System.Drawing.Size(150, 21);
             this.comboBoxTipoOperazione.TabIndex = 11;
+            this.comboBoxTipoOperazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoOperazione_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -248,7 +254,6 @@ namespace Transa
             this.splitContainer4.Panel1.Controls.Add(this.label10);
             this.splitContainer4.Panel1.Controls.Add(this.label8);
             this.splitContainer4.Panel1.Controls.Add(this.comboBoxTipoSottocontiSorgente);
-            this.splitContainer4.Panel1.Controls.Add(this.radioOperazioneSorgenteMultipla);
             this.splitContainer4.Panel1.Controls.Add(this.butAggiornaSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.textNotaSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.label3);
@@ -273,6 +278,7 @@ namespace Transa
             // 
             this.textDeltaValoreSorgente.Location = new System.Drawing.Point(467, 102);
             this.textDeltaValoreSorgente.Name = "textDeltaValoreSorgente";
+            this.textDeltaValoreSorgente.ReadOnly = true;
             this.textDeltaValoreSorgente.Size = new System.Drawing.Size(121, 20);
             this.textDeltaValoreSorgente.TabIndex = 13;
             // 
@@ -289,6 +295,7 @@ namespace Transa
             // 
             this.textTotaleValoreSorgente.Location = new System.Drawing.Point(220, 100);
             this.textTotaleValoreSorgente.Name = "textTotaleValoreSorgente";
+            this.textTotaleValoreSorgente.ReadOnly = true;
             this.textTotaleValoreSorgente.Size = new System.Drawing.Size(113, 20);
             this.textTotaleValoreSorgente.TabIndex = 11;
             // 
@@ -321,17 +328,6 @@ namespace Transa
             this.comboBoxTipoSottocontiSorgente.Name = "comboBoxTipoSottocontiSorgente";
             this.comboBoxTipoSottocontiSorgente.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTipoSottocontiSorgente.TabIndex = 8;
-            // 
-            // radioOperazioneSorgenteMultipla
-            // 
-            this.radioOperazioneSorgenteMultipla.AutoSize = true;
-            this.radioOperazioneSorgenteMultipla.Location = new System.Drawing.Point(147, 79);
-            this.radioOperazioneSorgenteMultipla.Name = "radioOperazioneSorgenteMultipla";
-            this.radioOperazioneSorgenteMultipla.Size = new System.Drawing.Size(118, 17);
-            this.radioOperazioneSorgenteMultipla.TabIndex = 7;
-            this.radioOperazioneSorgenteMultipla.TabStop = true;
-            this.radioOperazioneSorgenteMultipla.Text = "Operazione Multipla";
-            this.radioOperazioneSorgenteMultipla.UseVisualStyleBackColor = true;
             // 
             // butAggiornaSorgente
             // 
@@ -414,7 +410,6 @@ namespace Transa
             this.splitContainer3.Panel1.Controls.Add(this.textDeltaValoreDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label9);
             this.splitContainer3.Panel1.Controls.Add(this.label12);
-            this.splitContainer3.Panel1.Controls.Add(this.radioOperazioneDestinazioneMultipla);
             this.splitContainer3.Panel1.Controls.Add(this.textTotaleValoreDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label13);
             this.splitContainer3.Panel1.Controls.Add(this.comboBoxTipoSottocontiDestinazione);
@@ -442,6 +437,7 @@ namespace Transa
             // 
             this.textDeltaValoreDestinazione.Location = new System.Drawing.Point(464, 105);
             this.textDeltaValoreDestinazione.Name = "textDeltaValoreDestinazione";
+            this.textDeltaValoreDestinazione.ReadOnly = true;
             this.textDeltaValoreDestinazione.Size = new System.Drawing.Size(121, 20);
             this.textDeltaValoreDestinazione.TabIndex = 17;
             // 
@@ -463,21 +459,11 @@ namespace Transa
             this.label12.TabIndex = 16;
             this.label12.Text = "Delta Valore";
             // 
-            // radioOperazioneDestinazioneMultipla
-            // 
-            this.radioOperazioneDestinazioneMultipla.AutoSize = true;
-            this.radioOperazioneDestinazioneMultipla.Location = new System.Drawing.Point(144, 79);
-            this.radioOperazioneDestinazioneMultipla.Name = "radioOperazioneDestinazioneMultipla";
-            this.radioOperazioneDestinazioneMultipla.Size = new System.Drawing.Size(118, 17);
-            this.radioOperazioneDestinazioneMultipla.TabIndex = 13;
-            this.radioOperazioneDestinazioneMultipla.TabStop = true;
-            this.radioOperazioneDestinazioneMultipla.Text = "Operazione Multipla";
-            this.radioOperazioneDestinazioneMultipla.UseVisualStyleBackColor = true;
-            // 
             // textTotaleValoreDestinazione
             // 
             this.textTotaleValoreDestinazione.Location = new System.Drawing.Point(217, 103);
             this.textTotaleValoreDestinazione.Name = "textTotaleValoreDestinazione";
+            this.textTotaleValoreDestinazione.ReadOnly = true;
             this.textTotaleValoreDestinazione.Size = new System.Drawing.Size(113, 20);
             this.textTotaleValoreDestinazione.TabIndex = 15;
             // 
@@ -570,13 +556,6 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
-            // textNumOperazione
-            // 
-            this.textNumOperazione.Location = new System.Drawing.Point(1068, 16);
-            this.textNumOperazione.Name = "textNumOperazione";
-            this.textNumOperazione.Size = new System.Drawing.Size(112, 20);
-            this.textNumOperazione.TabIndex = 16;
-            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -622,10 +601,8 @@ namespace Transa
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textNotaSorgente;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.RadioButton radioOperazioneSorgenteMultipla;
         private System.Windows.Forms.Button butAggiornaSorgente;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.RadioButton radioOperazioneDestinazioneMultipla;
         private System.Windows.Forms.Button butAggiornaDestinazione;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textNotaDestinazione;

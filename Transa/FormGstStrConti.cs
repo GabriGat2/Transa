@@ -18,14 +18,29 @@ namespace Transa
         /// Oggetto che contiene tutti i dati e le strutture comuni
         /// </summary>
         public LData lData;
-
-
-
+        /// <summary>
+        /// Costruttore
+        /// </summary>
+        /// <param name="rLdata"></param>
         public FormGstStrConti(ref LData rLdata)
         {
             lData = rLdata;
             InitializeComponent();
+            Inizializzazione();
             LocalUpdateForm();
+        }
+        /// <summary>
+        /// Inizializzazione
+        /// </summary>
+        private void Inizializzazione()
+        {
+            // carica la combobox selezione conti 
+            for (int i = 0; i < lData.TipoConti.Count(); i++)
+            {
+                // carica i conti sulla combo box
+                comboBoxTipoConti.Items.Add(lData.TipoConti[i]);
+            }
+            comboBoxTipoConti.SelectedIndex = 0;
         }
         /// <summary>
         /// Seleziona e carica la struttura del conto
@@ -53,6 +68,10 @@ namespace Transa
 
                 // Azzera la lista dei conti disponibili
                 lData.conti.Clear();
+                lData.contiAttivita.Clear();
+                lData.contiAttivitaBase.Clear();
+                lData.contiCapitali.Clear();
+                lData.contiCapitaliBase.Clear();
 
                 bool run = true;
                 string line;
@@ -80,6 +99,9 @@ namespace Transa
                                 // aggiunte il conto ientificato alla lista dei conti
                                 lData.conti.Add(campi[1]);
 
+                                // seleziona il funzione del tipo
+                                SelezionaConto(campi[1]);
+
                                 // stampa il conto identificato
                                 richTextBoxStrConti.AppendText(lData.conti[lData.conti.Count - 1]);
                                 richTextBoxStrConti.AppendText("\n");
@@ -94,22 +116,6 @@ namespace Transa
 
                 // Aggiorna i dati del form
                 LocalUpdateForm();
-
-                //// carica i conti sulla combo box
-                //for (int i = 0; i < lData.conti.Count; i++)
-                //{
-                //    comboBoxConti.Items.Add(lData.conti[i]);
-                //}
-
-                //// stampa il numero di conti gestiti
-                //textBoxNumeroConti.Text = lData.conti.Count.ToString();
-
-                // stampa il nome dei file della struttura dei conti conti
-
-
-                // Possibilita di salvare i conti su un file
-                // DEBUG_SalvaFileTesto(ref ldata.conti);
-
 
             }
             catch (SecurityException ex)
@@ -212,25 +218,113 @@ namespace Transa
             comboBoxConti.Items.Clear();
             richTextBoxStrConti.Clear();
 
-            // stampa e carica i conti sulla combo box 
-            for (int i = 0; i < lData.conti.Count; i++)
+            // Aggiorna la lisra dei conti visualizzata
+            switch (comboBoxTipoConti.SelectedItem)
             {
-                // carica i conti sulla combo box
-                comboBoxConti.Items.Add(lData.conti[i]);
-            
-                // stampa la lista dei conti
-                richTextBoxStrConti.AppendText(lData.conti[i]);
-                richTextBoxStrConti.AppendText("\n");           
+                case "All":
+                    AggiornaTipoConto(lData.conti);
+                    break;
+                case "Attivita":
+                    AggiornaTipoConto(lData.contiAttivita);
+                    break;
+                case "AttivitaBase":
+                    AggiornaTipoConto(lData.contiAttivitaBase);
+                    break;
+                case "Capitali":
+                    AggiornaTipoConto(lData.contiCapitali);
+                    break;
+                case "CapitaliBase":
+                    AggiornaTipoConto(lData.contiCapitaliBase);
+                    break;
+                default:
+                    AggiornaTipoConto(lData.conti);
+                    break;
             }
 
+//            AggiornaTipoConto(lData.conti);
+
+            //// stampa e carica i conti sulla combo box 
+            //for (int i = 0; i < lData.conti.Count; i++)
+            //{
+            //    // carica i conti sulla combo box
+            //    comboBoxConti.Items.Add(lData.conti[i]);
+            
+            //    // stampa la lista dei conti
+            //    richTextBoxStrConti.AppendText(lData.conti[i]);
+            //    richTextBoxStrConti.AppendText("\n");           
+            //}
+
+            //// stampa il numero di conti gestiti
+            //textBoxNumeroConti.Text = lData.conti.Count.ToString();
+
+            //// stampa il nome dei file della struttura dei conti conti
+            //textBoxFileNameConti.Text = lData.fileNameConti;
+        }
+        /// <summary>
+        /// Attiva la visualizzazione della lista di conti indicati
+        /// </summary>
+        /// <param name="conti"></param>
+        private void AggiornaTipoConto(List<string> conti)
+        {
+            // stampa e carica i conti sulla combo box 
+            for (int i = 0; i < conti.Count; i++)
+            {
+                // carica i conti sulla combo box
+                comboBoxConti.Items.Add(conti[i]);
+
+                // stampa la lista dei conti
+                richTextBoxStrConti.AppendText(conti[i]);
+                richTextBoxStrConti.AppendText("\n");
+            }
+            if (conti.Count > 1)
+                comboBoxConti.SelectedIndex = 0;
+
             // stampa il numero di conti gestiti
-            textBoxNumeroConti.Text = lData.conti.Count.ToString();
+            textBoxNumeroConti.Text = conti.Count.ToString();
 
             // stampa il nome dei file della struttura dei conti conti
             textBoxFileNameConti.Text = lData.fileNameConti;
+        }
+        /// <summary>
+        /// Seleziona il tipo di conto
+        /// </summary>
+        /// <param name="conto"></param>
+        private void SelezionaConto(string conto)
+        {
+            // Scompone il conto
+            string[] subConti = conto.Split(':');
+
+            switch (subConti[0])
+            {
+                case "Attivita":
+                    // aggiunte il conto ientificato alla lista dei conti
+                    lData.contiAttivita.Add(conto);
+                    // seleziona il conto base
+                    if (subConti.Length <= 3)
+                        lData.contiAttivitaBase.Add(conto);
+                    break;
+                case "Capitali":
+                    lData.contiCapitali.Add(conto);
+                    // seleziona il conto base
+                    if (subConti.Length <= 4)
+                        lData.contiCapitaliBase.Add(conto);
+                    break;
+                default:
+                    break;
+
+            }
+
 
 
         }
-
+        /// <summary>
+        /// La selezione del tipo di conti è cambiata percui aggiorna la pagina
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxTipoConti_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocalUpdateForm();
+        }
     }
 }

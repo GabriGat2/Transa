@@ -441,24 +441,6 @@ namespace Transa
 
             // Estre le trasizioni dell'operazione
             dlg.GetTransiction(ref transactionDataGridView);
-
-
-            //// crea le transizioni sorgente
-            //bool start = true;
-            //string[] campi;
-            //while ((campi = dlg.GetNextSourceOperation(start)) != null)
-            //{
-            //    start = false;
-            //    transactionDataGridView.Rows.Add(campi);
-            //}
-
-            //// crea le transizioni destinazione
-            //start = true;
-            //while ((campi = dlg.GetNextDestinationOperation(start)) != null)
-            //{
-            //    start = false;
-            //    transactionDataGridView.Rows.Add(campi);
-            //}
         }
 
         /// <summary>
