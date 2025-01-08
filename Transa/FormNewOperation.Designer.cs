@@ -43,6 +43,8 @@ namespace Transa
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxTipoContiSorgente = new System.Windows.Forms.ComboBox();
             this.comboBoxContoSorgente = new System.Windows.Forms.ComboBox();
             this.textDeltaValoreSorgente = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -74,6 +76,8 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBoxTipoContiDestinazione = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -247,6 +251,8 @@ namespace Transa
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.label16);
+            this.splitContainer4.Panel1.Controls.Add(this.comboBoxTipoContiSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.comboBoxContoSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.textDeltaValoreSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.label11);
@@ -265,6 +271,28 @@ namespace Transa
             this.splitContainer4.Size = new System.Drawing.Size(600, 542);
             this.splitContainer4.SplitterDistance = 130;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(144, 78);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(54, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Tipo conti";
+            // 
+            // comboBoxTipoContiSorgente
+            // 
+            this.comboBoxTipoContiSorgente.FormattingEnabled = true;
+            this.comboBoxTipoContiSorgente.Items.AddRange(new object[] {
+            "@",
+            "Cnt",
+            "Dep"});
+            this.comboBoxTipoContiSorgente.Location = new System.Drawing.Point(220, 73);
+            this.comboBoxTipoContiSorgente.Name = "comboBoxTipoContiSorgente";
+            this.comboBoxTipoContiSorgente.Size = new System.Drawing.Size(113, 21);
+            this.comboBoxTipoContiSorgente.TabIndex = 15;
+            this.comboBoxTipoContiSorgente.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoContiSorgente_SelectedIndexChanged);
             // 
             // comboBoxContoSorgente
             // 
@@ -406,6 +434,8 @@ namespace Transa
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.label17);
+            this.splitContainer3.Panel1.Controls.Add(this.comboBoxTipoContiDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.comboBoxContoDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.textDeltaValoreDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label9);
@@ -556,6 +586,28 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(141, 82);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(54, 13);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Tipo conti";
+            // 
+            // comboBoxTipoContiDestinazione
+            // 
+            this.comboBoxTipoContiDestinazione.FormattingEnabled = true;
+            this.comboBoxTipoContiDestinazione.Items.AddRange(new object[] {
+            "@",
+            "Cnt",
+            "Dep"});
+            this.comboBoxTipoContiDestinazione.Location = new System.Drawing.Point(217, 77);
+            this.comboBoxTipoContiDestinazione.Name = "comboBoxTipoContiDestinazione";
+            this.comboBoxTipoContiDestinazione.Size = new System.Drawing.Size(113, 21);
+            this.comboBoxTipoContiDestinazione.TabIndex = 18;
+            this.comboBoxTipoContiDestinazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoContiDestinazione_SelectedIndexChanged);
+            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,5 +688,9 @@ namespace Transa
         private System.Windows.Forms.DateTimePicker dateTimeOperazione;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textNumOperazione;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxTipoContiSorgente;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox comboBoxTipoContiDestinazione;
     }
 }

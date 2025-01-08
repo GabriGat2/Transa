@@ -61,7 +61,19 @@ namespace Transa
         /// </summary>\
         private void Inizializzazione()
         {
-            // inizializzazione caselle operazione
+            // carica le combobox selezione conti 
+            comboBoxTipoContiSorgente.Items.Clear();
+            comboBoxTipoContiDestinazione.Items.Clear();
+            for (int i = 0; i < lData.TipoConti.Count(); i++)
+            {
+                // carica i conti sulla combo box
+                comboBoxTipoContiSorgente.Items.Add(lData.TipoConti[i]);
+                comboBoxTipoContiDestinazione.Items.Add(lData.TipoConti[i]);
+            }
+            comboBoxTipoContiSorgente.SelectedIndex = 0;
+            comboBoxTipoContiDestinazione.SelectedIndex = 0;
+
+              // inizializzazione caselle operazione
             textDescrizioneOperazione.Text = "Operazione di prova";
             textValoreOperazione.Text = "1234,56";
             textNumOperazione.Text = "1";
@@ -1338,6 +1350,9 @@ namespace Transa
 
                     butAggiornaSorgente.Enabled = true;
                     butAggiornaDestinazione.Enabled = true;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 0;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 0;
                     break;
 
                 case "Open":
@@ -1349,6 +1364,9 @@ namespace Transa
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 5;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
                     break;
 
                 case "Close":
@@ -1357,8 +1375,12 @@ namespace Transa
                     textNumOperazione.Text = "80000";
                     textNotaSorgente.Text = "Prelievo da -> ";
                     textNotaDestinazione.Text = "Depositato in -> ";
+
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 6;
                     break;
 
                 case "Zip":
@@ -1367,8 +1389,12 @@ namespace Transa
                     textNumOperazione.Text = "20000";
                     textNotaSorgente.Text = "Prelievo da -> ";
                     textNotaDestinazione.Text = "Depositato in -> ";
+
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
                     break;
 
                 default:
@@ -1380,9 +1406,84 @@ namespace Transa
 
                     butAggiornaSorgente.Enabled = true;
                     butAggiornaDestinazione.Enabled = true;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 0;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 0;
+                    break;
+            }
+        }
+        /// <summary>
+        /// Aggiorna al combo box tipo dei conti
+        /// </summary>
+        private void AggiornaTipoConti(ref ComboBox comboBoxTipoConti, ref ComboBox comboBoxConti)
+        {
+            // azzera gli oggetti di visualizzazione
+            comboBoxConti.Items.Clear();
+            
+            // Aggiorna la lista dei conti visualizzata
+            switch (comboBoxTipoConti.SelectedItem)
+            {
+                case "All":
+                    AggiornaTipoConto(ref comboBoxConti, lData.conti);
+                    break;
+                case "Attivita":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiAttivita);
+                    break;
+                case "AttivitaBase":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiAttivitaBase);
+                    break;
+                case "Capitali":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiCapitali);
+                    break;
+                case "CapitaliBase":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiCapitaliBase);
+                    break;
+                case "CapitaliBaseIniziale":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiCapitaliBaseIniziale);
+                    break;
+                case "CapitaliBaseFinale":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiCapitaliBaseFinale);
+                    break;
+                default:
+                    AggiornaTipoConto(ref comboBoxConti, lData.conti);
                     break;
             }
 
+        }
+        /// <summary>
+        /// Attiva la visualizzazione della lista di conti indicati
+        /// </summary>
+        /// <param name="conti"></param>
+        private void AggiornaTipoConto(ref ComboBox comboBoxConti, List<string> conti)
+        {
+            // stampa e carica i conti sulla combo box 
+            for (int i = 0; i < conti.Count; i++)
+            {
+                // carica i conti sulla combo box
+                comboBoxConti.Items.Add(conti[i]);
+            }
+            if (conti.Count > 1)
+                comboBoxConti.SelectedIndex = 0;
+        }
+        /// <summary>
+        /// Al cambio della combo comboBoxTipoContiSorgente,
+        /// aggiorna la comboBox comboBoxContoSorgente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxTipoContiSorgente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AggiornaTipoConti(ref comboBoxTipoContiSorgente, ref comboBoxContoSorgente);
+        }
+        /// <summary>
+        /// Al cambio della comboBox comboBoxTipoContiDestinazione,
+        /// aggiorna la comboBox comboBoxContoDestinazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxTipoContiDestinazione_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AggiornaTipoConti(ref comboBoxTipoContiDestinazione, ref comboBoxContoDestinazione);
         }
     }
 }

@@ -72,6 +72,8 @@ namespace Transa
                 lData.contiAttivitaBase.Clear();
                 lData.contiCapitali.Clear();
                 lData.contiCapitaliBase.Clear();
+                lData.contiCapitaliBaseIniziale.Clear();
+                lData.contiCapitaliBaseFinale.Clear();
 
                 bool run = true;
                 string line;
@@ -181,8 +183,6 @@ namespace Transa
                 $"Details:\n\n{ex.StackTrace}");
             }
         }
-
-
         /// <summary>
         /// Salva le transizione nel file specificato
         /// </summary>
@@ -236,29 +236,17 @@ namespace Transa
                 case "CapitaliBase":
                     AggiornaTipoConto(lData.contiCapitaliBase);
                     break;
+                case "CapitaliBaseIniziale":
+                    AggiornaTipoConto(lData.contiCapitaliBaseIniziale);
+                    break;
+                case "CapitaliBaseFinale":
+                    AggiornaTipoConto(lData.contiCapitaliBaseFinale);
+                    break;
                 default:
                     AggiornaTipoConto(lData.conti);
                     break;
             }
 
-//            AggiornaTipoConto(lData.conti);
-
-            //// stampa e carica i conti sulla combo box 
-            //for (int i = 0; i < lData.conti.Count; i++)
-            //{
-            //    // carica i conti sulla combo box
-            //    comboBoxConti.Items.Add(lData.conti[i]);
-            
-            //    // stampa la lista dei conti
-            //    richTextBoxStrConti.AppendText(lData.conti[i]);
-            //    richTextBoxStrConti.AppendText("\n");           
-            //}
-
-            //// stampa il numero di conti gestiti
-            //textBoxNumeroConti.Text = lData.conti.Count.ToString();
-
-            //// stampa il nome dei file della struttura dei conti conti
-            //textBoxFileNameConti.Text = lData.fileNameConti;
         }
         /// <summary>
         /// Attiva la visualizzazione della lista di conti indicati
@@ -294,27 +282,43 @@ namespace Transa
             // Scompone il conto
             string[] subConti = conto.Split(':');
 
-            switch (subConti[0])
+            try
             {
-                case "Attivita":
-                    // aggiunte il conto ientificato alla lista dei conti
-                    lData.contiAttivita.Add(conto);
-                    // seleziona il conto base
-                    if (subConti.Length <= 3)
-                        lData.contiAttivitaBase.Add(conto);
-                    break;
-                case "Capitali":
-                    lData.contiCapitali.Add(conto);
-                    // seleziona il conto base
-                    if (subConti.Length <= 4)
-                        lData.contiCapitaliBase.Add(conto);
-                    break;
-                default:
-                    break;
+                switch (subConti[0])
+                {
+                    case "Attivita":
+                        // aggiunte il conto ientificato alla lista dei conti
+                        lData.contiAttivita.Add(conto);
+                        // seleziona il conto base
+                        if (subConti.Length <= 3)
+                            lData.contiAttivitaBase.Add(conto);
+                        break;
+                    case "Capitali":
+                        lData.contiCapitali.Add(conto);
+                        // seleziona il conto base
+                        if (subConti.Length <= 4)
+                        {
+                            lData.contiCapitaliBase.Add(conto);
+                            // selezione capitale iniziale e finale
+                            if (subConti.Length > 1)
+                            {
+                                if (subConti[1] == "Iniziale")
+                                    lData.contiCapitaliBaseIniziale.Add(conto);
+                                if (subConti[1] == "Finale")
+                                    lData.contiCapitaliBaseFinale.Add(conto);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
 
             }
-
-
+            catch (Exception e)
+            {
+                int pippo = 0;
+            }
 
         }
         /// <summary>

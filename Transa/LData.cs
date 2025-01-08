@@ -151,6 +151,14 @@ namespace Transa
         /// </summary>
         public List<string> contiCapitaliBase = new List<string>();
         /// <summary>
+        /// Lista dei conti Capitali base iniziale
+        /// </summary>
+        public List<string> contiCapitaliBaseIniziale = new List<string>();
+        /// <summary>
+        /// Lista dei conti Capitali base Finale
+        /// </summary>
+        public List<string> contiCapitaliBaseFinale = new List<string>();
+        /// <summary>
         /// Selezione dei conti
         /// </summary>
         public string[] TipoConti =
@@ -160,6 +168,8 @@ namespace Transa
             "AttivitaBase",
             "Capitali",
             "CapitaliBase",
+            "CapitaliBaseIniziale",
+            "CapitaliBaseFinale",
         };
         /// <summary>
         /// Sotto conti
