@@ -480,5 +480,11 @@ namespace Transa
 
 
         }
+
+        private void butTest_Click(object sender, EventArgs e)
+        {
+            FormGstValue dlg = new FormGstValue();
+            dlg.ShowDialog();
+        }
     }
 }

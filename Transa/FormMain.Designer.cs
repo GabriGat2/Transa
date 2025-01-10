@@ -32,13 +32,14 @@ namespace Transa
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.butAccounts = new System.Windows.Forms.Button();
             this.butNewOperation = new System.Windows.Forms.Button();
             this.butSaveFile = new System.Windows.Forms.Button();
             this.butDeleteRow = new System.Windows.Forms.Button();
             this.butAddRow = new System.Windows.Forms.Button();
             this.butOpenFile = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.butAccounts = new System.Windows.Forms.Button();
+            this.butTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -67,6 +68,7 @@ namespace Transa
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.butTest);
             this.panel1.Controls.Add(this.butAccounts);
             this.panel1.Controls.Add(this.butNewOperation);
             this.panel1.Controls.Add(this.butSaveFile);
@@ -79,6 +81,16 @@ namespace Transa
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1237, 35);
             this.panel1.TabIndex = 0;
+            // 
+            // butAccounts
+            // 
+            this.butAccounts.Location = new System.Drawing.Point(508, 7);
+            this.butAccounts.Name = "butAccounts";
+            this.butAccounts.Size = new System.Drawing.Size(108, 23);
+            this.butAccounts.TabIndex = 5;
+            this.butAccounts.Text = "Gestione conti";
+            this.butAccounts.UseVisualStyleBackColor = true;
+            this.butAccounts.Click += new System.EventHandler(this.butAccounts_Click);
             // 
             // butNewOperation
             // 
@@ -134,24 +146,24 @@ namespace Transa
             this.butOpenFile.UseVisualStyleBackColor = true;
             this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click);
             // 
-            // butAccounts
+            // butTest
             // 
-            this.butAccounts.Location = new System.Drawing.Point(508, 7);
-            this.butAccounts.Name = "butAccounts";
-            this.butAccounts.Size = new System.Drawing.Size(108, 23);
-            this.butAccounts.TabIndex = 5;
-            this.butAccounts.Text = "Gestione conti";
-            this.butAccounts.UseVisualStyleBackColor = true;
-            this.butAccounts.Click += new System.EventHandler(this.butAccounts_Click);
+            this.butTest.Location = new System.Drawing.Point(837, 6);
+            this.butTest.Name = "butTest";
+            this.butTest.Size = new System.Drawing.Size(75, 23);
+            this.butTest.TabIndex = 6;
+            this.butTest.Text = "Test";
+            this.butTest.UseVisualStyleBackColor = true;
+            this.butTest.Click += new System.EventHandler(this.butTest_Click);
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1237, 653);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Form1";
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -173,6 +185,7 @@ namespace Transa
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button butNewOperation;
         private System.Windows.Forms.Button butAccounts;
+        private System.Windows.Forms.Button butTest;
     }
 }
 

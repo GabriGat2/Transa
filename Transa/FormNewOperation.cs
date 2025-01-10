@@ -1792,11 +1792,12 @@ namespace Transa
                     break;
                 case "ZipSplit":
                 case "Split":
+                case "Zip":
                     GeneraTransizioniSplit(ref transactionDataGrid);
                     break;
-                case "Zip":
-                    GeneraTransizioniZip(ref transactionDataGrid);
-                    break;
+                //case "Zip":
+                    //GeneraTransizioniZip(ref transactionDataGrid);
+                    //break;
                 default:
                     break;
             }
