@@ -25,16 +25,6 @@ namespace Transa
             ContoBase
         }
         /// <summary>
-        ///// tipo di operazione in una transizione Zip o Split
-        ///// </summary>
-        //enum ETipoOperazione
-        //{
-        //    Boh,
-        //    Totale,
-        //    Split,
-        //    Zip
-        //};
-        /// <summary>
         /// Costruttore
         /// </summary>
         /// <param name="rLdata"></param>

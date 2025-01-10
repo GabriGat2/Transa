@@ -439,7 +439,7 @@ namespace Transa
             // rigenera la tabella delle transizioni
             RigeneratransactionDataGridView();
 
-            // Estre le trasizioni dell'operazione
+            // Estrae le trasizioni dell'operazione
             dlg.GetTransiction(ref transactionDataGridView);
         }
 
