@@ -317,7 +317,7 @@ namespace Transa
             }
             catch (Exception e)
             {
-                int pippo = 0;
+                ;
             }
 
         }

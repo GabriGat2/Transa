@@ -8,7 +8,7 @@ namespace Transa
 {
     public class LData
     {
-        public enum IdentificationColumnsTransition
+        public enum EIdentificationColumnsTransition
         {
             Data,                   // 0                       
             IDTransazione,          // 1               
@@ -195,14 +195,37 @@ namespace Transa
         /// <summary>
         /// Tipo Operazione
         /// </summary>
-        public string[] TipoOperazione = 
+        public enum ETipoOperazione 
         {
-            "Transition",
-            "Open",
-            "Close",
-            "Split",
-            "Zip"
+            Transition,
+            Open,
+            Close,
+            Split,
+            Zip,
+            ZipSplit
         };
+        /// <summary>
+        /// Tipo Operazione
+        /// </summary>
+        public string[] TipoOperazione =
+{
+            ETipoOperazione.Transition.ToString(),
+            ETipoOperazione.Open.ToString(),
+            ETipoOperazione.Close.ToString(),
+            ETipoOperazione.Split.ToString(),
+            ETipoOperazione.Zip.ToString(),
+            ETipoOperazione.ZipSplit.ToString()
+        };
+        /// tipo di operazione in una transizione Zip o Split
+        /// </summary>
+        public enum ETipoOperazioneComplessa
+        {
+            Boh,
+            TOTALE,
+            SPLIT,
+            ZIP
+        };
+
 
         //=======================================================================================================
         //====== DEBUG
