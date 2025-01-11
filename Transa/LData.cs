@@ -182,16 +182,36 @@ namespace Transa
             "GG",
             "LC",
         };
+        // =====================================================================================
+        // ====== Tipo sottoconti
+        // =====================================================================================
+        /// <summary>
+        /// Tipo Sottoconti
+        /// </summary>
+        public enum ETipoSottoconti
+        {
+            Single,
+            Cnt,
+            Dep,
+            All
+        };
         /// <summary>
         /// Tipo Sottoconti
         /// </summary>
         public string[] TipoSottoconti =
         {
-            "Single",
-            "Cnt",
-            "Dep",
-            "All"
+            ETipoSottoconti.Single.ToString(),
+            ETipoSottoconti.Cnt.ToString(),
+            ETipoSottoconti.Dep.ToString(),
+            ETipoSottoconti.All.ToString(),
+            //"Single",
+            //"Cnt",
+            //"Dep",
+            //"All"
         };
+        // =====================================================================================
+        // ====== Tipo operazione
+        // =====================================================================================
         /// <summary>
         /// Tipo Operazione
         /// </summary>
@@ -208,7 +228,7 @@ namespace Transa
         /// Tipo Operazione
         /// </summary>
         public string[] TipoOperazione =
-{
+        {
             ETipoOperazione.Transition.ToString(),
             ETipoOperazione.Open.ToString(),
             ETipoOperazione.Close.ToString(),
@@ -226,12 +246,47 @@ namespace Transa
             ZIP
         };
 
+        // =====================================================================================
+        // ====== Codice errore
+        // =====================================================================================
+        public enum ETransaErrore
+        {
+            E0000_OK = 0,
+            E0001_NOK = 1,
+            E0002_ValoreNonRichiesto,
 
-        //=======================================================================================================
-        //====== DEBUG
-        //=======================================================================================================
+            // Errori relativi alla gestione di una tabell
+            E1000_TabellaInesistente,
+            E1001_ColonnaTabellaFuoriLimiti,
+            E1002_RigaTabellaFuoriLimiti,
+            E1003_CellaTabellaFuoriLimiti,
 
-        public double DEBUG_ValoreDefaultSorgente = 1;
+            // Errori relativi ad un tipo di dato
+            //10 sbyte System.SByte
+            //20 byte System.Byte
+            //30 short System.Int16
+            //40 ushort System.UInt16
+            //50 int System.Int32
+            //60 uint System.UInt32
+            //70 long System.Int64
+            //80 ulong System.UInt64
+            //90 char System.Char
+            //100 float System.Single
+
+            E2100_double_LaStringaNonContieneUnValoreDouble,
+            // 110 bool System.Boolean
+            // 120 decimal System.Decimal
+        }
+
+
+
+
+
+    //=======================================================================================================
+    //====== DEBUG
+    //=======================================================================================================
+
+    public double DEBUG_ValoreDefaultSorgente = 1;
         public double DEBUG_ValoreDefaultDestinazione = 1;
 
 
@@ -242,6 +297,46 @@ namespace Transa
         public LData()
         {
 
+        }
+        /// <summary>
+        /// Esamina una stringa e sostituisce:
+        /// - La lettera maiuscola con spazio + lettera maiuscola
+        /// - il cratttere '_' con spazio
+        /// </summary>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public string RestultToSting(ETransaErrore error)
+        {
+            string errore = error.ToString();
+            string messaggioErrore = "";
+
+            // sostituisci tutte le lettere maiuscole con spazio-lettera
+            bool maiuscola = true;
+            for (int i = 0; i < errore.Length; i++)
+            {
+                               
+                if (Char.IsUpper(errore[i]) && i > 0)
+                {
+                    messaggioErrore += " ";
+                    if (maiuscola)
+                    {
+                        messaggioErrore += errore[i];
+                        maiuscola = false;
+                    }
+                    else
+                        messaggioErrore += Char.ToLower(errore[i]);
+                }
+                else if (errore[i] == '_')
+                {
+                    messaggioErrore += ":";
+                    messaggioErrore += " ";
+                    maiuscola = true;
+                }
+                else
+                    messaggioErrore += errore[i];
+            }
+
+            return messaggioErrore;
         }
     }
 }

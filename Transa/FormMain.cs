@@ -483,7 +483,7 @@ namespace Transa
 
         private void butTest_Click(object sender, EventArgs e)
         {
-            FormGstValue dlg = new FormGstValue();
+            FormGstValue dlg = new FormGstValue(ref lData);
             dlg.ShowDialog();
         }
     }
