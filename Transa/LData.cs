@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Transa
 {
@@ -255,11 +256,18 @@ namespace Transa
             E0001_NOK = 1,
             E0002_ValoreNonRichiesto,
 
-            // Errori relativi alla gestione di una tabell
+            // Errori relativi alla gestione di una tabell2
             E1000_TabellaInesistente,
             E1001_ColonnaTabellaFuoriLimiti,
             E1002_RigaTabellaFuoriLimiti,
             E1003_CellaTabellaFuoriLimiti,
+            E1004_IndiceColonnaTabellaFuoriLimiti,
+            E1005_IndiceRigaTabellaFuoriLimiti,
+            E1006_IndiceCellaTabellaFuoriLimiti,
+
+            // Stato dei conti
+            E1100_IContiNonSonoBilanciati,
+
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte
@@ -276,6 +284,8 @@ namespace Transa
             E2100_double_LaStringaNonContieneUnValoreDouble,
             // 110 bool System.Boolean
             // 120 decimal System.Decimal
+
+
         }
 
 
@@ -337,6 +347,40 @@ namespace Transa
             }
 
             return messaggioErrore;
+        }
+        /// <summary>
+        /// Stampa un messaggio di errore
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="messaggio2"></param>
+        /// <param name="stampaMessaggio"></param>
+        /// <returns></returns>
+        public bool StampaMessaggioErrore(LData.ETransaErrore esito, string messaggio2 = "", bool stampaMessaggio = true)
+        {
+            // controlla l'esito del risultatao
+            if (esito != ETransaErrore.E0000_OK)
+            {
+                if (stampaMessaggio)
+                {
+                    // compone il messaggio da stampare
+                    string titolo = "Errore!";
+                    string messaggio = "La stringa >" + messaggio2 + "<\n\n" +
+                                       "ha generato l'errore: \n\n" +
+                                       RestultToSting(esito) +
+                                        "\n\n" +
+                                        "Continuo?";
+
+                    //  stampa il messaggio con l'esito
+                    var result3 = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result3 == DialogResult.Yes)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            return true;
         }
     }
 }

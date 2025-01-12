@@ -16,14 +16,13 @@ namespace Transa
         /// Oggetto che contiene tutti i dati e le strutture comuni
         /// </summary>
         public LData lData;
-
         /// <summary>
         /// Identificatore colonne
         /// </summary>
         public enum ENomeColonne
         {
             Totale,         // 0                       
-            TotaleSel,      // 1
+            TotaleAtt,      // 1
             Radice,         // 2     
             Cnt,            // 3   
             CntFA,          // 4
@@ -44,7 +43,7 @@ namespace Transa
         private string [] NomeColonne = 
         {
             "Totale",         // 0                       
-            "TotaleSel",      // 1
+            "TotaleAtt",      // 1
             "@",              // 2
             "Cnt",            // 3   
             "Cnt-FA",         // 4
@@ -59,6 +58,141 @@ namespace Transa
             "Dep-BG",         // 13
             "Dep-Cat"         // 14
         };
+
+        // =====================================================================================
+        // ====== Stato del conto
+        // =====================================================================================
+        public enum EStatoConto
+        {
+            Bilanciato,     // 0                       
+            NonBilanciato,  // 1
+            ValoriInEccesso,// 2
+            Indefinito      // 3
+        };
+        private EStatoConto statoConto = EStatoConto.Indefinito;
+        public EStatoConto StatoConto { get => statoConto; /*set => statoConto = value;*/ }
+
+        public bool StatoContoOK
+        {
+            get => ((statoConto == EStatoConto.Bilanciato) || (statoConto == EStatoConto.ValoriInEccesso));
+            /*set => statoConto = value;*/
+        }
+
+        public Color StatoContoColore { get => ColoreStatoConto(); }
+
+        private string FormatoValore = "#0.00";
+        // =====================================================================================
+        // ====== Valori conto sorgente
+        // =====================================================================================
+        public double ValoreTotaleSorgente { get => GetValore(true, 0); }
+        public double ValoreTotaleAttivoSorgente     {get => GetValore(true, 1); }
+        public string sValoreTotaleAttivoSorgente { get => ValoreTotaleAttivoSorgente.ToString(FormatoValore); }
+        public Color ValoreTotaleSorgenteColore { get => textBoxValoreTransizione.BackColor; }
+        // =====================================================================================
+        // ====== Valori conto destinazione
+        // =====================================================================================
+        public double ValoreTotaleDestinazione { get => GetValore(false, 0); }
+        public double ValoreTotaleAttivoDestinazione { get => GetValore(false, 1); }
+        public string sValoreTotaleAttivoDestinazione { get => ValoreTotaleAttivoDestinazione.ToString(FormatoValore); }
+
+        // =====================================================================================
+        // ====== Valore conto base 
+        // =====================================================================================
+        public double ValoreContoBaseSorgente { get => GetValore(true, 2); }
+        public double ValoreContoBaseDestinazione { get => GetValore(false, 2); }
+        public string sValoreContoBaseSorgente { get => ValoreContoBaseSorgente.ToString(FormatoValore); }
+        public string sValoreContoBaseDestinazione { get => ValoreContoBaseDestinazione.ToString(FormatoValore); }
+
+
+        // =====================================================================================
+        // ====== Valore conto Cnt 
+        // =====================================================================================
+        public double ValoreContoCntSorgente { get => GetValore(true, 3); }
+        public double ValoreContoCntDestinazione { get => GetValore(false, 3); }
+        public string sValoreContoCntSorgente { get => ValoreContoCntSorgente.ToString(FormatoValore); }
+        public string sValoreContoCntDestinazione { get => ValoreContoCntDestinazione.ToString(FormatoValore); }
+
+        // =====================================================================================
+        // ====== Valore sottoconti Cnt 
+        // =====================================================================================
+
+        public double ValoreSottoContoCntSorgente(int IndSottoconto) { return GetValore(true, 4 + IndSottoconto); }
+        public double ValoreSottoContoCntDestinazione(int IndSottoconto) { return GetValore(false, 4 + IndSottoconto); }
+
+        public string sValoreSottoContoCntSorgente(int IndSottoconto) { return ValoreSottoContoCntSorgente(IndSottoconto).ToString(FormatoValore); }
+        public string sValoreSottoContoCntDestinazione(int IndSottoconto) { return ValoreSottoContoCntDestinazione(IndSottoconto).ToString(FormatoValore); }
+
+
+        // =====================================================================================
+        // ====== Valore conto Dep 
+        // =====================================================================================
+        public double ValoreContoDepSorgente { get => GetValore(true, 9); }
+        public double ValoreContoDepDestinazione { get => GetValore(false, 9); }
+        public string sValoreContoDepSorgente { get => ValoreContoDepSorgente.ToString(FormatoValore); }
+        public string sValoreContoDepDestinazione { get => ValoreContoDepDestinazione.ToString(FormatoValore); }
+
+        // =====================================================================================
+        // ====== Valore sottoconti Dep 
+        // =====================================================================================
+
+        public double ValoreSottoContoDepSorgente(int IndSottoconto) { return GetValore(true, 10 + IndSottoconto); }
+        public double ValoreSottoContoDepDestinazione(int IndSottoconto) { return GetValore(false, 10 + IndSottoconto); }
+
+        public string sValoreSottoContoDepSorgente(int IndSottoconto) { return ValoreSottoContoDepSorgente(IndSottoconto).ToString(FormatoValore); }
+        public string sValoreSottoContoDepDestinazione(int IndSottoconto) { return ValoreSottoContoDepDestinazione(IndSottoconto).ToString(FormatoValore); }
+
+        // =====================================================================================
+        // ====== Valori dei sottoconti 
+        // =====================================================================================
+        public int SottoContoSorgente { get => comboBoxTipoSottocontiSorgente.SelectedIndex; }
+        public int SottoContodestinazione { get => comboBoxTipoSottocontiDestinazione.SelectedIndex; }
+
+
+        // =====================================================================================
+        // ====== 
+        // =====================================================================================
+
+        /// <summary>
+        /// Rende richiesta della tabella conti
+        /// </summary>
+        /// <param name="rowSorgente"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        public double GetValore(bool rowSorgente, int col)
+        {
+            LData.ETransaErrore esito;
+            double valore;
+            string sValore;
+
+            // verifica l'indice della tabella
+            if (col > dataGridViewValoreConti.ColumnCount)
+            {
+                esito = LData.ETransaErrore.E1004_IndiceColonnaTabellaFuoriLimiti;
+                lData.StampaMessaggioErrore(esito, "");
+                return 0;
+            }
+
+            // estrae il valore della tabella
+            if (rowSorgente)
+                sValore = dataGridViewValoreConti.Rows[0].Cells[col].Value.ToString();
+            else
+                sValore = dataGridViewValoreConti.Rows[1].Cells[col].Value.ToString();
+
+            // verifica che contenga un valore double
+            if (! ConvertAG.IsDouble(sValore))
+            {
+                esito = LData.ETransaErrore.E2100_double_LaStringaNonContieneUnValoreDouble;
+                lData.StampaMessaggioErrore(esito, sValore);
+                return 0;
+            }
+
+            // converte in double
+            valore = ConvertAG.ToDouble0(sValore);
+
+            return valore;
+        }
+
+
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -93,20 +227,16 @@ namespace Transa
         }
         private void InizializzaDataGrid(ref DataGridView dataGridView, bool src, bool dst)
         {
-            // Configura le righe
-            dataGridView.RowHeadersVisible = true;
-            dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-
-            //dataGridView.RowHeadersDefaultCellStyle.ForeColor = Color.Red;
-            //dataGridView.RowHeadersDefaultCellStyle.BackColor = Color.Yellow;
-            //dataGridView.RowHeadersDefaultCellStyle.Font =
-            //        new Font(dataGridView.Font, FontStyle.Bold);
+            //// Configura le righe
+            //dataGridView.RowHeadersVisible = true;
+            //dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 
             // configura le colonne
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.Red;
             dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Yellow;
             dataGridView.ColumnHeadersDefaultCellStyle.Font =
                 new Font(dataGridView.Font, FontStyle.Bold);
+
             // aggiunge le colonne
             for (int i = 0; i < NomeColonne.Length; i++)
             {
@@ -122,15 +252,13 @@ namespace Transa
             dataGridView.RowHeadersDefaultCellStyle.Font =
                     new Font(dataGridView.Font, FontStyle.Bold);
 
-
-
             // aggiunge le righe sorgente e destinazione
             string[] valoriSorgente = new string[NomeColonne.Length];
             string[] valoriDestinazione = new string[NomeColonne.Length];
-            for (int i = 1; i < NomeColonne.Length; i++)
+            for (int i = 0; i < NomeColonne.Length; i++)
             {
-                valoriSorgente[i] = i.ToString();
-                valoriDestinazione[i] = (10 + i).ToString();
+                valoriSorgente[i] = "0.00"; // i.ToString();
+                valoriDestinazione[i] = "0.00"; // (10 + i).ToString();
             }
             int j = 0;
             if (src)
@@ -143,27 +271,7 @@ namespace Transa
                 dataGridView.Rows.Add(valoriDestinazione);
                 dataGridView.Rows[j].HeaderCell.Value = "Dst";  
             }
-                
 
-            // setta il nome delle righe
-            //dataGridView.Rows[0].HeaderCell.Value = "Sorgente";
-            //dataGridView.Rows[1].HeaderCell.Value = "Destinazione";
-
-
-            // Setta il nome della riga
-            //dataGridView.RowHeadersVisible = true;
-            //dataGridView.Rows[0].HeaderCell.Style.BackColor = Color.Yellow;
-            //dataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-
-            //dataGridView.RowHeadersDefaultCellStyle.ForeColor = Color.Yellow;
-            //dataGridView.RowHeadersDefaultCellStyle.BackColor = Color.Red;
-            //dataGridView.RowHeadersDefaultCellStyle.Font =
-            //        new Font(dataGridView.Font, FontStyle.Bold);
-            //dataGridView.RowsDefaultCellStyle.ForeColor = Color.Yellow;
-
-
-
-            //dataGridView.Rows[0].DefaultCellStyle.BackColor = Color.Yellow;
         }
         /// <summary>
         /// Analisi stringa sorgente
@@ -255,8 +363,14 @@ namespace Transa
             if (!ConvertAG.IsDouble(valore))
                 return LData.ETransaErrore.E2100_double_LaStringaNonContieneUnValoreDouble;
 
+            // Converte il valore in double
+            double dValore = ConvertAG.ToDouble0(valore);
+
+            // riconverte il valore in stringa con due decimali
+            string sValore = dValore.ToString("#0.00");
+
             // assegna il valore alla cella
-            dataGridView.Rows[row].Cells[col].Value = valore;
+            dataGridView.Rows[row].Cells[col].Value = sValore;
             // colora la cella di verde
             if (inRange)
                 dataGridView.Rows[row].Cells[col].Style.BackColor = Color.GreenYellow;
@@ -354,18 +468,78 @@ namespace Transa
                     totaleSel += ConvertAG.ToDouble0(dataGridView.Rows[row].Cells[j].Value.ToString());
             }
 
+            // Verifica che il conto base sia incluso nel conteggio di totaleSel
+            if (colFine > 2)
+                totaleSel += ConvertAG.ToDouble0(dataGridView.Rows[row].Cells[2].Value.ToString());
+
             // Assegna i valori calcolati
             dataGridView.Rows[row].Cells[0].Value = totale.ToString();
             dataGridView.Rows[row].Cells[1].Value = totaleSel.ToString();
 
-            // Assegna i colori delle celle
-            if (totale == totaleSel)
-                dataGridView.Rows[row].Cells[0].Style.BackColor = Color.LightGreen;
-            else
-                dataGridView.Rows[row].Cells[0].Style.BackColor = Color.LightPink;
-
-            dataGridView.Rows[row].Cells[1].Style.BackColor = Color.LightGreen;
+            // Verifica i conti totali
+            VerificaTotali();
+           
         }
+        /// <summary>
+        /// Verifica conti totali
+        /// </summary>
+        /// <returns></returns>
+        public bool VerificaTotali()
+        {
+            EStatoConto stato;
+
+
+            // Verifia conti attivi
+            if  (ValoreTotaleAttivoSorgente == ValoreTotaleAttivoDestinazione)
+            {
+                dataGridViewValoreConti.Rows[0].Cells[1].Style.BackColor = Color.LightGreen;
+                dataGridViewValoreConti.Rows[1].Cells[1].Style.BackColor = Color.LightGreen;
+                stato = EStatoConto.Bilanciato;
+            }
+            else    
+            {
+                dataGridViewValoreConti.Rows[0].Cells[1].Style.BackColor = Color.Red;
+                dataGridViewValoreConti.Rows[1].Cells[1].Style.BackColor = Color.Red;
+                stato = EStatoConto.NonBilanciato;
+            }
+
+            // Verifia conto totale sorgente
+            if (ValoreTotaleAttivoSorgente == ValoreTotaleSorgente)
+            {
+                dataGridViewValoreConti.Rows[0].Cells[0].Style.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                dataGridViewValoreConti.Rows[0].Cells[0].Style.BackColor = Color.Orange;
+                if (stato != EStatoConto.NonBilanciato)
+                    stato = EStatoConto.ValoriInEccesso;
+            }
+
+            // Verifia conto totale destinazione
+            if (ValoreTotaleAttivoDestinazione == ValoreTotaleDestinazione)
+            {
+                dataGridViewValoreConti.Rows[1].Cells[0].Style.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                dataGridViewValoreConti.Rows[1].Cells[0].Style.BackColor = Color.Orange;
+                if (stato != EStatoConto.NonBilanciato)
+                    stato = EStatoConto.ValoriInEccesso;
+            }
+
+            // aggiorna lo stato del conto
+            statoConto = stato;
+
+            // Aggiorna oggetti
+            textBoxValoreTransizione.Text = sValoreTotaleAttivoSorgente;
+            textBoxValoreTransizione.BackColor = dataGridViewValoreConti.Rows[0].Cells[1].Style.BackColor;
+
+            textBoxStatoConti.Text = statoConto.ToString();
+            textBoxStatoConti.BackColor = ColoreStatoConto();
+
+            return StatoContoOK;
+        }
+
         /// <summary>
         /// Cambio tipo sottoconto sorgente
         /// </summary>
@@ -373,6 +547,7 @@ namespace Transa
         /// <param name="e"></param>
         private void comboBoxTipoSottocontiSorgente_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //AggiornaTipoSottoconto(true);
             AggiornaTipoSottoconto(ref dataGridViewSorgente, comboBoxTipoSottocontiSorgente.Text, 0);
         }
         /// <summary>
@@ -382,10 +557,26 @@ namespace Transa
         /// <param name="e"></param>
         private void comboBoxTipoSottocontiDestinazione_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // AggiornaTipoSottoconto(false);
             AggiornaTipoSottoconto(ref dataGridViewDestinazione, comboBoxTipoSottocontiDestinazione.Text, 1);
         }
         /// <summary>
-        /// Agiorna il sottoconto attivo e le tabelle collegate
+        /// Aggiorna il tipo di sotto conto specificato
+        /// </summary>
+        /// <param name="sorgente"></param>
+        public void AggiornaTipoSottoconto(bool sorgente, int SelectedIndex)
+        {
+            if (sorgente)
+            {
+                comboBoxTipoSottocontiSorgente.SelectedIndex = SelectedIndex;
+            }
+            else
+            {
+                comboBoxTipoSottocontiDestinazione.SelectedIndex = SelectedIndex;
+            }
+        }
+        /// <summary>
+        /// Aggiorna il sottoconto attivo e le tabelle collegate
         /// </summary>
         /// <param name="dataGridView"></param>
         /// <param name="tipoSottoconto"></param>
@@ -595,6 +786,35 @@ namespace Transa
             AggiornaTotali(ref dataGridViewValoreConti, row, colInizio, colFine);
 
         }
+        /// <summary>
+        /// Rende il colore dello stato del conto
+        /// </summary>
+        /// <returns></returns>
+        private Color ColoreStatoConto()
+        {
+            Color colore;
+
+            switch (statoConto)
+            {
+                case EStatoConto.Bilanciato:
+                    colore = Color.LightGreen;
+                    break;
+                case EStatoConto.NonBilanciato:
+                    colore = Color.Red;
+                    break;
+                case EStatoConto.ValoriInEccesso:
+                    colore = Color.Orange;
+                    break;
+                case EStatoConto.Indefinito:
+                    colore = Color.Fuchsia;
+                    break;
+                default:
+                    colore = Color.Fuchsia;
+                    break;
+            }
+            return colore;
+        }
+
 
     }
 }

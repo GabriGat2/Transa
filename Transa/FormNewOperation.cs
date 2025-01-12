@@ -17,6 +17,10 @@ namespace Transa
         /// </summary>
         public LData lData;
         /// <summary>
+        /// Oggetto  per la gestione dei valori dei conti
+        /// </summary>
+        public FormGstValue GValori;
+        /// <summary>
         /// tipo di sezione di conto
         /// </summary>
         private enum SezioneConto
@@ -30,7 +34,12 @@ namespace Transa
         /// <param name="rLdata"></param>
         public FormNewOperation(ref LData rLdata)
         {
+            // Asssegna l'ggeto per la gestione dei dati comuni
             lData = rLdata;
+
+            // Crea l'oggeto per la gestione dei valori dei conti
+            GValori = new FormGstValue(ref rLdata);
+
             InitializeComponent();
             Inizializzazione();
             LocalUpdate();
@@ -117,7 +126,7 @@ namespace Transa
                 case "Single":
                     subOperazione[0] = textNotaSorgente.Text;
                     subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
-                    subOperazione[2] = lData.DEBUG_ValoreDefaultSorgente.ToString();
+                    subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                     break;
 
@@ -152,7 +161,7 @@ namespace Transa
             // Aggiunge il sottoconto base
             subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase;
             subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = lData.DEBUG_ValoreDefaultSorgente.ToString();
+            subOperazione[2] = GValori.sValoreContoBaseSorgente;
             AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
 
@@ -162,7 +171,7 @@ namespace Transa
                 // Aggiunge il sottoconto base Cnt
                 subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt";
                 subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-                subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * 10).ToString();
+                subOperazione[2] = GValori.sValoreContoCntSorgente;
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti
@@ -170,7 +179,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * (10 + i + 1)).ToString();
+                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                 }
 
@@ -182,7 +191,7 @@ namespace Transa
                 // Aggiunge il conto base Dep
                 subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep";
                 subOperazione[1] = contoSorgenteCompleto + ":Dep";
-                subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * 20).ToString();
+                subOperazione[2] = GValori.sValoreContoDepSorgente;
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
@@ -190,7 +199,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Dep:Dep-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (lData.DEBUG_ValoreDefaultSorgente * (20 + i + 1)).ToString();
+                    subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                 }
             }
@@ -216,7 +225,7 @@ namespace Transa
                 case "Single":
                     subOperazione[0] = textNotaDestinazione.Text;
                     subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
-                    subOperazione[2] = lData.DEBUG_ValoreDefaultDestinazione.ToString();
+                    subOperazione[2] = GValori.sValoreTotaleAttivoDestinazione;
 
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                     break;
@@ -253,7 +262,7 @@ namespace Transa
             // Aggiunge il sottoconto base
             subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase;
             subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = lData.DEBUG_ValoreDefaultDestinazione.ToString();
+            subOperazione[2] = GValori.sValoreContoBaseDestinazione;
             AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
 
@@ -263,7 +272,7 @@ namespace Transa
                 // Aggiunge il sottoconto base Cnt
                 subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt";
                 subOperazione[1] = contoDestinazioneCompleto + ":Cnt";
-                subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * 10).ToString();
+                subOperazione[2] = GValori.sValoreContoCntDestinazione;
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti Cnt
@@ -271,7 +280,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoDestinazioneCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i]; ;
-                    subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * (10 + i + 1)).ToString();
+                    subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
 
@@ -283,7 +292,7 @@ namespace Transa
                 // Aggiunge il conto base Dep
                 subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep";
                 subOperazione[1] = contoDestinazioneCompleto + ":Dep";
-                subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * 20).ToString(); ;
+                subOperazione[2] = GValori.sValoreContoDepDestinazione;
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti Dep
@@ -291,7 +300,7 @@ namespace Transa
                 {
                     subOperazione[0] = textNotaDestinazione.Text + contoDestinazioneBase + ":Dep:Dep-" + lData.ContiMultipli[i];
                     subOperazione[1] = contoDestinazioneCompleto + ":Dep:Dep-" + lData.ContiMultipli[i]; ;
-                    subOperazione[2] = (lData.DEBUG_ValoreDefaultDestinazione * (20 + i + 1)).ToString(); ;
+                    subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
             }
@@ -912,24 +921,26 @@ namespace Transa
         /// </summary>
         private void AggiornaTotalizzatoriSorgente()
         {
-            // aggiorna il totale dei valori
-            double totale = 0;
-            for (int i = 0; i < dataGridViewSorgenteOperazione.Rows.Count; i++)
-            {
-                if (dataGridViewSorgenteOperazione.Columns.Count >= 2)
-                    if (dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value != null)
-                    {
-                        //totale += Convert.ToDouble(dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString());
-                        totale += ConvertAG.ToDouble0(dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString());
-                    }
-            }
-            textTotaleValoreSorgente.Text = totale.ToString();
+            AggiornaTotalizzatori(ref dataGridViewSorgenteOperazione, ref textTotaleValoreSorgente, ref textDeltaValoreSorgente);
 
-            // aggiorna il delta valore rispetto al valore dell'operazione
-            if (ConvertAG.IsDouble(textValoreOperazione.Text))
-                textDeltaValoreSorgente.Text = (Convert.ToDouble(textValoreOperazione.Text) - totale).ToString();
-            else
-                textDeltaValoreSorgente.Text = "???";
+            //// aggiorna il totale dei valori
+            //double totale = 0;
+            //for (int i = 0; i < dataGridViewSorgenteOperazione.Rows.Count; i++)
+            //{
+            //    if (dataGridViewSorgenteOperazione.Columns.Count >= 2)
+            //        if (dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value != null)
+            //        {
+            //            //totale += Convert.ToDouble(dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString());
+            //            totale += ConvertAG.ToDouble0(dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString());
+            //        }
+            //}
+            //textTotaleValoreSorgente.Text = totale.ToString();
+
+            //// aggiorna il delta valore rispetto al valore dell'operazione
+            //if (ConvertAG.IsDouble(textValoreOperazione.Text))
+            //    textDeltaValoreSorgente.Text = (Convert.ToDouble(textValoreOperazione.Text) - totale).ToString();
+            //else
+            //    textDeltaValoreSorgente.Text = "???";
         }
         /// <summary>
         /// Il valore di una cella destinazione è cambiato, viene ricalcolato il totale dei valori
@@ -945,29 +956,70 @@ namespace Transa
         /// </summary>
         private void AggiornaTotalizzatoriDestinazione()
         {
+            AggiornaTotalizzatori(ref dataGridViewDestinazioneOperazione, ref textTotaleValoreDestinazione, ref textDeltaValoreDestinazione);
+
+            //// aggiorna il totale dei valori
+            //double totale = 0;
+            //for (int i = 0; i < dataGridViewDestinazioneOperazione.Rows.Count; i++)
+            //{
+            //    if (dataGridViewDestinazioneOperazione.Columns.Count >= 2)
+            //        if (dataGridViewDestinazioneOperazione.Rows[i].Cells[2].Value != null)
+            //        {
+
+            //            totale += ConvertAG.ToDouble0(dataGridViewDestinazioneOperazione.Rows[i].Cells[2].Value.ToString());
+            //        }
+            //}
+            //textTotaleValoreDestinazione.Text = totale.ToString();
+
+            //// aggiuona il delta valore rispetto al valore dell'operazione
+            //try
+            //{
+            //    double valoreOperazione = Convert.ToDouble(textValoreOperazione.Text);
+            //    double differenza = valoreOperazione - totale;
+            //    string sDifferenza = differenza.ToString("#0.0000");
+
+            //    textDeltaValoreDestinazione.Text = sDifferenza;
+            //    //textDeltaValoreDestinazione.Text = (Convert.ToDouble(textValoreOperazione.Text) - totale).ToString();
+            //}
+            //catch (Exception e1)
+            //{
+            //    textDeltaValoreDestinazione.Text = "???";
+            //}
+        }
+        /// <summary>
+        /// Aggiorna i totalizzatori
+        /// </summary>
+        private void AggiornaTotalizzatori(ref DataGridView dataGridView, ref TextBox textTotaleValore, ref TextBox textDeltaValore)
+        {
             // aggiorna il totale dei valori
             double totale = 0;
-            for (int i = 0; i < dataGridViewDestinazioneOperazione.Rows.Count; i++)
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
             {
-                if (dataGridViewDestinazioneOperazione.Columns.Count >= 2)
-                    if (dataGridViewDestinazioneOperazione.Rows[i].Cells[2].Value != null)
+                if (dataGridView.Columns.Count >= 2)
+                    if (dataGridView.Rows[i].Cells[2].Value != null)
                     {
 
-                        totale += ConvertAG.ToDouble0(dataGridViewDestinazioneOperazione.Rows[i].Cells[2].Value.ToString());
+                        totale += ConvertAG.ToDouble0(dataGridView.Rows[i].Cells[2].Value.ToString());
                     }
             }
-            textTotaleValoreDestinazione.Text = totale.ToString();
+            textTotaleValore.Text = totale.ToString();
 
-            // aggiuona il delta valore rispetto al valore dell'operazione
+            // aggiuorna il delta valore rispetto al valore dell'operazione
             try
             {
-                textDeltaValoreDestinazione.Text = (Convert.ToDouble(textValoreOperazione.Text) - totale).ToString();
+                double valoreOperazione = Convert.ToDouble(textValoreOperazione.Text);
+                double differenza = valoreOperazione - totale;
+                string sDifferenza = differenza.ToString("#0.0000");
+
+                textDeltaValore.Text = sDifferenza;
+                //textDeltaValoreDestinazione.Text = (Convert.ToDouble(textValoreOperazione.Text) - totale).ToString();
             }
             catch (Exception e1)
             {
-                textDeltaValoreDestinazione.Text = "???";
+                textDeltaValore.Text = "???";
             }
         }
+
         /// <summary>
         /// Genera le trasisioni dalla tabella sorgente
         /// </summary>
@@ -1559,6 +1611,13 @@ namespace Transa
         /// <param name="e"></param>
         private void butAggiorna_Click(object sender, EventArgs e)
         {
+            // varifica lo stato dei conti
+            if (!GValori.StatoContoOK)
+            {
+                lData.StampaMessaggioErrore(LData.ETransaErrore.E1100_IContiNonSonoBilanciati);
+                return;    
+            }
+
             // recupera il tipo di operazione richiesta
             string TipoOperazione = comboBoxTipoOperazione.Text;
 
@@ -1990,6 +2049,64 @@ namespace Transa
         private void comboBoxTipoContiDestinazione_SelectedIndexChanged(object sender, EventArgs e)
         {
             AggiornaTipoConti(ref comboBoxTipoContiDestinazione, ref comboBoxContoDestinazione);
+        }
+        /// <summary>
+        /// Attiva la dialog per la gestione dei valori dei conti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butValoreConti_Click(object sender, EventArgs e)
+        {
+            GValori.ShowDialog();
+
+            // Aggiorna il valore dei sottoconti
+            comboBoxTipoSottocontiSorgente.SelectedIndex = GValori.SottoContoSorgente;
+            comboBoxTipoSottocontiDestinazione.SelectedIndex = GValori.SottoContodestinazione;
+
+            // Aggiorna la casella del valore della transizione
+            AggiornaValoreOperazione();
+        }
+        /// <summary>
+        /// Aggiorna il sottoconto sorgente attivo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxTipoSottocontiSorgente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /// Aggiorna il sottoconto sorgente attivo in GValori
+            GValori.AggiornaTipoSottoconto(true, comboBoxTipoSottocontiSorgente.SelectedIndex);
+
+            // Aggiorna la casella del valore della transizione
+            AggiornaValoreOperazione();
+        }
+        /// <summary>
+        /// Aggiorna il sottoconto destinazione attivo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxTipoSottocontiDestinazione_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Aggiorna il sottoconto destinazione attivo in GValori
+            GValori.AggiornaTipoSottoconto(false, comboBoxTipoSottocontiDestinazione.SelectedIndex);
+
+            // Aggiorna la casella del valore della transizione
+            AggiornaValoreOperazione();
+        }
+
+        /// <summary>
+        /// Aggiorna la casella del valore dell'operzione
+        /// </summary>
+        private void AggiornaValoreOperazione()
+        {
+            // Aggiorna la casella del valore della transizione
+            textValoreOperazione.Text = GValori.sValoreTotaleAttivoSorgente;
+
+            // Aggiorna il colore della casella del valore della transizione
+            textValoreOperazione.BackColor = GValori.ValoreTotaleSorgenteColore;
+
+            // Aggiorna la casella dello stato dei conti
+            textBoxStatoConti.Text = GValori.StatoConto.ToString();
+            textBoxStatoConti.BackColor = GValori.StatoContoColore;
         }
     }
 }

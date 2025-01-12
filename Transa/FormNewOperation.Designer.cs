@@ -32,8 +32,8 @@ namespace Transa
             this.label1 = new System.Windows.Forms.Label();
             this.textDescrizioneOperazione = new System.Windows.Forms.TextBox();
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.butValoreConti = new System.Windows.Forms.Button();
             this.textNumOperazione = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
@@ -61,6 +61,8 @@ namespace Transa
             this.ColContoSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBoxTipoContiDestinazione = new System.Windows.Forms.ComboBox();
             this.comboBoxContoDestinazione = new System.Windows.Forms.ComboBox();
             this.textDeltaValoreDestinazione = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,8 +78,9 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label17 = new System.Windows.Forms.Label();
-            this.comboBoxTipoContiDestinazione = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxStatoConti = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -109,27 +112,21 @@ namespace Transa
             // 
             // textDescrizioneOperazione
             // 
-            this.textDescrizioneOperazione.Location = new System.Drawing.Point(147, 19);
+            this.textDescrizioneOperazione.Location = new System.Drawing.Point(158, 19);
             this.textDescrizioneOperazione.Name = "textDescrizioneOperazione";
-            this.textDescrizioneOperazione.Size = new System.Drawing.Size(620, 20);
+            this.textDescrizioneOperazione.Size = new System.Drawing.Size(609, 20);
             this.textDescrizioneOperazione.TabIndex = 1;
             // 
             // textValoreOperazione
             // 
-            this.textValoreOperazione.Location = new System.Drawing.Point(147, 45);
+            this.textValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textValoreOperazione.Location = new System.Drawing.Point(253, 51);
             this.textValoreOperazione.Name = "textValoreOperazione";
-            this.textValoreOperazione.Size = new System.Drawing.Size(620, 20);
+            this.textValoreOperazione.ReadOnly = true;
+            this.textValoreOperazione.Size = new System.Drawing.Size(173, 20);
             this.textValoreOperazione.TabIndex = 3;
+            this.textValoreOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textValoreOperazione.TextChanged += new System.EventHandler(this.textValoreOperazione_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Valore Operazione";
             // 
             // splitContainer1
             // 
@@ -140,6 +137,10 @@ namespace Transa
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxStatoConti);
+            this.splitContainer1.Panel1.Controls.Add(this.label18);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.butValoreConti);
             this.splitContainer1.Panel1.Controls.Add(this.textNumOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label15);
             this.splitContainer1.Panel1.Controls.Add(this.dateTimeOperazione);
@@ -147,7 +148,6 @@ namespace Transa
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxTipoOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label14);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.textValoreOperazione);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.textDescrizioneOperazione);
@@ -158,6 +158,16 @@ namespace Transa
             this.splitContainer1.Size = new System.Drawing.Size(1192, 626);
             this.splitContainer1.SplitterDistance = 80;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // butValoreConti
+            // 
+            this.butValoreConti.Location = new System.Drawing.Point(12, 49);
+            this.butValoreConti.Name = "butValoreConti";
+            this.butValoreConti.Size = new System.Drawing.Size(136, 23);
+            this.butValoreConti.TabIndex = 17;
+            this.butValoreConti.Text = "Modifica conti operazione";
+            this.butValoreConti.UseVisualStyleBackColor = true;
+            this.butValoreConti.Click += new System.EventHandler(this.butValoreConti_Click);
             // 
             // textNumOperazione
             // 
@@ -356,6 +366,7 @@ namespace Transa
             this.comboBoxTipoSottocontiSorgente.Name = "comboBoxTipoSottocontiSorgente";
             this.comboBoxTipoSottocontiSorgente.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTipoSottocontiSorgente.TabIndex = 8;
+            this.comboBoxTipoSottocontiSorgente.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoSottocontiSorgente_SelectedIndexChanged);
             // 
             // butAggiornaSorgente
             // 
@@ -455,6 +466,28 @@ namespace Transa
             this.splitContainer3.SplitterDistance = 130;
             this.splitContainer3.TabIndex = 8;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(141, 82);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(54, 13);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Tipo conti";
+            // 
+            // comboBoxTipoContiDestinazione
+            // 
+            this.comboBoxTipoContiDestinazione.FormattingEnabled = true;
+            this.comboBoxTipoContiDestinazione.Items.AddRange(new object[] {
+            "@",
+            "Cnt",
+            "Dep"});
+            this.comboBoxTipoContiDestinazione.Location = new System.Drawing.Point(217, 77);
+            this.comboBoxTipoContiDestinazione.Name = "comboBoxTipoContiDestinazione";
+            this.comboBoxTipoContiDestinazione.Size = new System.Drawing.Size(113, 21);
+            this.comboBoxTipoContiDestinazione.TabIndex = 18;
+            this.comboBoxTipoContiDestinazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoContiDestinazione_SelectedIndexChanged);
+            // 
             // comboBoxContoDestinazione
             // 
             this.comboBoxContoDestinazione.FormattingEnabled = true;
@@ -517,6 +550,7 @@ namespace Transa
             this.comboBoxTipoSottocontiDestinazione.Name = "comboBoxTipoSottocontiDestinazione";
             this.comboBoxTipoSottocontiDestinazione.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTipoSottocontiDestinazione.TabIndex = 10;
+            this.comboBoxTipoSottocontiDestinazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoSottocontiDestinazione_SelectedIndexChanged);
             // 
             // butAggiornaDestinazione
             // 
@@ -586,27 +620,33 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
-            // label17
+            // label2
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(141, 82);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(54, 13);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "Tipo conti";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(155, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Valore operazione";
             // 
-            // comboBoxTipoContiDestinazione
+            // textBoxStatoConti
             // 
-            this.comboBoxTipoContiDestinazione.FormattingEnabled = true;
-            this.comboBoxTipoContiDestinazione.Items.AddRange(new object[] {
-            "@",
-            "Cnt",
-            "Dep"});
-            this.comboBoxTipoContiDestinazione.Location = new System.Drawing.Point(217, 77);
-            this.comboBoxTipoContiDestinazione.Name = "comboBoxTipoContiDestinazione";
-            this.comboBoxTipoContiDestinazione.Size = new System.Drawing.Size(113, 21);
-            this.comboBoxTipoContiDestinazione.TabIndex = 18;
-            this.comboBoxTipoContiDestinazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoContiDestinazione_SelectedIndexChanged);
+            this.textBoxStatoConti.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStatoConti.Location = new System.Drawing.Point(616, 46);
+            this.textBoxStatoConti.Name = "textBoxStatoConti";
+            this.textBoxStatoConti.ReadOnly = true;
+            this.textBoxStatoConti.Size = new System.Drawing.Size(151, 20);
+            this.textBoxStatoConti.TabIndex = 20;
+            this.textBoxStatoConti.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(531, 55);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(89, 13);
+            this.label18.TabIndex = 19;
+            this.label18.Text = "Stato conti attivi: ";
             // 
             // FormNewOperation
             // 
@@ -646,7 +686,6 @@ namespace Transa
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textDescrizioneOperazione;
         private System.Windows.Forms.TextBox textValoreOperazione;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label3;
@@ -692,5 +731,9 @@ namespace Transa
         private System.Windows.Forms.ComboBox comboBoxTipoContiSorgente;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox comboBoxTipoContiDestinazione;
+        private System.Windows.Forms.Button butValoreConti;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxStatoConti;
+        private System.Windows.Forms.Label label18;
     }
 }

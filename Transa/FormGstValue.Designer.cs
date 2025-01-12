@@ -38,6 +38,10 @@ namespace Transa
             this.label1 = new System.Windows.Forms.Label();
             this.butAnalisiSorgente = new System.Windows.Forms.Button();
             this.dataGridViewSorgente = new System.Windows.Forms.DataGridView();
+            this.butAssegnaTuttoSorgente = new System.Windows.Forms.Button();
+            this.butAssegnaSorgente = new System.Windows.Forms.Button();
+            this.butAzzeraTuttoSorgente = new System.Windows.Forms.Button();
+            this.butAzzeraSorgente = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxTipoSottocontiSorgente = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,16 +51,18 @@ namespace Transa
             this.butAnalisiDestinazione = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewDestinazione = new System.Windows.Forms.DataGridView();
+            this.butAssegnaTuttoDestinazione = new System.Windows.Forms.Button();
+            this.butAssegnaDestinazione = new System.Windows.Forms.Button();
+            this.butAzzeraDestinazione = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxTipoSottocontiDestinazione = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.textBoxValoreTransizione = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxStatoConti = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dataGridViewValoreConti = new System.Windows.Forms.DataGridView();
-            this.butAzzeraSorgente = new System.Windows.Forms.Button();
-            this.butAzzeraDestinazione = new System.Windows.Forms.Button();
-            this.butAzzeraTuttoSorgente = new System.Windows.Forms.Button();
-            this.butAssegnaSorgente = new System.Windows.Forms.Button();
-            this.butAssegnaDestinazione = new System.Windows.Forms.Button();
-            this.butAssegnaTuttoSorgente = new System.Windows.Forms.Button();
-            this.butAssegnaTuttoDestinazione = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,6 +91,11 @@ namespace Transa
             this.splitContainer6.Panel2.SuspendLayout();
             this.splitContainer6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDestinazione)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
+            this.splitContainer7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValoreConti)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,9 +119,9 @@ namespace Transa
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridViewValoreConti);
-            this.splitContainer1.Size = new System.Drawing.Size(1548, 450);
-            this.splitContainer1.SplitterDistance = 350;
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer1.Size = new System.Drawing.Size(1548, 568);
+            this.splitContainer1.SplitterDistance = 400;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer3
@@ -127,8 +138,8 @@ namespace Transa
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer3.Size = new System.Drawing.Size(1548, 350);
-            this.splitContainer3.SplitterDistance = 180;
+            this.splitContainer3.Size = new System.Drawing.Size(1548, 400);
+            this.splitContainer3.SplitterDistance = 202;
             this.splitContainer3.TabIndex = 6;
             // 
             // groupBox1
@@ -138,7 +149,7 @@ namespace Transa
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1548, 180);
+            this.groupBox1.Size = new System.Drawing.Size(1548, 202);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sorgente";
@@ -162,8 +173,8 @@ namespace Transa
             this.splitContainer5.Panel2.Controls.Add(this.butAzzeraSorgente);
             this.splitContainer5.Panel2.Controls.Add(this.label8);
             this.splitContainer5.Panel2.Controls.Add(this.comboBoxTipoSottocontiSorgente);
-            this.splitContainer5.Size = new System.Drawing.Size(1542, 161);
-            this.splitContainer5.SplitterDistance = 115;
+            this.splitContainer5.Size = new System.Drawing.Size(1542, 183);
+            this.splitContainer5.SplitterDistance = 102;
             this.splitContainer5.TabIndex = 0;
             // 
             // splitContainer2
@@ -182,8 +193,8 @@ namespace Transa
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridViewSorgente);
-            this.splitContainer2.Size = new System.Drawing.Size(1542, 115);
-            this.splitContainer2.SplitterDistance = 34;
+            this.splitContainer2.Size = new System.Drawing.Size(1542, 102);
+            this.splitContainer2.SplitterDistance = 27;
             this.splitContainer2.TabIndex = 0;
             // 
             // label1
@@ -213,8 +224,48 @@ namespace Transa
             this.dataGridViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSorgente.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSorgente.Name = "dataGridViewSorgente";
-            this.dataGridViewSorgente.Size = new System.Drawing.Size(1542, 77);
+            this.dataGridViewSorgente.Size = new System.Drawing.Size(1542, 71);
             this.dataGridViewSorgente.TabIndex = 1;
+            // 
+            // butAssegnaTuttoSorgente
+            // 
+            this.butAssegnaTuttoSorgente.Location = new System.Drawing.Point(524, 6);
+            this.butAssegnaTuttoSorgente.Name = "butAssegnaTuttoSorgente";
+            this.butAssegnaTuttoSorgente.Size = new System.Drawing.Size(94, 23);
+            this.butAssegnaTuttoSorgente.TabIndex = 15;
+            this.butAssegnaTuttoSorgente.Text = "Assegna tutto";
+            this.butAssegnaTuttoSorgente.UseVisualStyleBackColor = true;
+            this.butAssegnaTuttoSorgente.Click += new System.EventHandler(this.butAssegnaTuttoSorgente_Click);
+            // 
+            // butAssegnaSorgente
+            // 
+            this.butAssegnaSorgente.Location = new System.Drawing.Point(443, 6);
+            this.butAssegnaSorgente.Name = "butAssegnaSorgente";
+            this.butAssegnaSorgente.Size = new System.Drawing.Size(75, 23);
+            this.butAssegnaSorgente.TabIndex = 14;
+            this.butAssegnaSorgente.Text = "Assegna";
+            this.butAssegnaSorgente.UseVisualStyleBackColor = true;
+            this.butAssegnaSorgente.Click += new System.EventHandler(this.butAssegnaSorgente_Click);
+            // 
+            // butAzzeraTuttoSorgente
+            // 
+            this.butAzzeraTuttoSorgente.Location = new System.Drawing.Point(305, 6);
+            this.butAzzeraTuttoSorgente.Name = "butAzzeraTuttoSorgente";
+            this.butAzzeraTuttoSorgente.Size = new System.Drawing.Size(75, 23);
+            this.butAzzeraTuttoSorgente.TabIndex = 13;
+            this.butAzzeraTuttoSorgente.Text = "Azzera tutto";
+            this.butAzzeraTuttoSorgente.UseVisualStyleBackColor = true;
+            this.butAzzeraTuttoSorgente.Click += new System.EventHandler(this.butAzzeraTuttoSorgente_Click);
+            // 
+            // butAzzeraSorgente
+            // 
+            this.butAzzeraSorgente.Location = new System.Drawing.Point(224, 6);
+            this.butAzzeraSorgente.Name = "butAzzeraSorgente";
+            this.butAzzeraSorgente.Size = new System.Drawing.Size(75, 23);
+            this.butAzzeraSorgente.TabIndex = 12;
+            this.butAzzeraSorgente.Text = "Azzera";
+            this.butAzzeraSorgente.UseVisualStyleBackColor = true;
+            this.butAzzeraSorgente.Click += new System.EventHandler(this.butAzzeraSorgente_Click);
             // 
             // label8
             // 
@@ -241,7 +292,7 @@ namespace Transa
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1548, 166);
+            this.groupBox2.Size = new System.Drawing.Size(1548, 194);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Destinazione";
@@ -264,8 +315,8 @@ namespace Transa
             this.splitContainer4.Panel2.Controls.Add(this.butAzzeraDestinazione);
             this.splitContainer4.Panel2.Controls.Add(this.label3);
             this.splitContainer4.Panel2.Controls.Add(this.comboBoxTipoSottocontiDestinazione);
-            this.splitContainer4.Size = new System.Drawing.Size(1542, 147);
-            this.splitContainer4.SplitterDistance = 95;
+            this.splitContainer4.Size = new System.Drawing.Size(1542, 175);
+            this.splitContainer4.SplitterDistance = 126;
             this.splitContainer4.TabIndex = 0;
             // 
             // splitContainer6
@@ -286,8 +337,8 @@ namespace Transa
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.dataGridViewDestinazione);
-            this.splitContainer6.Size = new System.Drawing.Size(1542, 95);
-            this.splitContainer6.SplitterDistance = 34;
+            this.splitContainer6.Size = new System.Drawing.Size(1542, 126);
+            this.splitContainer6.SplitterDistance = 58;
             this.splitContainer6.TabIndex = 0;
             // 
             // textBoxInStringaDestinazione
@@ -324,8 +375,38 @@ namespace Transa
             this.dataGridViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewDestinazione.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewDestinazione.Name = "dataGridViewDestinazione";
-            this.dataGridViewDestinazione.Size = new System.Drawing.Size(1542, 57);
+            this.dataGridViewDestinazione.Size = new System.Drawing.Size(1542, 64);
             this.dataGridViewDestinazione.TabIndex = 1;
+            // 
+            // butAssegnaTuttoDestinazione
+            // 
+            this.butAssegnaTuttoDestinazione.Location = new System.Drawing.Point(524, 4);
+            this.butAssegnaTuttoDestinazione.Name = "butAssegnaTuttoDestinazione";
+            this.butAssegnaTuttoDestinazione.Size = new System.Drawing.Size(94, 23);
+            this.butAssegnaTuttoDestinazione.TabIndex = 20;
+            this.butAssegnaTuttoDestinazione.Text = "Assegna tutto";
+            this.butAssegnaTuttoDestinazione.UseVisualStyleBackColor = true;
+            this.butAssegnaTuttoDestinazione.Click += new System.EventHandler(this.butAssegnaTuttoDestinazione_Click);
+            // 
+            // butAssegnaDestinazione
+            // 
+            this.butAssegnaDestinazione.Location = new System.Drawing.Point(443, 4);
+            this.butAssegnaDestinazione.Name = "butAssegnaDestinazione";
+            this.butAssegnaDestinazione.Size = new System.Drawing.Size(75, 23);
+            this.butAssegnaDestinazione.TabIndex = 19;
+            this.butAssegnaDestinazione.Text = "Assegna";
+            this.butAssegnaDestinazione.UseVisualStyleBackColor = true;
+            this.butAssegnaDestinazione.Click += new System.EventHandler(this.butAssegnaDestinazione_Click);
+            // 
+            // butAzzeraDestinazione
+            // 
+            this.butAzzeraDestinazione.Location = new System.Drawing.Point(224, 6);
+            this.butAzzeraDestinazione.Name = "butAzzeraDestinazione";
+            this.butAzzeraDestinazione.Size = new System.Drawing.Size(75, 23);
+            this.butAzzeraDestinazione.TabIndex = 18;
+            this.butAzzeraDestinazione.Text = "Azzera";
+            this.butAzzeraDestinazione.UseVisualStyleBackColor = true;
+            this.butAzzeraDestinazione.Click += new System.EventHandler(this.butAzzeraDestinazione_Click);
             // 
             // label3
             // 
@@ -345,6 +426,77 @@ namespace Transa
             this.comboBoxTipoSottocontiDestinazione.TabIndex = 16;
             this.comboBoxTipoSottocontiDestinazione.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoSottocontiDestinazione_SelectedIndexChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupBox3.Controls.Add(this.splitContainer7);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1548, 164);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Conti Attivi";
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(3, 16);
+            this.splitContainer7.Name = "splitContainer7";
+            this.splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.textBoxValoreTransizione);
+            this.splitContainer7.Panel1.Controls.Add(this.label5);
+            this.splitContainer7.Panel1.Controls.Add(this.textBoxStatoConti);
+            this.splitContainer7.Panel1.Controls.Add(this.label2);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.dataGridViewValoreConti);
+            this.splitContainer7.Size = new System.Drawing.Size(1542, 145);
+            this.splitContainer7.SplitterDistance = 30;
+            this.splitContainer7.TabIndex = 0;
+            // 
+            // textBoxValoreTransizione
+            // 
+            this.textBoxValoreTransizione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxValoreTransizione.Location = new System.Drawing.Point(404, 4);
+            this.textBoxValoreTransizione.Name = "textBoxValoreTransizione";
+            this.textBoxValoreTransizione.ReadOnly = true;
+            this.textBoxValoreTransizione.Size = new System.Drawing.Size(100, 20);
+            this.textBoxValoreTransizione.TabIndex = 3;
+            this.textBoxValoreTransizione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(306, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Valore transizione";
+            // 
+            // textBoxStatoConti
+            // 
+            this.textBoxStatoConti.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStatoConti.Location = new System.Drawing.Point(107, 3);
+            this.textBoxStatoConti.Name = "textBoxStatoConti";
+            this.textBoxStatoConti.ReadOnly = true;
+            this.textBoxStatoConti.Size = new System.Drawing.Size(100, 20);
+            this.textBoxStatoConti.TabIndex = 1;
+            this.textBoxStatoConti.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Stato conti attivi: ";
+            // 
             // dataGridViewValoreConti
             // 
             this.dataGridViewValoreConti.AllowUserToAddRows = false;
@@ -353,84 +505,14 @@ namespace Transa
             this.dataGridViewValoreConti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewValoreConti.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewValoreConti.Name = "dataGridViewValoreConti";
-            this.dataGridViewValoreConti.Size = new System.Drawing.Size(1548, 96);
+            this.dataGridViewValoreConti.Size = new System.Drawing.Size(1542, 111);
             this.dataGridViewValoreConti.TabIndex = 0;
-            // 
-            // butAzzeraSorgente
-            // 
-            this.butAzzeraSorgente.Location = new System.Drawing.Point(224, 6);
-            this.butAzzeraSorgente.Name = "butAzzeraSorgente";
-            this.butAzzeraSorgente.Size = new System.Drawing.Size(75, 23);
-            this.butAzzeraSorgente.TabIndex = 12;
-            this.butAzzeraSorgente.Text = "Azzera";
-            this.butAzzeraSorgente.UseVisualStyleBackColor = true;
-            this.butAzzeraSorgente.Click += new System.EventHandler(this.butAzzeraSorgente_Click);
-            // 
-            // butAzzeraDestinazione
-            // 
-            this.butAzzeraDestinazione.Location = new System.Drawing.Point(224, 6);
-            this.butAzzeraDestinazione.Name = "butAzzeraDestinazione";
-            this.butAzzeraDestinazione.Size = new System.Drawing.Size(75, 23);
-            this.butAzzeraDestinazione.TabIndex = 18;
-            this.butAzzeraDestinazione.Text = "Azzera";
-            this.butAzzeraDestinazione.UseVisualStyleBackColor = true;
-            this.butAzzeraDestinazione.Click += new System.EventHandler(this.butAzzeraDestinazione_Click);
-            // 
-            // butAzzeraTuttoSorgente
-            // 
-            this.butAzzeraTuttoSorgente.Location = new System.Drawing.Point(305, 6);
-            this.butAzzeraTuttoSorgente.Name = "butAzzeraTuttoSorgente";
-            this.butAzzeraTuttoSorgente.Size = new System.Drawing.Size(75, 23);
-            this.butAzzeraTuttoSorgente.TabIndex = 13;
-            this.butAzzeraTuttoSorgente.Text = "Azzera tutto";
-            this.butAzzeraTuttoSorgente.UseVisualStyleBackColor = true;
-            this.butAzzeraTuttoSorgente.Click += new System.EventHandler(this.butAzzeraTuttoSorgente_Click);
-            // 
-            // butAssegnaSorgente
-            // 
-            this.butAssegnaSorgente.Location = new System.Drawing.Point(443, 6);
-            this.butAssegnaSorgente.Name = "butAssegnaSorgente";
-            this.butAssegnaSorgente.Size = new System.Drawing.Size(75, 23);
-            this.butAssegnaSorgente.TabIndex = 14;
-            this.butAssegnaSorgente.Text = "Assegna";
-            this.butAssegnaSorgente.UseVisualStyleBackColor = true;
-            this.butAssegnaSorgente.Click += new System.EventHandler(this.butAssegnaSorgente_Click);
-            // 
-            // butAssegnaDestinazione
-            // 
-            this.butAssegnaDestinazione.Location = new System.Drawing.Point(443, 4);
-            this.butAssegnaDestinazione.Name = "butAssegnaDestinazione";
-            this.butAssegnaDestinazione.Size = new System.Drawing.Size(75, 23);
-            this.butAssegnaDestinazione.TabIndex = 19;
-            this.butAssegnaDestinazione.Text = "Assegna";
-            this.butAssegnaDestinazione.UseVisualStyleBackColor = true;
-            this.butAssegnaDestinazione.Click += new System.EventHandler(this.butAssegnaDestinazione_Click);
-            // 
-            // butAssegnaTuttoSorgente
-            // 
-            this.butAssegnaTuttoSorgente.Location = new System.Drawing.Point(524, 6);
-            this.butAssegnaTuttoSorgente.Name = "butAssegnaTuttoSorgente";
-            this.butAssegnaTuttoSorgente.Size = new System.Drawing.Size(94, 23);
-            this.butAssegnaTuttoSorgente.TabIndex = 15;
-            this.butAssegnaTuttoSorgente.Text = "Assegna tutto";
-            this.butAssegnaTuttoSorgente.UseVisualStyleBackColor = true;
-            this.butAssegnaTuttoSorgente.Click += new System.EventHandler(this.butAssegnaTuttoSorgente_Click);
-            // 
-            // butAssegnaTuttoDestinazione
-            // 
-            this.butAssegnaTuttoDestinazione.Location = new System.Drawing.Point(524, 4);
-            this.butAssegnaTuttoDestinazione.Name = "butAssegnaTuttoDestinazione";
-            this.butAssegnaTuttoDestinazione.Size = new System.Drawing.Size(94, 23);
-            this.butAssegnaTuttoDestinazione.TabIndex = 20;
-            this.butAssegnaTuttoDestinazione.Text = "Assegna tutto";
-            this.butAssegnaTuttoDestinazione.UseVisualStyleBackColor = true;
-            this.butAssegnaTuttoDestinazione.Click += new System.EventHandler(this.butAssegnaTuttoDestinazione_Click);
             // 
             // FormGstValue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1548, 450);
+            this.ClientSize = new System.Drawing.Size(1548, 568);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormGstValue";
             this.Text = "FormGstValue";
@@ -466,6 +548,12 @@ namespace Transa
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
             this.splitContainer6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDestinazione)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel1.PerformLayout();
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
+            this.splitContainer7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewValoreConti)).EndInit();
             this.ResumeLayout(false);
 
@@ -500,5 +588,11 @@ namespace Transa
         private System.Windows.Forms.Button butAssegnaSorgente;
         private System.Windows.Forms.Button butAssegnaTuttoDestinazione;
         private System.Windows.Forms.Button butAssegnaDestinazione;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.SplitContainer splitContainer7;
+        private System.Windows.Forms.TextBox textBoxStatoConti;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxValoreTransizione;
+        private System.Windows.Forms.Label label5;
     }
 }
