@@ -122,6 +122,18 @@ namespace Transa
         public string sValoreSottoContoCntSorgente(int IndSottoconto) { return ValoreSottoContoCntSorgente(IndSottoconto).ToString(FormatoValore); }
         public string sValoreSottoContoCntDestinazione(int IndSottoconto) { return ValoreSottoContoCntDestinazione(IndSottoconto).ToString(FormatoValore); }
 
+        public bool IsZeroValoreSottoContoCntSorgente(int IndSottoconto)
+        {
+            return ConvertAG.IsZero(ValoreSottoContoCntSorgente(IndSottoconto));
+        }
+
+        public bool IsZeroValoreSottoContoCntDestinazione(int IndSottoconto)
+        {
+            return ConvertAG.IsZero(ValoreSottoContoCntDestinazione(IndSottoconto));
+        }
+
+
+
 
         // =====================================================================================
         // ====== Valore conto Dep 
@@ -130,6 +142,17 @@ namespace Transa
         public double ValoreContoDepDestinazione { get => GetValore(false, 9); }
         public string sValoreContoDepSorgente { get => ValoreContoDepSorgente.ToString(FormatoValore); }
         public string sValoreContoDepDestinazione { get => ValoreContoDepDestinazione.ToString(FormatoValore); }
+
+        public bool IsZeroValoreSottoContoDepSorgente(int IndSottoconto)
+        {
+            return ConvertAG.IsZero(ValoreSottoContoDepSorgente(IndSottoconto));
+        }
+
+        public bool IsZeroValoreSottoContoDepDestinazione(int IndSottoconto)
+        {
+            return ConvertAG.IsZero(ValoreSottoContoDepDestinazione(IndSottoconto));
+        }
+
 
         // =====================================================================================
         // ====== Valore sottoconti Dep 

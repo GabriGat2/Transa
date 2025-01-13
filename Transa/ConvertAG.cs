@@ -50,7 +50,16 @@ namespace Transa
                 return false;
             }
         }
-
+        /// <summary>
+        /// Rende true se i valore è in prossimità di 0
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static bool IsZero(double valore)
+        {
+            return ((valore > -0.001) && (valore < 0.001));
+        }
 
 
     }

@@ -173,15 +173,37 @@ namespace Transa
             "CapitaliBaseFinale",
         };
         /// <summary>
+        /// Gruppo SottoConti
+        /// </summary>
+        public enum EGruppoSottoconti 
+        {
+            FA,
+            LC,
+            GG,
+            BG,
+            CCat
+        };
+        /// <summary>
+        /// Gruppo SottoConti
+        /// </summary>
+        public string[] sGruppoSottoconti =
+        {
+            EGruppoSottoconti.FA.ToString(),
+            EGruppoSottoconti.LC.ToString(),
+            EGruppoSottoconti.GG.ToString(),
+            EGruppoSottoconti.BG.ToString(),
+            EGruppoSottoconti.CCat.ToString()
+        };
+        /// <summary>
         /// Sotto conti
         /// </summary>
-        public string[] ContiMultipli =
+        public string[] ContiMultipli = // DA ELIMINARE
         {
-            "BG",
-            "CCat",
-            "FA",
-            "GG",
-            "LC",
+            EGruppoSottoconti.FA.ToString(),
+            EGruppoSottoconti.LC.ToString(),
+            EGruppoSottoconti.GG.ToString(),
+            EGruppoSottoconti.BG.ToString(),
+            EGruppoSottoconti.CCat.ToString()
         };
         // =====================================================================================
         // ====== Tipo sottoconti
