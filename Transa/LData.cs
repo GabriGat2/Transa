@@ -278,7 +278,7 @@ namespace Transa
             E0001_NOK = 1,
             E0002_ValoreNonRichiesto,
 
-            // Errori relativi alla gestione di una tabell2
+            // Errori relativi alla gestione di una tabelle
             E1000_TabellaInesistente,
             E1001_ColonnaTabellaFuoriLimiti,
             E1002_RigaTabellaFuoriLimiti,
@@ -286,10 +286,12 @@ namespace Transa
             E1004_IndiceColonnaTabellaFuoriLimiti,
             E1005_IndiceRigaTabellaFuoriLimiti,
             E1006_IndiceCellaTabellaFuoriLimiti,
+            E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse ,
 
             // Stato dei conti
             E1100_IContiNonSonoBilanciati,
-
+            E1101_ISottoContiAttiviSonoDiversi,
+            E1102_IContiBaseSonoDiversi,
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte
@@ -386,7 +388,7 @@ namespace Transa
                 {
                     // compone il messaggio da stampare
                     string titolo = "Errore!";
-                    string messaggio = "La stringa >" + messaggio2 + "<\n\n" +
+                    string messaggio = "Problema: \n>" + messaggio2 + "<\n\n" +
                                        "ha generato l'errore: \n\n" +
                                        RestultToSting(esito) +
                                         "\n\n" +
