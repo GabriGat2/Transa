@@ -32,6 +32,7 @@ namespace Transa
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.butTest = new System.Windows.Forms.Button();
             this.butAccounts = new System.Windows.Forms.Button();
             this.butNewOperation = new System.Windows.Forms.Button();
             this.butSaveFile = new System.Windows.Forms.Button();
@@ -39,7 +40,7 @@ namespace Transa
             this.butAddRow = new System.Windows.Forms.Button();
             this.butOpenFile = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.butTest = new System.Windows.Forms.Button();
+            this.butModificaOperazione = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -68,6 +69,7 @@ namespace Transa
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.butModificaOperazione);
             this.panel1.Controls.Add(this.butTest);
             this.panel1.Controls.Add(this.butAccounts);
             this.panel1.Controls.Add(this.butNewOperation);
@@ -82,9 +84,19 @@ namespace Transa
             this.panel1.Size = new System.Drawing.Size(1237, 35);
             this.panel1.TabIndex = 0;
             // 
+            // butTest
+            // 
+            this.butTest.Location = new System.Drawing.Point(1129, 7);
+            this.butTest.Name = "butTest";
+            this.butTest.Size = new System.Drawing.Size(75, 23);
+            this.butTest.TabIndex = 6;
+            this.butTest.Text = "Test";
+            this.butTest.UseVisualStyleBackColor = true;
+            this.butTest.Click += new System.EventHandler(this.butTest_Click);
+            // 
             // butAccounts
             // 
-            this.butAccounts.Location = new System.Drawing.Point(508, 7);
+            this.butAccounts.Location = new System.Drawing.Point(981, 7);
             this.butAccounts.Name = "butAccounts";
             this.butAccounts.Size = new System.Drawing.Size(108, 23);
             this.butAccounts.TabIndex = 5;
@@ -146,15 +158,15 @@ namespace Transa
             this.butOpenFile.UseVisualStyleBackColor = true;
             this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click);
             // 
-            // butTest
+            // butModificaOperazione
             // 
-            this.butTest.Location = new System.Drawing.Point(837, 6);
-            this.butTest.Name = "butTest";
-            this.butTest.Size = new System.Drawing.Size(75, 23);
-            this.butTest.TabIndex = 6;
-            this.butTest.Text = "Test";
-            this.butTest.UseVisualStyleBackColor = true;
-            this.butTest.Click += new System.EventHandler(this.butTest_Click);
+            this.butModificaOperazione.Location = new System.Drawing.Point(492, 9);
+            this.butModificaOperazione.Name = "butModificaOperazione";
+            this.butModificaOperazione.Size = new System.Drawing.Size(120, 23);
+            this.butModificaOperazione.TabIndex = 7;
+            this.butModificaOperazione.Text = "Modifica Operazione";
+            this.butModificaOperazione.UseVisualStyleBackColor = true;
+            this.butModificaOperazione.Click += new System.EventHandler(this.butModificaOperazione_Click);
             // 
             // FormMain
             // 
@@ -186,6 +198,7 @@ namespace Transa
         private System.Windows.Forms.Button butNewOperation;
         private System.Windows.Forms.Button butAccounts;
         private System.Windows.Forms.Button butTest;
+        private System.Windows.Forms.Button butModificaOperazione;
     }
 }
 

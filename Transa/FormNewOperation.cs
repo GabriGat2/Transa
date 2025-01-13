@@ -262,7 +262,7 @@ namespace Transa
             string contoDst = GetContoDestinazione(SezioneConto.ContoCompleto);
 
             // Imposta promemoria
-            string promemoriaDst = textNotaSorgente.Text + contoDst;
+            string promemoriaDst = textNotaDestinazione.Text + contoDst;
 
             // Imposta le variabili di filto
             bool filtra0Dst = checkBoxFiltra0Destinazione.Checked;
@@ -1894,7 +1894,7 @@ namespace Transa
                     textValoreOperazione.Text = "1";
                     textNumOperazione.Text = "80000";
                     textNotaSorgente.Text = "Prelievo da ";
-                    textNotaDestinazione.Text = "Depositato in -> ";
+                    textNotaDestinazione.Text = "Deposito in -> ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
@@ -1910,7 +1910,7 @@ namespace Transa
                     textValoreOperazione.Text = "1";
                     textNumOperazione.Text = "80000";
                     textNotaSorgente.Text = "Prelievo da ";
-                    textNotaDestinazione.Text = "Depositato in ";
+                    textNotaDestinazione.Text = "Deposito in ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
@@ -1926,7 +1926,7 @@ namespace Transa
                     textValoreOperazione.Text = "1";
                     textNumOperazione.Text = "21000";
                     textNotaSorgente.Text = "Prelievo da ";
-                    textNotaDestinazione.Text = "Depositato in ";
+                    textNotaDestinazione.Text = "Deposito in ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
@@ -1943,7 +1943,7 @@ namespace Transa
                     textValoreOperazione.Text = "1";
                     textNumOperazione.Text = "20000";
                     textNotaSorgente.Text = "Prelievo da ";
-                    textNotaDestinazione.Text = "Depositato in ";
+                    textNotaDestinazione.Text = "Deposito in ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
@@ -1960,7 +1960,7 @@ namespace Transa
                     textValoreOperazione.Text = "1";
                     textNumOperazione.Text = "21000";
                     textNotaSorgente.Text = "Prelievo da ";
-                    textNotaDestinazione.Text = "Depositato in ";
+                    textNotaDestinazione.Text = "Deposito in ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
@@ -2119,29 +2119,6 @@ namespace Transa
             textBoxStatoConti.Text = GValori.StatoConto.ToString();
             textBoxStatoConti.BackColor = GValori.StatoContoColore;
         }
-
-        //private void AggiornaGruppoSottoconto(bool tabSrc, bool contoSrc, bool contoCnt, string promemoria, bool filtra0)
-        //{
-        //    // compone promemoria base
-        //    string promemoriaBase = promemoria;
-
-
-        //    // Aggiunge il sottoconto base Cnt
-        //    subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt";
-        //    subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-        //    subOperazione[2] = GValori.sValoreContoCntSorgente;
-        //    AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-        //    // aggiunge i sottoconti
-        //    for (int i = 0; i < lData.ContiMultipli.Length; i++)
-        //    {
-        //        subOperazione[0] = textNotaSorgente.Text + contoSorgenteBase + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-        //        subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-        //        subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
-        //        AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-        //    }
-
-        //}
         /// <summary>
         /// Svuota la tabella
         /// </summary>
@@ -2153,6 +2130,16 @@ namespace Transa
             {
                 dataGrid.Rows.RemoveAt(i);
             }
+        }
+        /// <summary>
+        /// Azzera tutti idati della classe
+        /// </summary>
+        public void AzzeraTutto()
+        {
+            Inizializzazione();
+            SvuotaTabella(ref dataGridViewSorgenteOperazione);
+            SvuotaTabella(ref dataGridViewDestinazioneOperazione);
+            GValori.AzzeraTutto();
         }
 
     }

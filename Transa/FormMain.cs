@@ -14,8 +14,15 @@ namespace Transa
 {
     public partial class FormMain : Form
     {
-        public LData lData = new LData();
-
+        /// <summary>
+        /// Oggetto che contiene tutti i dati e le strutture comuni
+        /// </summary>
+        public LData lData;
+        /// <summary>
+        /// Oggetto  per la gestione dei valori transazioni
+        /// </summary>
+        public FormNewOperation GTransa;
+        
         /// <summary>
         /// Tabella transizioni completa
         /// </summary>
@@ -25,6 +32,12 @@ namespace Transa
         /// </summary>
         public FormMain()
         {
+            // Crea l'oggeto per la gestione dei dati comuni
+            lData = new LData();
+
+            // Crea l'oggeto per la gestione delle transazioni
+            GTransa = new FormNewOperation(ref lData);
+
             InitializeComponent();
             SetupDataGridView();
             PopulateDataGridView();
@@ -418,16 +431,31 @@ namespace Transa
         /// <param name="e"></param>
         private void butNewOperation_Click(object sender, EventArgs e)
         {
-            FormNewOperation dlg = new FormNewOperation(ref lData);
+            GestioneTransazione(true);  
+        }
+        /// <summary>
+        /// Modifica l'operazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butModificaOperazione_Click(object sender, EventArgs e)
+        {
+            GestioneTransazione(false);
+        }
+        /// <summary>
+        /// Gestione transazione
+        /// </summary>
+        /// <param name="azzera"></param>
+        private void GestioneTransazione(bool azzera)
+        {
+            // controlla se deve reinizializzare tutto
+            if (azzera)
+            {
+                GTransa.AzzeraTutto();
+            }
 
-            //int cnt = 0;
-            //bool run = true;
-            //while (run)
-            //{ 
-                // crea la nuova operazione
-                dlg.ShowDialog();
-            //    run = --cnt > 0;
-            //}
+            // apre la dialog per la gestione della transazione
+            GTransa.ShowDialog();
 
             // Svuota la tabelle delle transizioni
             int nRows = transactionDataGridView.Rows.Count - 2;
@@ -440,8 +468,10 @@ namespace Transa
             RigeneratransactionDataGridView();
 
             // Estrae le trasizioni dell'operazione
-            dlg.GetTransiction(ref transactionDataGridView);
+            GTransa.GetTransiction(ref transactionDataGridView);
         }
+
+
 
         /// <summary>
         /// Rigenera la tabella delle transizioni
@@ -486,5 +516,6 @@ namespace Transa
             FormGstValue dlg = new FormGstValue(ref lData);
             dlg.ShowDialog();
         }
+
     }
 }

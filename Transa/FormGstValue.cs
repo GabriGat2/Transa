@@ -732,7 +732,7 @@ namespace Transa
         /// <summary>
         /// Azzera tutte le aree
         /// </summary>
-        private void AzzeraTutto()
+        public void AzzeraTutto()
         {
             // Azzera area sorgente
             Azzera(true, true);
