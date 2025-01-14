@@ -335,7 +335,7 @@ namespace Transa
             string contoSrc = GetContoSorgente(SezioneConto.ContoCompleto);
             string contoDst = GetContoDestinazione(SezioneConto.ContoCompleto);
 
-            // VerificaSubTransazione che il conto base sia identico
+            // Verifica SubTransazione che il conto base sia identico
             string contoBaseSrc = GetContoSorgente(SezioneConto.ContoBase, 3);
             string contoBaseDst = GetContoDestinazione(SezioneConto.ContoBase);
             if (contoBaseSrc != contoBaseDst)
@@ -626,147 +626,6 @@ namespace Transa
             AggiornaTotalizzatoriDestinazione();
         }
         /// <summary>
-        /// Operazione Zip:
-        /// - Operazione 1: ZIP
-        ///     - Preleva dal gruppo del conto sorgente
-        ///     - Deposita nel conto base sorgente
-        /// - Operazione 2: TOTALE    
-        ///     - Preleva dal conto base sorgente
-        ///     - deposita nel gruppo destinazione
-        /// </summary>
-        private void AggiornaOperazioneZip()
-        {
-            // Svuota la tabelle
-            SvuotaTabella(ref dataGridViewSorgenteOperazione);
-            SvuotaTabella(ref dataGridViewDestinazioneOperazione);
-
-            // estre il gruppo di sotto conti selezionati
-            string contiSelezionati = comboBoxTipoSottocontiSorgente.Text;
-
-            // definisce la stringa per la porzione di transizione
-            string[] subOperazione = new string[3];
-
-
-            // =============================================================================
-            // - Operazione 1: ZIP
-            //     - Preleva dal gruppo del conto sorgente
-            //     - Deposita nel conto base sorgente
-            // =============================================================================
-
-            // compone i conti sorgente e destinazione
-            string contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
-            string contoDestinazioneCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
-
-            // compone promemoria base
-            string promemoriaS = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaSorgente.Text + contoSorgenteCompleto;
-            string promemoriaD = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
-
-            // assegna il valori di inizializzazione base dei conti
-            double DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
-            double DEBUG_vDestinazione = DEBUG_vSorgente;
-            
-            // Compone le trasizioni sorgente 1
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaS;
-            subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = DEBUG_vSorgente.ToString();
-            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-            // aggiunge i sotto conti del gruppo Cnt se selezionati
-            if ((contiSelezionati == "Cnt") || (contiSelezionati == "All"))
-            {
-                // Aggiunge il sottoconto Cnt
-                subOperazione[0] = promemoriaS + ":Cnt";
-                subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-                subOperazione[2] = (DEBUG_vSorgente * 10).ToString();
-                AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-                // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                {
-                    subOperazione[0] = promemoriaS + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (DEBUG_vSorgente * (10 + i + 1)).ToString();
-                    AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-                }
-            }
-
-            // aggiunge i sotto conti del gruppo Dep se selezionati
-            if ((contiSelezionati == "Dep") || (contiSelezionati == "All"))
-            {
-                // Aggiunge il sottoconto Dep
-                subOperazione[0] = promemoriaS + ":Dep";
-                subOperazione[1] = contoSorgenteCompleto + ":Dep";
-                subOperazione[2] = (DEBUG_vSorgente * 20).ToString();
-                AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-                // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
-                {
-                    subOperazione[0] = promemoriaS + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (DEBUG_vSorgente * (20 + i + 1)).ToString();
-                    AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-                }
-            }
-                        
-            // Compone le trasizioni sorgente destinazione 1
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaD;
-            subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = DEBUG_vDestinazione.ToString();
-            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
-
-
-
-            // =============================================================================
-            // - Operazione 2: TOTALE
-            //     - Preleva nel conto base sorgente
-            //     - Deposita nel conto destinazione
-            // =============================================================================
-
-            // compone i conti sorgente e destinazione
-            contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
-            contoDestinazioneCompleto = GetContoDestinazione(SezioneConto.ContoCompleto);
-
-            // compone promemoria base
-            promemoriaS = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaSorgente.Text + contoSorgenteCompleto;
-            promemoriaD = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
-
-            // assegna il valori di inizializzazione base dei conti
-            DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
-            DEBUG_vDestinazione = DEBUG_vSorgente;
-
-            // Compone le trasizioni sorgente 2
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaS;
-            subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = DEBUG_vSorgente.ToString();
-            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-
-            // Compone le trasizioni sorgente destinazione 2
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaD;
-            subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = DEBUG_vDestinazione.ToString();
-            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
-
-
-
-            // Aggiorna i totalizzazori();
-            AggiornaTotalizzatoriSorgente();
-            AggiornaTotalizzatoriDestinazione();
-        }
-        /// <summary>
         /// Operazione Split:
         /// - Operazione 0: ZIP opzionale   
         ///     - Preleva dal gruppo del conto sorgente 
@@ -778,35 +637,42 @@ namespace Transa
         ///     - Preleva dal conto dal destinazione base
         ///     - Deposita nel gruppo del conto destinazione
         /// </summary>
-        private void AggiornaOperazioneSplit(bool operazione0)
+        private void AggiornaOperazioneSplit(bool operazione0, bool operazione2)
         {
-            // Svuota la tabelle
+            // Svuota le tabelle
             SvuotaTabella(ref dataGridViewSorgenteOperazione);
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
 
-            // estre il gruppo di sotto conti selezionati
-            string contiSelezionatiS = comboBoxTipoSottocontiSorgente.Text;
-            string contiSelezionatiD = comboBoxTipoSottocontiDestinazione.Text;
-
-            // definisce la stringa per la porzione di transizione
+            // Dichiara la stringa per le subOperazioni
             string[] subOperazione = new string[3];
 
+            // D conto sorgente    
+            string contoSrc;
+            string contoDst;
 
-            // Dischiara le variabili comuni
-            // Conti sorgente e destinazione
-            string contoSorgenteCompleto;
-            string contoDestinazioneCompleto;
+            // Imposta promemoriaS
+            string promemoriaSrc;
+            string promemoriaDst;
 
-            // Promemoria base
-            string promemoriaS = "";
-            string promemoriaD = "";
+            // Imposta le variabili di filtro 
+            bool filtra0Src = checkBoxFiltra0Sorgente.Checked;
+            bool filtra0Dst = checkBoxFiltra0Destinazione.Checked;
 
-            // Valori di inizializzazione base dei conti
-            double DEBUG_vSorgente = 0;
-            double DEBUG_vDestinazione = 0;
+            // Estrai i sottoconti selezionati
+            string contiSelezionatiSrc = comboBoxTipoSottocontiSorgente.Text;
+            string contiSelezionatiDst = comboBoxTipoSottocontiDestinazione.Text;
+            // I sottoconti selezionati devono essere identici solo se operazione0 è attiva
+            if ((contiSelezionatiSrc != contiSelezionatiDst) && operazione0 && operazione2)
+            {
+                string messaggio2 = "Sottoconto sorgente     = " + contiSelezionatiSrc + "\n" +
+                                    "Sottoconto destinazione = " + contiSelezionatiDst;
 
+                LData.ETransaErrore esito = LData.ETransaErrore.E1101_ISottoContiAttiviSonoDiversi;
 
-
+                lData.StampaMessaggioErrore(esito, messaggio2);
+                return;
+            }
+ 
             // =============================================================================
             // - Operazione 0: ZIP opzionale
             //     - Preleva dal gruppo del conto sorgente
@@ -816,61 +682,60 @@ namespace Transa
             if (operazione0)
             {
                 // compone i conti sorgente e destinazione
-                contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
-                contoDestinazioneCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
+                contoSrc = GetContoSorgente(SezioneConto.ContoCompleto);
+                contoDst = GetContoSorgente(SezioneConto.ContoCompleto);
 
                 // compone promemoria base
-                promemoriaS = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaSorgente.Text + contoSorgenteCompleto;
-                promemoriaD = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
+                promemoriaSrc = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaSorgente.Text + contoSrc;
+                promemoriaDst = LData.ETipoOperazioneComplessa.ZIP.ToString() + " ->" + textNotaDestinazione.Text + contoDst;
 
-                // assegna il valori di inizializzazione base dei conti
-                DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
-                DEBUG_vDestinazione = DEBUG_vSorgente;
 
                 // Compone le trasizioni sorgente 1
                 //==================================================================
 
                 // Aggiunge il sottoconto base
-                subOperazione[0] = promemoriaS;
-                subOperazione[1] = contoSorgenteCompleto;
-                subOperazione[2] = DEBUG_vSorgente.ToString();
+                subOperazione[0] = promemoriaSrc;
+                subOperazione[1] = contoSrc;
+                subOperazione[2] = GValori.sValoreContoBaseSorgente;
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sotto conti del gruppo Cnt se selezionati
-                if ((contiSelezionatiS == "Cnt") || (contiSelezionatiS == "All"))
+                if ((contiSelezionatiSrc == "Cnt") || (contiSelezionatiSrc == "All"))
                 {
                     // Aggiunge il sottoconto Cnt
-                    subOperazione[0] = promemoriaS + ":Cnt";
-                    subOperazione[1] = contoSorgenteCompleto + ":Cnt";
-                    subOperazione[2] = (DEBUG_vSorgente * 10).ToString();
+                    subOperazione[0] = promemoriaSrc + ":Cnt";
+                    subOperazione[1] = contoSrc + ":Cnt";
+                    subOperazione[2] = GValori.sValoreContoCntSorgente;
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Cnt
                     for (int i = 0; i < lData.ContiMultipli.Length; i++)
                     {
-                        subOperazione[0] = promemoriaS + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoSorgenteCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[2] = (DEBUG_vSorgente * (10 + i + 1)).ToString();
-                        AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+                        subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
+                        if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
+                            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                     }
                 }
 
-                // aggiunge i sotto conti del gruppo Dep se selezionati
-                if ((contiSelezionatiS == "Dep") || (contiSelezionatiS == "All"))
+                // Aggiunge i sotto conti del gruppo Dep se selezionati
+                if ((contiSelezionatiSrc == "Dep") || (contiSelezionatiSrc == "All"))
                 {
                     // Aggiunge il sottoconto Dep
-                    subOperazione[0] = promemoriaS + ":Dep";
-                    subOperazione[1] = contoSorgenteCompleto + ":Dep";
-                    subOperazione[2] = (DEBUG_vSorgente * 20).ToString();
+                    subOperazione[0] = promemoriaSrc + ":Dep";
+                    subOperazione[1] = contoSrc + ":Dep";
+                    subOperazione[2] = GValori.sValoreContoDepSorgente;
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Dep
                     for (int i = 0; i < lData.ContiMultipli.Length; i++)
                     {
-                        subOperazione[0] = promemoriaS + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoSorgenteCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[2] = (DEBUG_vSorgente * (20 + i + 1)).ToString();
-                        AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+                        subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
+                        if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0Src))
+                            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                     }
                 }
 
@@ -878,124 +743,122 @@ namespace Transa
                 //==================================================================
 
                 // Aggiunge il sottoconto base
-                subOperazione[0] = promemoriaD;
-                subOperazione[1] = contoDestinazioneCompleto;
-                subOperazione[2] = DEBUG_vDestinazione.ToString();
+                subOperazione[0] = promemoriaDst;
+                subOperazione[1] = contoDst;
+                subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
             }
 
             // =============================================================================
             // - Operazione 1: TOTALE
-            //     - Preleva nel conto sorgente
+            //     - Preleva nel conto base sorgente
             //     - Deposita nel conto base destinazione
             // =============================================================================
 
             // compone i conti sorgente e destinazione
-            contoSorgenteCompleto = GetContoSorgente(SezioneConto.ContoCompleto);
-            contoDestinazioneCompleto = GetContoDestinazione(SezioneConto.ContoCompleto);
+            contoSrc = GetContoSorgente(SezioneConto.ContoCompleto);
+            contoDst = GetContoDestinazione(SezioneConto.ContoCompleto);
 
             // compone promemoria base
-            promemoriaS = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaSorgente.Text + contoSorgenteCompleto;
-            promemoriaD = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
-
-            // assegna i valori di inizializzazione base dei conti
-            DEBUG_vSorgente = lData.DEBUG_ValoreDefaultSorgente;
-            DEBUG_vDestinazione = DEBUG_vSorgente;
+            promemoriaSrc = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaSorgente.Text + contoSrc;
+            promemoriaDst = LData.ETipoOperazioneComplessa.TOTALE.ToString() + " ->" + textNotaDestinazione.Text + contoDst;
 
             // Compone le trasizioni sorgente 1
             //==================================================================
 
             // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaS;
-            subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = DEBUG_vSorgente.ToString();
+            subOperazione[0] = promemoriaSrc;
+            subOperazione[1] = contoSrc;
+            subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
             AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
 
-            // Compone le trasizioni sorgente destinazione 1
+            // Compone le trasizioni destinazione 1
             //==================================================================
 
             // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaD;
-            subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = DEBUG_vDestinazione.ToString();
+            subOperazione[0] = promemoriaDst;
+            subOperazione[1] = contoDst;
+            subOperazione[2] = GValori.sValoreTotaleAttivoDestinazione;
             AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
 
 
             // =============================================================================
-            // - Operazione 2: SPLIT
+            // - Operazione 2: SPLIT opzionale
             //     - Preleva dal conto base destinazione
             //     - Deposita nel gruppo del conto base destinazione
             // =============================================================================
 
-            // compone i conti sorgente e destinazione
-            contoSorgenteCompleto = GetContoDestinazione(SezioneConto.ContoCompleto);
-            contoDestinazioneCompleto = GetContoDestinazione(SezioneConto.ContoCompleto);
-
-            // compone promemoria base
-            promemoriaS = LData.ETipoOperazioneComplessa.SPLIT.ToString() + " ->" + textNotaSorgente.Text + contoSorgenteCompleto;
-            promemoriaD = LData.ETipoOperazioneComplessa.SPLIT.ToString() + " ->" + textNotaDestinazione.Text + contoDestinazioneCompleto;
-
-            // assegna il valori di inizializzazione base dei conti
-            DEBUG_vSorgente = lData.DEBUG_ValoreDefaultDestinazione;
-            DEBUG_vDestinazione = DEBUG_vSorgente;
-
-            // Compone le trasizioni sorgente  2
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaS;
-            subOperazione[1] = contoSorgenteCompleto;
-            subOperazione[2] = DEBUG_vDestinazione.ToString();
-            AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
-
-
-            // Compone le trasizioni destinazione 2
-            //==================================================================
-
-            // Aggiunge il sottoconto base
-            subOperazione[0] = promemoriaD;
-            subOperazione[1] = contoDestinazioneCompleto;
-            subOperazione[2] = DEBUG_vDestinazione.ToString();
-            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
-
-            // aggiunge i sotto conti del gruppo Cnt se selezionati
-            if ((contiSelezionatiD == "Cnt") || (contiSelezionatiD == "All"))
+            if (operazione2)
             {
-                // Aggiunge il sottoconto Cnt
-                subOperazione[0] = promemoriaD + ":Cnt";
-                subOperazione[1] = contoDestinazioneCompleto + ":Cnt";
-                subOperazione[2] = (DEBUG_vDestinazione * 10).ToString();
+
+                // compone i conti sorgente e destinazione
+                contoSrc = GetContoDestinazione(SezioneConto.ContoCompleto);
+                contoDst = GetContoDestinazione(SezioneConto.ContoCompleto);
+
+                // compone promemoria base
+                promemoriaSrc = LData.ETipoOperazioneComplessa.SPLIT.ToString() + " ->" + textNotaSorgente.Text + contoSrc;
+                promemoriaDst = LData.ETipoOperazioneComplessa.SPLIT.ToString() + " ->" + textNotaDestinazione.Text + contoDst;
+
+                // Compone le trasizioni sorgente  2
+                //==================================================================
+
+                // Aggiunge il sottoconto base
+                subOperazione[0] = promemoriaSrc;
+                subOperazione[1] = contoSrc;
+                subOperazione[2] = GValori.sValoreTotaleAttivoDestinazione;
+                AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
+
+
+                // Compone le trasizioni destinazione 2
+                //==================================================================
+
+                // Aggiunge il sottoconto base
+                subOperazione[0] = promemoriaDst;
+                subOperazione[1] = contoDst;
+                subOperazione[2] = GValori.sValoreContoBaseDestinazione;
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
-                // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                // aggiunge i sotto conti del gruppo Cnt se selezionati
+                if ((contiSelezionatiDst == "Cnt") || (contiSelezionatiDst == "All"))
                 {
-                    subOperazione[0] = promemoriaD + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[1] = contoDestinazioneCompleto + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (DEBUG_vDestinazione * (10 + i + 1)).ToString();
+                    // Aggiunge il sottoconto Cnt
+                    subOperazione[0] = promemoriaDst + ":Cnt";
+                    subOperazione[1] = contoDst + ":Cnt";
+                    subOperazione[2] = GValori.sValoreContoCntDestinazione;
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+
+                    // aggiunge i sottoconti del gruppo Cnt
+                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    {
+                        subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
+                        if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0Dst))
+                            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+                    }
                 }
-            }
 
-            // aggiunge i sotto conti del gruppo Dep se selezionati
-            if ((contiSelezionatiD == "Dep") || (contiSelezionatiD == "All"))
-            {
-                // Aggiunge il sottoconto Dep
-                subOperazione[0] = promemoriaD + ":Dep";
-                subOperazione[1] = contoDestinazioneCompleto + ":Dep";
-                subOperazione[2] = (DEBUG_vDestinazione * 20).ToString();
-                AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
-
-                // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                // aggiunge i sotto conti del gruppo Dep se selezionati
+                if ((contiSelezionatiDst == "Dep") || (contiSelezionatiDst == "All"))
                 {
-                    subOperazione[0] = promemoriaD + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[1] = contoDestinazioneCompleto + ":Dep:Dep-" + lData.ContiMultipli[i];
-                    subOperazione[2] = (DEBUG_vDestinazione * (20 + i + 1)).ToString();
+                    // Aggiunge il sottoconto Dep
+                    subOperazione[0] = promemoriaDst + ":Dep";
+                    subOperazione[1] = contoDst + ":Dep";
+                    subOperazione[2] = GValori.sValoreContoDepDestinazione;
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+
+                    // aggiunge i sottoconti del gruppo Dep
+                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    {
+                        subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[1] = contoDst + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
+                        if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0Dst))
+                            AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+                    }
                 }
             }
 
@@ -1812,15 +1675,15 @@ namespace Transa
                     break;
 
                 case "Split":
-                    AggiornaOperazioneSplit(false);
+                    AggiornaOperazioneSplit(false, true);
                     break;
 
                 case "Zip":
-                    AggiornaOperazioneZip();
+                    AggiornaOperazioneSplit(true, false);
                     break;
 
                 case "ZipSplit":
-                    AggiornaOperazioneSplit(true);
+                    AggiornaOperazioneSplit(true, true);
                     break;
 
                 default:

@@ -492,7 +492,7 @@ namespace Transa
             }
 
             // Verifica che il conto base sia incluso nel conteggio di totaleSel
-            if (colFine > 2)
+            if (colInizio > 2)
                 totaleSel += ConvertAG.ToDouble0(dataGridView.Rows[row].Cells[2].Value.ToString());
 
             // Assegna i valori calcolati
