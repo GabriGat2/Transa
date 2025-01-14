@@ -178,7 +178,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
@@ -199,7 +199,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
@@ -285,7 +285,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i]; ;
@@ -306,7 +306,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i]; 
@@ -391,7 +391,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc;
@@ -410,7 +410,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc;
@@ -439,10 +439,10 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                    subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                    subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
@@ -458,9 +458,9 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
-                    subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.ContiMultipli[i];
+                    subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
@@ -545,7 +545,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
@@ -564,7 +564,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
@@ -593,7 +593,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst;
@@ -613,7 +613,7 @@ namespace Transa
                 AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst;
@@ -709,10 +709,10 @@ namespace Transa
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Cnt
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                     {
-                        subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                        subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                         subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
                         if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
                             AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
@@ -729,10 +729,10 @@ namespace Transa
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Dep
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                     {
-                        subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                        subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                         subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
                         if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0Src))
                             AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
@@ -831,10 +831,10 @@ namespace Transa
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Cnt
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                     {
-                        subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.ContiMultipli[i];
+                        subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                        subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                         subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
                         if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0Dst))
                             AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
@@ -851,10 +851,10 @@ namespace Transa
                     AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                     // aggiunge i sottoconti del gruppo Dep
-                    for (int i = 0; i < lData.ContiMultipli.Length; i++)
+                    for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                     {
-                        subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.ContiMultipli[i];
-                        subOperazione[1] = contoDst + ":Dep:Dep-" + lData.ContiMultipli[i];
+                        subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                        subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                         subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
                         if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0Dst))
                             AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
@@ -2157,6 +2157,5 @@ namespace Transa
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
             GValori.AzzeraTutto();
         }
-
     }
 }

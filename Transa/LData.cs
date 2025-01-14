@@ -194,17 +194,6 @@ namespace Transa
             EGruppoSottoconti.BG.ToString(),
             EGruppoSottoconti.CCat.ToString()
         };
-        /// <summary>
-        /// Sotto conti
-        /// </summary>
-        public string[] ContiMultipli = // DA ELIMINARE
-        {
-            EGruppoSottoconti.FA.ToString(),
-            EGruppoSottoconti.LC.ToString(),
-            EGruppoSottoconti.GG.ToString(),
-            EGruppoSottoconti.BG.ToString(),
-            EGruppoSottoconti.CCat.ToString()
-        };
         // =====================================================================================
         // ====== Tipo sottoconti
         // =====================================================================================
