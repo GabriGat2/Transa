@@ -329,7 +329,7 @@ namespace Transa
 
             saveFileDialog1.FileName = GeneraFileName();
 
-
+            // Salva il file 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog1.FileName;
