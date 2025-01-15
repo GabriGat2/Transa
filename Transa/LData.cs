@@ -131,6 +131,8 @@ namespace Transa
         /// Nome del file da cui è stata prelevata la struttura dei conti
         /// </summary>
         public string fileNameConti = "";
+        // segnala che la struttura dei conti è ok
+        public bool ContiOk = false;
         /// <summary>
         /// Lista dei conti
         /// </summary>
@@ -281,6 +283,10 @@ namespace Transa
             E1100_IContiNonSonoBilanciati,
             E1101_ISottoContiAttiviSonoDiversi,
             E1102_IContiBaseSonoDiversi,
+            E1103_StrutturaDeiContiNonDisponibile,
+
+            // Operazioni
+            E1200_UnaOperazioneInCorso,
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte
@@ -368,7 +374,7 @@ namespace Transa
         /// <param name="messaggio2"></param>
         /// <param name="stampaMessaggio"></param>
         /// <returns></returns>
-        public bool StampaMessaggioErrore(LData.ETransaErrore esito, string messaggio2 = "", bool stampaMessaggio = true)
+        public bool StampaMessaggioErrore(LData.ETransaErrore esito, string messaggio2 = "", bool stampaMessaggio = true, bool continuo = true)
         {
             // controlla l'esito del risultatao
             if (esito != ETransaErrore.E0000_OK)
@@ -377,22 +383,37 @@ namespace Transa
                 {
                     // compone il messaggio da stampare
                     string titolo = "Errore!";
-                    string messaggio = "Problema: \n>" + messaggio2 + "<\n\n" +
+                    string messaggio = "Problema: \n" + messaggio2 + "\n\n" +
                                        "ha generato l'errore: \n\n" +
-                                       RestultToSting(esito) +
-                                        "\n\n" +
-                                        "Continuo?";
+                                       RestultToSting(esito);
 
-                    //  stampa il messaggio con l'esito
-                    var result3 = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result3 == DialogResult.Yes)
-                        return true;
-                    else
+                    // Chiede la conferma per continuare                    
+                    if (continuo)
+                    {
+                        messaggio += "\n\n" + "Continuo?";
+
+                        //  stampa il messaggio con l'esito
+                        var result3 = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        if (result3 == DialogResult.Yes)
+                            return true;
+                        else
+                            return false;
+                    }
+
+                    // Rende sempre FALSE
+                    if (!continuo)
+                    {
+                        //  stampa il messaggio con l'esito
+                        var result3 = MessageBox.Show(messaggio, titolo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
+                    }
+
+                    return false;
                 }
                 else
                     return false;
             }
+
             return true;
         }
     }

@@ -22,7 +22,7 @@ namespace Transa
         /// Oggetto  per la gestione dei valori transazioni
         /// </summary>
         public FormNewOperation GTransa;
-        
+       
         /// <summary>
         /// Tabella transizioni completa
         /// </summary>
@@ -323,12 +323,12 @@ namespace Transa
         /// <param name="e"></param>
         private void butSaveFile_Click(object sender, EventArgs e)
         {
-            //Stream myStream;
-            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
+
+            saveFileDialog1.FileName = GeneraFileName();
+
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -448,10 +448,31 @@ namespace Transa
         /// <param name="azzera"></param>
         private void GestioneTransazione(bool azzera)
         {
+            // Verifica se la struttura dei conti è OK
+            if (! lData.ContiOk)
+            {
+                string messaggio2 = "ContiOk = " + lData.ContiOk.ToString();
+
+                LData.ETransaErrore esito = LData.ETransaErrore.E1103_StrutturaDeiContiNonDisponibile;
+
+                lData.StampaMessaggioErrore(esito, messaggio2, true, false);
+                return;
+            }
+
+
             // controlla se deve reinizializzare tutto
-            if (azzera)
+            if (!GTransa.OperazioneInizializata)
             {
                 GTransa.AzzeraTutto();
+            }
+            else if (azzera)
+            {
+                string messaggio2 = "Vuoi cancellare l'operazione in corso?";
+
+                LData.ETransaErrore esito = LData.ETransaErrore.E1200_UnaOperazioneInCorso;
+
+                if (lData.StampaMessaggioErrore(esito, messaggio2))
+                    GTransa.AzzeraTutto();
             }
 
             // apre la dialog per la gestione della transazione
@@ -505,17 +526,69 @@ namespace Transa
             FormGstStrConti dlg = new FormGstStrConti(ref lData);
 
             // Mostra la dialog
-            dlg.Show();
-
-
-
-        }
-
-        private void butTest_Click(object sender, EventArgs e)
-        {
-            FormGstValue dlg = new FormGstValue(ref lData);
             dlg.ShowDialog();
         }
 
+
+        private string GeneraFileName()
+        {
+            string fileName = "";
+            string fileName2 = "";
+
+            if (transactionDataGridView.Rows.Count > 1)
+            {
+                // estrae la data dell'operazione
+                fileName2 = transactionDataGridView.Rows[0].Cells[0].Value.ToString();
+                fileName2 += "_";
+
+                // estrae la descrizione dell operazione
+                fileName2 += transactionDataGridView.Rows[0].Cells[3].Value.ToString();
+
+
+                // filtra la stringa
+                for (int i = 0; i < fileName2.Length; i++)
+                {
+                    switch (fileName2[i])
+                    {
+                        case '.':
+                        case ':':
+                        case ',':
+                        case ';':
+                        case '!':
+                        case '?':
+
+                        case '"':
+
+                        case '(':
+                        case ')':
+                        case '[':
+                        case ']':
+                        case '{':
+                        case '}':
+
+                        case '^':
+
+                        case '*':
+                        case '+':
+                        case '-':
+                        case '/':
+                        //case '%':
+
+                        case '>':
+                        case '<':
+
+
+                            fileName += '_';
+                            break;
+
+                        default:
+                            fileName += fileName2[i];
+                            break;
+                    }
+                }
+            }
+
+            return fileName;
+        }
     }
 }

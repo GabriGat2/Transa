@@ -65,6 +65,7 @@ namespace Transa
             this.ColContoSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxFiltra0Destinazione = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBoxTipoContiDestinazione = new System.Windows.Forms.ComboBox();
             this.comboBoxContoDestinazione = new System.Windows.Forms.ComboBox();
@@ -82,7 +83,6 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBoxFiltra0Destinazione = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -508,6 +508,16 @@ namespace Transa
             this.splitContainer3.SplitterDistance = 130;
             this.splitContainer3.TabIndex = 8;
             // 
+            // checkBoxFiltra0Destinazione
+            // 
+            this.checkBoxFiltra0Destinazione.AutoSize = true;
+            this.checkBoxFiltra0Destinazione.Location = new System.Drawing.Point(12, 103);
+            this.checkBoxFiltra0Destinazione.Name = "checkBoxFiltra0Destinazione";
+            this.checkBoxFiltra0Destinazione.Size = new System.Drawing.Size(57, 17);
+            this.checkBoxFiltra0Destinazione.TabIndex = 20;
+            this.checkBoxFiltra0Destinazione.Text = "Filtra 0";
+            this.checkBoxFiltra0Destinazione.UseVisualStyleBackColor = true;
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -662,16 +672,6 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
-            // checkBoxFiltra0Destinazione
-            // 
-            this.checkBoxFiltra0Destinazione.AutoSize = true;
-            this.checkBoxFiltra0Destinazione.Location = new System.Drawing.Point(12, 103);
-            this.checkBoxFiltra0Destinazione.Name = "checkBoxFiltra0Destinazione";
-            this.checkBoxFiltra0Destinazione.Size = new System.Drawing.Size(57, 17);
-            this.checkBoxFiltra0Destinazione.TabIndex = 20;
-            this.checkBoxFiltra0Destinazione.Text = "Filtra 0";
-            this.checkBoxFiltra0Destinazione.UseVisualStyleBackColor = true;
-            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -679,7 +679,7 @@ namespace Transa
             this.ClientSize = new System.Drawing.Size(1192, 626);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormNewOperation";
-            this.Text = "FormNewOperation";
+            this.Text = "Operazioni";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

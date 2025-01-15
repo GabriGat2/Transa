@@ -63,8 +63,14 @@ namespace Transa
             {
                 var sr = new StreamReader(fileName);
 
+                // Segnala conti NonOk
+                lData.ContiOk = false;
+
                 // salva il nome del file della struttura dei conti
                 lData.fileNameConti = fileName;
+
+                // stampa il nome del file dei conti
+                StampaNomefileConti();
 
                 // Azzera la lista dei conti disponibili
                 lData.conti.Clear();
@@ -115,6 +121,9 @@ namespace Transa
 
                     }
                 }
+
+                // Segnala conti Ok
+                lData.ContiOk = true;
 
                 // Aggiorna i dati del form
                 LocalUpdateForm();
@@ -247,6 +256,9 @@ namespace Transa
                     break;
             }
 
+            // stampa il nome del file dei conti
+            StampaNomefileConti();
+
         }
         /// <summary>
         /// Attiva la visualizzazione della lista di conti indicati
@@ -269,10 +281,24 @@ namespace Transa
 
             // stampa il numero di conti gestiti
             textBoxNumeroConti.Text = conti.Count.ToString();
-
+        }
+        /// <summary>
+        /// Stamapa colora il nome file dei conti
+        /// </summary>
+        private void StampaNomefileConti()
+        {
             // stampa il nome dei file della struttura dei conti conti
             textBoxFileNameConti.Text = lData.fileNameConti;
+            if (lData.ContiOk)
+            {
+                textBoxNumeroConti.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textBoxNumeroConti.BackColor = Color.Red;
+            }
         }
+
         /// <summary>
         /// Seleziona il tipo di conto
         /// </summary>

@@ -13,6 +13,24 @@ namespace Transa
     public partial class FormNewOperation : Form
     {
         /// <summary>
+        /// SOperazione in corso
+        /// </summary>
+        private bool lOperazioneValida = false;
+        /// <summary>
+        /// Operazione in corso
+        /// </summary>
+        public bool OperazioneValida { get => lOperazioneValida; }
+
+        /// <summary>
+        /// Operazione inizializzata
+        /// </summary>
+        private bool lOperazioneInizializata = false;
+        /// <summary>
+        /// Operazione inizializzata
+        /// </summary>
+        public bool OperazioneInizializata { get => lOperazioneInizializata; }
+
+        /// <summary>
         /// Oggetto che contiene tutti i dati e le strutture comuni
         /// </summary>
         public LData lData;
@@ -34,7 +52,7 @@ namespace Transa
         /// <param name="rLdata"></param>
         public FormNewOperation(ref LData rLdata)
         {
-            // Asssegna l'ggeto per la gestione dei dati comuni
+            // Asssegna l'oggeto per la gestione dei dati comuni
             lData = rLdata;
 
             // Crea l'oggeto per la gestione dei valori dei conti
@@ -50,6 +68,9 @@ namespace Transa
         /// </summary>\
         private void Inizializzazione()
         {
+            // Resetta operazione valida
+            lOperazioneValida = false;
+
             // carica le combobox selezione conti 
             comboBoxTipoContiSorgente.Items.Clear();
             comboBoxTipoContiDestinazione.Items.Clear();
@@ -1119,7 +1140,7 @@ namespace Transa
 
                 string valore = dataGridViewOperazione.Rows[i].Cells[2].Value.ToString();
                 if (tabSrc)
-                    valore = "-" + valore;
+                    valore = NegaValore(valore);
                 string valoreSimb = valore + " €";
                 campi[11] = valoreSimb;                                         // 11 "Importo con Simb",
                 campi[12] = valore;                                             // 12 "Importo Num.",
@@ -1209,16 +1230,16 @@ namespace Transa
 
                 string valore = dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString();
                 string valoreSimb = valore + " €";
-                campiS[11] = "-" + valoreSimb;                                   // 11 "Importo con Simb",
+                campiS[11] = NegaValore(valoreSimb);                             // 11 "Importo con Simb",
                 campiD[11] = valoreSimb;                                         // 11 "Importo con Simb",
 
-                campiS[12] = "-" + valore;                                       // 12 "Importo Num.",
+                campiS[12] = NegaValore(valore);                                 // 12 "Importo Num.",
                 campiD[12] = valore;                                             // 12 "Importo Num.",
 
-                campiS[13] = "-" + valoreSimb;                                   // 13 "Valore con Simb",
+                campiS[13] = NegaValore(valoreSimb);                             // 13 "Valore con Simb",
                 campiD[13] = valoreSimb;                                         // 13 "Valore con Simb",
 
-                campiS[14] = "-" + valore;                                       // 14 "Valore Num.",
+                campiS[14] = NegaValore(valore);                                 // 14 "Valore Num.",
                 campiD[14] = valore;                                             // 14 "Valore Num.",
 
                 campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
@@ -1309,16 +1330,16 @@ namespace Transa
 
                 string valore = dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString();
                 string valoreSimb = valore + " €";
-                campiS[11] = "-" + valoreSimb;                                   // 11 "Importo con Simb",
+                campiS[11] = NegaValore(valoreSimb);                             // 11 "Importo con Simb",
                 campiD[11] = valoreSimb;                                         // 11 "Importo con Simb",
 
-                campiS[12] = "-" + valore;                                       // 12 "Importo Num.",
+                campiS[12] = NegaValore(valore);                                 // 12 "Importo Num.",
                 campiD[12] = valore;                                             // 12 "Importo Num.",
 
-                campiS[13] = "-" + valoreSimb;                                   // 13 "Valore con Simb",
+                campiS[13] = NegaValore(valoreSimb);                             // 13 "Valore con Simb",
                 campiD[13] = valoreSimb;                                         // 13 "Valore con Simb",
 
-                campiS[14] = "-" + valore;                                       // 14 "Valore Num.",
+                campiS[14] = NegaValore(valore);                                 // 14 "Valore Num.",
                 campiD[14] = valore;                                             // 14 "Valore Num.",
 
                 campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
@@ -1647,12 +1668,17 @@ namespace Transa
         /// <param name="e"></param>
         private void butAggiorna_Click(object sender, EventArgs e)
         {
+            bool reso = false;
+
             // varifica lo stato dei conti
             if (!GValori.StatoContoOK)
             {
                 lData.StampaMessaggioErrore(LData.ETransaErrore.E1100_IContiNonSonoBilanciati);
                 return;    
             }
+
+            // Resetta operazione valida 
+            lOperazioneValida = false;
 
             // recupera il tipo di operazione richiesta
             string TipoOperazione = comboBoxTipoOperazione.Text;
@@ -1690,6 +1716,10 @@ namespace Transa
                     break;
 
             }
+
+            // segnal operazione valida 
+            reso = true;
+            lOperazioneValida = reso;
         }
         /// <summary>
         /// Verifica i cambi di una porzione di transazione
@@ -2156,6 +2186,17 @@ namespace Transa
             SvuotaTabella(ref dataGridViewSorgenteOperazione);
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
             GValori.AzzeraTutto();
+            lOperazioneInizializata = true;
         }
+
+        private string NegaValore(string stringaIn)
+        {
+            // converte in double
+            double valore = ConvertAG.ToDouble0(stringaIn);
+            // nega il valore
+            valore *= -1;
+            return valore.ToString("#0.00");
+        }
+
     }
 }

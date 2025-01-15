@@ -31,6 +31,7 @@ namespace Transa
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.comboBoxTipoConti = new System.Windows.Forms.ComboBox();
             this.textBoxFileNameConti = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxNumeroConti = new System.Windows.Forms.TextBox();
@@ -40,7 +41,6 @@ namespace Transa
             this.butLoad = new System.Windows.Forms.Button();
             this.richTextBoxStrConti = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1debug = new System.Windows.Forms.SaveFileDialog();
-            this.comboBoxTipoConti = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,6 +76,15 @@ namespace Transa
             this.splitContainer1.SplitterDistance = 60;
             this.splitContainer1.TabIndex = 0;
             // 
+            // comboBoxTipoConti
+            // 
+            this.comboBoxTipoConti.FormattingEnabled = true;
+            this.comboBoxTipoConti.Location = new System.Drawing.Point(12, 36);
+            this.comboBoxTipoConti.Name = "comboBoxTipoConti";
+            this.comboBoxTipoConti.Size = new System.Drawing.Size(94, 21);
+            this.comboBoxTipoConti.TabIndex = 6;
+            this.comboBoxTipoConti.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoConti_SelectedIndexChanged);
+            // 
             // textBoxFileNameConti
             // 
             this.textBoxFileNameConti.Location = new System.Drawing.Point(458, 14);
@@ -95,11 +104,13 @@ namespace Transa
             // 
             // textBoxNumeroConti
             // 
+            this.textBoxNumeroConti.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNumeroConti.Location = new System.Drawing.Point(198, 12);
             this.textBoxNumeroConti.Name = "textBoxNumeroConti";
             this.textBoxNumeroConti.ReadOnly = true;
             this.textBoxNumeroConti.Size = new System.Drawing.Size(86, 20);
             this.textBoxNumeroConti.TabIndex = 3;
+            this.textBoxNumeroConti.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -146,15 +157,6 @@ namespace Transa
             this.richTextBoxStrConti.TabIndex = 0;
             this.richTextBoxStrConti.Text = "";
             // 
-            // comboBoxTipoConti
-            // 
-            this.comboBoxTipoConti.FormattingEnabled = true;
-            this.comboBoxTipoConti.Location = new System.Drawing.Point(12, 36);
-            this.comboBoxTipoConti.Name = "comboBoxTipoConti";
-            this.comboBoxTipoConti.Size = new System.Drawing.Size(94, 21);
-            this.comboBoxTipoConti.TabIndex = 6;
-            this.comboBoxTipoConti.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoConti_SelectedIndexChanged);
-            // 
             // FormGstStrConti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,7 +164,7 @@ namespace Transa
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormGstStrConti";
-            this.Text = "GstStrConti";
+            this.Text = "Gestione strutura conti GNUCASH";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
