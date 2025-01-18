@@ -102,7 +102,14 @@ namespace Transa
         public double ValoreContoBaseDestinazione { get => GetValore(false, 2); }
         public string sValoreContoBaseSorgente { get => ValoreContoBaseSorgente.ToString(FormatoValore); }
         public string sValoreContoBaseDestinazione { get => ValoreContoBaseDestinazione.ToString(FormatoValore); }
-
+        public bool IsZeroValoreContoBaseSorgente()
+        {
+            return ConvertAG.IsZero(ValoreContoBaseSorgente);
+        }
+        public bool IsZeroValoreContoBaseDestinazione()
+        {
+            return ConvertAG.IsZero(ValoreContoBaseDestinazione);
+        }
 
         // =====================================================================================
         // ====== Valore conto Cnt 

@@ -840,7 +840,8 @@ namespace Transa
                 subOperazione[0] = promemoriaDst;
                 subOperazione[1] = contoDst;
                 subOperazione[2] = GValori.sValoreContoBaseDestinazione;
-                AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
+                if (!(GValori.IsZeroValoreContoBaseDestinazione() && filtra0Dst))
+                    AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
 
                 // aggiunge i sotto conti del gruppo Cnt se selezionati
                 if ((contiSelezionatiDst == "Cnt") || (contiSelezionatiDst == "All"))
