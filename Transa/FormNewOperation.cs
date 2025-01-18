@@ -1971,14 +1971,14 @@ namespace Transa
                 case "Split":
                     textDescrizioneOperazione.Text = "Operazione SPLIT ";
                     textValoreOperazione.Text = "1";
-                    textNumOperazione.Text = "21000";
+                    textNumOperazione.Text = "2000";
                     textNotaSorgente.Text = "Prelievo da ";
                     textNotaDestinazione.Text = "Deposito in ";
 
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
 
-                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiSorgente.SelectedIndex = 0;
                     comboBoxTipoContiDestinazione.SelectedIndex = 2;
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 0;
@@ -1988,7 +1988,7 @@ namespace Transa
                 case "Zip":
                     textDescrizioneOperazione.Text = "Operazione ZIP ";
                     textValoreOperazione.Text = "1";
-                    textNumOperazione.Text = "20000";
+                    textNumOperazione.Text = "2100";
                     textNotaSorgente.Text = "Prelievo da ";
                     textNotaDestinazione.Text = "Deposito in ";
 
@@ -1996,7 +1996,7 @@ namespace Transa
                     butAggiornaDestinazione.Enabled = false;
 
                     comboBoxTipoContiSorgente.SelectedIndex = 2;
-                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 0;
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 3;
                     comboBoxTipoSottocontiDestinazione.SelectedIndex = 0;
@@ -2005,7 +2005,7 @@ namespace Transa
                 case "ZipSplit":
                     textDescrizioneOperazione.Text = "Operazione ZIP - SPLIT";
                     textValoreOperazione.Text = "1";
-                    textNumOperazione.Text = "21000";
+                    textNumOperazione.Text = "2200";
                     textNotaSorgente.Text = "Prelievo da ";
                     textNotaDestinazione.Text = "Deposito in ";
 
