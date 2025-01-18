@@ -2067,6 +2067,15 @@ namespace Transa
                 case "CapitaliBaseFinale":
                     AggiornaTipoConto(ref comboBoxConti, lData.contiCapitaliBaseFinale);
                     break;
+                case "Entrate":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiEntrate);
+                    break;
+                case "Uscite":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiUscite);
+                    break;
+                case "Passivita":
+                    AggiornaTipoConto(ref comboBoxConti, lData.contiPassivita);
+                    break;
                 default:
                     AggiornaTipoConto(ref comboBoxConti, lData.conti);
                     break;

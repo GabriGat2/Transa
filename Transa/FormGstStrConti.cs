@@ -80,6 +80,9 @@ namespace Transa
                 lData.contiCapitaliBase.Clear();
                 lData.contiCapitaliBaseIniziale.Clear();
                 lData.contiCapitaliBaseFinale.Clear();
+                lData.contiEntrate.Clear();
+                lData.contiUscite.Clear();
+                lData.contiPassivita.Clear();
 
                 bool run = true;
                 string line;
@@ -251,6 +254,15 @@ namespace Transa
                 case "CapitaliBaseFinale":
                     AggiornaTipoConto(lData.contiCapitaliBaseFinale);
                     break;
+                case "Entrate":
+                    AggiornaTipoConto(lData.contiEntrate);
+                    break;
+                case "Uscite":
+                    AggiornaTipoConto(lData.contiUscite);
+                    break;
+                case "Passivita":
+                    AggiornaTipoConto(lData.contiPassivita);
+                    break;
                 default:
                     AggiornaTipoConto(lData.conti);
                     break;
@@ -319,6 +331,7 @@ namespace Transa
                         if (subConti.Length <= 3)
                             lData.contiAttivitaBase.Add(conto);
                         break;
+
                     case "Capitali":
                         lData.contiCapitali.Add(conto);
                         // seleziona il conto base
@@ -335,6 +348,19 @@ namespace Transa
                             }
                         }
                         break;
+
+                    case "Entrate":
+                        lData.contiEntrate.Add(conto);
+                        break;
+
+                    case "Uscite":
+                        lData.contiUscite.Add(conto);
+                        break;
+
+                    case "Passivita":
+                        lData.contiPassivita.Add(conto);
+                        break;
+
                     default:
                         break;
 
