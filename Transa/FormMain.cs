@@ -346,15 +346,6 @@ namespace Transa
                         outputFile.WriteLine(line);
                     }
                 }
-
-
-                //if ((myStream = saveFileDialog1.OpenFile()) != null)
-                //{
-                //    // Code to write the stream goes here.
-                //    myStream.Write()
-
-                //    myStream.Close();
-                //}
             }
         }
         /// <summary>

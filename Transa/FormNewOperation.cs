@@ -1496,21 +1496,21 @@ namespace Transa
                 string[] porzioniContoS = dataGridViewSorgenteOperazione.Rows[i].Cells[1].Value.ToString().Split(':');
                 campiS[10] = porzioniContoS[porzioniContoS.Length - 1]; // 10 "Nome del conto",
 
-                string valore = dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString();
+                string valore = NegaValore(dataGridViewSorgenteOperazione.Rows[i].Cells[2].Value.ToString());
                 string valoreSimb = valore + " €";
-                campiS[11] = "-" + valoreSimb;                                   // 11 "Importo con Simb",
+                campiS[11] = valoreSimb;                                        // 11 "Importo con Simb",
 
-                campiS[12] = "-" + valore;                                       // 12 "Importo Num.",
+                campiS[12] = valore;                                            // 12 "Importo Num.",
 
-                campiS[13] = "-" + valoreSimb;                                   // 13 "Valore con Simb",
+                campiS[13] = valoreSimb;                                        // 13 "Valore con Simb",
 
-                campiS[14] = "-" + valore;                                       // 14 "Valore Num.",
+                campiS[14] = valore;                                            // 14 "Valore Num.",
 
-                campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
+                campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];   // 15 "Riconcilia",
 
-                campiS[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
+                campiS[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];   // 16 "Data di riconciliazione",
 
-                campiS[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
+                campiS[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];   // 17 "Tasso/Prezzo"
 
                 // Assegna le trasizioni generate    
                 transactionDataGrid.Rows.Add(campiS);
