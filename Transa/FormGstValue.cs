@@ -25,17 +25,17 @@ namespace Transa
             TotaleAtt,      // 1
             Radice,         // 2     
             Cnt,            // 3   
-            CntFA,          // 4
-            CntLC,          // 5
-            CntGG,          // 6
-            CntBG,          // 7
-            CntCat,         // 8
+            CntBG,          // 4
+            CntCCat,        // 5
+            CntFA,          // 6
+            CntGG,          // 7
+            CntLC,          // 8
             Dep,            // 9   
-            DepFA,          // 10
-            DepLC,          // 11
-            DepGG,          // 12
-            DepBG,          // 13
-            DepCat          // 14
+            DepBG,          // 10
+            DepCCat,        // 11
+            DepFa,          // 12
+            DepGG,          // 13
+            DepLC           // 14
         };
         /// <summary>
         /// Nome colonne
@@ -46,17 +46,17 @@ namespace Transa
             "TotaleAtt",      // 1
             "@",              // 2
             "Cnt",            // 3   
-            "Cnt-FA",         // 4
-            "Cnt-LC",         // 5
-            "Cnt-GG",         // 6
-            "Cnt-BG",         // 7
-            "Cnt-Cat",        // 8
+            "Cnt-BG",         // 4
+            "Cnt-CCat",       // 5
+            "Cnt-FA",         // 6
+            "Cnt-GG",         // 7
+            "Cnt-LC",         // 8
             "Dep",            // 9   
-            "Dep-FA",         // 10
-            "Dep-LC",         // 11
-            "Dep-GG",         // 12
-            "Dep-BG",         // 13
-            "Dep-Cat"         // 14
+            "Dep-BG",         // 10
+            "Dep-CCat",       // 11
+            "Dep-FA",         // 12
+            "Dep-GG",         // 13
+            "Dep-LC"          // 14
         };
 
         // =====================================================================================

@@ -179,22 +179,22 @@ namespace Transa
         /// </summary>
         public enum EGruppoSottoconti 
         {
-            FA,
-            LC,
-            GG,
             BG,
-            CCat
+            CCat,
+            FA,
+            GG,
+            LC
         };
         /// <summary>
         /// Gruppo SottoConti
         /// </summary>
         public string[] sGruppoSottoconti =
         {
-            EGruppoSottoconti.FA.ToString(),
-            EGruppoSottoconti.LC.ToString(),
-            EGruppoSottoconti.GG.ToString(),
             EGruppoSottoconti.BG.ToString(),
-            EGruppoSottoconti.CCat.ToString()
+            EGruppoSottoconti.CCat.ToString(),
+            EGruppoSottoconti.FA.ToString(),
+            EGruppoSottoconti.GG.ToString(),
+            EGruppoSottoconti.LC.ToString()
         };
         // =====================================================================================
         // ====== Tipo sottoconti
@@ -218,10 +218,6 @@ namespace Transa
             ETipoSottoconti.Cnt.ToString(),
             ETipoSottoconti.Dep.ToString(),
             ETipoSottoconti.All.ToString(),
-            //"Single",
-            //"Cnt",
-            //"Dep",
-            //"All"
         };
         // =====================================================================================
         // ====== Tipo operazione
