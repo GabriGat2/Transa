@@ -581,5 +581,10 @@ namespace Transa
 
             return fileName;
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
