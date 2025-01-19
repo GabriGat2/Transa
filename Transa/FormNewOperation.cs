@@ -1416,9 +1416,9 @@ namespace Transa
         {
             // compone nome operazione 0, 1 e 2
             string nomeOperazione = " == " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
-            string nomeOperazione0 = LData.ETipoOperazioneComplessa.ZIP.ToString() + nomeOperazione;
+            string nomeOperazione0 = AllineaLunghezza(LData.ETipoOperazioneComplessa.ZIP.ToString(), LData.ETipoOperazioneComplessa.TOTALE.ToString()) + nomeOperazione;
             string nomeOperazione1 = LData.ETipoOperazioneComplessa.TOTALE.ToString() + nomeOperazione;
-            string nomeOperazione2 = LData.ETipoOperazioneComplessa.SPLIT.ToString() + nomeOperazione;
+            string nomeOperazione2 = AllineaLunghezza(LData.ETipoOperazioneComplessa.SPLIT.ToString(), LData.ETipoOperazioneComplessa.TOTALE.ToString()) + nomeOperazione;
 
             // Assegna numero operazione 1 e 2
             int numeroOperazione0 = Convert.ToInt32(textNumOperazione.Text);
@@ -2198,7 +2198,11 @@ namespace Transa
             GValori.AzzeraTutto();
             lOperazioneInizializata = true;
         }
-
+        /// <summary>
+        /// Nega il valore di una stringa
+        /// </summary>
+        /// <param name="stringaIn"></param>
+        /// <returns></returns>
         private string NegaValore(string stringaIn)
         {
             // converte in double
@@ -2206,6 +2210,29 @@ namespace Transa
             // nega il valore
             valore *= -1;
             return valore.ToString("#0.00");
+        }
+        /// <summary>
+        /// confronta le lunghezze delle 2 stringhe
+        /// se la stringa  è >= della stringa di riferimento rende la stringa senza modificarla
+        /// </summary>
+        /// <param name="stringa"></param>
+        /// <param name="stringaRiferimento"></param>
+        /// <returns></returns>
+        private string AllineaLunghezza(string stringa, string stringaRiferimento)
+        {
+            // confronta le lunghezze delle 2 stringhe
+            // se la stringa  è >= della stringa di riferimento rende la stringa senza modificarla
+
+            int delta = stringaRiferimento.Length - stringa.Length;
+            if (delta <= 0)
+                return stringa;
+
+            // aggiunge spazi in coda alla stringa per portala alla lunghezza della stringa di riferimento
+            for (int i = 0; i < delta; i++)
+                stringa += " ";
+
+
+            return stringa;
         }
 
     }

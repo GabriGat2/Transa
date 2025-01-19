@@ -165,7 +165,6 @@ namespace Transa
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormMain";
             this.Text = "TRANSA: generatore di transizoni - Versione 1.0.0.6";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
