@@ -683,16 +683,16 @@ namespace Transa
             string contiSelezionatiSrc = comboBoxTipoSottocontiSorgente.Text;
             string contiSelezionatiDst = comboBoxTipoSottocontiDestinazione.Text;
             // I sottoconti selezionati devono essere identici solo se operazione0 è attiva
-            if ((contiSelezionatiSrc != contiSelezionatiDst) && operazione0 && operazione2)
-            {
-                string messaggio2 = "Sottoconto sorgente     = " + contiSelezionatiSrc + "\n" +
-                                    "Sottoconto destinazione = " + contiSelezionatiDst;
+            //if ((contiSelezionatiSrc != contiSelezionatiDst) && operazione0 && operazione2)
+            //{
+            //    string messaggio2 = "Sottoconto sorgente     = " + contiSelezionatiSrc + "\n" +
+            //                        "Sottoconto destinazione = " + contiSelezionatiDst;
 
-                LData.ETransaErrore esito = LData.ETransaErrore.E1101_ISottoContiAttiviSonoDiversi;
+            //    LData.ETransaErrore esito = LData.ETransaErrore.E1101_ISottoContiAttiviSonoDiversi;
 
-                lData.StampaMessaggioErrore(esito, messaggio2);
-                return;
-            }
+            //    lData.StampaMessaggioErrore(esito, messaggio2);
+            //    return;
+            //}
  
             // =============================================================================
             // - Operazione 0: ZIP opzionale
