@@ -247,7 +247,9 @@ namespace Transa
             Close,
             Split,
             Zip,
-            ZipSplit
+            ZipSplit,
+            TitoloAcquisto,
+            TitoloRimborso
         };
         /// <summary>
         /// Tipo Operazione
@@ -259,7 +261,9 @@ namespace Transa
             ETipoOperazione.Close.ToString(),
             ETipoOperazione.Split.ToString(),
             ETipoOperazione.Zip.ToString(),
-            ETipoOperazione.ZipSplit.ToString()
+            ETipoOperazione.ZipSplit.ToString(),
+            ETipoOperazione.TitoloAcquisto.ToString(),
+            ETipoOperazione.TitoloRimborso.ToString()
         };
         /// tipo di operazione in una transizione Zip o Split
         /// </summary>

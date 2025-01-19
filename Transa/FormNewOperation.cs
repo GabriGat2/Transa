@@ -889,6 +889,117 @@ namespace Transa
             AggiornaTotalizzatoriDestinazione();
         }
         /// <summary>
+        /// Aggiorna operazioni titoli
+        /// </summary>
+        /// <param name="srcCnt"></param>
+        private void AggiornaOperazioneTitolo(bool srcCnt)
+        {
+            // Svuota le tabelle
+            SvuotaTabella(ref dataGridViewSorgenteOperazione);
+            SvuotaTabella(ref dataGridViewDestinazioneOperazione);
+
+            // Crea le operazini Sorgente
+            PorzioneOperazioneTitolo(srcCnt, true, ref dataGridViewSorgenteOperazione);
+            XXXXXXXXXXXXX
+            // Crea le operazini Destinazione
+            PorzioneOperazioneTitolo(srcCnt, false, ref dataGridViewDestinazioneOperazione);
+
+            // Aggiorna i totalizzazori();
+            AggiornaTotalizzatoriSorgente();
+            AggiornaTotalizzatoriDestinazione();
+
+        }
+        /// <summary>
+        /// Crea porzione operazione titoli
+        /// </summary>
+        /// <param name="srcCnt"></param>
+        /// <param name="operazioneSrc"></param>
+        /// <param name="dataGridView"></param>
+        private void PorzioneOperazioneTitolo(bool srcCnt, bool operazioneSrc, ref DataGridView dataGridView)
+        {
+            // Dichiara la stringa per le subOperazioni
+            string[] subOperazione = new string[3];
+
+            // Dichiara conto     
+            string conto;
+
+            // Imposta promemoria
+            string promemoria;
+
+            // Imposta le variabili di filtro 
+            bool filtra0 = checkBoxFiltra0Destinazione.Checked;
+
+            // =============================================================================
+            // - Operazione 0: ZIP opzionale
+            //     - Preleva dal gruppo del conto sorgente
+            //     - Deposita nel conto base sorgente
+            // =============================================================================
+
+            // compone i conti sorgente e destinazione
+            conto = GetContoDestinazione(SezioneConto.ContoCompleto);
+
+            // compone promemoria base
+            if (srcCnt)
+            {
+                promemoria = "Titolo Acquisto" + " ->" + textNotaSorgente.Text + conto;
+            }
+            else
+            {
+                promemoria = "Titolo Rimborso" + " ->" + textNotaSorgente.Text + conto;
+            }
+
+
+            // Compone le trasizioni sorgente 1
+            //==================================================================
+
+            // Aggiunge il sottoconto base
+            subOperazione[0] = promemoria;
+            subOperazione[1] = conto;
+            subOperazione[2] = GValori.sValoreContoBaseDestinazione;
+            if (srcCnt)
+                AddTransizione(ref dataGridView, subOperazione);
+
+            // aggiunge i sotto conti del gruppo Cnt
+            if (srcCnt)
+            {
+                // Aggiunge il sottoconto Cnt
+                subOperazione[0] = promemoria + ":Cnt";
+                subOperazione[1] = conto + ":Cnt";
+                subOperazione[2] = GValori.sValoreContoCntDestinazione;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Cnt
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
+                    if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
+            }
+
+            // Aggiunge i sotto conti del gruppo Dep
+            if (!srcCnt)
+            {
+                // Aggiunge il sottoconto Dep
+                subOperazione[0] = promemoria + ":Dep";
+                subOperazione[1] = conto + ":Dep";
+                subOperazione[2] = GValori.sValoreContoDepDestinazione;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Dep
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
+                    if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
+            }
+        }
+        /// <summary>
         /// Il valore di una cella sorgente è cambiato, viene ricalcolato il totale dei valori
         /// </summary>
         /// <param name="sender"></param>
@@ -1713,6 +1824,14 @@ namespace Transa
                     AggiornaOperazioneSplit(true, true);
                     break;
 
+                case "TitoloAcquisto":
+                    AggiornaOperazioneTitolo(true);
+                    break;
+
+                case "TitoloRimborso":
+                    AggiornaOperazioneTitolo(false);
+                    break;
+
                 default:
                     break;
 
@@ -2018,6 +2137,24 @@ namespace Transa
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 3;
                     comboBoxTipoSottocontiDestinazione.SelectedIndex = 3;
                     break;
+
+                case "TitoloAcquisto":
+                    textDescrizioneOperazione.Text = "Titolo acquisto";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "2300";
+                    textNotaSorgente.Text = "Prelievo da ";
+                    textNotaDestinazione.Text = "Deposito in ";
+
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+
+                    comboBoxTipoSottocontiSorgente.SelectedIndex = 1;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 2;
+                    break;
+
 
 
                 default:
