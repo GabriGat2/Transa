@@ -149,7 +149,7 @@ namespace Transa
                     if (checkBoxAzzeraSorgente.Checked)
                         SvuotaTabella(ref dataGridViewSorgenteOperazione);
 
-                    subOperazione[0] = textNotaSorgente.Text;
+                    subOperazione[0] = textNotaSorgente.Text + GetContoSorgente(SezioneConto.ContoCompleto;
                     subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
                     subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
@@ -257,7 +257,7 @@ namespace Transa
                     if (checkBoxAzzeraDestinazione.Checked)
                         SvuotaTabella(ref dataGridViewDestinazioneOperazione);
 
-                    subOperazione[0] = textNotaDestinazione.Text;
+                    subOperazione[0] = textNotaDestinazione.Text + GetContoDestinazione(SezioneConto.ContoCompleto);
                     subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
                     subOperazione[2] = GValori.sValoreTotaleAttivoDestinazione;
 
@@ -907,10 +907,10 @@ namespace Transa
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
 
             // Crea le operazini Sorgente
-            PorzioneOperazioneTitolo(srcCnt, ref dataGridViewSorgenteOperazione);
+            PorzioneOperazioneTitoloSorgente(ref dataGridViewSorgenteOperazione);
 
             // Crea le operazini Destinazione
-            PorzioneOperazioneTitolo(! srcCnt, ref dataGridViewDestinazioneOperazione);
+            PorzioneOperazioneTitoloDestinazione(ref dataGridViewDestinazioneOperazione);
 
             // Aggiorna i totalizzazori();
             AggiornaTotalizzatoriSorgente();
@@ -918,82 +918,86 @@ namespace Transa
 
         }
         /// <summary>
-        /// Crea porzione operazione titoli
+        /// Crea porzione operazione titoli sorgente
         /// </summary>
         /// <param name="srcCnt"></param>
         /// <param name="dataGridView"></param>
-        private void PorzioneOperazioneTitolo(bool srcCnt,  ref DataGridView dataGridView)
+        private void PorzioneOperazioneTitoloSorgente(ref DataGridView dataGridView)
         {
             // Dichiara la stringa per le subOperazioni
             string[] subOperazione = new string[3];
 
-            // Dichiara conto     
-            string conto;
-
-            // Imposta promemoria
-            string promemoria;
-
             // Imposta le variabili di filtro 
-            bool filtra0 = checkBoxFiltra0Destinazione.Checked;
+            bool filtra0 = checkBoxFiltra0Sorgente.Checked;
 
-            // compone i conti sorgente e destinazione
-            conto = GetContoSorgente(SezioneConto.ContoCompleto);
+            // compone nome conto
+            string conto = GetContoSorgente(SezioneConto.ContoCompleto);
 
             // compone promemoria base
-            if (srcCnt)
-                promemoria = textNotaSorgente.Text;
-            else
-                promemoria = textNotaDestinazione.Text;
+            string promemoria = textNotaSorgente.Text;
 
-
-            // Compone le trasizioni sorgente 1
+            //==================================================================
+            // Compone le trasizioni sorgente
             //==================================================================
 
             // Aggiunge il sottoconto base
             subOperazione[0] = "@";
             subOperazione[1] = conto;
-            subOperazione[2] = GValori.sValoreContoBaseDestinazione;
-            if (srcCnt)
-                AddTransizione(ref dataGridView, subOperazione);
+            subOperazione[2] = GValori.sValoreContoBaseSorgente;
+            AddTransizione(ref dataGridView, subOperazione);
 
-            // aggiunge i sotto conti del gruppo Cnt
-            if (srcCnt)
+            // Aggiunge il sottoconto Cnt
+            subOperazione[0] = promemoria + ":Cnt";
+            subOperazione[1] = conto + ":Cnt";
+            subOperazione[2] = GValori.sValoreContoCntSorgente;
+            AddTransizione(ref dataGridView, subOperazione);
+
+            // aggiunge i sottoconti del gruppo Cnt
+            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
             {
-                // Aggiunge il sottoconto Cnt
-                subOperazione[0] = promemoria + ":Cnt";
-                subOperazione[1] = conto + ":Cnt";
-                subOperazione[2] = GValori.sValoreContoCntSorgente;
-                AddTransizione(ref dataGridView, subOperazione);
-
-                // aggiunge i sottoconti del gruppo Cnt
-                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
-                {
-                    subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                    subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
-                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0))
-                        AddTransizione(ref dataGridView, subOperazione);
-                }
+                subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
+                if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0))
+                    AddTransizione(ref dataGridView, subOperazione);
             }
+        }
+        /// <summary>
+        /// Crea porzione operazione titoli destinazione
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        private void PorzioneOperazioneTitoloDestinazione(ref DataGridView dataGridView)
+        {
+            // Dichiara la stringa per le subOperazioni
+            string[] subOperazione = new string[3];
 
-            // Aggiunge i sotto conti del gruppo Dep
-            if (!srcCnt)
+            // Imposta le variabili di filtro 
+            bool filtra0 = checkBoxFiltra0Destinazione.Checked;
+
+            // compone nome conto
+            string conto = GetContoDestinazione(SezioneConto.ContoCompleto);
+
+            // compone promemoria base
+            string promemoria = textNotaDestinazione.Text;
+
+            //==================================================================
+            // Compone le trasizioni destinazione
+            //==================================================================
+
+            // Aggiunge il sottoconto Dep
+            subOperazione[0] = promemoria + ":Dep";
+            subOperazione[1] = conto + ":Dep";
+            subOperazione[2] = GValori.sValoreContoDepDestinazione;
+            AddTransizione(ref dataGridView, subOperazione);
+
+            // aggiunge i sottoconti del gruppo Dep
+            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
             {
-                // Aggiunge il sottoconto Dep
-                subOperazione[0] = promemoria + ":Dep";
-                subOperazione[1] = conto + ":Dep";
-                subOperazione[2] = GValori.sValoreContoCntSorgente;
-                AddTransizione(ref dataGridView, subOperazione);
-
-                // aggiunge i sottoconti del gruppo Dep
-                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
-                {
-                    subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                    subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
-                    if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0))
-                        AddTransizione(ref dataGridView, subOperazione);
-                }
+                subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
+                if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0))
+                    AddTransizione(ref dataGridView, subOperazione);
             }
         }
         /// <summary>
@@ -2026,6 +2030,11 @@ namespace Transa
 
         private void comboBoxTipoOperazione_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Riabilita controlli disabilitati
+            comboBoxTipoSottocontiSorgente.Enabled = true;
+            comboBoxTipoSottocontiDestinazione.Enabled = true;
+            comboBoxContoDestinazione.Enabled = true;
+
             // Estrae il tipo di operazione  attiva
             string tipoDiOperazione = comboBoxTipoOperazione.Text;
 
@@ -2147,7 +2156,12 @@ namespace Transa
                     comboBoxTipoContiDestinazione.SelectedIndex = 2;
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 1;
-                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 2;
+
+                    // disabilita impostazione conto destinazione
+                    comboBoxTipoSottocontiSorgente.Enabled = false;
+                    comboBoxTipoSottocontiDestinazione.Enabled = false;
+                    comboBoxContoDestinazione.Enabled = false;
                     break;
 
                 case "TitoloRimborso":
@@ -2164,7 +2178,13 @@ namespace Transa
                     comboBoxTipoContiDestinazione.SelectedIndex = 2;
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 2;
-                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 2;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
+
+                    // disabilita impostazione conto destinazione
+                    comboBoxTipoSottocontiSorgente.Enabled = false;
+                    comboBoxTipoSottocontiDestinazione.Enabled = false;
+                    comboBoxContoDestinazione.Enabled = false;
+
                     break;
 
 
@@ -2383,6 +2403,32 @@ namespace Transa
 
 
             return stringa;
+        }
+        /// <summary>
+        ///  Allinea il sottoconto destinazione allo stesso valore
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxContoSorgente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // recupera il tipo di operazione richiesta
+            string TipoOperazione = comboBoxTipoOperazione.Text;
+
+
+            // Esegue l'operazione richiesta
+            switch (TipoOperazione)
+            {
+
+                case "TitoloAcquisto":
+                case "TitoloRimborso":
+                    comboBoxContoDestinazione.SelectedIndex = comboBoxContoSorgente.SelectedIndex;
+                    break;
+
+                default:
+                    break;
+
+            }
+
         }
     }
 }

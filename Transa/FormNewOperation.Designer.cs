@@ -365,6 +365,7 @@ namespace Transa
             this.comboBoxContoSorgente.Name = "comboBoxContoSorgente";
             this.comboBoxContoSorgente.Size = new System.Drawing.Size(441, 21);
             this.comboBoxContoSorgente.TabIndex = 14;
+            this.comboBoxContoSorgente.SelectedIndexChanged += new System.EventHandler(this.comboBoxContoSorgente_SelectedIndexChanged);
             // 
             // textDeltaValoreSorgente
             // 
