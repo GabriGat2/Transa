@@ -46,6 +46,7 @@ namespace Transa
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxAzzeraSorgente = new System.Windows.Forms.CheckBox();
             this.checkBoxFiltra0Sorgente = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.comboBoxTipoContiSorgente = new System.Windows.Forms.ComboBox();
@@ -83,6 +84,7 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBoxAzzeraDestinazione = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -291,6 +293,7 @@ namespace Transa
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.checkBoxAzzeraSorgente);
             this.splitContainer4.Panel1.Controls.Add(this.checkBoxFiltra0Sorgente);
             this.splitContainer4.Panel1.Controls.Add(this.label16);
             this.splitContainer4.Panel1.Controls.Add(this.comboBoxTipoContiSorgente);
@@ -312,6 +315,16 @@ namespace Transa
             this.splitContainer4.Size = new System.Drawing.Size(600, 542);
             this.splitContainer4.SplitterDistance = 130;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // checkBoxAzzeraSorgente
+            // 
+            this.checkBoxAzzeraSorgente.AutoSize = true;
+            this.checkBoxAzzeraSorgente.Location = new System.Drawing.Point(72, 103);
+            this.checkBoxAzzeraSorgente.Name = "checkBoxAzzeraSorgente";
+            this.checkBoxAzzeraSorgente.Size = new System.Drawing.Size(58, 17);
+            this.checkBoxAzzeraSorgente.TabIndex = 18;
+            this.checkBoxAzzeraSorgente.Text = "Azzera";
+            this.checkBoxAzzeraSorgente.UseVisualStyleBackColor = true;
             // 
             // checkBoxFiltra0Sorgente
             // 
@@ -486,6 +499,7 @@ namespace Transa
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.checkBoxAzzeraDestinazione);
             this.splitContainer3.Panel1.Controls.Add(this.checkBoxFiltra0Destinazione);
             this.splitContainer3.Panel1.Controls.Add(this.label17);
             this.splitContainer3.Panel1.Controls.Add(this.comboBoxTipoContiDestinazione);
@@ -672,6 +686,16 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
+            // checkBoxAzzeraDestinazione
+            // 
+            this.checkBoxAzzeraDestinazione.AutoSize = true;
+            this.checkBoxAzzeraDestinazione.Location = new System.Drawing.Point(80, 104);
+            this.checkBoxAzzeraDestinazione.Name = "checkBoxAzzeraDestinazione";
+            this.checkBoxAzzeraDestinazione.Size = new System.Drawing.Size(58, 17);
+            this.checkBoxAzzeraDestinazione.TabIndex = 21;
+            this.checkBoxAzzeraDestinazione.Text = "Azzera";
+            this.checkBoxAzzeraDestinazione.UseVisualStyleBackColor = true;
+            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -761,5 +785,7 @@ namespace Transa
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.CheckBox checkBoxFiltra0Sorgente;
         private System.Windows.Forms.CheckBox checkBoxFiltra0Destinazione;
+        private System.Windows.Forms.CheckBox checkBoxAzzeraSorgente;
+        private System.Windows.Forms.CheckBox checkBoxAzzeraDestinazione;
     }
 }

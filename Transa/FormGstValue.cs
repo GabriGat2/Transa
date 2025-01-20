@@ -40,7 +40,7 @@ namespace Transa
         /// <summary>
         /// Nome colonne
         /// </summary>
-        private string [] NomeColonne = 
+        private string[] NomeColonne =
         {
             "Totale",         // 0                       
             "TotaleAtt",      // 1
@@ -85,7 +85,7 @@ namespace Transa
         // ====== Valori conto sorgente
         // =====================================================================================
         public double ValoreTotaleSorgente { get => GetValore(true, 0); }
-        public double ValoreTotaleAttivoSorgente     {get => GetValore(true, 1); }
+        public double ValoreTotaleAttivoSorgente { get => GetValore(true, 1); }
         public string sValoreTotaleAttivoSorgente { get => ValoreTotaleAttivoSorgente.ToString(FormatoValore); }
         public Color ValoreTotaleSorgenteColore { get => textBoxValoreTransizione.BackColor; }
         // =====================================================================================
@@ -111,6 +111,19 @@ namespace Transa
             return ConvertAG.IsZero(ValoreContoBaseDestinazione);
         }
 
+        public double ValoreSommaSorgente()
+        {
+            double somma = ValoreContoBaseSorgente;
+            somma += ValoreSommaCntSorgente();
+            somma += ValoreSommaDepSorgente();
+            return somma;
+        }
+        public string sValoreSommaSorgente()
+        {
+            return ValoreSommaSorgente().ToString(FormatoValore); 
+        }
+
+
         // =====================================================================================
         // ====== Valore conto Cnt 
         // =====================================================================================
@@ -118,6 +131,33 @@ namespace Transa
         public double ValoreContoCntDestinazione { get => GetValore(false, 3); }
         public string sValoreContoCntSorgente { get => ValoreContoCntSorgente.ToString(FormatoValore); }
         public string sValoreContoCntDestinazione { get => ValoreContoCntDestinazione.ToString(FormatoValore); }
+
+        public double ValoreSommaCntSorgente()
+        {
+            double somma = 0;
+            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+            {
+                somma += ValoreSottoContoCntSorgente(i);
+            }
+            return somma + ValoreContoCntSorgente;
+        }
+        public string sValoreSommaCntSorgente()
+        {
+            return ValoreSommaCntSorgente().ToString(FormatoValore);
+        }
+        public double ValoreSommaDepSorgente()
+        {
+            double somma = 0;
+            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+            {
+                somma += ValoreSottoContoDepSorgente(i);
+            }
+            return somma + ValoreContoDepSorgente;
+        }
+        public string sValoreSommaDepSorgente()
+        {
+            return ValoreSommaDepSorgente().ToString(FormatoValore);
+        }
 
         // =====================================================================================
         // ====== Valore sottoconti Cnt 

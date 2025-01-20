@@ -145,6 +145,10 @@ namespace Transa
             switch (contiSelezionati)
             {
                 case "Single":
+                    // Svuota la tabella
+                    if (checkBoxAzzeraSorgente.Checked)
+                        SvuotaTabella(ref dataGridViewSorgenteOperazione);
+
                     subOperazione[0] = textNotaSorgente.Text;
                     subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
                     subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
@@ -249,6 +253,10 @@ namespace Transa
             switch (contiSelezionati)
             {
                 case "Single":
+                    // Svuota la tabella
+                    if (checkBoxAzzeraDestinazione.Checked)
+                        SvuotaTabella(ref dataGridViewDestinazioneOperazione);
+
                     subOperazione[0] = textNotaDestinazione.Text;
                     subOperazione[1] = GetContoDestinazione(SezioneConto.ContoCompleto);
                     subOperazione[2] = GValori.sValoreTotaleAttivoDestinazione;
@@ -332,7 +340,7 @@ namespace Transa
                     subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i]; 
                     subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
-                    if ( !(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0Dst))
+                    if ( !(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0Dst))
                         AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
             }
@@ -1992,10 +2000,10 @@ namespace Transa
             switch (tipoDiOperazione)
             {
                 case "Transition":
+                case "TitoloAcquisto":
+                case "TitoloRimborso":
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true);
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false);
-                    //GeneraTransizioniSorgente(ref transactionDataGrid);
-                    //GeneraTransizioniDestinazione(ref transactionDataGrid);
                     break;
                 case "Open":
                     GeneraTransizioniOpen(ref transactionDataGrid);
@@ -2008,9 +2016,7 @@ namespace Transa
                 case "Zip":
                     GeneraTransizioniSplit(ref transactionDataGrid);
                     break;
-                //case "Zip":
-                    //GeneraTransizioniZip(ref transactionDataGrid);
-                    //break;
+
                 default:
                     break;
             }
@@ -2378,6 +2384,5 @@ namespace Transa
 
             return stringa;
         }
-
     }
 }
