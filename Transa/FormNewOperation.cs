@@ -149,7 +149,7 @@ namespace Transa
                     if (checkBoxAzzeraSorgente.Checked)
                         SvuotaTabella(ref dataGridViewSorgenteOperazione);
 
-                    subOperazione[0] = textNotaSorgente.Text + GetContoSorgente(SezioneConto.ContoCompleto;
+                    subOperazione[0] = textNotaSorgente.Text + GetContoSorgente(SezioneConto.ContoCompleto);
                     subOperazione[1] = GetContoSorgente(SezioneConto.ContoCompleto);
                     subOperazione[2] = GValori.sValoreTotaleAttivoSorgente;
                     AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
