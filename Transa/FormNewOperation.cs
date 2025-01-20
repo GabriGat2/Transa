@@ -907,10 +907,10 @@ namespace Transa
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
 
             // Crea le operazini Sorgente
-            PorzioneOperazioneTitoloSorgente(ref dataGridViewSorgenteOperazione);
+            PorzioneOperazioneTitoloSorgente(srcCnt, ref dataGridViewSorgenteOperazione);
 
             // Crea le operazini Destinazione
-            PorzioneOperazioneTitoloDestinazione(ref dataGridViewDestinazioneOperazione);
+            PorzioneOperazioneTitoloDestinazione(srcCnt, ref dataGridViewDestinazioneOperazione);
 
             // Aggiorna i totalizzazori();
             AggiornaTotalizzatoriSorgente();
@@ -922,7 +922,7 @@ namespace Transa
         /// </summary>
         /// <param name="srcCnt"></param>
         /// <param name="dataGridView"></param>
-        private void PorzioneOperazioneTitoloSorgente(ref DataGridView dataGridView)
+        private void PorzioneOperazioneTitoloSorgente(bool srcCnt, ref DataGridView dataGridView)
         {
             // Dichiara la stringa per le subOperazioni
             string[] subOperazione = new string[3];
@@ -946,27 +946,51 @@ namespace Transa
             subOperazione[2] = GValori.sValoreContoBaseSorgente;
             AddTransizione(ref dataGridView, subOperazione);
 
-            // Aggiunge il sottoconto Cnt
-            subOperazione[0] = promemoria + ":Cnt";
-            subOperazione[1] = conto + ":Cnt";
-            subOperazione[2] = GValori.sValoreContoCntSorgente;
-            AddTransizione(ref dataGridView, subOperazione);
-
-            // aggiunge i sottoconti del gruppo Cnt
-            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+            // Aggiunge il gruppo del sottocon Cnt
+            if (srcCnt)
             {
-                subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
-                if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0))
-                    AddTransizione(ref dataGridView, subOperazione);
+                // Aggiunge il sottoconto Cnt
+                subOperazione[0] = promemoria + ":Cnt";
+                subOperazione[1] = conto + ":Cnt";
+                subOperazione[2] = GValori.sValoreContoCntSorgente;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Cnt
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
+                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
+            }
+
+            // Aggiunge il gruppo del sottoconto Dep
+            if (!srcCnt)
+            {
+                // Aggiunge il sottoconto dep
+                subOperazione[0] = promemoria + ":Dep";
+                subOperazione[1] = conto + ":Dep";
+                subOperazione[2] = GValori.sValoreContoDepSorgente;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Dep
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
+                    if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
             }
         }
         /// <summary>
         /// Crea porzione operazione titoli destinazione
         /// </summary>
         /// <param name="dataGridView"></param>
-        private void PorzioneOperazioneTitoloDestinazione(ref DataGridView dataGridView)
+        private void PorzioneOperazioneTitoloDestinazione(bool srcCnt, ref DataGridView dataGridView)
         {
             // Dichiara la stringa per le subOperazioni
             string[] subOperazione = new string[3];
@@ -983,21 +1007,44 @@ namespace Transa
             //==================================================================
             // Compone le trasizioni destinazione
             //==================================================================
-
-            // Aggiunge il sottoconto Dep
-            subOperazione[0] = promemoria + ":Dep";
-            subOperazione[1] = conto + ":Dep";
-            subOperazione[2] = GValori.sValoreContoDepDestinazione;
-            AddTransizione(ref dataGridView, subOperazione);
-
-            // aggiunge i sottoconti del gruppo Dep
-            for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+            // Aggiunge il gruppo del sottoconto Cnt
+            if (!srcCnt)
             {
-                subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
-                if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0))
-                    AddTransizione(ref dataGridView, subOperazione);
+                // Aggiunge il sottoconto Dep
+                subOperazione[0] = promemoria + ":Cnt";
+                subOperazione[1] = conto + ":Cnt";
+                subOperazione[2] = GValori.sValoreContoCntDestinazione;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Dep
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
+                    if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
+            }
+
+            // Aggiunge il gruppo del sottoconto Dep
+            if (srcCnt)
+            {
+                // Aggiunge il sottoconto Dep
+                subOperazione[0] = promemoria + ":Dep";
+                subOperazione[1] = conto + ":Dep";
+                subOperazione[2] = GValori.sValoreContoDepDestinazione;
+                AddTransizione(ref dataGridView, subOperazione);
+
+                // aggiunge i sottoconti del gruppo Dep
+                for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
+                {
+                    subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
+                    subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
+                    if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0))
+                        AddTransizione(ref dataGridView, subOperazione);
+                }
             }
         }
         /// <summary>
