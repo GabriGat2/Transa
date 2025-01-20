@@ -899,10 +899,10 @@ namespace Transa
             SvuotaTabella(ref dataGridViewDestinazioneOperazione);
 
             // Crea le operazini Sorgente
-            PorzioneOperazioneTitolo(srcCnt, true, ref dataGridViewSorgenteOperazione);
-            XXXXXXXXXXXXX
+            PorzioneOperazioneTitolo(srcCnt, ref dataGridViewSorgenteOperazione);
+
             // Crea le operazini Destinazione
-            PorzioneOperazioneTitolo(srcCnt, false, ref dataGridViewDestinazioneOperazione);
+            PorzioneOperazioneTitolo(! srcCnt, ref dataGridViewDestinazioneOperazione);
 
             // Aggiorna i totalizzazori();
             AggiornaTotalizzatoriSorgente();
@@ -913,9 +913,8 @@ namespace Transa
         /// Crea porzione operazione titoli
         /// </summary>
         /// <param name="srcCnt"></param>
-        /// <param name="operazioneSrc"></param>
         /// <param name="dataGridView"></param>
-        private void PorzioneOperazioneTitolo(bool srcCnt, bool operazioneSrc, ref DataGridView dataGridView)
+        private void PorzioneOperazioneTitolo(bool srcCnt,  ref DataGridView dataGridView)
         {
             // Dichiara la stringa per le subOperazioni
             string[] subOperazione = new string[3];
@@ -929,31 +928,21 @@ namespace Transa
             // Imposta le variabili di filtro 
             bool filtra0 = checkBoxFiltra0Destinazione.Checked;
 
-            // =============================================================================
-            // - Operazione 0: ZIP opzionale
-            //     - Preleva dal gruppo del conto sorgente
-            //     - Deposita nel conto base sorgente
-            // =============================================================================
-
             // compone i conti sorgente e destinazione
-            conto = GetContoDestinazione(SezioneConto.ContoCompleto);
+            conto = GetContoSorgente(SezioneConto.ContoCompleto);
 
             // compone promemoria base
             if (srcCnt)
-            {
-                promemoria = "Titolo Acquisto" + " ->" + textNotaSorgente.Text + conto;
-            }
+                promemoria = textNotaSorgente.Text;
             else
-            {
-                promemoria = "Titolo Rimborso" + " ->" + textNotaSorgente.Text + conto;
-            }
+                promemoria = textNotaDestinazione.Text;
 
 
             // Compone le trasizioni sorgente 1
             //==================================================================
 
             // Aggiunge il sottoconto base
-            subOperazione[0] = promemoria;
+            subOperazione[0] = "@";
             subOperazione[1] = conto;
             subOperazione[2] = GValori.sValoreContoBaseDestinazione;
             if (srcCnt)
@@ -965,7 +954,7 @@ namespace Transa
                 // Aggiunge il sottoconto Cnt
                 subOperazione[0] = promemoria + ":Cnt";
                 subOperazione[1] = conto + ":Cnt";
-                subOperazione[2] = GValori.sValoreContoCntDestinazione;
+                subOperazione[2] = GValori.sValoreContoCntSorgente;
                 AddTransizione(ref dataGridView, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Cnt
@@ -973,8 +962,8 @@ namespace Transa
                 {
                     subOperazione[0] = promemoria + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = conto + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
-                    subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
-                    if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0))
+                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
+                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0))
                         AddTransizione(ref dataGridView, subOperazione);
                 }
             }
@@ -985,7 +974,7 @@ namespace Transa
                 // Aggiunge il sottoconto Dep
                 subOperazione[0] = promemoria + ":Dep";
                 subOperazione[1] = conto + ":Dep";
-                subOperazione[2] = GValori.sValoreContoDepDestinazione;
+                subOperazione[2] = GValori.sValoreContoCntSorgente;
                 AddTransizione(ref dataGridView, subOperazione);
 
                 // aggiunge i sottoconti del gruppo Dep
@@ -993,8 +982,8 @@ namespace Transa
                 {
                     subOperazione[0] = promemoria + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = conto + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                    subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
-                    if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0))
+                    subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
+                    if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0))
                         AddTransizione(ref dataGridView, subOperazione);
                 }
             }
@@ -2152,8 +2141,26 @@ namespace Transa
                     comboBoxTipoContiDestinazione.SelectedIndex = 2;
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 1;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
+                    break;
+
+                case "TitoloRimborso":
+                    textDescrizioneOperazione.Text = "Titolo rimborso";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "2400";
+                    textNotaSorgente.Text = "Prelievo da ";
+                    textNotaDestinazione.Text = "Deposito in ";
+
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+
+                    comboBoxTipoSottocontiSorgente.SelectedIndex = 2;
                     comboBoxTipoSottocontiDestinazione.SelectedIndex = 2;
                     break;
+
 
 
 
