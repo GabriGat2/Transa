@@ -1849,6 +1849,7 @@ namespace Transa
             switch (TipoOperazione)
             {
                 case "Transition":
+                case "Interessi":
                     AggiornaSorgente();
                     AggiornaDestinazione();
                     break;
@@ -2054,6 +2055,7 @@ namespace Transa
                 case "Transition":
                 case "TitoloAcquisto":
                 case "TitoloRimborso":
+                case "Interessi":
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true);
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false);
                     break;
@@ -2244,19 +2246,12 @@ namespace Transa
                     butAggiornaSorgente.Enabled = false;
                     butAggiornaDestinazione.Enabled = false;
 
-                    comboBoxTipoContiSorgente.SelectedIndex = 2;
-                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+                    comboBoxTipoContiSorgente.SelectedIndex = ((int)LData.ETipoConti.Entrate);
+                    comboBoxTipoContiDestinazione.SelectedIndex = ((int)LData.ETipoConti.AttivitaBase);
 
-                    comboBoxTipoSottocontiSorgente.SelectedIndex = 2;
-                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
-
-                    // disabilita impostazione conto destinazione
-                    comboBoxTipoSottocontiSorgente.Enabled = false;
-                    comboBoxTipoSottocontiDestinazione.Enabled = false;
-                    comboBoxContoDestinazione.Enabled = false;
+                    comboBoxTipoSottocontiSorgente.SelectedIndex = ((int)LData.ETipoSottoconti.Single);
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = ((int)LData.ETipoSottoconti.Cnt);
                     break;
-
-
 
 
                 default:
