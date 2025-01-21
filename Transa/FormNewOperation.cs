@@ -2528,12 +2528,12 @@ namespace Transa
             double valore = ConvertAG.ToDouble0(sValore);
 
             // riconverte valore in stringa normalizzata
-            string sValoreNorm = valore.ToString("#0.00");
+            string sValoreNorm = valore.ToString("## ##0.00");
 
             // compone il descrittore
             string descrizione = "== ";
             // aggiunge gli spazi
-            for (int i = 0; i < 8 - sValoreNorm.Length; i++)
+            for (int i = 0; i < 9 - sValoreNorm.Length; i++)
                 descrizione += ' ';
 
             // completa la stringa
