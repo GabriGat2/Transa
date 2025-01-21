@@ -74,11 +74,11 @@ namespace Transa
             // carica le combobox selezione conti 
             comboBoxTipoContiSorgente.Items.Clear();
             comboBoxTipoContiDestinazione.Items.Clear();
-            for (int i = 0; i < lData.TipoConti.Count(); i++)
+            for (int i = 0; i < lData.sTipoConti.Count(); i++)
             {
                 // carica i conti sulla combo box
-                comboBoxTipoContiSorgente.Items.Add(lData.TipoConti[i]);
-                comboBoxTipoContiDestinazione.Items.Add(lData.TipoConti[i]);
+                comboBoxTipoContiSorgente.Items.Add(lData.sTipoConti[i]);
+                comboBoxTipoContiDestinazione.Items.Add(lData.sTipoConti[i]);
             }
             comboBoxTipoContiSorgente.SelectedIndex = 0;
             comboBoxTipoContiDestinazione.SelectedIndex = 0;
@@ -2232,7 +2232,28 @@ namespace Transa
                     comboBoxTipoSottocontiSorgente.Enabled = false;
                     comboBoxTipoSottocontiDestinazione.Enabled = false;
                     comboBoxContoDestinazione.Enabled = false;
+                    break;
 
+                case "Interessi":
+                    textDescrizioneOperazione.Text = "Interessi";
+                    textValoreOperazione.Text = "1";
+                    textNumOperazione.Text = "2500";
+                    textNotaSorgente.Text = "Prelievo da ";
+                    textNotaDestinazione.Text = "Deposito in ";
+
+                    butAggiornaSorgente.Enabled = false;
+                    butAggiornaDestinazione.Enabled = false;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+
+                    comboBoxTipoSottocontiSorgente.SelectedIndex = 2;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
+
+                    // disabilita impostazione conto destinazione
+                    comboBoxTipoSottocontiSorgente.Enabled = false;
+                    comboBoxTipoSottocontiDestinazione.Enabled = false;
+                    comboBoxContoDestinazione.Enabled = false;
                     break;
 
 

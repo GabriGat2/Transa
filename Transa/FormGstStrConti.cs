@@ -35,10 +35,10 @@ namespace Transa
         private void Inizializzazione()
         {
             // carica la combobox selezione conti 
-            for (int i = 0; i < lData.TipoConti.Count(); i++)
+            for (int i = 0; i < lData.sTipoConti.Count(); i++)
             {
                 // carica i conti sulla combo box
-                comboBoxTipoConti.Items.Add(lData.TipoConti[i]);
+                comboBoxTipoConti.Items.Add(lData.sTipoConti[i]);
             }
             comboBoxTipoConti.SelectedIndex = 0;
         }

@@ -173,10 +173,26 @@ namespace Transa
         /// Lista dei conti Passivita
         /// </summary>
         public List<string> contiPassivita = new List<string>();
+        // =====================================================================================
+        // ====== Selezione tipo Conti
+        // =====================================================================================
+        public enum ETipoConti
+        {
+            All,
+            Attivita,
+            AttivitaBase,
+            Capitali,
+            CapitaliBase,
+            CapitaliBaseIniziale,
+            CapitaliBaseFinale,
+            Entrate,
+            Uscite,
+            Passivita
+        };
         /// <summary>
         /// Selezione dei conti
         /// </summary>
-        public string[] TipoConti =
+        public string[] sTipoConti =
         {
             "All",
             "Attivita",
@@ -189,6 +205,9 @@ namespace Transa
             "Uscite",
             "Passivita"
         };
+        // =====================================================================================
+        // ====== Tipo gruppo sottoconti
+        // =====================================================================================
         /// <summary>
         /// Gruppo SottoConti
         /// </summary>
@@ -249,7 +268,8 @@ namespace Transa
             Zip,
             ZipSplit,
             TitoloAcquisto,
-            TitoloRimborso
+            TitoloRimborso,
+            Interessi
         };
         /// <summary>
         /// Tipo Operazione
@@ -263,7 +283,8 @@ namespace Transa
             ETipoOperazione.Zip.ToString(),
             ETipoOperazione.ZipSplit.ToString(),
             ETipoOperazione.TitoloAcquisto.ToString(),
-            ETipoOperazione.TitoloRimborso.ToString()
+            ETipoOperazione.TitoloRimborso.ToString(),
+            ETipoOperazione.Interessi .ToString()
         };
         /// tipo di operazione in una transizione Zip o Split
         /// </summary>
