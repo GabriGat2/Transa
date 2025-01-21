@@ -66,6 +66,7 @@ namespace Transa
             this.ColContoSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreSrc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxAzzeraDestinazione = new System.Windows.Forms.CheckBox();
             this.checkBoxFiltra0Destinazione = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBoxTipoContiDestinazione = new System.Windows.Forms.ComboBox();
@@ -84,7 +85,6 @@ namespace Transa
             this.ColNotaDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConContoDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValoreDst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBoxAzzeraDestinazione = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -523,6 +523,16 @@ namespace Transa
             this.splitContainer3.SplitterDistance = 130;
             this.splitContainer3.TabIndex = 8;
             // 
+            // checkBoxAzzeraDestinazione
+            // 
+            this.checkBoxAzzeraDestinazione.AutoSize = true;
+            this.checkBoxAzzeraDestinazione.Location = new System.Drawing.Point(80, 104);
+            this.checkBoxAzzeraDestinazione.Name = "checkBoxAzzeraDestinazione";
+            this.checkBoxAzzeraDestinazione.Size = new System.Drawing.Size(58, 17);
+            this.checkBoxAzzeraDestinazione.TabIndex = 21;
+            this.checkBoxAzzeraDestinazione.Text = "Azzera";
+            this.checkBoxAzzeraDestinazione.UseVisualStyleBackColor = true;
+            // 
             // checkBoxFiltra0Destinazione
             // 
             this.checkBoxFiltra0Destinazione.AutoSize = true;
@@ -687,16 +697,6 @@ namespace Transa
             this.ColValoreDst.Name = "ColValoreDst";
             this.ColValoreDst.Width = 62;
             // 
-            // checkBoxAzzeraDestinazione
-            // 
-            this.checkBoxAzzeraDestinazione.AutoSize = true;
-            this.checkBoxAzzeraDestinazione.Location = new System.Drawing.Point(80, 104);
-            this.checkBoxAzzeraDestinazione.Name = "checkBoxAzzeraDestinazione";
-            this.checkBoxAzzeraDestinazione.Size = new System.Drawing.Size(58, 17);
-            this.checkBoxAzzeraDestinazione.TabIndex = 21;
-            this.checkBoxAzzeraDestinazione.Text = "Azzera";
-            this.checkBoxAzzeraDestinazione.UseVisualStyleBackColor = true;
-            // 
             // FormNewOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -705,6 +705,7 @@ namespace Transa
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormNewOperation";
             this.Text = "Operazioni";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
