@@ -278,6 +278,7 @@ namespace Transa
             // 
             // comboBoxTipoSottocontiSorgente
             // 
+            this.comboBoxTipoSottocontiSorgente.Enabled = false;
             this.comboBoxTipoSottocontiSorgente.FormattingEnabled = true;
             this.comboBoxTipoSottocontiSorgente.Location = new System.Drawing.Point(86, 6);
             this.comboBoxTipoSottocontiSorgente.Name = "comboBoxTipoSottocontiSorgente";
@@ -419,6 +420,7 @@ namespace Transa
             // 
             // comboBoxTipoSottocontiDestinazione
             // 
+            this.comboBoxTipoSottocontiDestinazione.Enabled = false;
             this.comboBoxTipoSottocontiDestinazione.FormattingEnabled = true;
             this.comboBoxTipoSottocontiDestinazione.Location = new System.Drawing.Point(86, 6);
             this.comboBoxTipoSottocontiDestinazione.Name = "comboBoxTipoSottocontiDestinazione";
