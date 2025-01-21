@@ -1168,7 +1168,7 @@ namespace Transa
         public uint GeneraTransizioniSorgente(ref DataGridView transactionDataGrid)
         {
             // compone nome operazione 
-            string nomeOperazione = " == € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
+            string nomeOperazione = ValoreDescrizione(textValoreOperazione.Text) + textDescrizioneOperazione.Text;
 
             // Assegna numero operazione
             int numeroOperazione = Convert.ToInt32(textNumOperazione.Text);
@@ -1231,7 +1231,7 @@ namespace Transa
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
                 campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
 
-                campi[3] = "== € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;  //  3 "Descrizione",
+                campi[3] = ValoreDescrizione(textValoreOperazione.Text) + textDescrizioneOperazione.Text;  //  3 "Descrizione",
 
                 campi[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
                 campi[5] = lData.FilteredCellValuesOfTheTrasizioneLine[5];      //  5 "Commodity/Valuta",
@@ -1270,7 +1270,8 @@ namespace Transa
         public uint GeneraTransizioni(ref DataGridView transactionDataGrid, ref DataGridView dataGridViewOperazione, bool tabSrc)
         {
             // compone nome operazione 
-            string nomeOperazione = " == € " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
+            string sValore = ValoreDescrizione(textValoreOperazione.Text);
+            string nomeOperazione = sValore + textDescrizioneOperazione.Text;
 
             // Assegna numero operazione
             int numeroOperazione = Convert.ToInt32(textNumOperazione.Text);
@@ -1534,7 +1535,7 @@ namespace Transa
         public uint GeneraTransizioniZip(ref DataGridView transactionDataGrid)
         {
             // compone nome operazione 1 e 2
-            string nomeOperazione = " == " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
+            string nomeOperazione = ValoreDescrizione(textValoreOperazione.Text) + textDescrizioneOperazione.Text;
             string nomeOperazione1 = LData.ETipoOperazioneComplessa.ZIP.ToString() + nomeOperazione;
             string nomeOperazione2 = LData.ETipoOperazioneComplessa.TOTALE.ToString() + nomeOperazione;
 
@@ -1575,7 +1576,7 @@ namespace Transa
         public uint GeneraTransizioniSplit(ref DataGridView transactionDataGrid)
         {
             // compone nome operazione 0, 1 e 2
-            string nomeOperazione = " == " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
+            string nomeOperazione = ValoreDescrizione(textValoreOperazione.Text) + textDescrizioneOperazione.Text;
             string nomeOperazione0 = AllineaLunghezza(LData.ETipoOperazioneComplessa.ZIP.ToString(), LData.ETipoOperazioneComplessa.TOTALE.ToString()) + nomeOperazione;
             string nomeOperazione1 = LData.ETipoOperazioneComplessa.TOTALE.ToString() + nomeOperazione;
             string nomeOperazione2 = AllineaLunghezza(LData.ETipoOperazioneComplessa.SPLIT.ToString(), LData.ETipoOperazioneComplessa.TOTALE.ToString()) + nomeOperazione;
@@ -2505,6 +2506,40 @@ namespace Transa
             string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
 
             return dataAMG;
+        }
+        /// <summary>
+        /// Normalizza la stringa del volore nella descrizione
+        /// </summary>
+        /// <param name="sValore"></param>
+        /// <returns></returns>
+        private string ValoreDescrizione(string sValore)
+        {
+
+
+            // verifica che contenga un valore double
+            if (!ConvertAG.IsDouble(sValore))
+            {
+                LData.ETransaErrore esito = LData.ETransaErrore.E2100_double_LaStringaNonContieneUnValoreDouble;
+                lData.StampaMessaggioErrore(esito, sValore);
+                return "== ? == ";
+            }
+
+            // converte in double
+            double valore = ConvertAG.ToDouble0(sValore);
+
+            // riconverte valore in stringa normalizzata
+            string sValoreNorm = valore.ToString("#0.00");
+
+            // compone il descrittore
+            string descrizione = "== ";
+            // aggiunge gli spazi
+            for (int i = 0; i < 8 - sValoreNorm.Length; i++)
+                descrizione += ' ';
+
+            // completa la stringa
+            descrizione = descrizione + sValoreNorm + " € == ";
+
+            return descrizione;
         }
     }
 }
