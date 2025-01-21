@@ -83,7 +83,7 @@ namespace Transa
             comboBoxTipoContiSorgente.SelectedIndex = 0;
             comboBoxTipoContiDestinazione.SelectedIndex = 0;
 
-              // inizializzazione caselle operazione
+            // inizializzazione caselle operazione
             textDescrizioneOperazione.Text = "Operazione di prova";
             textValoreOperazione.Text = "1234,56";
             textNumOperazione.Text = "1";
@@ -208,7 +208,7 @@ namespace Transa
                     subOperazione[0] = promemoriaSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoCntSorgente(i);
-                    if (! (GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
+                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
                         AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                 }
 
@@ -229,7 +229,7 @@ namespace Transa
                     subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
-                    if (! (GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
+                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
                         AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                 }
             }
@@ -319,7 +319,7 @@ namespace Transa
                     subOperazione[0] = promemoriaDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoDst + ":Cnt:Cnt-" + lData.sGruppoSottoconti[i]; ;
                     subOperazione[2] = GValori.sValoreSottoContoCntDestinazione(i);
-                    if ( !(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0Dst))
+                    if (!(GValori.IsZeroValoreSottoContoCntDestinazione(i) && filtra0Dst))
                         AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
 
@@ -338,9 +338,9 @@ namespace Transa
                 for (int i = 0; i < lData.sGruppoSottoconti.Length; i++)
                 {
                     subOperazione[0] = promemoriaDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
-                    subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i]; 
+                    subOperazione[1] = contoDst + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoDepDestinazione(i);
-                    if ( !(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0Dst))
+                    if (!(GValori.IsZeroValoreSottoContoDepDestinazione(i) && filtra0Dst))
                         AddTransizione(ref dataGridViewDestinazioneOperazione, subOperazione);
                 }
             }
@@ -701,7 +701,7 @@ namespace Transa
             //    lData.StampaMessaggioErrore(esito, messaggio2);
             //    return;
             //}
- 
+
             // =============================================================================
             // - Operazione 0: ZIP opzionale
             //     - Preleva dal gruppo del conto sorgente
@@ -1175,11 +1175,11 @@ namespace Transa
 
 
             for (int i = 0; i < (dataGridViewSorgenteOperazione.Rows.Count - 1); i++)
-            { 
+            {
                 // crea la stringa campi
                 string[] campi = new string[lData.NameColumnsTransition.Length];
 
-                campi[0] = dateTimeOperazione.Text;                             //  0 "Data",
+                campi[0] = DataAMG();                                           //  0 "Data",
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
 
                 campi[2] = numeroOperazione.ToString();                         //  2 "Numero",
@@ -1227,7 +1227,7 @@ namespace Transa
                 string[] campi = new string[lData.NameColumnsTransition.Length];
 
 
-                campi[0] = dateTimeOperazione.Text;                             //  0 "Data",
+                campi[0] = DataAMG();                                           //  0 "Data",
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
                 campi[2] = lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
 
@@ -1280,7 +1280,8 @@ namespace Transa
                 // crea la stringa campi
                 string[] campi = new string[lData.NameColumnsTransition.Length];
 
-                campi[0] = dateTimeOperazione.Text;                             //  0 "Data",
+                campi[0] = DataAMG();                                           //  0 "Data",
+
                 campi[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
 
                 campi[2] = numeroOperazione.ToString();                         //  2 "Numero",
@@ -1335,7 +1336,7 @@ namespace Transa
                                     "Lunghezza tabDestinazione = " + nTransizioniDestinazione.ToString();
 
                 LData.ETransaErrore esito = LData.ETransaErrore.E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse;
-                
+
                 lData.StampaMessaggioErrore(esito, messaggio2);
                 return;
             }
@@ -1352,7 +1353,7 @@ namespace Transa
                 string[] campiS = new string[lData.NameColumnsTransition.Length];
                 string[] campiD = new string[lData.NameColumnsTransition.Length];
 
-                campiS[0] = dateTimeOperazione.Text;                            //  0 "Data",
+                campiS[0] = DataAMG();                                          //  0 "Data",
                 campiD[0] = campiS[0];
 
                 campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
@@ -1441,7 +1442,7 @@ namespace Transa
             }
 
             // compone nome operazione parziale
-            string nomeOperazione =  textDescrizioneOperazione.Text;
+            string nomeOperazione = textDescrizioneOperazione.Text;
 
             // Recupera il numero dell'operazione
             int numOperazione = Convert.ToInt32(textNumOperazione.Text);
@@ -1452,7 +1453,7 @@ namespace Transa
                 string[] campiS = new string[lData.NameColumnsTransition.Length];
                 string[] campiD = new string[lData.NameColumnsTransition.Length];
 
-                campiS[0] = dateTimeOperazione.Text;                            //  0 "Data",
+                campiS[0] = DataAMG();                                          //  0 "Data",
                 campiD[0] = campiS[0];
 
                 campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
@@ -1460,8 +1461,8 @@ namespace Transa
 
                 campiS[2] = (numOperazione + i).ToString();                     //  2 "Numero",
                 campiD[2] = campiS[2];
-                
-                campiS[3] = nomeOperazione +  dataGridViewSorgenteOperazione.Rows[i].Cells[1].Value.ToString();  //  3 "Descrizione",
+
+                campiS[3] = nomeOperazione + dataGridViewSorgenteOperazione.Rows[i].Cells[1].Value.ToString();  //  3 "Descrizione",
                 campiD[3] = campiS[3];
 
                 campiS[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
@@ -1532,7 +1533,7 @@ namespace Transa
         /// <returns></returns>
         public uint GeneraTransizioniZip(ref DataGridView transactionDataGrid)
         {
-             // compone nome operazione 1 e 2
+            // compone nome operazione 1 e 2
             string nomeOperazione = " == " + textValoreOperazione.Text + " == " + textDescrizioneOperazione.Text;
             string nomeOperazione1 = LData.ETipoOperazioneComplessa.ZIP.ToString() + nomeOperazione;
             string nomeOperazione2 = LData.ETipoOperazioneComplessa.TOTALE.ToString() + nomeOperazione;
@@ -1546,13 +1547,13 @@ namespace Transa
             //     - Analizza operazioni 
             // =============================================================================
             GeneraTransizione(ref transactionDataGrid,
-                              LData.ETipoOperazioneComplessa.ZIP.ToString(), 
-                              nomeOperazione1, 
+                              LData.ETipoOperazioneComplessa.ZIP.ToString(),
+                              nomeOperazione1,
                               numeroOperazione1);
 
             GeneraTransizione(ref transactionDataGrid,
-                              LData.ETipoOperazioneComplessa.TOTALE.ToString(), 
-                              nomeOperazione2, 
+                              LData.ETipoOperazioneComplessa.TOTALE.ToString(),
+                              nomeOperazione2,
                               numeroOperazione2);
 
             return 0;
@@ -1614,9 +1615,9 @@ namespace Transa
         /// <param name="nomeOperazione"></param>
         /// <param name="numeroOperazione"></param>
         /// <returns></returns>
-        public uint GeneraTransizione( ref DataGridView transactionDataGrid, 
-                                            string tipoOperazione, 
-                                            string nomeOperazione, 
+        public uint GeneraTransizione(ref DataGridView transactionDataGrid,
+                                            string tipoOperazione,
+                                            string nomeOperazione,
                                             int numeroOperazione)
         {
             // =============================================================================
@@ -1636,9 +1637,9 @@ namespace Transa
                 // crea la stringa campi
                 string[] campiS = new string[lData.NameColumnsTransition.Length];
 
-                campiS[0] = dateTimeOperazione.Text;                            //  0 "Data",
+                campiS[0] = DataAMG();                                          //  0 "Data",
                 campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
- 
+
                 campiS[2] = numeroOperazione.ToString();                        //  2 "Numero"
                 campiS[3] = nomeOperazione;                                     //  3 "Descrizione",
 
@@ -1693,7 +1694,7 @@ namespace Transa
                 // crea la stringa campi
                 string[] campiD = new string[lData.NameColumnsTransition.Length];
 
-                campiD[0] = dateTimeOperazione.Text;                                //  0 "Data",
+                campiD[0] = DataAMG();                                              //  0 "Data",
 
                 campiD[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];         //  1 "ID transazione",
 
@@ -1834,7 +1835,7 @@ namespace Transa
             if (!GValori.StatoContoOK)
             {
                 lData.StampaMessaggioErrore(LData.ETransaErrore.E1100_IContiNonSonoBilanciati);
-                return;    
+                return;
             }
 
             // Resetta operazione valida 
@@ -1915,7 +1916,7 @@ namespace Transa
                 return 201;
             // verifica se il conto esiste
             bool find = false;
-            foreach(string conto in lData.conti)
+            foreach (string conto in lData.conti)
             {
                 if (conto == subOperazione[1])
                 {
@@ -2001,10 +2002,10 @@ namespace Transa
 
             // compone l'esito della verifica
             string titolo = "Errore nella transizione!";
-            string messaggio =  "La verifica della trasizione : \n"+
-                                "Suboperazione[0]:Promemoria: >" + subOperazione[0] + "<\n"+
-                                "Suboperazione[1]:Conto: >" + subOperazione[1] + "<\n"+
-                                "Suboperazione[2]:Valore: >" + subOperazione[2] + "<\n\n"+
+            string messaggio = "La verifica della trasizione : \n" +
+                                "Suboperazione[0]:Promemoria: >" + subOperazione[0] + "<\n" +
+                                "Suboperazione[1]:Conto: >" + subOperazione[1] + "<\n" +
+                                "Suboperazione[2]:Valore: >" + subOperazione[2] + "<\n\n" +
                                 "ha dato esito negativo : " + result.ToString() + "\n\n" +
                                 DescrizioneErrore + "\n\n" +
                                 "Cancelli la transizione?";
@@ -2259,7 +2260,7 @@ namespace Transa
         {
             // azzera gli oggetti di visualizzazione
             comboBoxConti.Items.Clear();
-            
+
             // Aggiorna la lista dei conti visualizzata
             switch (comboBoxTipoConti.SelectedItem)
             {
@@ -2476,6 +2477,18 @@ namespace Transa
 
             }
 
+        }
+        /// <summary>
+        /// Rende la data impostato nel fomato anno, mese, giorno
+        /// </summary>
+        /// <returns></returns>
+        private string DataAMG()
+        {
+            string[] campiData = dateTimeOperazione.Text.Split('/');
+
+            string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
+
+            return dataAMG;
         }
     }
 }
