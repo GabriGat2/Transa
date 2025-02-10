@@ -2086,6 +2086,12 @@ namespace Transa
             comboBoxTipoSottocontiDestinazione.Enabled = true;
             comboBoxContoDestinazione.Enabled = true;
 
+            // inizializzazioni di default
+            checkBoxFiltra0Sorgente.Checked = true;
+            checkBoxFiltra0Destinazione.Checked = true;
+            checkBoxAzzeraSorgente.Checked = true;
+            checkBoxAzzeraDestinazione.Checked = true;
+
             // Estrae il tipo di operazione  attiva
             string tipoDiOperazione = comboBoxTipoOperazione.Text;
 
