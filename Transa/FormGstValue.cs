@@ -429,12 +429,17 @@ namespace Transa
             // Verifica se la riga esiste
             if ((dataGridView.Rows.Count <= row) || (row < 0))
                 return LData.ETransaErrore.E1002_RigaTabellaFuoriLimiti;
+
+            // Filtra segni di valuta €
+            string valoreF = ConvertAG.FiltraValuta(valore);
+
             // Verifica se è un valore double
-            if (!ConvertAG.IsDouble(valore))
+            if (!ConvertAG.IsDouble(valoreF))
                 return LData.ETransaErrore.E2100_double_LaStringaNonContieneUnValoreDouble;
 
+
             // Converte il valore in double
-            double dValore = ConvertAG.ToDouble0(valore);
+            double dValore = ConvertAG.ToDouble0(valoreF);
 
             // riconverte il valore in stringa con due decimali
             string sValore = dValore.ToString("#0.00");

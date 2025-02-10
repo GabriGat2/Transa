@@ -60,6 +60,16 @@ namespace Transa
         {
             return ((valore > -0.001) && (valore < 0.001));
         }
+        /// <summary>
+        /// RImuove eventuale segni di valuta €
+        /// </summary>
+        /// <param name="valore"></param>
+        /// <returns></returns>
+        public static string FiltraValuta (string valore)
+        {
+            string valoreF = valore.Replace('€', ' ');
+            return valoreF;
+        }
 
 
     }
