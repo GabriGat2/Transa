@@ -482,9 +482,6 @@ namespace Transa
             // Estrae le trasizioni dell'operazione
             GTransa.GetTransiction(ref transactionDataGridView);
         }
-
-
-
         /// <summary>
         /// Rigenera la tabella delle transizioni
         /// </summary>

@@ -277,6 +277,23 @@ namespace Transa
             AggiornaTotalizzatoriDestinazione();
         }
         /// <summary>
+        /// Aggiunge il conto sorgente base e destinazione nella descrizione
+        /// </summary>
+        private String AggiornaDescrizione()
+        {
+            // recupera il conto sorgente    
+            string [] contoSrc = GetContoSorgente(SezioneConto.ContoCompleto).Split(':');
+
+
+            // recupera il conto destinazione    
+            string [] contoDst = GetContoDestinazione(SezioneConto.ContoCompleto).Split(':'); ;
+
+            // compone la stringa con i conti
+            string descrizione2 = " DA => " + contoSrc[contoSrc.Length - 1] + "    A => " + contoDst[contoDst.Length - 1];
+
+            return descrizione2;
+        }
+        /// <summary>
         /// Aggiorna la sezione destinazioni con conti multipli
         /// </summary>
         private void AggiornaDestinazioneMultipla(string contiSelezionati)
@@ -346,6 +363,8 @@ namespace Transa
             }
 
         }
+
+
         /// <summary>
         /// Operazione open:
         /// - Preleva dal conto sorgente
@@ -1267,11 +1286,14 @@ namespace Transa
         /// </summary>
         /// <param name="transactionDataGrid"></param>
         /// <returns></returns>
-        public uint GeneraTransizioni(ref DataGridView transactionDataGrid, ref DataGridView dataGridViewOperazione, bool tabSrc)
+        public uint GeneraTransizioni(ref DataGridView transactionDataGrid, ref DataGridView dataGridViewOperazione, bool tabSrc, bool aggiornaDescrizione = false)
         {
             // compone nome operazione 
             string sValore = ValoreDescrizione(textValoreOperazione.Text);
             string nomeOperazione = sValore + textDescrizioneOperazione.Text;
+            if (aggiornaDescrizione)
+                nomeOperazione += AggiornaDescrizione();
+
 
             // Assegna numero operazione
             int numeroOperazione = Convert.ToInt32(textNumOperazione.Text);
@@ -1851,11 +1873,12 @@ namespace Transa
             {
                 case "Transition":
                 case "Interessi":
+                case "Trasferimento":
                     AggiornaSorgente();
                     AggiornaDestinazione();
                     break;
 
-                case "Open":
+                 case "Open":
                     AggiornaOperazioneOpen();
                     break;
 
@@ -2060,6 +2083,12 @@ namespace Transa
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true);
                     GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false);
                     break;
+
+                case "Trasferimento":
+                    GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true, true);
+                    GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false, true); ;
+                    break;
+
                 case "Open":
                     GeneraTransizioniOpen(ref transactionDataGrid);
                     break;
@@ -2113,6 +2142,24 @@ namespace Transa
 
                     comboBoxTipoSottocontiSorgente.SelectedIndex = 0;
                     break;
+
+                case "Trasferimento":
+                    textDescrizioneOperazione.Text = "Trasferimento fondi ";
+                    textValoreOperazione.Text = "0";
+                    textNumOperazione.Text = "100";
+                    textNotaSorgente.Text = "Prelievo da  ";
+                    textNotaDestinazione.Text = "Depositato in ";
+
+                    butAggiornaSorgente.Enabled = true;
+                    butAggiornaDestinazione.Enabled = true;
+
+                    comboBoxTipoContiSorgente.SelectedIndex = 2;
+                    comboBoxTipoContiDestinazione.SelectedIndex = 2;
+
+                    comboBoxTipoSottocontiSorgente.SelectedIndex = 1;
+                    comboBoxTipoSottocontiDestinazione.SelectedIndex = 1;
+                    break;
+
 
                 case "Open":
                     textDescrizioneOperazione.Text = "Bilancio di apertura ";

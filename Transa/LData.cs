@@ -262,6 +262,7 @@ namespace Transa
         public enum ETipoOperazione 
         {
             Transition,
+            Trasferimento,
             Open,
             Close,
             Split,
@@ -277,6 +278,7 @@ namespace Transa
         public string[] TipoOperazione =
         {
             ETipoOperazione.Transition.ToString(),
+            ETipoOperazione.Trasferimento.ToString(),
             ETipoOperazione.Open.ToString(),
             ETipoOperazione.Close.ToString(),
             ETipoOperazione.Split.ToString(),
