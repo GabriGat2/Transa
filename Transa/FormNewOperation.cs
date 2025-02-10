@@ -2202,7 +2202,7 @@ namespace Transa
                 case "TitoloAcquisto":
                     textDescrizioneOperazione.Text = "Titolo acquisto";
                     textValoreOperazione.Text = "1";
-                    textNumOperazione.Text = "2300";
+                    textNumOperazione.Text = "2400";
                     textNotaSorgente.Text = "Prelievo da ";
                     textNotaDestinazione.Text = "Deposito in ";
 
@@ -2224,7 +2224,7 @@ namespace Transa
                 case "TitoloRimborso":
                     textDescrizioneOperazione.Text = "Titolo rimborso";
                     textValoreOperazione.Text = "1";
-                    textNumOperazione.Text = "2400";
+                    textNumOperazione.Text = "2300";
                     textNotaSorgente.Text = "Prelievo da ";
                     textNotaDestinazione.Text = "Deposito in ";
 
