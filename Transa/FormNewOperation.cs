@@ -13,7 +13,7 @@ namespace Transa
     public partial class FormNewOperation : Form
     {
         /// <summary>
-        /// SOperazione in corso
+        /// Operazione in corso
         /// </summary>
         private bool lOperazioneValida = false;
         /// <summary>

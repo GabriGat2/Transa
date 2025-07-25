@@ -22,7 +22,11 @@ namespace Transa
         /// Oggetto  per la gestione dei valori transazioni
         /// </summary>
         public FormNewOperation GTransa;
-       
+        /// <summary>
+        /// Oggetto per la gestione dei file Bea con le transazioni di Banco Posta
+        /// </summary>
+        public FormFileBea FormFileBea;
+
         /// <summary>
         /// Tabella transizioni completa
         /// </summary>
@@ -37,6 +41,9 @@ namespace Transa
 
             // Crea l'oggeto per la gestione delle transazioni
             GTransa = new FormNewOperation(ref lData);
+
+            // Crea l'oggetto per la gestione dei file Bea
+            FormFileBea = new FormFileBea(ref lData);
 
             InitializeComponent();
             SetupDataGridView();
@@ -579,5 +586,9 @@ namespace Transa
             return fileName;
         }
 
+        private void butFileBea_Click(object sender, EventArgs e)
+        {
+            FormFileBea.ShowDialog();
+        }
     }
 }

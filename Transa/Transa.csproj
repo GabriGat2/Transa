@@ -74,7 +74,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CListaTransizioni.cs" />
     <Compile Include="ConvertAG.cs" />
+    <Compile Include="CTransizione.cs" />
+    <Compile Include="FormFileBea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFileBea.Designer.cs">
+      <DependentUpon>FormFileBea.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGstValue.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +110,9 @@
     <Compile Include="LData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFileBea.resx">
+      <DependentUpon>FormFileBea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGstValue.resx">
       <DependentUpon>FormGstValue.cs</DependentUpon>
     </EmbeddedResource>

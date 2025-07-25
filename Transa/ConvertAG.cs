@@ -10,7 +10,7 @@ namespace Transa
     {
         /// <summary>
         /// Converte una stringa in double.
-        /// Se la stringa è vuota o cisono problemi rende 0
+        /// Se la stringa è vuota o ci sono problemi rende 0
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
