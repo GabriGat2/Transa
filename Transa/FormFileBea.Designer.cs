@@ -36,6 +36,7 @@
             this.splitContainer1B_2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B_2A = new System.Windows.Forms.SplitContainer();
             this.groupBoxLineeFile = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.butAnalizza = new System.Windows.Forms.Button();
             this.textBoxLinea = new System.Windows.Forms.TextBox();
             this.butNext = new System.Windows.Forms.Button();
@@ -57,9 +58,14 @@
             this.textValoreOperazione = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textDescrizioneOperazione = new System.Windows.Forms.TextBox();
+            this.splitContainer1B_2B_3B_4 = new System.Windows.Forms.SplitContainer();
+            this.splitContainersplitContainer1B_2B_3B_4A_5 = new System.Windows.Forms.SplitContainer();
+            this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
+            this.treeViewSorgente = new System.Windows.Forms.TreeView();
+            this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
+            this.treeViewDestinazione = new System.Windows.Forms.TreeView();
+            this.textBoxPathSorgente = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label3 = new System.Windows.Forms.Label();
-            this.richTextBoxLinee2 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,7 +84,18 @@
             this.groupBoxOperazioni.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3)).BeginInit();
             this.splitContainer1B_2B_3.Panel1.SuspendLayout();
+            this.splitContainer1B_2B_3.Panel2.SuspendLayout();
             this.splitContainer1B_2B_3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3B_4)).BeginInit();
+            this.splitContainer1B_2B_3B_4.Panel1.SuspendLayout();
+            this.splitContainer1B_2B_3B_4.Panel2.SuspendLayout();
+            this.splitContainer1B_2B_3B_4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainersplitContainer1B_2B_3B_4A_5)).BeginInit();
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel1.SuspendLayout();
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel2.SuspendLayout();
+            this.splitContainersplitContainer1B_2B_3B_4A_5.SuspendLayout();
+            this.groupBoxSorgente.SuspendLayout();
+            this.groupBoxDestinazione.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -189,6 +206,15 @@
             this.groupBoxLineeFile.TabStop = false;
             this.groupBoxLineeFile.Text = "Linee file";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Transizione";
+            // 
             // butAnalizza
             // 
             this.butAnalizza.Location = new System.Drawing.Point(1086, 19);
@@ -256,7 +282,6 @@
             // 
             // splitContainer1B_2B_3.Panel1
             // 
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.richTextBoxLinee2);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxStatoConti);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label18);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label2);
@@ -271,8 +296,12 @@
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textValoreOperazione);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label1);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textDescrizioneOperazione);
+            // 
+            // splitContainer1B_2B_3.Panel2
+            // 
+            this.splitContainer1B_2B_3.Panel2.Controls.Add(this.splitContainer1B_2B_3B_4);
             this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 426);
-            this.splitContainer1B_2B_3.SplitterDistance = 395;
+            this.splitContainer1B_2B_3.SplitterDistance = 80;
             this.splitContainer1B_2B_3.TabIndex = 0;
             // 
             // textBoxStatoConti
@@ -402,26 +431,91 @@
             this.textDescrizioneOperazione.Size = new System.Drawing.Size(609, 20);
             this.textDescrizioneOperazione.TabIndex = 22;
             // 
+            // splitContainer1B_2B_3B_4
+            // 
+            this.splitContainer1B_2B_3B_4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1B_2B_3B_4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1B_2B_3B_4.Name = "splitContainer1B_2B_3B_4";
+            this.splitContainer1B_2B_3B_4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1B_2B_3B_4.Panel1
+            // 
+            this.splitContainer1B_2B_3B_4.Panel1.Controls.Add(this.splitContainersplitContainer1B_2B_3B_4A_5);
+            // 
+            // splitContainer1B_2B_3B_4.Panel2
+            // 
+            this.splitContainer1B_2B_3B_4.Panel2.Controls.Add(this.textBoxPathSorgente);
+            this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 342);
+            this.splitContainer1B_2B_3B_4.SplitterDistance = 313;
+            this.splitContainer1B_2B_3B_4.TabIndex = 0;
+            // 
+            // splitContainersplitContainer1B_2B_3B_4A_5
+            // 
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Name = "splitContainersplitContainer1B_2B_3B_4A_5";
+            // 
+            // splitContainersplitContainer1B_2B_3B_4A_5.Panel1
+            // 
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel1.Controls.Add(this.groupBoxSorgente);
+            // 
+            // splitContainersplitContainer1B_2B_3B_4A_5.Panel2
+            // 
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel2.Controls.Add(this.groupBoxDestinazione);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Size = new System.Drawing.Size(1186, 313);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.SplitterDistance = 550;
+            this.splitContainersplitContainer1B_2B_3B_4A_5.TabIndex = 0;
+            // 
+            // groupBoxSorgente
+            // 
+            this.groupBoxSorgente.Controls.Add(this.treeViewSorgente);
+            this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxSorgente.Name = "groupBoxSorgente";
+            this.groupBoxSorgente.Size = new System.Drawing.Size(550, 313);
+            this.groupBoxSorgente.TabIndex = 0;
+            this.groupBoxSorgente.TabStop = false;
+            this.groupBoxSorgente.Text = "Sorgente";
+            // 
+            // treeViewSorgente
+            // 
+            this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
+            this.treeViewSorgente.Name = "treeViewSorgente";
+            this.treeViewSorgente.Size = new System.Drawing.Size(544, 294);
+            this.treeViewSorgente.TabIndex = 0;
+            this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
+            // 
+            // groupBoxDestinazione
+            // 
+            this.groupBoxDestinazione.Controls.Add(this.treeViewDestinazione);
+            this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxDestinazione.Name = "groupBoxDestinazione";
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(632, 313);
+            this.groupBoxDestinazione.TabIndex = 0;
+            this.groupBoxDestinazione.TabStop = false;
+            this.groupBoxDestinazione.Text = "Destinazione";
+            // 
+            // treeViewDestinazione
+            // 
+            this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
+            this.treeViewDestinazione.Name = "treeViewDestinazione";
+            this.treeViewDestinazione.Size = new System.Drawing.Size(626, 294);
+            this.treeViewDestinazione.TabIndex = 0;
+            // 
+            // textBoxPathSorgente
+            // 
+            this.textBoxPathSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxPathSorgente.Location = new System.Drawing.Point(0, 0);
+            this.textBoxPathSorgente.Name = "textBoxPathSorgente";
+            this.textBoxPathSorgente.Size = new System.Drawing.Size(1186, 20);
+            this.textBoxPathSorgente.TabIndex = 0;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Transizione";
-            // 
-            // richTextBoxLinee2
-            // 
-            this.richTextBoxLinee2.Location = new System.Drawing.Point(12, 69);
-            this.richTextBoxLinee2.Name = "richTextBoxLinee2";
-            this.richTextBoxLinee2.Size = new System.Drawing.Size(1146, 307);
-            this.richTextBoxLinee2.TabIndex = 35;
-            this.richTextBoxLinee2.Text = "";
             // 
             // FormFileBea
             // 
@@ -431,6 +525,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormFileBea";
             this.Text = "FormFileBea";
+            this.Load += new System.EventHandler(this.FormFileBea_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -451,8 +546,20 @@
             this.groupBoxOperazioni.ResumeLayout(false);
             this.splitContainer1B_2B_3.Panel1.ResumeLayout(false);
             this.splitContainer1B_2B_3.Panel1.PerformLayout();
+            this.splitContainer1B_2B_3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3)).EndInit();
             this.splitContainer1B_2B_3.ResumeLayout(false);
+            this.splitContainer1B_2B_3B_4.Panel1.ResumeLayout(false);
+            this.splitContainer1B_2B_3B_4.Panel2.ResumeLayout(false);
+            this.splitContainer1B_2B_3B_4.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3B_4)).EndInit();
+            this.splitContainer1B_2B_3B_4.ResumeLayout(false);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel1.ResumeLayout(false);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainersplitContainer1B_2B_3B_4A_5)).EndInit();
+            this.splitContainersplitContainer1B_2B_3B_4A_5.ResumeLayout(false);
+            this.groupBoxSorgente.ResumeLayout(false);
+            this.groupBoxDestinazione.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -490,6 +597,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textDescrizioneOperazione;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox richTextBoxLinee2;
+        private System.Windows.Forms.SplitContainer splitContainer1B_2B_3B_4;
+        private System.Windows.Forms.GroupBox groupBoxSorgente;
+        private System.Windows.Forms.SplitContainer splitContainersplitContainer1B_2B_3B_4A_5;
+        private System.Windows.Forms.GroupBox groupBoxDestinazione;
+        private System.Windows.Forms.TreeView treeViewSorgente;
+        private System.Windows.Forms.TreeView treeViewDestinazione;
+        private System.Windows.Forms.TextBox textBoxPathSorgente;
     }
 }

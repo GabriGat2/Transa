@@ -6,9 +6,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Transa
 {
@@ -27,6 +29,8 @@ namespace Transa
         /// Transizione attiva
         /// </summary>
         protected CTransizione transizione = new CTransizione();
+
+
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -39,7 +43,10 @@ namespace Transa
             // Azzera la lista delle transizioni
             transizioni.Clear();
 
+
+
             InitializeComponent();
+
         }
         /// <summary>
         /// Seleziona il file delle trasizioni
@@ -111,12 +118,12 @@ namespace Transa
         /// <param name="e"></param>
         private void butAnalizza_Click(object sender, EventArgs e)
         {
-            richTextBoxLinee2.Clear();
+            richTextBoxLinee.Clear();
 
             // Controlla se la transizione può essere scomposta
             if (!transizione.Scomponibile())
             {
-                richTextBoxLinee2.AppendText("La transizione non può essere scomposta !!!");
+                richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!");
                 return;
             }
 
@@ -149,5 +156,219 @@ namespace Transa
             else
                 textBoxLinea.Text = "!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE";
         }
+        /// <summary>
+        /// Aggiorna l'albero sorgente
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore AggiornaAlberoSorgente()
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0000_OK;
+            List<string> contiSorgente;
+            string[] campiPath;
+
+            // inizia aggiornamento
+            treeViewSorgente.BeginUpdate();
+
+            // Azzera Tree view
+            treeViewSorgente.Nodes.Clear();
+
+
+            // ================================================================
+            // contiSpeseBeatrice
+
+            // Assegna gruppo conto
+            contiSorgente = lData.contiSpeseBeatrice;
+
+            // verifica che esista almeno un nodo
+            if (contiSorgente.Count == 0)
+                return GstErrori.EErrore.E0001_NOK;
+
+            // Aggiunge il primo nodo
+            campiPath = contiSorgente[0].Split(':');
+            TreeNode nodoG1 = new TreeNode("Spese Beatrice");
+            treeViewSorgente.Nodes.Add(nodoG1);
+
+            for (int i = 0; i < contiSorgente.Count; i++)
+            {
+                AggiungeNodo(ref nodoG1, contiSorgente[i], 2);
+            }
+
+            // ================================================================
+            // contiSpeseIstruzionwBeatrice
+
+            // Assegna gruppo conto
+            contiSorgente = lData.contiSpeseIstruzioneBeatrice;
+
+            // verifica che esista almeno un nodo
+            if (contiSorgente.Count == 0)
+                return GstErrori.EErrore.E0001_NOK;
+
+            // Aggiunge il primo nodo
+            campiPath = contiSorgente[0].Split(':');
+            TreeNode nodoG2 = new TreeNode("Spese Istruzione Beatrice");
+            treeViewSorgente.Nodes.Add(nodoG2);
+            TreeNode nodoG3 = new TreeNode("Beatrice");
+            nodoG2.Nodes.Add(nodoG3);
+
+            for (int i = 0; i < contiSorgente.Count; i++)
+            {
+                AggiungeNodo(ref nodoG3, contiSorgente[i], 3);
+            }
+
+
+            // ========================================================================
+            // Conti Uscite
+
+            // Assegna gruppo conto
+            contiSorgente = lData.contiUscite;
+
+            // verifica che esista almeno un nodo
+            if (contiSorgente.Count == 0)
+                return GstErrori.EErrore.E0001_NOK;
+
+            // Aggiunge il primo nodo
+            campiPath = contiSorgente[0].Split(':');
+            TreeNode nodo = new TreeNode(campiPath[0]);
+            treeViewSorgente.Nodes.Add(nodo);
+
+            for (int i = 0; i < contiSorgente.Count; i++)
+            {
+                AggiungeNodo(ref nodo, contiSorgente[i], 0);
+            }
+
+            // ================================================================
+
+
+            // termina aggiornamnto
+            treeViewSorgente.EndUpdate();
+
+            return esito;
+        }
+        /// <summary>
+        /// Aggiorna l'albero sorgente
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore AggiornaAlberoDestinazione()
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0000_OK;
+
+            // inizia aggiornamnto
+            treeViewDestinazione.BeginUpdate();
+
+            // Azzeera Tree view
+            treeViewDestinazione.Nodes.Clear();
+
+            // Assegna gruppo conto
+            List<string> contiDestinazione = lData.contiBancoPostaBG;
+
+            // verifica che esista almeno un nodo
+            if (contiDestinazione.Count == 0)
+                return GstErrori.EErrore.E0001_NOK;
+
+            // Aggiunge il primo nodo
+            string[] campiPath = contiDestinazione[0].Split(':');
+            TreeNode nodo = new TreeNode(campiPath[0]);
+            treeViewDestinazione.Nodes.Add(nodo);
+
+            for (int i = 0; i < contiDestinazione.Count; i++)
+            {
+                AggiungeNodo(ref nodo, contiDestinazione[i], 0);
+            }
+
+            // termina aggiornamnto
+            treeViewDestinazione.EndUpdate();
+
+            return esito;
+        }
+        /// <summary>
+        /// Istruzioni eseguiti al caricamaneto del form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormFileBea_Load(object sender, EventArgs e)
+        {
+            // Aggiorna l'arbero dei conti sorgenti
+            AggiornaAlberoSorgente();
+            // Aggiorna l'arbero dei conti destinazione
+            AggiornaAlberoDestinazione();
+        }
+        /// <summary>
+        /// Seleziona operazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewSorgente_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EstraeTagSorgente();
+        }
+        /// <summary>
+        /// Estrae il tag dal treeViewSorgente che contiente il path del conmto
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EstraeTagSorgente()
+        {
+            // recuprea il nodo selezionato
+            TreeNode nodo = treeViewSorgente.SelectedNode;
+            if (nodo == null)
+                return GstErrori.EErrore.E0001_NOK;
+
+            // recupera l'ID del nodo
+            if (nodo.Tag == null)
+                return GstErrori.EErrore.E0001_NOK;
+            string PathConto = (string)nodo.Tag;
+
+            // stampa i dati completi dell'identita del lugo selezionato
+            textBoxPathSorgente.Text = PathConto;
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
+        private GstErrori.EErrore AggiungeNodo(ref TreeNode nodo, string path, int indice)
+        {
+            // compone il path
+            string[] campiPath = path.Split(':');
+
+            // controlla se ha analizzato tutta la catena
+            if (indice + 1 >= campiPath.Length)
+                return GstErrori.EErrore.E0000_OK;
+
+            // analizza il nome del nodo corrente
+            if (nodo.Text != campiPath[indice])
+                return GstErrori.EErrore.E0001_NOK;
+
+            // nodo figlio
+            TreeNode nodoFiglio;
+
+            // Nome del nome figlio
+            string nomeFiglio = campiPath[indice + 1];
+
+            // estra i numero dei nodi figlio
+            int numeroNodi = nodo.GetNodeCount(false);
+
+            // analizza i nodi figlio
+            for (int i = 0; i < numeroNodi; i++)
+            {
+                // Estra un nodo figlio
+                nodoFiglio = nodo.Nodes[i];
+
+                // Verifica il nome del nodo
+                if (nodoFiglio.Text == campiPath[indice + 1])
+                {
+                    // aggiunge nodo
+                    return AggiungeNodo(ref nodoFiglio, path, indice + 1);
+                }
+            }
+
+            // se arriva qui significa: il nodo figlio non esiste
+
+            // Crea Il nodo figlio
+            nodoFiglio = new TreeNode(campiPath[indice + 1]);
+            nodoFiglio.Tag = path;
+            nodo.Nodes.Add(nodoFiglio);
+            return AggiungeNodo(ref nodoFiglio, path, indice + 1);
+        }
+
+
     }
 }
+ 

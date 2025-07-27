@@ -83,6 +83,7 @@ namespace Transa
                 lData.contiEntrate.Clear();
                 lData.contiUscite.Clear();
                 lData.contiPassivita.Clear();
+                lData.contiBancoPostaBG.Clear();
 
                 bool run = true;
                 string line;
@@ -230,7 +231,7 @@ namespace Transa
             comboBoxConti.Items.Clear();
             richTextBoxStrConti.Clear();
 
-            // Aggiorna la lisra dei conti visualizzata
+            // Aggiorna la lista dei conti visualizzata
             switch (comboBoxTipoConti.SelectedItem)
             {
                 case "All":
@@ -330,6 +331,11 @@ namespace Transa
                         // seleziona il conto base
                         if (subConti.Length <= 3)
                             lData.contiAttivitaBase.Add(conto);
+                        // seleziona conto banco posta Beatrice
+                        if (subConti.Length >= 3)
+                            if (subConti[2] == "BancoPosta-BG")
+                                lData.contiBancoPostaBG.Add(conto);
+
                         break;
 
                     case "Capitali":
@@ -355,6 +361,18 @@ namespace Transa
 
                     case "Uscite":
                         lData.contiUscite.Add(conto);
+
+                        // seleziona conto Spese Beatrice
+                        if (subConti.Length >= 3)
+                            if (subConti[2] == "Spese Beatrice")
+                                lData.contiSpeseBeatrice.Add(conto);
+
+                        // seleziona conto Spese Istruzione Beatrice
+                        if (subConti.Length >= 4)
+                            if (subConti[2] == "Istruzione")
+                                if (subConti[3] == "Beatrice")
+                                    lData.contiSpeseIstruzioneBeatrice.Add(conto);
+
                         break;
 
                     case "Passivita":

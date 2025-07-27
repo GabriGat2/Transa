@@ -107,6 +107,7 @@
     <Compile Include="FormGstStrConti.Designer.cs">
       <DependentUpon>FormGstStrConti.cs</DependentUpon>
     </Compile>
+    <Compile Include="GstErrori.cs" />
     <Compile Include="LData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

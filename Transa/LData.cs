@@ -173,6 +173,17 @@ namespace Transa
         /// Lista dei conti Passivita
         /// </summary>
         public List<string> contiPassivita = new List<string>();
+        /// <summary>
+        /// Lista dei conti BancoPosta-BG
+        /// </summary>
+        public List<string> contiBancoPostaBG = new List<string>();
+        /// <summary>
+        /// Lista dei conti SpeseBeatrice
+        /// </summary>
+        public List<string> contiSpeseBeatrice = new List<string>();
+        /// Lista dei conti SpeseIstruzioneBeatrice
+        /// </summary>
+        public List<string> contiSpeseIstruzioneBeatrice = new List<string>();
         // =====================================================================================
         // ====== Selezione tipo Conti
         // =====================================================================================
