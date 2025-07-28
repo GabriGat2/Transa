@@ -293,7 +293,7 @@ namespace Transa
             AggiornaAlberoDestinazione();
         }
         /// <summary>
-        /// Seleziona operazione
+        /// Seleziona conto sorgente
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -317,12 +317,18 @@ namespace Transa
                 return GstErrori.EErrore.E0001_NOK;
             string PathConto = (string)nodo.Tag;
 
-            // stampa i dati completi dell'identita del lugo selezionato
-            textBoxPathSorgente.Text = PathConto;
+            // stampa i dati completi dell'identita del conto selezionato
+            textBoxContoSorgente.Text = PathConto;
 
             return GstErrori.EErrore.E0000_OK;
         }
-
+        /// <summary>
+        /// Aggiunge un nodo
+        /// </summary>
+        /// <param name="nodo"></param>
+        /// <param name="path"></param>
+        /// <param name="indice"></param>
+        /// <returns></returns>
         private GstErrori.EErrore AggiungeNodo(ref TreeNode nodo, string path, int indice)
         {
             // compone il path
@@ -367,7 +373,36 @@ namespace Transa
             nodo.Nodes.Add(nodoFiglio);
             return AggiungeNodo(ref nodoFiglio, path, indice + 1);
         }
+        /// <summary>
+        /// Seleziona conto destinazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewDestinazione_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EstraeTagDestinazione();
+        }
+        /// <summary>
+        /// Estrae il tag dal treeViewDestinazione che contiente il path del conto
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EstraeTagDestinazione()
+        {
+            // recuprea il nodo selezionato
+            TreeNode nodo = treeViewDestinazione.SelectedNode;
+            if (nodo == null)
+                return GstErrori.EErrore.E0001_NOK;
 
+            // recupera l'ID del nodo
+            if (nodo.Tag == null)
+                return GstErrori.EErrore.E0001_NOK;
+            string PathConto = (string)nodo.Tag;
+
+            // stampa i dati completi dell'identita del conto selezionato
+            textBoxContoDestinazione.Text = PathConto;
+
+            return GstErrori.EErrore.E0000_OK;
+        }
 
     }
 }
