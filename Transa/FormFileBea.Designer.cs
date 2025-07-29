@@ -374,6 +374,7 @@
             this.butAggiorna.TabIndex = 27;
             this.butAggiorna.Text = "Aggiorna";
             this.butAggiorna.UseVisualStyleBackColor = true;
+            this.butAggiorna.Click += new System.EventHandler(this.butAggiorna_Click);
             // 
             // label7
             // 
@@ -492,7 +493,7 @@
             this.ClientSize = new System.Drawing.Size(1192, 626);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormFileBea";
-            this.Text = "FormFileBea";
+            this.Text = "GTransaBea";
             this.Load += new System.EventHandler(this.FormFileBea_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

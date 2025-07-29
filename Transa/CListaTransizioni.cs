@@ -15,7 +15,8 @@ namespace Transa
         /// <summary>
         /// Indice della transizione attiva
         /// </summary>
-        protected int Indice;
+        private int indice;
+        public int Indice { get => indice; }
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -29,7 +30,7 @@ namespace Transa
         public void Clear()
         {
             transizioni.Clear();
-            Indice = 0;
+            indice = 0;
         }
         /// <summary>
         ///  Rende la transizione selezionata
@@ -46,11 +47,11 @@ namespace Transa
         public string Next()
         {
             // incrementa indice
-            Indice++;
+            indice++;
             // verifica il valore di indice
             if (Indice >= transizioni.Count)
             {
-                Indice = transizioni.Count - 1;
+                indice = transizioni.Count - 1;
                 return null;
             }
             else

@@ -17,6 +17,30 @@ namespace Transa
     public partial class FormFileBea: Form
     {
         /// <summary>
+        /// Operazione in corso
+        /// </summary>
+        private bool lOperazioneValida = false;
+        /// <summary>
+        /// Operazione in corso
+        /// </summary>
+        public bool OperazioneValida { get => lOperazioneValida; }
+
+        /// <summary>
+        /// Operazione inizializzata
+        /// </summary>
+        private bool lOperazioneInizializata = false;
+        /// <summary>
+        /// Operazione inizializzata
+        /// </summary>
+        public bool OperazioneInizializata { get => lOperazioneInizializata; }
+
+        /// <summary>
+        /// Griglia delle transizioni per GNUCaSH
+        /// </summary>
+        private DataGridView transactionDataGridView;        
+        public DataGridView TransactionDataGridView { get => transactionDataGridView; set => transactionDataGridView = value; }
+
+        /// <summary>
         /// Oggetto che contiene tutti i dati e le strutture comuni
         /// </summary>
         public LData lData;
@@ -43,10 +67,29 @@ namespace Transa
             // Azzera la lista delle transizioni
             transizioni.Clear();
 
-
-
             InitializeComponent();
+        }
+        /// <summary>
+        /// Inizializzazione caselle base
+        /// </summary>\
+        private void Inizializzazione()
+        {
+            // Resetta operazione valida
+            lOperazioneValida = false;
 
+            // Azzera la lista delle transizioni
+            transizioni.Clear();
+        }
+        /// <summary>
+        /// Azzera tutti idati della classe
+        /// </summary>
+        public void AzzeraTutto()
+        {
+            Inizializzazione();
+            //SvuotaTabella(ref dataGridViewSorgenteOperazione);
+            //SvuotaTabella(ref dataGridViewDestinazioneOperazione);
+            //GValori.AzzeraTutto();
+            lOperazioneInizializata = false; // true;
         }
         /// <summary>
         /// Seleziona il file delle trasizioni
@@ -149,6 +192,9 @@ namespace Transa
         {
             // Assegna la transione
             transizione.Transizione = transizioni.Next();
+
+            // Assegna al numnero dell'operazioe l'Indice della trasizione
+            textNumOperazione.Text = transizioni.Indice.ToString();
 
             // verifica se la transizione esiste
             if (transizione.Esiste())
@@ -403,7 +449,183 @@ namespace Transa
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// Genera tutte le transizioni che formano un operazione 
+        /// </summary>
+        /// <param name="start"> = Inizia una nuova estrazione </param>
+        /// <returns></returns>
+        public uint GetTransiction(ref DataGridView transactionDataGrid)
+        {
+            GeneraTransizioniBancoPosta25(ref transactionDataGrid);
 
+
+            //// Estrae il tipo di operazione 
+            //string tipoDiOperazione = comboBoxTipoOperazione.Text;
+
+            //// Esegue l'operazione richiesta
+            //switch (tipoDiOperazione)
+            //{
+            //    case "Transition":
+            //    case "TitoloAcquisto":
+            //    case "TitoloRimborso":
+            //    case "Interessi":
+            //        GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true);
+            //        GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false);
+            //        break;
+
+            //    case "Trasferimento":
+            //        GeneraTransizioni(ref transactionDataGrid, ref dataGridViewSorgenteOperazione, true, true);
+            //        GeneraTransizioni(ref transactionDataGrid, ref dataGridViewDestinazioneOperazione, false, true); ;
+            //        break;
+
+            //    case "Open":
+            //        GeneraTransizioniOpen(ref transactionDataGrid);
+            //        break;
+            //    case "Close":
+            //        GeneraTransizioniClose(ref transactionDataGrid);
+            //        break;
+            //    case "ZipSplit":
+            //    case "Split":
+            //    case "Zip":
+            //        GeneraTransizioniSplit(ref transactionDataGrid);
+            //        break;
+
+            //    default:
+            //        break;
+            //}
+
+            return 0;
+        }
+        /// <summary>
+        /// Rende la data impostato nel fomato anno, mese, giorno
+        /// </summary>
+        /// <returns></returns>
+        private string DataAMG()
+        {
+            string[] campiData = dateTimeOperazione.Text.Split('/');
+
+            string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
+
+            return dataAMG;
+        }
+        /// <summary>
+        /// Nega il valore di una stringa
+        /// </summary>
+        /// <param name="stringaIn"></param>
+        /// <returns></returns>
+        private string NegaValore(string stringaIn)
+        {
+            // converte in double
+            double valore = ConvertAG.ToDouble0(stringaIn);
+            // nega il valore
+            valore *= -1;
+            return valore.ToString("#0.00");
+        }
+        /// <summary>
+        /// Open genera un transizione per ogni conto:
+        /// da conto sorgente
+        /// a gruppo conti destinazione
+        /// </summary>
+        /// <param name="transactionDataGrid"></param>
+        /// <returns></returns>
+        public void GeneraTransizioniBancoPosta25(ref DataGridView transactionDataGrid)
+        {
+            //// verifica che le tabelle sorgente e destinazione contengano lo stesso numero di transizioni
+            //int nTransizioniSorgente = dataGridViewSorgenteOperazione.Rows.Count - 1;
+            //int nTransizioniDestinazione = dataGridViewDestinazioneOperazione.Rows.Count - 1;
+            //if (nTransizioniSorgente != nTransizioniDestinazione)
+            //{
+            //    string messaggio2 = "Lunghezza tabSorgente     = " + nTransizioniSorgente.ToString() + "\n" +
+            //                        "Lunghezza tabDestinazione = " + nTransizioniDestinazione.ToString();
+
+            //    LData.ETransaErrore esito = LData.ETransaErrore.E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse;
+
+            //    lData.StampaMessaggioErrore(esito, messaggio2);
+            //    return;
+            //}
+
+            // compone nome operazione parziale
+            string nomeOperazione = textDescrizioneOperazione.Text;
+
+            // Recupera il numero dell'operazione
+            int numOperazione = Convert.ToInt32(textNumOperazione.Text);
+
+            for (int i = 0; i < 1; i++)
+            {
+                // crea la stringa campi
+                string[] campiS = new string[lData.NameColumnsTransition.Length];
+                string[] campiD = new string[lData.NameColumnsTransition.Length];
+
+                campiS[0] = DataAMG();                                          //  0 "Data",
+                campiD[0] = campiS[0];
+
+                campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
+                campiD[1] = campiS[1];
+
+                campiS[2] = (numOperazione + i).ToString(); //lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
+                campiD[2] = campiS[2];
+
+                campiS[3] = nomeOperazione + "===" + textValoreOperazione;  //  3 "Descrizione",
+                campiD[3] = campiS[3];
+
+                campiS[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
+                campiD[4] = campiS[4];
+
+                campiS[5] = lData.FilteredCellValuesOfTheTrasizioneLine[5];      //  5 "Commodity/Valuta",
+                campiD[5] = campiS[5];
+
+                campiS[6] = lData.FilteredCellValuesOfTheTrasizioneLine[6];      //  6 "Motivo annullamento",
+                campiD[6] = campiS[6];
+
+                campiS[7] = lData.FilteredCellValuesOfTheTrasizioneLine[7];      //  7 "Operazione",
+                campiD[7] = campiS[7];
+
+                campiS[8] = "Spesa";                                             //  8 "Promemoria",
+                campiD[8] = "Addebito";                                          //  8 "Promemoria",
+
+                campiS[9] = textBoxContoSorgente.Text;                           //  9 "Nome completo del conto",
+                campiD[9] = textBoxContoDestinazione.Text;                       //  9 "Nome completo del conto",
+
+
+                string[] porzioniContoS = textBoxContoSorgente.Text.Split(':');
+                string[] porzioniContoD = textBoxContoDestinazione.Text.Split(':');
+                campiS[10] = porzioniContoS[porzioniContoS.Length - 1]; // 10 "Nome del conto",
+                campiD[10] = porzioniContoD[porzioniContoD.Length - 1]; // 10 "Nome del conto",
+
+                string valore = textValoreOperazione.Text;
+                string valoreSimb = valore + " €";
+                campiS[11] = NegaValore(valoreSimb);                             // 11 "Importo con Simb",
+                campiD[11] = valoreSimb;                                         // 11 "Importo con Simb",
+
+                campiS[12] = NegaValore(valore);                                 // 12 "Importo Num.",
+                campiD[12] = valore;                                             // 12 "Importo Num.",
+
+                campiS[13] = NegaValore(valoreSimb);                             // 13 "Valore con Simb",
+                campiD[13] = valoreSimb;                                         // 13 "Valore con Simb",
+
+                campiS[14] = NegaValore(valore);                                 // 14 "Valore Num.",
+                campiD[14] = valore;                                             // 14 "Valore Num.",
+
+                campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
+                campiD[15] = campiS[15];
+
+                campiS[16] = lData.FilteredCellValuesOfTheTrasizioneLine[16];    // 16 "Data di riconciliazione",
+                campiD[16] = campiS[16];
+
+                campiS[17] = lData.FilteredCellValuesOfTheTrasizioneLine[17];    // 17 "Tasso/Prezzo"
+                campiD[17] = campiS[17];
+
+
+                // Assegna le trasizioni generate    
+                transactionDataGrid.Rows.Add(campiS);
+                transactionDataGrid.Rows.Add(campiD);
+            }
+        }
+
+        private void butAggiorna_Click(object sender, EventArgs e)
+        {
+            GetTransiction(ref transactionDataGridView);
+        }
     }
 }
  
