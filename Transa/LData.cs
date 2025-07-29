@@ -336,6 +336,10 @@ namespace Transa
 
             // Operazioni
             E1200_UnaOperazioneInCorso,
+            E1201_TransizioneNuova,
+            E1202_TransizioneSelezionata,
+            E1203_TransizioneAnalizzata,
+
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte

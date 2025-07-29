@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Transa
 {
@@ -101,6 +102,7 @@ namespace Transa
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBoxNomeFile.Text = openFileDialog1.FileName;
+                LeggeFileTransizioni(textBoxNomeFile.Text);
             }
         }
         /// <summary>
@@ -146,42 +148,33 @@ namespace Transa
             }
         }
         /// <summary>
-        /// Legge il file delle transizioni
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void butApri_Click(object sender, EventArgs e)
-        {
-            LeggeFileTransizioni(textBoxNomeFile.Text);
-        }
-        /// <summary>
         /// Analizza la linea selezionata
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void butAnalizza_Click(object sender, EventArgs e)
         {
-            richTextBoxLinee.Clear();
-
-            // Controlla se la transizione può essere scomposta
-            if (!transizione.Scomponibile())
-            {
-                richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!");
-                return;
-            }
+            bool reso = GestioneNuovaTrasizione(false, true);   
 
 
-            // assegna causale operazione
-            textDescrizioneOperazione.Text = "TR: " + transizione.Causale;
+            //richTextBoxLinee.Clear();
 
-            // assegna data
-            dateTimeOperazione.Value = transizione.Data;
+            //// Controlla se la transizione può essere scomposta
+            //if (!transizione.Scomponibile())
+            //{
+            //    richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!");
+            //    return;
+            //}
 
-            // Assegna il valore dell'operazione
-            textValoreOperazione.Text = transizione.Valore;
 
+            //// assegna causale operazione
+            //textDescrizioneOperazione.Text = "TR: " + transizione.Causale;
 
+            //// assegna data
+            //dateTimeOperazione.Value = transizione.Data;
 
+            //// Assegna il valore dell'operazione
+            //textValoreOperazione.Text = transizione.Valore;
         }
         /// <summary>
         ///  Seleziona la prossima transizione
@@ -190,18 +183,121 @@ namespace Transa
         /// <param name="e"></param>
         private void butNext_Click(object sender, EventArgs e)
         {
-            // Assegna la transione
-            transizione.Transizione = transizioni.Next();
+            bool reso = GestioneNuovaTrasizione(true, false);
 
-            // Assegna al numnero dell'operazioe l'Indice della trasizione
-            textNumOperazione.Text = transizioni.Indice.ToString();
 
-            // verifica se la transizione esiste
-            if (transizione.Esiste())
-                textBoxLinea.Text = transizione.Transizione;
-            else
-                textBoxLinea.Text = "!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE";
+            //// Assegna la transione
+            //transizione.Transizione = transizioni.Next();
+
+            //// Assegna al numnero dell'operazioe l'Indice della trasizione
+            //textNumOperazione.Text = transizioni.Indice.ToString();
+
+            //// verifica se la transizione esiste
+            //if (transizione.Esiste())
+            //    textBoxLinea.Text = transizione.Transizione;
+            //else
+            //    textBoxLinea.Text = "!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE";
         }
+        private void AggiornaStatoTrasione()
+        {
+            labelStatoTranzizione.Text = transizione.GetStato();
+        }
+        /// <summary>
+        /// Gestione nuova Transizione
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="analizza"></param>
+        /// <returns></returns>
+        private bool GestioneNuovaTrasizione(bool next, bool analizza)
+        {
+            bool reso = GestioneNuovaTrasizione2(next, analizza);
+            AggiornaStatoTrasione();
+            return reso;
+        }
+        /// <summary>
+        /// Gestione nuova Transizione
+        /// </summary>
+        /// <param name="next"></param>
+        /// <param name="analizza"></param>
+        private bool GestioneNuovaTrasizione2(bool next, bool analizza)
+        {
+            // controlla se deve estrarre una nuova transizione
+            if (next)
+            {
+                // Analizza lo stato della transizione
+                LData.ETransaErrore esito = LData.ETransaErrore.E0000_OK;
+                if (transizione.Stato == CTransizione.EStatoTransizione.Selezionata)
+                    esito = LData.ETransaErrore.E1202_TransizioneSelezionata;
+                else if (transizione.Stato == CTransizione.EStatoTransizione.Analizzata)
+                    esito = LData.ETransaErrore.E1203_TransizioneAnalizzata;
+
+                if (esito != LData.ETransaErrore.E0000_OK)
+                {
+                    string messaggio2 = "Vuoi cancellare la trasizione in corso?";
+                    if (!lData.StampaMessaggioErrore(esito, messaggio2))
+                        return false;
+                }
+
+                // Assegna la transione
+                transizione.Transizione = transizioni.Next();
+
+                // Assegna al numero dell'operazioe l'Indice della trasizione
+                textNumOperazione.Text = transizioni.Indice.ToString();
+
+                // verifica se la transizione esiste
+                if (transizione.Esiste())
+                    textBoxLinea.Text = transizione.Transizione;
+                else
+                {
+                    textBoxLinea.Text = "!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE";
+                    return false;
+                }
+
+                // cambia lo stato della transizione
+                transizione.Stato = CTransizione.EStatoTransizione.Selezionata;
+            }
+
+            // controlla se deve analizzare un nuova transizione
+            if (analizza)
+            {
+                if (transizione.Stato != CTransizione.EStatoTransizione.Selezionata)
+                {
+                    string messaggio2 = "Non ci sono transizioni selezionate!";
+                    LData.ETransaErrore esito = LData.ETransaErrore.E1202_TransizioneSelezionata;
+                    lData.StampaMessaggioErrore(esito, messaggio2);
+                    return false;
+                }
+
+                // azzera i commenti
+                richTextBoxLinee.Clear();
+
+                // Controlla se la transizione può essere scomposta
+                if (!transizione.Scomponibile())
+                {
+                    richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!");
+                    return false;
+                }
+
+
+                // assegna causale operazione
+                textDescrizioneOperazione.Text = "TR: " + transizione.Causale;
+
+                // assegna data
+                dateTimeOperazione.Value = transizione.Data;
+
+                // Assegna il valore dell'operazione
+                textValoreOperazione.Text = transizione.Valore;
+
+
+                // cambia lo stato della transizione
+                transizione.Stato = CTransizione.EStatoTransizione.Analizzata;
+
+                return true;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Aggiorna l'albero sorgente
         /// </summary>
@@ -624,8 +720,53 @@ namespace Transa
 
         private void butAggiorna_Click(object sender, EventArgs e)
         {
-            GetTransiction(ref transactionDataGridView);
+
+            if (radioButtonAssegna.Checked)
+            {
+                int cntGiri = Convert.ToInt32( textBoxGiri.Text);  
+                bool gira = true;
+                while (gira && cntGiri > 0)
+                {
+                    cntGiri--;
+
+                    gira = GestioneAssegnaTransizione();
+                    if (gira)
+                    {
+                        gira = GestioneNuovaTrasizione(true, true);
+                    }
+                }
+            }
         }
+
+        /// <summary>
+        /// Gestisce l'assegnazione dei una transizione
+        /// </summary>
+        /// <returns></returns>
+        private bool GestioneAssegnaTransizione()
+        {
+            if (transizione.Stato != CTransizione.EStatoTransizione.Analizzata)
+            {
+                string messaggio2 = "La transizione non è stata analizzata!";
+                LData.ETransaErrore esito = LData.ETransaErrore.E1203_TransizioneAnalizzata;
+                lData.StampaMessaggioErrore(esito, messaggio2);
+                return false;
+            }
+
+
+            // esegue l'assegnazione della transizione
+            GetTransiction(ref transactionDataGridView);
+
+
+            // cambia lo stato della transizione
+            transizione.Stato = CTransizione.EStatoTransizione.Assegnata;
+
+            // Aggiorna lo stato della transizione
+            AggiornaStatoTrasione();
+
+            return true;
+
+        }
+
     }
 }
  

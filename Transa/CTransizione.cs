@@ -22,9 +22,22 @@ namespace Transa
         /// Numero delle colonne della transizione
         /// </summary>
         private const int NumColonneTransizione = 7;
-
-
-
+        /// <summary>
+        /// Stati della transizione
+        /// </summary>
+        public enum EStatoTransizione
+        {
+            Vuota,                  // 0
+            Nuova,                  // 1
+            Selezionata,            // 2               
+            Analizzata,             // 3   
+            Assegnata,              // 4
+        };
+        /// <summary>
+        /// Stato della transizione
+        /// </summary>
+        private EStatoTransizione stato;
+        public EStatoTransizione Stato { get => stato; set => stato = value; }
         /// <summary>
         /// Colonne della transizione
         /// </summary>
@@ -99,6 +112,7 @@ namespace Transa
         public CTransizione ()
         {
             CampiTransizione = null;
+            stato = EStatoTransizione.Vuota;
         }
         /// <summary>
         /// assegna la transizione
@@ -112,6 +126,11 @@ namespace Transa
             // scompone i campi della transizione
             ScomponeTransizione();
 
+            // cambia lo stato della transizione
+            if (Scomponibile())
+                stato = EStatoTransizione.Nuova;
+            else
+                stato = EStatoTransizione.Vuota;
         }
         /// <summary>
         /// Scompone la transione
@@ -169,7 +188,14 @@ namespace Transa
             else
                 return false;
         }
+        /// <summary>
+        /// Rende lo stato in formato stringa
+        /// </summary>
+        /// <returns></returns>
+        public string GetStato()
+        {
+            return stato.ToString();
 
-
+        }
     }
 }

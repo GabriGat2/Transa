@@ -30,7 +30,8 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxFileTransazioni = new System.Windows.Forms.GroupBox();
-            this.butApri = new System.Windows.Forms.Button();
+            this.labelStatoTranzizione = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.textBoxNomeFile = new System.Windows.Forms.TextBox();
             this.butNomeFile = new System.Windows.Forms.Button();
             this.splitContainer1B_2 = new System.Windows.Forms.SplitContainer();
@@ -44,6 +45,9 @@
             this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
             this.splitContainer1B_2B_3 = new System.Windows.Forms.SplitContainer();
+            this.textBoxGiri = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.radioButtonAssegna = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxContoDestinazione = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -115,7 +119,8 @@
             // 
             // groupBoxFileTransazioni
             // 
-            this.groupBoxFileTransazioni.Controls.Add(this.butApri);
+            this.groupBoxFileTransazioni.Controls.Add(this.labelStatoTranzizione);
+            this.groupBoxFileTransazioni.Controls.Add(this.label6);
             this.groupBoxFileTransazioni.Controls.Add(this.textBoxNomeFile);
             this.groupBoxFileTransazioni.Controls.Add(this.butNomeFile);
             this.groupBoxFileTransazioni.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -126,15 +131,23 @@
             this.groupBoxFileTransazioni.TabStop = false;
             this.groupBoxFileTransazioni.Text = "File Transazioni";
             // 
-            // butApri
+            // labelStatoTranzizione
             // 
-            this.butApri.Location = new System.Drawing.Point(1005, 20);
-            this.butApri.Name = "butApri";
-            this.butApri.Size = new System.Drawing.Size(75, 23);
-            this.butApri.TabIndex = 2;
-            this.butApri.Text = "Apri";
-            this.butApri.UseVisualStyleBackColor = true;
-            this.butApri.Click += new System.EventHandler(this.butApri_Click);
+            this.labelStatoTranzizione.AutoSize = true;
+            this.labelStatoTranzizione.Location = new System.Drawing.Point(1104, 27);
+            this.labelStatoTranzizione.Name = "labelStatoTranzizione";
+            this.labelStatoTranzizione.Size = new System.Drawing.Size(25, 13);
+            this.labelStatoTranzizione.TabIndex = 3;
+            this.labelStatoTranzizione.Text = "???";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1006, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Stato transizione: ";
             // 
             // textBoxNomeFile
             // 
@@ -149,7 +162,7 @@
             this.butNomeFile.Name = "butNomeFile";
             this.butNomeFile.Size = new System.Drawing.Size(75, 23);
             this.butNomeFile.TabIndex = 0;
-            this.butNomeFile.Text = "Nome file";
+            this.butNomeFile.Text = "Apre File";
             this.butNomeFile.UseVisualStyleBackColor = true;
             this.butNomeFile.Click += new System.EventHandler(this.butNomeFile_Click);
             // 
@@ -279,6 +292,9 @@
             // 
             // splitContainer1B_2B_3.Panel1
             // 
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxGiri);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label8);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.radioButtonAssegna);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label5);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxContoDestinazione);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label4);
@@ -299,6 +315,35 @@
             this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 426);
             this.splitContainer1B_2B_3.SplitterDistance = 90;
             this.splitContainer1B_2B_3.TabIndex = 0;
+            // 
+            // textBoxGiri
+            // 
+            this.textBoxGiri.Location = new System.Drawing.Point(1068, 63);
+            this.textBoxGiri.Name = "textBoxGiri";
+            this.textBoxGiri.Size = new System.Drawing.Size(112, 20);
+            this.textBoxGiri.TabIndex = 39;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1036, 66);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(22, 13);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "Giri";
+            // 
+            // radioButtonAssegna
+            // 
+            this.radioButtonAssegna.AutoSize = true;
+            this.radioButtonAssegna.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioButtonAssegna.Location = new System.Drawing.Point(1036, 35);
+            this.radioButtonAssegna.Name = "radioButtonAssegna";
+            this.radioButtonAssegna.Size = new System.Drawing.Size(90, 17);
+            this.radioButtonAssegna.TabIndex = 37;
+            this.radioButtonAssegna.TabStop = true;
+            this.radioButtonAssegna.Text = "Assegna tutte";
+            this.radioButtonAssegna.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioButtonAssegna.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -343,15 +388,15 @@
             // 
             // textNumOperazione
             // 
-            this.textNumOperazione.Location = new System.Drawing.Point(1065, 7);
+            this.textNumOperazione.Location = new System.Drawing.Point(868, 62);
             this.textNumOperazione.Name = "textNumOperazione";
-            this.textNumOperazione.Size = new System.Drawing.Size(112, 20);
+            this.textNumOperazione.Size = new System.Drawing.Size(150, 20);
             this.textNumOperazione.TabIndex = 30;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1033, 10);
+            this.label15.Location = new System.Drawing.Point(817, 68);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(29, 13);
             this.label15.TabIndex = 29;
@@ -368,11 +413,11 @@
             // 
             // butAggiorna
             // 
-            this.butAggiorna.Location = new System.Drawing.Point(1102, 41);
+            this.butAggiorna.Location = new System.Drawing.Point(1065, 11);
             this.butAggiorna.Name = "butAggiorna";
-            this.butAggiorna.Size = new System.Drawing.Size(75, 23);
+            this.butAggiorna.Size = new System.Drawing.Size(112, 23);
             this.butAggiorna.TabIndex = 27;
-            this.butAggiorna.Text = "Aggiorna";
+            this.butAggiorna.Text = "Assegna";
             this.butAggiorna.UseVisualStyleBackColor = true;
             this.butAggiorna.Click += new System.EventHandler(this.butAggiorna_Click);
             // 
@@ -537,7 +582,6 @@
         private System.Windows.Forms.GroupBox groupBoxFileTransazioni;
         private System.Windows.Forms.TextBox textBoxNomeFile;
         private System.Windows.Forms.Button butNomeFile;
-        private System.Windows.Forms.Button butApri;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SplitContainer splitContainer1B_2;
         private System.Windows.Forms.GroupBox groupBoxLineeFile;
@@ -569,5 +613,10 @@
         private System.Windows.Forms.TextBox textBoxContoDestinazione;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxContoSorgente;
+        private System.Windows.Forms.RadioButton radioButtonAssegna;
+        private System.Windows.Forms.Label labelStatoTranzizione;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxGiri;
+        private System.Windows.Forms.Label label8;
     }
 }
