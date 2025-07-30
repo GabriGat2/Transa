@@ -53,7 +53,7 @@ namespace Transa
         /// <summary>
         /// Transizione attiva
         /// </summary>
-        protected CTransizione transizione = new CTransizione();
+        protected CTransizione transizione = new CTransizione_BP25();
 
 
         /// <summary>
@@ -155,26 +155,6 @@ namespace Transa
         private void butAnalizza_Click(object sender, EventArgs e)
         {
             bool reso = GestioneNuovaTrasizione(false, true);   
-
-
-            //richTextBoxLinee.Clear();
-
-            //// Controlla se la transizione può essere scomposta
-            //if (!transizione.Scomponibile())
-            //{
-            //    richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!");
-            //    return;
-            //}
-
-
-            //// assegna causale operazione
-            //textDescrizioneOperazione.Text = "TR: " + transizione.Causale;
-
-            //// assegna data
-            //dateTimeOperazione.Value = transizione.Data;
-
-            //// Assegna il valore dell'operazione
-            //textValoreOperazione.Text = transizione.Valore;
         }
         /// <summary>
         ///  Seleziona la prossima transizione
@@ -184,19 +164,6 @@ namespace Transa
         private void butNext_Click(object sender, EventArgs e)
         {
             bool reso = GestioneNuovaTrasizione(true, false);
-
-
-            //// Assegna la transione
-            //transizione.Transizione = transizioni.Next();
-
-            //// Assegna al numnero dell'operazioe l'Indice della trasizione
-            //textNumOperazione.Text = transizioni.Indice.ToString();
-
-            //// verifica se la transizione esiste
-            //if (transizione.Esiste())
-            //    textBoxLinea.Text = transizione.Transizione;
-            //else
-            //    textBoxLinea.Text = "!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE";
         }
         private void AggiornaStatoTrasione()
         {
@@ -592,31 +559,31 @@ namespace Transa
 
             return 0;
         }
-        /// <summary>
-        /// Rende la data impostato nel fomato anno, mese, giorno
-        /// </summary>
-        /// <returns></returns>
-        private string DataAMG()
-        {
-            string[] campiData = dateTimeOperazione.Text.Split('/');
+        ///// <summary>
+        ///// Rende la data impostato nel fomato anno, mese, giorno
+        ///// </summary>
+        ///// <returns></returns>
+        //private string DataAMG()
+        //{
+        //    string[] campiData = dateTimeOperazione.Text.Split('/');
 
-            string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
+        //    string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
 
-            return dataAMG;
-        }
-        /// <summary>
-        /// Nega il valore di una stringa
-        /// </summary>
-        /// <param name="stringaIn"></param>
-        /// <returns></returns>
-        private string NegaValore(string stringaIn)
-        {
-            // converte in double
-            double valore = ConvertAG.ToDouble0(stringaIn);
-            // nega il valore
-            valore *= -1;
-            return valore.ToString("#0.00");
-        }
+        //    return dataAMG;
+        //}
+        ///// <summary>
+        ///// Nega il valore di una stringa
+        ///// </summary>
+        ///// <param name="stringaIn"></param>
+        ///// <returns></returns>
+        //private string NegaValore(string stringaIn)
+        //{
+        //    // converte in double
+        //    double valore = ConvertAG.ToDouble0(stringaIn);
+        //    // nega il valore
+        //    valore *= -1;
+        //    return valore.ToString("#0.00");
+        //}
         /// <summary>
         /// Open genera un transizione per ogni conto:
         /// da conto sorgente
@@ -652,7 +619,7 @@ namespace Transa
                 string[] campiS = new string[lData.NameColumnsTransition.Length];
                 string[] campiD = new string[lData.NameColumnsTransition.Length];
 
-                campiS[0] = DataAMG();                                          //  0 "Data",
+                campiS[0] = transizione.DataAMG(transizione.Data.ToShortDateString());   //  0 "Data",
                 campiD[0] = campiS[0];
 
                 campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
@@ -690,16 +657,16 @@ namespace Transa
 
                 string valore = textValoreOperazione.Text;
                 string valoreSimb = valore + " €";
-                campiS[11] = NegaValore(valoreSimb);                             // 11 "Importo con Simb",
+                campiS[11] = transizione.NegaValore(valoreSimb);                             // 11 "Importo con Simb",
                 campiD[11] = valoreSimb;                                         // 11 "Importo con Simb",
 
-                campiS[12] = NegaValore(valore);                                 // 12 "Importo Num.",
+                campiS[12] = transizione.NegaValore(valore);                                 // 12 "Importo Num.",
                 campiD[12] = valore;                                             // 12 "Importo Num.",
 
-                campiS[13] = NegaValore(valoreSimb);                             // 13 "Valore con Simb",
+                campiS[13] = transizione.NegaValore(valoreSimb);                             // 13 "Valore con Simb",
                 campiD[13] = valoreSimb;                                         // 13 "Valore con Simb",
 
-                campiS[14] = NegaValore(valore);                                 // 14 "Valore Num.",
+                campiS[14] = transizione.NegaValore(valore);                                 // 14 "Valore Num.",
                 campiD[14] = valore;                                             // 14 "Valore Num.",
 
                 campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
@@ -720,6 +687,7 @@ namespace Transa
 
         private void butAggiorna_Click(object sender, EventArgs e)
         {
+            bool reso;
 
             if (radioButtonAssegna.Checked)
             {
@@ -736,6 +704,8 @@ namespace Transa
                     }
                 }
             }
+            else
+                reso = GestioneAssegnaTransizione();
         }
 
         /// <summary>

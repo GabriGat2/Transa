@@ -77,6 +77,7 @@
     <Compile Include="CListaTransizioni.cs" />
     <Compile Include="ConvertAG.cs" />
     <Compile Include="CTransizione.cs" />
+    <Compile Include="CTransizione_BP25.cs" />
     <Compile Include="FormFileBea.cs">
       <SubType>Form</SubType>
     </Compile>

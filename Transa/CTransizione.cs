@@ -12,7 +12,7 @@ namespace Transa
         /// <summary>
         /// Transizione
         /// </summary>
-        private string transizione;
+        protected string transizione;
         public string Transizione { get => transizione; set => SetTransizione( value); }
         /// <summary>
         /// Transizione scomposta in campi
@@ -21,7 +21,7 @@ namespace Transa
         /// <summary>
         /// Numero delle colonne della transizione
         /// </summary>
-        private const int NumColonneTransizione = 7;
+        protected virtual int NumColonneTransizione { get => 7; }
         /// <summary>
         /// Stati della transizione
         /// </summary>
@@ -36,7 +36,7 @@ namespace Transa
         /// <summary>
         /// Stato della transizione
         /// </summary>
-        private EStatoTransizione stato;
+        protected EStatoTransizione stato;
         public EStatoTransizione Stato { get => stato; set => stato = value; }
         /// <summary>
         /// Colonne della transizione
@@ -52,10 +52,14 @@ namespace Transa
             Causale,                // 6
         };
         /// <summary>
+        /// Rende la colonna della causale
+        /// </summary>
+        protected virtual int ColonnaCausale { get => (int) EColonneTransizione.Causale;  }
+        /// <summary>
         /// Rende il valore della causale
         /// </summary>
-        public string Causale { get => GetCausale(); }
-        protected string GetCausale ()
+        public virtual string Causale { get => GetCausale(); }
+        protected virtual string GetCausale ()
         {
             if (Scomponibile())
                 return CampiTransizione[(int)EColonneTransizione.Causale];
@@ -65,8 +69,8 @@ namespace Transa
         /// <summary>
         /// Rende il valore della data dell'operazione
         /// </summary>
-        public DateTime Data { get => GetData(); }
-        protected DateTime GetData()
+        public virtual DateTime Data { get => GetData(); }
+        protected virtual DateTime GetData()
         {
             if (! Scomponibile())
                 return new DateTime(1959, 9, 1);
@@ -82,8 +86,8 @@ namespace Transa
         /// <summary>
         /// Rende il valore dell'operazione
         /// </summary>
-        public string Valore { get => GetValore(); }
-        protected string GetValore()
+        public virtual string Valore { get => GetValore(); }
+        protected virtual string GetValore()
         {
             if (!Scomponibile())
                 return "Non disponibile";
@@ -150,8 +154,8 @@ namespace Transa
             }
 
             // ricompone il campo della causale
-            string causale = campi[(int)EColonneTransizione.Causale];
-            for (int i = (int)EColonneTransizione.Causale; i < campi.Length; i++)
+            string causale = campi[ColonnaCausale];
+            for (int i = ColonnaCausale; i < campi.Length; i++)
             {
                 causale += ",";
                 causale += campi[i];
@@ -167,7 +171,7 @@ namespace Transa
             }
 
             // aggiunge il campo causale
-            CampiTransizione[(int)EColonneTransizione.Causale] = causale;
+            CampiTransizione[ColonnaCausale] = causale;
         }
         /// <summary>
         /// Verifica che la transizione esiste
@@ -197,5 +201,33 @@ namespace Transa
             return stato.ToString();
 
         }
+        /// <summary>
+        /// Rende la data impostato nel fomato anno, mese, giorno
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public string DataAMG(string data)
+        {
+            string[] campiData = data.Split('/');
+
+            string dataAMG = campiData[2] + '/' + campiData[1] + '/' + campiData[0];
+
+            return dataAMG;
+        }
+        /// <summary>
+        /// Nega il valore di una stringa
+        /// </summary>
+        /// <param name="valore"></param>
+        /// <returns></returns>
+        public string NegaValore(string valore)
+        {
+            // converte in double
+            double dValore = ConvertAG.ToDouble0(valore);
+            // nega il valore
+            dValore *= -1;
+            return dValore.ToString("#0.00");
+        }
+
+
     }
 }
