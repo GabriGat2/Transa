@@ -336,9 +336,16 @@ namespace Transa
 
             // Operazioni
             E1200_UnaOperazioneInCorso,
-            E1201_TransizioneNuova,
+            E1201_TransizioneVuota,
             E1202_TransizioneSelezionata,
             E1203_TransizioneAnalizzata,
+            E1204_TransizioneNonVuota,
+            E1205_TransizioneNonSelezionata,
+            E1206_TransizioneNonAnalizzata,
+
+
+            E1210_ContoSorgenteNonValido,
+            E1211_ContoDestinazioneNonValido,
 
 
             // Errori relativi ad un tipo di dato

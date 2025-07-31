@@ -30,37 +30,38 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxFileTransazioni = new System.Windows.Forms.GroupBox();
-            this.labelStatoTranzizione = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.textBoxNomeFile = new System.Windows.Forms.TextBox();
             this.butNomeFile = new System.Windows.Forms.Button();
             this.splitContainer1B_2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B_2A = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1_2AH = new System.Windows.Forms.SplitContainer();
+            this.groupBoxGestioneTransizione = new System.Windows.Forms.GroupBox();
+            this.labelStatoTranzizione = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioButtonAssegna = new System.Windows.Forms.RadioButton();
+            this.butAggiorna = new System.Windows.Forms.Button();
+            this.butNext = new System.Windows.Forms.Button();
             this.groupBoxLineeFile = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.butAnalizza = new System.Windows.Forms.Button();
             this.textBoxLinea = new System.Windows.Forms.TextBox();
-            this.butNext = new System.Windows.Forms.Button();
             this.groupBoxLinee = new System.Windows.Forms.GroupBox();
             this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
             this.splitContainer1B_2B_3 = new System.Windows.Forms.SplitContainer();
             this.textBoxGiri = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.radioButtonAssegna = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxContoDestinazione = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxContoSorgente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textNumOperazione = new System.Windows.Forms.TextBox();
+            this.textBoxNumOperazione = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
-            this.butAggiorna = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.textValoreOperazione = new System.Windows.Forms.TextBox();
+            this.textBoxValoreOperazione = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textDescrizioneOperazione = new System.Windows.Forms.TextBox();
+            this.textBoxCausaleOperazione = new System.Windows.Forms.TextBox();
             this.splitContainer1B_2B_3B_4 = new System.Windows.Forms.SplitContainer();
             this.splitContainersplitContainer1B_2B_3B_4A_5 = new System.Windows.Forms.SplitContainer();
             this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
@@ -81,6 +82,11 @@
             this.splitContainer1B_2A.Panel1.SuspendLayout();
             this.splitContainer1B_2A.Panel2.SuspendLayout();
             this.splitContainer1B_2A.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1_2AH)).BeginInit();
+            this.splitContainer1_2AH.Panel1.SuspendLayout();
+            this.splitContainer1_2AH.Panel2.SuspendLayout();
+            this.splitContainer1_2AH.SuspendLayout();
+            this.groupBoxGestioneTransizione.SuspendLayout();
             this.groupBoxLineeFile.SuspendLayout();
             this.groupBoxLinee.SuspendLayout();
             this.groupBoxOperazioni.SuspendLayout();
@@ -119,8 +125,6 @@
             // 
             // groupBoxFileTransazioni
             // 
-            this.groupBoxFileTransazioni.Controls.Add(this.labelStatoTranzizione);
-            this.groupBoxFileTransazioni.Controls.Add(this.label6);
             this.groupBoxFileTransazioni.Controls.Add(this.textBoxNomeFile);
             this.groupBoxFileTransazioni.Controls.Add(this.butNomeFile);
             this.groupBoxFileTransazioni.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -131,29 +135,11 @@
             this.groupBoxFileTransazioni.TabStop = false;
             this.groupBoxFileTransazioni.Text = "File Transazioni";
             // 
-            // labelStatoTranzizione
-            // 
-            this.labelStatoTranzizione.AutoSize = true;
-            this.labelStatoTranzizione.Location = new System.Drawing.Point(1104, 27);
-            this.labelStatoTranzizione.Name = "labelStatoTranzizione";
-            this.labelStatoTranzizione.Size = new System.Drawing.Size(25, 13);
-            this.labelStatoTranzizione.TabIndex = 3;
-            this.labelStatoTranzizione.Text = "???";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1006, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Stato transizione: ";
-            // 
             // textBoxNomeFile
             // 
             this.textBoxNomeFile.Location = new System.Drawing.Point(87, 22);
             this.textBoxNomeFile.Name = "textBoxNomeFile";
-            this.textBoxNomeFile.Size = new System.Drawing.Size(912, 20);
+            this.textBoxNomeFile.Size = new System.Drawing.Size(1093, 20);
             this.textBoxNomeFile.TabIndex = 1;
             // 
             // butNomeFile
@@ -181,7 +167,7 @@
             // 
             this.splitContainer1B_2.Panel2.Controls.Add(this.groupBoxOperazioni);
             this.splitContainer1B_2.Size = new System.Drawing.Size(1192, 569);
-            this.splitContainer1B_2.SplitterDistance = 120;
+            this.splitContainer1B_2.SplitterDistance = 140;
             this.splitContainer1B_2.TabIndex = 0;
             // 
             // splitContainer1B_2A
@@ -193,25 +179,106 @@
             // 
             // splitContainer1B_2A.Panel1
             // 
-            this.splitContainer1B_2A.Panel1.Controls.Add(this.groupBoxLineeFile);
+            this.splitContainer1B_2A.Panel1.Controls.Add(this.splitContainer1_2AH);
             // 
             // splitContainer1B_2A.Panel2
             // 
             this.splitContainer1B_2A.Panel2.Controls.Add(this.groupBoxLinee);
-            this.splitContainer1B_2A.Size = new System.Drawing.Size(1192, 120);
-            this.splitContainer1B_2A.SplitterDistance = 60;
+            this.splitContainer1B_2A.Size = new System.Drawing.Size(1192, 140);
+            this.splitContainer1B_2A.SplitterDistance = 70;
             this.splitContainer1B_2A.TabIndex = 0;
+            // 
+            // splitContainer1_2AH
+            // 
+            this.splitContainer1_2AH.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1_2AH.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1_2AH.Name = "splitContainer1_2AH";
+            // 
+            // splitContainer1_2AH.Panel1
+            // 
+            this.splitContainer1_2AH.Panel1.Controls.Add(this.groupBoxGestioneTransizione);
+            // 
+            // splitContainer1_2AH.Panel2
+            // 
+            this.splitContainer1_2AH.Panel2.Controls.Add(this.groupBoxLineeFile);
+            this.splitContainer1_2AH.Size = new System.Drawing.Size(1192, 70);
+            this.splitContainer1_2AH.SplitterDistance = 300;
+            this.splitContainer1_2AH.TabIndex = 0;
+            // 
+            // groupBoxGestioneTransizione
+            // 
+            this.groupBoxGestioneTransizione.Controls.Add(this.labelStatoTranzizione);
+            this.groupBoxGestioneTransizione.Controls.Add(this.label6);
+            this.groupBoxGestioneTransizione.Controls.Add(this.radioButtonAssegna);
+            this.groupBoxGestioneTransizione.Controls.Add(this.butAggiorna);
+            this.groupBoxGestioneTransizione.Controls.Add(this.butNext);
+            this.groupBoxGestioneTransizione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxGestioneTransizione.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxGestioneTransizione.Name = "groupBoxGestioneTransizione";
+            this.groupBoxGestioneTransizione.Size = new System.Drawing.Size(300, 70);
+            this.groupBoxGestioneTransizione.TabIndex = 0;
+            this.groupBoxGestioneTransizione.TabStop = false;
+            this.groupBoxGestioneTransizione.Text = "Gestione Transizione";
+            // 
+            // labelStatoTranzizione
+            // 
+            this.labelStatoTranzizione.AutoSize = true;
+            this.labelStatoTranzizione.Location = new System.Drawing.Point(87, 15);
+            this.labelStatoTranzizione.Name = "labelStatoTranzizione";
+            this.labelStatoTranzizione.Size = new System.Drawing.Size(25, 13);
+            this.labelStatoTranzizione.TabIndex = 3;
+            this.labelStatoTranzizione.Text = "???";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Stato:";
+            // 
+            // radioButtonAssegna
+            // 
+            this.radioButtonAssegna.AutoSize = true;
+            this.radioButtonAssegna.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.radioButtonAssegna.Location = new System.Drawing.Point(168, 34);
+            this.radioButtonAssegna.Name = "radioButtonAssegna";
+            this.radioButtonAssegna.Size = new System.Drawing.Size(90, 17);
+            this.radioButtonAssegna.TabIndex = 37;
+            this.radioButtonAssegna.TabStop = true;
+            this.radioButtonAssegna.Text = "Assegna tutte";
+            this.radioButtonAssegna.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.radioButtonAssegna.UseVisualStyleBackColor = true;
+            // 
+            // butAggiorna
+            // 
+            this.butAggiorna.Location = new System.Drawing.Point(87, 31);
+            this.butAggiorna.Name = "butAggiorna";
+            this.butAggiorna.Size = new System.Drawing.Size(75, 23);
+            this.butAggiorna.TabIndex = 27;
+            this.butAggiorna.Text = "Assegna";
+            this.butAggiorna.UseVisualStyleBackColor = true;
+            this.butAggiorna.Click += new System.EventHandler(this.butAggiorna_Click);
+            // 
+            // butNext
+            // 
+            this.butNext.Location = new System.Drawing.Point(6, 31);
+            this.butNext.Name = "butNext";
+            this.butNext.Size = new System.Drawing.Size(75, 23);
+            this.butNext.TabIndex = 3;
+            this.butNext.Text = "Next";
+            this.butNext.UseVisualStyleBackColor = true;
+            this.butNext.Click += new System.EventHandler(this.butNext_Click);
             // 
             // groupBoxLineeFile
             // 
             this.groupBoxLineeFile.Controls.Add(this.label3);
-            this.groupBoxLineeFile.Controls.Add(this.butAnalizza);
             this.groupBoxLineeFile.Controls.Add(this.textBoxLinea);
-            this.groupBoxLineeFile.Controls.Add(this.butNext);
             this.groupBoxLineeFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxLineeFile.Location = new System.Drawing.Point(0, 0);
             this.groupBoxLineeFile.Name = "groupBoxLineeFile";
-            this.groupBoxLineeFile.Size = new System.Drawing.Size(1192, 60);
+            this.groupBoxLineeFile.Size = new System.Drawing.Size(888, 70);
             this.groupBoxLineeFile.TabIndex = 0;
             this.groupBoxLineeFile.TabStop = false;
             this.groupBoxLineeFile.Text = "Linee file";
@@ -225,32 +292,12 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Transizione";
             // 
-            // butAnalizza
-            // 
-            this.butAnalizza.Location = new System.Drawing.Point(1086, 19);
-            this.butAnalizza.Name = "butAnalizza";
-            this.butAnalizza.Size = new System.Drawing.Size(75, 23);
-            this.butAnalizza.TabIndex = 5;
-            this.butAnalizza.Text = "Analizza";
-            this.butAnalizza.UseVisualStyleBackColor = true;
-            this.butAnalizza.Click += new System.EventHandler(this.butAnalizza_Click);
-            // 
             // textBoxLinea
             // 
-            this.textBoxLinea.Location = new System.Drawing.Point(87, 22);
+            this.textBoxLinea.Location = new System.Drawing.Point(74, 25);
             this.textBoxLinea.Name = "textBoxLinea";
-            this.textBoxLinea.Size = new System.Drawing.Size(912, 20);
+            this.textBoxLinea.Size = new System.Drawing.Size(802, 20);
             this.textBoxLinea.TabIndex = 4;
-            // 
-            // butNext
-            // 
-            this.butNext.Location = new System.Drawing.Point(1005, 19);
-            this.butNext.Name = "butNext";
-            this.butNext.Size = new System.Drawing.Size(75, 23);
-            this.butNext.TabIndex = 3;
-            this.butNext.Text = "Next";
-            this.butNext.UseVisualStyleBackColor = true;
-            this.butNext.Click += new System.EventHandler(this.butNext_Click);
             // 
             // groupBoxLinee
             // 
@@ -258,7 +305,7 @@
             this.groupBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxLinee.Location = new System.Drawing.Point(0, 0);
             this.groupBoxLinee.Name = "groupBoxLinee";
-            this.groupBoxLinee.Size = new System.Drawing.Size(1192, 56);
+            this.groupBoxLinee.Size = new System.Drawing.Size(1192, 66);
             this.groupBoxLinee.TabIndex = 0;
             this.groupBoxLinee.TabStop = false;
             this.groupBoxLinee.Text = "Linee";
@@ -268,7 +315,7 @@
             this.richTextBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLinee.Location = new System.Drawing.Point(3, 16);
             this.richTextBoxLinee.Name = "richTextBoxLinee";
-            this.richTextBoxLinee.Size = new System.Drawing.Size(1186, 37);
+            this.richTextBoxLinee.Size = new System.Drawing.Size(1186, 47);
             this.richTextBoxLinee.TabIndex = 0;
             this.richTextBoxLinee.Text = "";
             // 
@@ -278,7 +325,7 @@
             this.groupBoxOperazioni.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOperazioni.Location = new System.Drawing.Point(0, 0);
             this.groupBoxOperazioni.Name = "groupBoxOperazioni";
-            this.groupBoxOperazioni.Size = new System.Drawing.Size(1192, 445);
+            this.groupBoxOperazioni.Size = new System.Drawing.Size(1192, 425);
             this.groupBoxOperazioni.TabIndex = 0;
             this.groupBoxOperazioni.TabStop = false;
             this.groupBoxOperazioni.Text = "Operazioni";
@@ -294,26 +341,24 @@
             // 
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxGiri);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label8);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.radioButtonAssegna);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label5);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxContoDestinazione);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label4);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxContoSorgente);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label2);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textNumOperazione);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxNumOperazione);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label15);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.dateTimeOperazione);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.butAggiorna);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label7);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textValoreOperazione);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxValoreOperazione);
             this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label1);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textDescrizioneOperazione);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxCausaleOperazione);
             // 
             // splitContainer1B_2B_3.Panel2
             // 
             this.splitContainer1B_2B_3.Panel2.Controls.Add(this.splitContainer1B_2B_3B_4);
-            this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 426);
-            this.splitContainer1B_2B_3.SplitterDistance = 90;
+            this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 406);
+            this.splitContainer1B_2B_3.SplitterDistance = 100;
             this.splitContainer1B_2B_3.TabIndex = 0;
             // 
             // textBoxGiri
@@ -332,19 +377,6 @@
             this.label8.TabIndex = 38;
             this.label8.Text = "Giri";
             // 
-            // radioButtonAssegna
-            // 
-            this.radioButtonAssegna.AutoSize = true;
-            this.radioButtonAssegna.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButtonAssegna.Location = new System.Drawing.Point(1036, 35);
-            this.radioButtonAssegna.Name = "radioButtonAssegna";
-            this.radioButtonAssegna.Size = new System.Drawing.Size(90, 17);
-            this.radioButtonAssegna.TabIndex = 37;
-            this.radioButtonAssegna.TabStop = true;
-            this.radioButtonAssegna.Text = "Assegna tutte";
-            this.radioButtonAssegna.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.radioButtonAssegna.UseVisualStyleBackColor = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -358,8 +390,10 @@
             // 
             this.textBoxContoDestinazione.Location = new System.Drawing.Point(155, 62);
             this.textBoxContoDestinazione.Name = "textBoxContoDestinazione";
+            this.textBoxContoDestinazione.ReadOnly = true;
             this.textBoxContoDestinazione.Size = new System.Drawing.Size(609, 20);
             this.textBoxContoDestinazione.TabIndex = 36;
+            this.textBoxContoDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoDestinazione_MouseClick);
             // 
             // label4
             // 
@@ -374,8 +408,10 @@
             // 
             this.textBoxContoSorgente.Location = new System.Drawing.Point(155, 36);
             this.textBoxContoSorgente.Name = "textBoxContoSorgente";
+            this.textBoxContoSorgente.ReadOnly = true;
             this.textBoxContoSorgente.Size = new System.Drawing.Size(609, 20);
             this.textBoxContoSorgente.TabIndex = 34;
+            this.textBoxContoSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoSorgente_MouseClick);
             // 
             // label2
             // 
@@ -386,12 +422,13 @@
             this.label2.TabIndex = 32;
             this.label2.Text = "Valore";
             // 
-            // textNumOperazione
+            // textBoxNumOperazione
             // 
-            this.textNumOperazione.Location = new System.Drawing.Point(868, 62);
-            this.textNumOperazione.Name = "textNumOperazione";
-            this.textNumOperazione.Size = new System.Drawing.Size(150, 20);
-            this.textNumOperazione.TabIndex = 30;
+            this.textBoxNumOperazione.Location = new System.Drawing.Point(868, 62);
+            this.textBoxNumOperazione.Name = "textBoxNumOperazione";
+            this.textBoxNumOperazione.ReadOnly = true;
+            this.textBoxNumOperazione.Size = new System.Drawing.Size(150, 20);
+            this.textBoxNumOperazione.TabIndex = 30;
             // 
             // label15
             // 
@@ -411,16 +448,6 @@
             this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
             this.dateTimeOperazione.TabIndex = 28;
             // 
-            // butAggiorna
-            // 
-            this.butAggiorna.Location = new System.Drawing.Point(1065, 11);
-            this.butAggiorna.Name = "butAggiorna";
-            this.butAggiorna.Size = new System.Drawing.Size(112, 23);
-            this.butAggiorna.TabIndex = 27;
-            this.butAggiorna.Text = "Assegna";
-            this.butAggiorna.UseVisualStyleBackColor = true;
-            this.butAggiorna.Click += new System.EventHandler(this.butAggiorna_Click);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -430,31 +457,31 @@
             this.label7.TabIndex = 24;
             this.label7.Text = "Data ";
             // 
-            // textValoreOperazione
+            // textBoxValoreOperazione
             // 
-            this.textValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textValoreOperazione.Location = new System.Drawing.Point(868, 36);
-            this.textValoreOperazione.Name = "textValoreOperazione";
-            this.textValoreOperazione.ReadOnly = true;
-            this.textValoreOperazione.Size = new System.Drawing.Size(150, 20);
-            this.textValoreOperazione.TabIndex = 23;
-            this.textValoreOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxValoreOperazione.Location = new System.Drawing.Point(868, 36);
+            this.textBoxValoreOperazione.Name = "textBoxValoreOperazione";
+            this.textBoxValoreOperazione.ReadOnly = true;
+            this.textBoxValoreOperazione.Size = new System.Drawing.Size(150, 20);
+            this.textBoxValoreOperazione.TabIndex = 23;
+            this.textBoxValoreOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 13);
+            this.label1.Size = new System.Drawing.Size(100, 13);
             this.label1.TabIndex = 21;
-            this.label1.Text = "Descrizione operazione";
+            this.label1.Text = "Causale operazione";
             // 
-            // textDescrizioneOperazione
+            // textBoxCausaleOperazione
             // 
-            this.textDescrizioneOperazione.Location = new System.Drawing.Point(155, 10);
-            this.textDescrizioneOperazione.Name = "textDescrizioneOperazione";
-            this.textDescrizioneOperazione.Size = new System.Drawing.Size(609, 20);
-            this.textDescrizioneOperazione.TabIndex = 22;
+            this.textBoxCausaleOperazione.Location = new System.Drawing.Point(155, 10);
+            this.textBoxCausaleOperazione.Name = "textBoxCausaleOperazione";
+            this.textBoxCausaleOperazione.Size = new System.Drawing.Size(609, 20);
+            this.textBoxCausaleOperazione.TabIndex = 22;
             // 
             // splitContainer1B_2B_3B_4
             // 
@@ -466,8 +493,8 @@
             // splitContainer1B_2B_3B_4.Panel1
             // 
             this.splitContainer1B_2B_3B_4.Panel1.Controls.Add(this.splitContainersplitContainer1B_2B_3B_4A_5);
-            this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 332);
-            this.splitContainer1B_2B_3B_4.SplitterDistance = 150;
+            this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 302);
+            this.splitContainer1B_2B_3B_4.SplitterDistance = 136;
             this.splitContainer1B_2B_3B_4.TabIndex = 0;
             // 
             // splitContainersplitContainer1B_2B_3B_4A_5
@@ -483,7 +510,7 @@
             // splitContainersplitContainer1B_2B_3B_4A_5.Panel2
             // 
             this.splitContainersplitContainer1B_2B_3B_4A_5.Panel2.Controls.Add(this.groupBoxDestinazione);
-            this.splitContainersplitContainer1B_2B_3B_4A_5.Size = new System.Drawing.Size(1186, 150);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Size = new System.Drawing.Size(1186, 136);
             this.splitContainersplitContainer1B_2B_3B_4A_5.SplitterDistance = 550;
             this.splitContainersplitContainer1B_2B_3B_4A_5.TabIndex = 0;
             // 
@@ -493,7 +520,7 @@
             this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSorgente.Name = "groupBoxSorgente";
-            this.groupBoxSorgente.Size = new System.Drawing.Size(550, 150);
+            this.groupBoxSorgente.Size = new System.Drawing.Size(550, 136);
             this.groupBoxSorgente.TabIndex = 0;
             this.groupBoxSorgente.TabStop = false;
             this.groupBoxSorgente.Text = "Sorgente - Spesa";
@@ -503,8 +530,9 @@
             this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
             this.treeViewSorgente.Name = "treeViewSorgente";
-            this.treeViewSorgente.Size = new System.Drawing.Size(544, 131);
+            this.treeViewSorgente.Size = new System.Drawing.Size(544, 117);
             this.treeViewSorgente.TabIndex = 0;
+            this.treeViewSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseClick);
             this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
             // 
             // groupBoxDestinazione
@@ -513,7 +541,7 @@
             this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
             this.groupBoxDestinazione.Name = "groupBoxDestinazione";
-            this.groupBoxDestinazione.Size = new System.Drawing.Size(632, 150);
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(632, 136);
             this.groupBoxDestinazione.TabIndex = 0;
             this.groupBoxDestinazione.TabStop = false;
             this.groupBoxDestinazione.Text = "Destinazione - Addebito";
@@ -523,8 +551,9 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            this.treeViewDestinazione.Size = new System.Drawing.Size(626, 131);
+            this.treeViewDestinazione.Size = new System.Drawing.Size(626, 117);
             this.treeViewDestinazione.TabIndex = 0;
+            this.treeViewDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseClick);
             this.treeViewDestinazione.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseDoubleClick);
             // 
             // openFileDialog1
@@ -554,6 +583,12 @@
             this.splitContainer1B_2A.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2A)).EndInit();
             this.splitContainer1B_2A.ResumeLayout(false);
+            this.splitContainer1_2AH.Panel1.ResumeLayout(false);
+            this.splitContainer1_2AH.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1_2AH)).EndInit();
+            this.splitContainer1_2AH.ResumeLayout(false);
+            this.groupBoxGestioneTransizione.ResumeLayout(false);
+            this.groupBoxGestioneTransizione.PerformLayout();
             this.groupBoxLineeFile.ResumeLayout(false);
             this.groupBoxLineeFile.PerformLayout();
             this.groupBoxLinee.ResumeLayout(false);
@@ -585,7 +620,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SplitContainer splitContainer1B_2;
         private System.Windows.Forms.GroupBox groupBoxLineeFile;
-        private System.Windows.Forms.Button butAnalizza;
         private System.Windows.Forms.TextBox textBoxLinea;
         private System.Windows.Forms.Button butNext;
         private System.Windows.Forms.SplitContainer splitContainer1B_2A;
@@ -594,14 +628,14 @@
         private System.Windows.Forms.GroupBox groupBoxOperazioni;
         private System.Windows.Forms.SplitContainer splitContainer1B_2B_3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textNumOperazione;
+        private System.Windows.Forms.TextBox textBoxNumOperazione;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DateTimePicker dateTimeOperazione;
         private System.Windows.Forms.Button butAggiorna;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textValoreOperazione;
+        private System.Windows.Forms.TextBox textBoxValoreOperazione;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textDescrizioneOperazione;
+        private System.Windows.Forms.TextBox textBoxCausaleOperazione;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.SplitContainer splitContainer1B_2B_3B_4;
         private System.Windows.Forms.GroupBox groupBoxSorgente;
@@ -618,5 +652,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxGiri;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.SplitContainer splitContainer1_2AH;
+        private System.Windows.Forms.GroupBox groupBoxGestioneTransizione;
     }
 }

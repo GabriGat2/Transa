@@ -132,7 +132,7 @@ namespace Transa
 
             // cambia lo stato della transizione
             if (Scomponibile())
-                stato = EStatoTransizione.Nuova;
+                stato = EStatoTransizione.Selezionata;
             else
                 stato = EStatoTransizione.Vuota;
         }
