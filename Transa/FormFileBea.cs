@@ -238,14 +238,14 @@ namespace Transa
                     richTextBoxLinee.AppendText("\n");
                     richTextBoxLinee.AppendText("Transizione numero: " + textBoxNumOperazione.Text.ToString() + "\n");
                     richTextBoxLinee.AppendText(transizione.Transizione + " \n");
+                    richTextBoxLinee.ScrollToCaret();
                 }
                 else
                 {
                     textBoxLinea.Text = "\n!!! TUTTE LE TRANSIZIONI SONO STATE ESAMINATE\n";
+                    richTextBoxLinee.ScrollToCaret();
                     return false;
                 }
-
-
             }
 
             // controlla se deve analizzare un nuova transizione
@@ -266,6 +266,7 @@ namespace Transa
                 if (!transizione.Scomponibile())
                 {
                     richTextBoxLinee.AppendText("La transizione non può essere scomposta !!!\n");
+                    richTextBoxLinee.ScrollToCaret();
                     return false;
                 }
 
@@ -778,7 +779,7 @@ namespace Transa
             AggiornaStatoTrasione();
 
             richTextBoxLinee.AppendText("La transizione è stata assegnata correttamente\n");
-
+            richTextBoxLinee.ScrollToCaret();
 
             return true;
 

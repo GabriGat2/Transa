@@ -44,30 +44,31 @@
             this.groupBoxLineeFile = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxLinea = new System.Windows.Forms.TextBox();
-            this.groupBoxLinee = new System.Windows.Forms.GroupBox();
-            this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
-            this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
-            this.splitContainer1B_2B_3 = new System.Windows.Forms.SplitContainer();
-            this.textBoxGiri = new System.Windows.Forms.TextBox();
+            this.groupBoxOperazione = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxContoDestinazione = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxContoSorgente = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxNumOperazione = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxGiri = new System.Windows.Forms.TextBox();
             this.dateTimeOperazione = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
             this.textBoxValoreOperazione = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCausaleOperazione = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxContoDestinazione = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxNumOperazione = new System.Windows.Forms.TextBox();
+            this.textBoxContoSorgente = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBoxConti = new System.Windows.Forms.GroupBox();
+            this.splitContainer1B_2B_3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B_2B_3B_4 = new System.Windows.Forms.SplitContainer();
             this.splitContainersplitContainer1B_2B_3B_4A_5 = new System.Windows.Forms.SplitContainer();
             this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
             this.treeViewSorgente = new System.Windows.Forms.TreeView();
             this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
             this.treeViewDestinazione = new System.Windows.Forms.TreeView();
+            this.groupBoxEsito = new System.Windows.Forms.GroupBox();
+            this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -88,8 +89,8 @@
             this.splitContainer1_2AH.SuspendLayout();
             this.groupBoxGestioneTransizione.SuspendLayout();
             this.groupBoxLineeFile.SuspendLayout();
-            this.groupBoxLinee.SuspendLayout();
-            this.groupBoxOperazioni.SuspendLayout();
+            this.groupBoxOperazione.SuspendLayout();
+            this.groupBoxConti.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3)).BeginInit();
             this.splitContainer1B_2B_3.Panel1.SuspendLayout();
             this.splitContainer1B_2B_3.Panel2.SuspendLayout();
@@ -103,6 +104,7 @@
             this.splitContainersplitContainer1B_2B_3B_4A_5.SuspendLayout();
             this.groupBoxSorgente.SuspendLayout();
             this.groupBoxDestinazione.SuspendLayout();
+            this.groupBoxEsito.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -165,9 +167,9 @@
             // 
             // splitContainer1B_2.Panel2
             // 
-            this.splitContainer1B_2.Panel2.Controls.Add(this.groupBoxOperazioni);
+            this.splitContainer1B_2.Panel2.Controls.Add(this.groupBoxConti);
             this.splitContainer1B_2.Size = new System.Drawing.Size(1192, 569);
-            this.splitContainer1B_2.SplitterDistance = 140;
+            this.splitContainer1B_2.SplitterDistance = 200;
             this.splitContainer1B_2.TabIndex = 0;
             // 
             // splitContainer1B_2A
@@ -183,9 +185,9 @@
             // 
             // splitContainer1B_2A.Panel2
             // 
-            this.splitContainer1B_2A.Panel2.Controls.Add(this.groupBoxLinee);
-            this.splitContainer1B_2A.Size = new System.Drawing.Size(1192, 140);
-            this.splitContainer1B_2A.SplitterDistance = 70;
+            this.splitContainer1B_2A.Panel2.Controls.Add(this.groupBoxOperazione);
+            this.splitContainer1B_2A.Size = new System.Drawing.Size(1192, 200);
+            this.splitContainer1B_2A.SplitterDistance = 80;
             this.splitContainer1B_2A.TabIndex = 0;
             // 
             // splitContainer1_2AH
@@ -201,7 +203,7 @@
             // splitContainer1_2AH.Panel2
             // 
             this.splitContainer1_2AH.Panel2.Controls.Add(this.groupBoxLineeFile);
-            this.splitContainer1_2AH.Size = new System.Drawing.Size(1192, 70);
+            this.splitContainer1_2AH.Size = new System.Drawing.Size(1192, 80);
             this.splitContainer1_2AH.SplitterDistance = 300;
             this.splitContainer1_2AH.TabIndex = 0;
             // 
@@ -215,7 +217,7 @@
             this.groupBoxGestioneTransizione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxGestioneTransizione.Location = new System.Drawing.Point(0, 0);
             this.groupBoxGestioneTransizione.Name = "groupBoxGestioneTransizione";
-            this.groupBoxGestioneTransizione.Size = new System.Drawing.Size(300, 70);
+            this.groupBoxGestioneTransizione.Size = new System.Drawing.Size(300, 80);
             this.groupBoxGestioneTransizione.TabIndex = 0;
             this.groupBoxGestioneTransizione.TabStop = false;
             this.groupBoxGestioneTransizione.Text = "Gestione Transizione";
@@ -223,7 +225,7 @@
             // labelStatoTranzizione
             // 
             this.labelStatoTranzizione.AutoSize = true;
-            this.labelStatoTranzizione.Location = new System.Drawing.Point(87, 15);
+            this.labelStatoTranzizione.Location = new System.Drawing.Point(87, 27);
             this.labelStatoTranzizione.Name = "labelStatoTranzizione";
             this.labelStatoTranzizione.Size = new System.Drawing.Size(25, 13);
             this.labelStatoTranzizione.TabIndex = 3;
@@ -232,7 +234,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 16);
+            this.label6.Location = new System.Drawing.Point(6, 28);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 2;
@@ -242,7 +244,7 @@
             // 
             this.radioButtonAssegna.AutoSize = true;
             this.radioButtonAssegna.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.radioButtonAssegna.Location = new System.Drawing.Point(168, 34);
+            this.radioButtonAssegna.Location = new System.Drawing.Point(168, 54);
             this.radioButtonAssegna.Name = "radioButtonAssegna";
             this.radioButtonAssegna.Size = new System.Drawing.Size(90, 17);
             this.radioButtonAssegna.TabIndex = 37;
@@ -253,7 +255,7 @@
             // 
             // butAggiorna
             // 
-            this.butAggiorna.Location = new System.Drawing.Point(87, 31);
+            this.butAggiorna.Location = new System.Drawing.Point(87, 51);
             this.butAggiorna.Name = "butAggiorna";
             this.butAggiorna.Size = new System.Drawing.Size(75, 23);
             this.butAggiorna.TabIndex = 27;
@@ -263,7 +265,7 @@
             // 
             // butNext
             // 
-            this.butNext.Location = new System.Drawing.Point(6, 31);
+            this.butNext.Location = new System.Drawing.Point(6, 51);
             this.butNext.Name = "butNext";
             this.butNext.Size = new System.Drawing.Size(75, 23);
             this.butNext.TabIndex = 3;
@@ -278,7 +280,7 @@
             this.groupBoxLineeFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxLineeFile.Location = new System.Drawing.Point(0, 0);
             this.groupBoxLineeFile.Name = "groupBoxLineeFile";
-            this.groupBoxLineeFile.Size = new System.Drawing.Size(888, 70);
+            this.groupBoxLineeFile.Size = new System.Drawing.Size(888, 80);
             this.groupBoxLineeFile.TabIndex = 0;
             this.groupBoxLineeFile.TabStop = false;
             this.groupBoxLineeFile.Text = "Linee file";
@@ -299,36 +301,162 @@
             this.textBoxLinea.Size = new System.Drawing.Size(802, 20);
             this.textBoxLinea.TabIndex = 4;
             // 
-            // groupBoxLinee
+            // groupBoxOperazione
             // 
-            this.groupBoxLinee.Controls.Add(this.richTextBoxLinee);
-            this.groupBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLinee.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxLinee.Name = "groupBoxLinee";
-            this.groupBoxLinee.Size = new System.Drawing.Size(1192, 66);
-            this.groupBoxLinee.TabIndex = 0;
-            this.groupBoxLinee.TabStop = false;
-            this.groupBoxLinee.Text = "Linee";
+            this.groupBoxOperazione.Controls.Add(this.label8);
+            this.groupBoxOperazione.Controls.Add(this.textBoxGiri);
+            this.groupBoxOperazione.Controls.Add(this.dateTimeOperazione);
+            this.groupBoxOperazione.Controls.Add(this.textBoxValoreOperazione);
+            this.groupBoxOperazione.Controls.Add(this.label1);
+            this.groupBoxOperazione.Controls.Add(this.textBoxCausaleOperazione);
+            this.groupBoxOperazione.Controls.Add(this.label5);
+            this.groupBoxOperazione.Controls.Add(this.label7);
+            this.groupBoxOperazione.Controls.Add(this.textBoxContoDestinazione);
+            this.groupBoxOperazione.Controls.Add(this.label15);
+            this.groupBoxOperazione.Controls.Add(this.label4);
+            this.groupBoxOperazione.Controls.Add(this.textBoxNumOperazione);
+            this.groupBoxOperazione.Controls.Add(this.textBoxContoSorgente);
+            this.groupBoxOperazione.Controls.Add(this.label2);
+            this.groupBoxOperazione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxOperazione.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxOperazione.Name = "groupBoxOperazione";
+            this.groupBoxOperazione.Size = new System.Drawing.Size(1192, 116);
+            this.groupBoxOperazione.TabIndex = 0;
+            this.groupBoxOperazione.TabStop = false;
+            this.groupBoxOperazione.Text = "Operazione";
             // 
-            // richTextBoxLinee
+            // label8
             // 
-            this.richTextBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxLinee.Location = new System.Drawing.Point(3, 16);
-            this.richTextBoxLinee.Name = "richTextBoxLinee";
-            this.richTextBoxLinee.Size = new System.Drawing.Size(1186, 47);
-            this.richTextBoxLinee.TabIndex = 0;
-            this.richTextBoxLinee.Text = "";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1033, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(22, 13);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "Giri";
             // 
-            // groupBoxOperazioni
+            // textBoxGiri
             // 
-            this.groupBoxOperazioni.Controls.Add(this.splitContainer1B_2B_3);
-            this.groupBoxOperazioni.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxOperazioni.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxOperazioni.Name = "groupBoxOperazioni";
-            this.groupBoxOperazioni.Size = new System.Drawing.Size(1192, 425);
-            this.groupBoxOperazioni.TabIndex = 0;
-            this.groupBoxOperazioni.TabStop = false;
-            this.groupBoxOperazioni.Text = "Operazioni";
+            this.textBoxGiri.Location = new System.Drawing.Point(1065, 66);
+            this.textBoxGiri.Name = "textBoxGiri";
+            this.textBoxGiri.Size = new System.Drawing.Size(112, 20);
+            this.textBoxGiri.TabIndex = 39;
+            // 
+            // dateTimeOperazione
+            // 
+            this.dateTimeOperazione.CustomFormat = "dd/MM/yyyy";
+            this.dateTimeOperazione.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeOperazione.Location = new System.Drawing.Point(865, 13);
+            this.dateTimeOperazione.Name = "dateTimeOperazione";
+            this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
+            this.dateTimeOperazione.TabIndex = 28;
+            // 
+            // textBoxValoreOperazione
+            // 
+            this.textBoxValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxValoreOperazione.Location = new System.Drawing.Point(865, 39);
+            this.textBoxValoreOperazione.Name = "textBoxValoreOperazione";
+            this.textBoxValoreOperazione.ReadOnly = true;
+            this.textBoxValoreOperazione.Size = new System.Drawing.Size(150, 20);
+            this.textBoxValoreOperazione.TabIndex = 23;
+            this.textBoxValoreOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Causale operazione";
+            // 
+            // textBoxCausaleOperazione
+            // 
+            this.textBoxCausaleOperazione.Location = new System.Drawing.Point(152, 13);
+            this.textBoxCausaleOperazione.Name = "textBoxCausaleOperazione";
+            this.textBoxCausaleOperazione.Size = new System.Drawing.Size(609, 20);
+            this.textBoxCausaleOperazione.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 13);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Destinazione-Addebito";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(814, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Data ";
+            // 
+            // textBoxContoDestinazione
+            // 
+            this.textBoxContoDestinazione.Location = new System.Drawing.Point(152, 65);
+            this.textBoxContoDestinazione.Name = "textBoxContoDestinazione";
+            this.textBoxContoDestinazione.ReadOnly = true;
+            this.textBoxContoDestinazione.Size = new System.Drawing.Size(609, 20);
+            this.textBoxContoDestinazione.TabIndex = 36;
+            this.textBoxContoDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoDestinazione_MouseClick);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(814, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(29, 13);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "Num";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Sorgente-Spesa";
+            // 
+            // textBoxNumOperazione
+            // 
+            this.textBoxNumOperazione.Location = new System.Drawing.Point(865, 65);
+            this.textBoxNumOperazione.Name = "textBoxNumOperazione";
+            this.textBoxNumOperazione.ReadOnly = true;
+            this.textBoxNumOperazione.Size = new System.Drawing.Size(150, 20);
+            this.textBoxNumOperazione.TabIndex = 30;
+            // 
+            // textBoxContoSorgente
+            // 
+            this.textBoxContoSorgente.Location = new System.Drawing.Point(152, 39);
+            this.textBoxContoSorgente.Name = "textBoxContoSorgente";
+            this.textBoxContoSorgente.ReadOnly = true;
+            this.textBoxContoSorgente.Size = new System.Drawing.Size(609, 20);
+            this.textBoxContoSorgente.TabIndex = 34;
+            this.textBoxContoSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoSorgente_MouseClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(814, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Valore";
+            // 
+            // groupBoxConti
+            // 
+            this.groupBoxConti.Controls.Add(this.splitContainer1B_2B_3);
+            this.groupBoxConti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxConti.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxConti.Name = "groupBoxConti";
+            this.groupBoxConti.Size = new System.Drawing.Size(1192, 365);
+            this.groupBoxConti.TabIndex = 0;
+            this.groupBoxConti.TabStop = false;
+            this.groupBoxConti.Text = "Conti";
             // 
             // splitContainer1B_2B_3
             // 
@@ -339,149 +467,14 @@
             // 
             // splitContainer1B_2B_3.Panel1
             // 
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxGiri);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label8);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label5);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxContoDestinazione);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label4);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxContoSorgente);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label2);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxNumOperazione);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label15);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.dateTimeOperazione);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label7);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxValoreOperazione);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.label1);
-            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.textBoxCausaleOperazione);
+            this.splitContainer1B_2B_3.Panel1.Controls.Add(this.splitContainersplitContainer1B_2B_3B_4A_5);
             // 
             // splitContainer1B_2B_3.Panel2
             // 
             this.splitContainer1B_2B_3.Panel2.Controls.Add(this.splitContainer1B_2B_3B_4);
-            this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 406);
-            this.splitContainer1B_2B_3.SplitterDistance = 100;
+            this.splitContainer1B_2B_3.Size = new System.Drawing.Size(1186, 346);
+            this.splitContainer1B_2B_3.SplitterDistance = 200;
             this.splitContainer1B_2B_3.TabIndex = 0;
-            // 
-            // textBoxGiri
-            // 
-            this.textBoxGiri.Location = new System.Drawing.Point(1068, 63);
-            this.textBoxGiri.Name = "textBoxGiri";
-            this.textBoxGiri.Size = new System.Drawing.Size(112, 20);
-            this.textBoxGiri.TabIndex = 39;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1036, 66);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(22, 13);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "Giri";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 65);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Destinazione-Addebito";
-            // 
-            // textBoxContoDestinazione
-            // 
-            this.textBoxContoDestinazione.Location = new System.Drawing.Point(155, 62);
-            this.textBoxContoDestinazione.Name = "textBoxContoDestinazione";
-            this.textBoxContoDestinazione.ReadOnly = true;
-            this.textBoxContoDestinazione.Size = new System.Drawing.Size(609, 20);
-            this.textBoxContoDestinazione.TabIndex = 36;
-            this.textBoxContoDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoDestinazione_MouseClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 13);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Sorgente-Spesa";
-            // 
-            // textBoxContoSorgente
-            // 
-            this.textBoxContoSorgente.Location = new System.Drawing.Point(155, 36);
-            this.textBoxContoSorgente.Name = "textBoxContoSorgente";
-            this.textBoxContoSorgente.ReadOnly = true;
-            this.textBoxContoSorgente.Size = new System.Drawing.Size(609, 20);
-            this.textBoxContoSorgente.TabIndex = 34;
-            this.textBoxContoSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxContoSorgente_MouseClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(817, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "Valore";
-            // 
-            // textBoxNumOperazione
-            // 
-            this.textBoxNumOperazione.Location = new System.Drawing.Point(868, 62);
-            this.textBoxNumOperazione.Name = "textBoxNumOperazione";
-            this.textBoxNumOperazione.ReadOnly = true;
-            this.textBoxNumOperazione.Size = new System.Drawing.Size(150, 20);
-            this.textBoxNumOperazione.TabIndex = 30;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(817, 68);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 13);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Num";
-            // 
-            // dateTimeOperazione
-            // 
-            this.dateTimeOperazione.CustomFormat = "dd/MM/yyyy";
-            this.dateTimeOperazione.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeOperazione.Location = new System.Drawing.Point(868, 10);
-            this.dateTimeOperazione.Name = "dateTimeOperazione";
-            this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
-            this.dateTimeOperazione.TabIndex = 28;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(817, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Data ";
-            // 
-            // textBoxValoreOperazione
-            // 
-            this.textBoxValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxValoreOperazione.Location = new System.Drawing.Point(868, 36);
-            this.textBoxValoreOperazione.Name = "textBoxValoreOperazione";
-            this.textBoxValoreOperazione.ReadOnly = true;
-            this.textBoxValoreOperazione.Size = new System.Drawing.Size(150, 20);
-            this.textBoxValoreOperazione.TabIndex = 23;
-            this.textBoxValoreOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Causale operazione";
-            // 
-            // textBoxCausaleOperazione
-            // 
-            this.textBoxCausaleOperazione.Location = new System.Drawing.Point(155, 10);
-            this.textBoxCausaleOperazione.Name = "textBoxCausaleOperazione";
-            this.textBoxCausaleOperazione.Size = new System.Drawing.Size(609, 20);
-            this.textBoxCausaleOperazione.TabIndex = 22;
             // 
             // splitContainer1B_2B_3B_4
             // 
@@ -492,9 +485,10 @@
             // 
             // splitContainer1B_2B_3B_4.Panel1
             // 
-            this.splitContainer1B_2B_3B_4.Panel1.Controls.Add(this.splitContainersplitContainer1B_2B_3B_4A_5);
-            this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 302);
-            this.splitContainer1B_2B_3B_4.SplitterDistance = 136;
+            this.splitContainer1B_2B_3B_4.Panel1.Controls.Add(this.groupBoxEsito);
+            this.splitContainer1B_2B_3B_4.Panel2MinSize = 5;
+            this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 142);
+            this.splitContainer1B_2B_3B_4.SplitterDistance = 133;
             this.splitContainer1B_2B_3B_4.TabIndex = 0;
             // 
             // splitContainersplitContainer1B_2B_3B_4A_5
@@ -510,7 +504,7 @@
             // splitContainersplitContainer1B_2B_3B_4A_5.Panel2
             // 
             this.splitContainersplitContainer1B_2B_3B_4A_5.Panel2.Controls.Add(this.groupBoxDestinazione);
-            this.splitContainersplitContainer1B_2B_3B_4A_5.Size = new System.Drawing.Size(1186, 136);
+            this.splitContainersplitContainer1B_2B_3B_4A_5.Size = new System.Drawing.Size(1186, 200);
             this.splitContainersplitContainer1B_2B_3B_4A_5.SplitterDistance = 550;
             this.splitContainersplitContainer1B_2B_3B_4A_5.TabIndex = 0;
             // 
@@ -520,7 +514,7 @@
             this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSorgente.Name = "groupBoxSorgente";
-            this.groupBoxSorgente.Size = new System.Drawing.Size(550, 136);
+            this.groupBoxSorgente.Size = new System.Drawing.Size(550, 200);
             this.groupBoxSorgente.TabIndex = 0;
             this.groupBoxSorgente.TabStop = false;
             this.groupBoxSorgente.Text = "Sorgente - Spesa";
@@ -530,7 +524,7 @@
             this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
             this.treeViewSorgente.Name = "treeViewSorgente";
-            this.treeViewSorgente.Size = new System.Drawing.Size(544, 117);
+            this.treeViewSorgente.Size = new System.Drawing.Size(544, 181);
             this.treeViewSorgente.TabIndex = 0;
             this.treeViewSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseClick);
             this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
@@ -541,7 +535,7 @@
             this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
             this.groupBoxDestinazione.Name = "groupBoxDestinazione";
-            this.groupBoxDestinazione.Size = new System.Drawing.Size(632, 136);
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(632, 200);
             this.groupBoxDestinazione.TabIndex = 0;
             this.groupBoxDestinazione.TabStop = false;
             this.groupBoxDestinazione.Text = "Destinazione - Addebito";
@@ -551,10 +545,30 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            this.treeViewDestinazione.Size = new System.Drawing.Size(626, 117);
+            this.treeViewDestinazione.Size = new System.Drawing.Size(626, 181);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseClick);
             this.treeViewDestinazione.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseDoubleClick);
+            // 
+            // groupBoxEsito
+            // 
+            this.groupBoxEsito.Controls.Add(this.richTextBoxLinee);
+            this.groupBoxEsito.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxEsito.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxEsito.Name = "groupBoxEsito";
+            this.groupBoxEsito.Size = new System.Drawing.Size(1186, 133);
+            this.groupBoxEsito.TabIndex = 0;
+            this.groupBoxEsito.TabStop = false;
+            this.groupBoxEsito.Text = "Esito";
+            // 
+            // richTextBoxLinee
+            // 
+            this.richTextBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLinee.Location = new System.Drawing.Point(3, 16);
+            this.richTextBoxLinee.Name = "richTextBoxLinee";
+            this.richTextBoxLinee.Size = new System.Drawing.Size(1180, 114);
+            this.richTextBoxLinee.TabIndex = 0;
+            this.richTextBoxLinee.Text = "";
             // 
             // openFileDialog1
             // 
@@ -591,10 +605,10 @@
             this.groupBoxGestioneTransizione.PerformLayout();
             this.groupBoxLineeFile.ResumeLayout(false);
             this.groupBoxLineeFile.PerformLayout();
-            this.groupBoxLinee.ResumeLayout(false);
-            this.groupBoxOperazioni.ResumeLayout(false);
+            this.groupBoxOperazione.ResumeLayout(false);
+            this.groupBoxOperazione.PerformLayout();
+            this.groupBoxConti.ResumeLayout(false);
             this.splitContainer1B_2B_3.Panel1.ResumeLayout(false);
-            this.splitContainer1B_2B_3.Panel1.PerformLayout();
             this.splitContainer1B_2B_3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B_2B_3)).EndInit();
             this.splitContainer1B_2B_3.ResumeLayout(false);
@@ -607,6 +621,7 @@
             this.splitContainersplitContainer1B_2B_3B_4A_5.ResumeLayout(false);
             this.groupBoxSorgente.ResumeLayout(false);
             this.groupBoxDestinazione.ResumeLayout(false);
+            this.groupBoxEsito.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -623,9 +638,9 @@
         private System.Windows.Forms.TextBox textBoxLinea;
         private System.Windows.Forms.Button butNext;
         private System.Windows.Forms.SplitContainer splitContainer1B_2A;
-        private System.Windows.Forms.GroupBox groupBoxLinee;
+        private System.Windows.Forms.GroupBox groupBoxEsito;
         private System.Windows.Forms.RichTextBox richTextBoxLinee;
-        private System.Windows.Forms.GroupBox groupBoxOperazioni;
+        private System.Windows.Forms.GroupBox groupBoxConti;
         private System.Windows.Forms.SplitContainer splitContainer1B_2B_3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxNumOperazione;
@@ -654,5 +669,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.SplitContainer splitContainer1_2AH;
         private System.Windows.Forms.GroupBox groupBoxGestioneTransizione;
+        private System.Windows.Forms.GroupBox groupBoxOperazione;
     }
 }
