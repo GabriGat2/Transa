@@ -53,7 +53,7 @@ namespace Transa
         /// <summary>
         /// Transizione attiva
         /// </summary>
-        protected CTransizione transizione = new CTransizione_BP25();
+        protected CTransizione transizione = new CTransizione();
 
         /// <summary>
         /// Conto sorgente
@@ -328,6 +328,17 @@ namespace Transa
             //    textBoxValoreOperazione.Text = transizione.sAddebito;
             //else
             //    textBoxValoreOperazione.Text = transizione.sValore;
+
+            // assegna conto sorgente
+            string contoSrc = transizione.GetContoSorgente();
+            if (contoSrc != null)
+                ContoSorgente.Nome = contoSrc;
+
+            // assegna conto destinazione
+            string contoDst = transizione.GetContoDestinazione();
+            if (contoDst != null)
+                ContoDestinazione.Nome = contoDst;
+
 
             // cambia lo stato della transizione
             transizione.Stato = CTransizione.EStatoTransizione.Analizzata;

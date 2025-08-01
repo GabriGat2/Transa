@@ -131,7 +131,21 @@ namespace Transa
             return ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
         }
 
-
-
+        /// <summary>
+        /// Rende il conto sorgente, se non esiste rende null
+        /// </summary>
+        /// <returns></returns>
+        public override string GetContoSorgente()
+        {
+            return null;
+        }
+        /// <summary>
+        /// Rende il conto destinazione, se non esiste rende null
+        /// </summary>
+        /// <returns></returns>
+        public override string GetContoDestinazione()
+        {
+            return null;
+        }
     }
 }

@@ -304,7 +304,160 @@ namespace Transa
             dValore *= -1;
             return dValore.ToString("#0.00");
         }
+        /// <summary>
+        /// Rende il conto sorgente, se non esiste rende null
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetContoSorgente()
+        {
+            // Analizza spesa Bea
+            string conto = CampiTransizione[(int)EColonneTransizione.SpesaBea];
+
+            if (conto != null)
+            {
+                switch (conto.ToLower())
+                {
+
+                    case "spese beatrice":
+                        return "Uscite:O:Spese Beatrice";
+                    case "prestiti & rimborsi":
+                        return "Uscite:O:Spese Beatrice:Prestiti & Rimborsi";
+                    case "ristorante":
+                        return "Uscite:O:Spese Beatrice:Ristorante";
+                    case "spesemisteriose":
+                        return "Uscite:O:Spese Beatrice:SpeseMisteriose";
+                    case "vacanze":
+                        return "Uscite:O:Spese Beatrice:Vacanze";
+                    case "varie":
+                        return "Uscite:O:Spese Beatrice:Varie";
+                    default:
+                        if (conto.Length == 0)
+                            break;
+                        else
+                        {
+                            var result3 = MessageBox.Show(conto,
+                                "Questo conto non è gestito!!!",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Error);
+                            return null;
+                        }
+                        break;
+                }
+            }
+
+            // Analizza istruzione Bea Bea
+            conto = CampiTransizione[(int)EColonneTransizione.Istruzioni];
+
+            if (conto != null)
+            {
+                switch (conto.ToLower())
+                {
+
+                    case "beatrice":
+                        return "Uscite:O:Istruzione:Beatrice";
+
+                    case "cancelleria":
+                        return "Uscite: O:Istruzione:Beatrice:Cancelleria";
+
+                    case "corsi":
+                        return "Uscite:O:Istruzione:Beatrice:Corsi";
+
+                    case "escursioni":
+                        return "Uscite:O:Istruzione:Beatrice:Escursioni";
+
+                    case "eventi":
+                        return "Uscite:O:Istruzione:Beatrice:Eventi";
+
+                    case "lezioniLezioni":
+                        return "Uscite:O:Istruzione:Beatrice:LezioniLezioni";
+
+                    case "libri":
+                        return "Uscite:O:Istruzione:Beatrice:Libri";
+
+                    case "mensa":
+                        return "Uscite:O:Istruzione:Beatrice:Mensa";
+
+                    case "patente":
+                        return "Uscite:O:Istruzione:Beatrice:Patente";
+
+                    case "tasporti":
+                        return "Uscite:O:Istruzione:Beatrice:Tasporti";
+
+                    case "tasse":
+                        return "Uscite:O:Istruzione:Beatrice:Tasse";
+
+                    case "test università":
+                        return "Uscite:O:Istruzione:Beatrice:Test Università";
+
+                    case "trasporti":
+                        return "Uscite:O:Istruzione:Beatrice:Trasporti";
+
+                    case "università":
+                        return "Uscite:O:Istruzione:Beatrice:Università";
+
+                    case "varie":
+                        return "Uscite:O:Istruzione:Beatrice:Varie";
+
+                    case "banca":
+                        return "Uscite:O:Banca:OUT_BancoPosta-BG,OUT_BancoPosta-BG";
 
 
+                    default:
+                        if (conto.Length == 0)
+                            break;
+                        else
+                        {
+                            var result3 = MessageBox.Show(conto,
+                                "Questo conto non è gestito!!!",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Error);
+                            return null;
+                        }
+                        break;
+                }
+                return null;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Rende il conto destinazione, se non esiste rende null
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetContoDestinazione()
+        {
+            // Analizza spesa Bea
+            string conto = CampiTransizione[(int)EColonneTransizione.Rimborso];
+
+            if (conto != null)
+            {
+                if (conto.Length == 0)
+                    return "Attivita:AttivitaCorrenti:BancoPosta-BG";
+
+                switch (conto.ToLower())
+                {
+
+                    case "rimborso":
+                        return "Attivita:AttivitaCorrenti:BancoPosta-BG:BG_Rimborso";
+                    default:
+                        if (conto.Length == 0)
+                            break;
+                        else
+                        {
+                            var result3 = MessageBox.Show(conto,
+                                "Questo conto non è gestito!!!",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Error);
+                            return null;
+                        }
+                        break;
+                }
+            }
+            return null;
+        }
     }
 }
+
+
+
+
+
