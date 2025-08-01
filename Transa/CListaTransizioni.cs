@@ -18,6 +18,10 @@ namespace Transa
         private int indice;
         public int Indice { get => indice; }
         /// <summary>
+        /// Numero delle transioni
+        /// </summary>
+        public int NumeroTransizioni { get => transizioni.Count;}
+        /// <summary>
         /// Costruttore
         /// </summary>
         public CListaTransizioni()
