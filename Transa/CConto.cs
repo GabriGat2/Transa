@@ -30,6 +30,22 @@ namespace Transa
         private string nome = "";
         public string Nome { get => nome; set => AssegnaNomeConto(value); }
 
+
+        /// <summary>
+        /// Rende il nome del conto finale del path
+        /// </summary>
+        public string NomeUltimo { get => GetNomeUltimo();}
+        /// <summary>
+        /// Estra il nome del conto finale del path
+        /// </summary>
+        /// <returns></returns>
+        private string GetNomeUltimo()
+        {
+            string[] porzioniConto = Nome.Split(':');
+            return porzioniConto[porzioniConto.Length - 1];
+        }
+
+
         /// <summary>
         /// Casella di testo associata
         /// </summary>

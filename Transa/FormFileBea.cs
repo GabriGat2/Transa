@@ -63,6 +63,12 @@ namespace Transa
         /// Conto Destinazione
         /// </summary>
         public CConto ContoDestinazione;
+        /// <summary>
+        /// Colore di foregraund originale di textBoxCausaleOperazione
+        /// </summary>
+        private Color textBoxCausaleOperazione_ForeColor;
+
+
 
         /// <summary>
         /// Costruttore
@@ -73,10 +79,13 @@ namespace Transa
             // Asssegna l'oggeto per la gestione dei dati comuni
             lData = rLdata;
 
-            //// Azzera la lista delle transizioni
-            //transizioni.Clear();
-
+            // Inizializza componenti
             InitializeComponent();
+
+            // salva il colore della casella 
+            textBoxCausaleOperazione_ForeColor = textBoxCausaleOperazione.ForeColor;
+
+            // Inizializzazione specifica della classe
             Inizializzazione();
         }
         /// <summary>
@@ -155,6 +164,14 @@ namespace Transa
                     }
                 }
 
+                // resetta causale operazione
+                textBoxCausaleOperazione.Text = "";
+                textBoxCausaleOperazione.ForeColor = textBoxCausaleOperazione_ForeColor;
+
+                // riabilita i button next e assegna
+                butNext.Visible = true;
+                butAggiorna.Visible = true;
+
                 // Preleva la prima transizione
                 bool reso = PrelevaTransizione(false);
              }
@@ -175,7 +192,7 @@ namespace Transa
             // preleva una nuova transizione
             bool reso = PrelevaTransizione(true);
         }
-        private void AggiornaStatoTrasione()
+        private void AggiornaStatoTransizione()
         {
             labelStatoTranzizione.Text = transizione.GetStato();
         }
@@ -202,14 +219,44 @@ namespace Transa
                     return false;
             }
 
-            // prelega la transizione
+            // preleva la transizione
             if (next)
+            { 
+                // Estrae la transizione
                 transizione.Transizione = transizioni.Next();
+
+                // verifica se c'è una transizione
+                if (transizione.Transizione == null)
+                {
+                    // assegna causale operazione
+                    textBoxCausaleOperazione.Text = "Tutte le trasizioni sono state analizzate";
+                    textBoxCausaleOperazione.ForeColor = Color.Red;
+
+                    // se arriva qui significa che tutte le transizioni sono state analizzate
+                    richTextBoxLinee.AppendText("\n\n");
+                    richTextBoxLinee.AppendText("-----------------------------------------------------------------------------------------\n");
+                    richTextBoxLinee.AppendText("----- Tutte le trasizioni sono state analizzate\n");
+                    richTextBoxLinee.AppendText("-----------------------------------------------------------------------------------------\n");
+
+                    // disabilta i button next e assegna
+                    butNext.Visible = false;
+                    butAggiorna.Visible = false;
+
+                    // Scroll della finestra di esito
+                    richTextBoxLinee.ScrollToCaret();
+
+                    // aggiorna lo stato della transizione
+                    AggiornaStatoTransizione();
+
+                    return false;
+                }
+
+            }
             else
                 transizione.Transizione = transizioni.Get();
 
             // Assegna al numero dell'operazione l'Indice della trasizione
-            textBoxNumOperazione.Text = transizioni.Indice.ToString() + textBoxOffsetNum.ToString();
+            textBoxNumOperazione.Text = (transizioni.Indice + Convert.ToInt32(textBoxOffsetNum.Text)).ToString();
 
             // Aggiorna il contatore di linee del file transioni
             labelLinee.Text = transizioni.Indice.ToString() + "\\" +  transizioni.NumeroTransizioni.ToString();
@@ -225,7 +272,9 @@ namespace Transa
                 textBoxLinea.Text = transizione.Transizione;
 
                 richTextBoxLinee.AppendText("\n");
+                richTextBoxLinee.AppendText("linea numero: " + labelLinee.Text + "            ");
                 richTextBoxLinee.AppendText("Transizione numero: " + textBoxNumOperazione.Text.ToString() + "\n");
+
                 richTextBoxLinee.AppendText(transizione.Transizione + " \n");
                 reso = true;
             }
@@ -242,7 +291,7 @@ namespace Transa
             // Scroll della finestra di esito
             richTextBoxLinee.ScrollToCaret();
 
-            AggiornaStatoTrasione();
+            AggiornaStatoTransizione();
             return reso;
         }
         /// <summary>
@@ -274,7 +323,11 @@ namespace Transa
             dateTimeOperazione.Value = transizione.Data;
 
             // Assegna il valore dell'operazione
-            textBoxValoreOperazione.Text = transizione.Valore;
+            textBoxValoreOperazione.Text = transizione.sAddebito;
+            //if (radioButtonSkipAccrediti.Checked)
+            //    textBoxValoreOperazione.Text = transizione.sAddebito;
+            //else
+            //    textBoxValoreOperazione.Text = transizione.sValore;
 
             // cambia lo stato della transizione
             transizione.Stato = CTransizione.EStatoTransizione.Analizzata;
@@ -314,21 +367,37 @@ namespace Transa
                 return false;
             }
 
-            // esegue l'assegnazione della transizione
-            GetTransiction(ref transactionDataGridView);
+            // Aggiorna finestra esito
+            richTextBoxLinee.AppendText("Valore: " + textBoxValoreOperazione.Text.ToString() + "\n");
+            richTextBoxLinee.AppendText("Conto spesa: " + textBoxContoSorgente.Text.ToString() + "\n");
+            richTextBoxLinee.AppendText("Conto addebito: " + textBoxContoDestinazione.Text.ToString() + "\n");
 
-            // cambia lo stato della transizione
-            transizione.Stato = CTransizione.EStatoTransizione.Assegnata;
+
+            // verifica che il valore dell'operazione dia diverso da 0
+            if (transizione.Addebito != 0.0)
+            {
+                // esegue l'assegnazione della transizione
+                GetTransiction(ref transactionDataGridView);
+
+                // cambia lo stato della transizione
+                transizione.Stato = CTransizione.EStatoTransizione.Assegnata;
+                richTextBoxLinee.AppendText("La transizione è stata assegnata correttamente\n");
+            }
+            else
+            {
+                // cambia lo stato della transizione
+                transizione.Stato = CTransizione.EStatoTransizione.NonAssegnata;
+                richTextBoxLinee.AppendText("La transizione NON è stata assegnata\n");
+            }
 
             // Invalita i conti
             ContoSorgente.Invalida();
             ContoDestinazione.Invalida();
 
             // Aggiorna lo stato della transizione
-            AggiornaStatoTrasione();
+            AggiornaStatoTransizione();
 
             // esegue lo scroll della finestra di esito
-            richTextBoxLinee.AppendText("La transizione è stata assegnata correttamente\n");
             richTextBoxLinee.ScrollToCaret();
 
             return true;
@@ -635,26 +704,6 @@ namespace Transa
         /// <returns></returns>
         public void GeneraTransizioniBancoPosta25(ref DataGridView transactionDataGrid)
         {
-            //// verifica che le tabelle sorgente e destinazione contengano lo stesso numero di transizioni
-            //int nTransizioniSorgente = dataGridViewSorgenteOperazione.Rows.Count - 1;
-            //int nTransizioniDestinazione = dataGridViewDestinazioneOperazione.Rows.Count - 1;
-            //if (nTransizioniSorgente != nTransizioniDestinazione)
-            //{
-            //    string messaggio2 = "Lunghezza tabSorgente     = " + nTransizioniSorgente.ToString() + "\n" +
-            //                        "Lunghezza tabDestinazione = " + nTransizioniDestinazione.ToString();
-
-            //    LData.ETransaErrore esito = LData.ETransaErrore.E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse;
-
-            //    lData.StampaMessaggioErrore(esito, messaggio2);
-            //    return;
-            //}
-
-            // compone nome operazione parziale
-            string nomeOperazione = textBoxCausaleOperazione.Text;
-
-            // Recupera il numero dell'operazione
-            int numOperazione = Convert.ToInt32(textBoxNumOperazione.Text);
-
             for (int i = 0; i < 1; i++)
             {
                 // crea la stringa campi
@@ -664,13 +713,13 @@ namespace Transa
                 campiS[0] = transizione.DataAMG(transizione.Data.ToShortDateString());   //  0 "Data",
                 campiD[0] = campiS[0];
 
-                campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];     //  1 "ID transazione",
+                campiS[1] = lData.FilteredCellValuesOfTheTrasizioneLine[1];      //  1 "ID transazione",
                 campiD[1] = campiS[1];
 
-                campiS[2] = (numOperazione + i).ToString(); //lData.FilteredCellValuesOfTheTrasizioneLine[2];      //  2 "Numero",
+                campiS[2] = textBoxNumOperazione.Text;                           //  2 "Numero",
                 campiD[2] = campiS[2];
 
-                campiS[3] = nomeOperazione + "===" + textBoxValoreOperazione;  //  3 "Descrizione",
+                campiS[3] = textBoxCausaleOperazione.Text;                       //  3 "Descrizione",
                 campiD[3] = campiS[3];
 
                 campiS[4] = lData.FilteredCellValuesOfTheTrasizioneLine[4];      //  4 "Note",
@@ -688,28 +737,24 @@ namespace Transa
                 campiS[8] = "Spesa";                                             //  8 "Promemoria",
                 campiD[8] = "Addebito";                                          //  8 "Promemoria",
 
-                campiS[9] = textBoxContoSorgente.Text;                           //  9 "Nome completo del conto",
-                campiD[9] = textBoxContoDestinazione.Text;                       //  9 "Nome completo del conto",
+                campiS[9] = ContoSorgente.Nome;                                  //  9 "Nome completo del conto sorgente",
+                campiD[9] = ContoDestinazione.Nome;                              //  9 "Nome completo del conto destinazione",
 
+                campiS[10] = ContoSorgente.NomeUltimo;                           // 10 "Nome ultimo conto sorgente",
+                campiD[10] = ContoDestinazione.NomeUltimo;                       // 10 "Nome dell'ultimo conto destinazione",
 
-                string[] porzioniContoS = textBoxContoSorgente.Text.Split(':');
-                string[] porzioniContoD = textBoxContoDestinazione.Text.Split(':');
-                campiS[10] = porzioniContoS[porzioniContoS.Length - 1]; // 10 "Nome del conto",
-                campiD[10] = porzioniContoD[porzioniContoD.Length - 1]; // 10 "Nome del conto",
+                string simbolo = "€";
+                campiS[11] = transizione.ssAddebito(simbolo);                   // 11 "Importo con Simb",
+                campiD[11] = transizione.ssnAddebito(simbolo);                    // 11 "Importo con Simb",
 
-                string valore = textBoxValoreOperazione.Text;
-                string valoreSimb = valore + " €";
-                campiS[11] = transizione.NegaValore(valoreSimb);                             // 11 "Importo con Simb",
-                campiD[11] = valoreSimb;                                         // 11 "Importo con Simb",
+                campiS[12] = transizione.sAddebito;                             // 12 "Importo Num.",
+                campiD[12] = transizione.snAddebito;                              // 12 "Importo Num.",
 
-                campiS[12] = transizione.NegaValore(valore);                                 // 12 "Importo Num.",
-                campiD[12] = valore;                                             // 12 "Importo Num.",
+                campiS[13] = transizione.ssAddebito(simbolo);                   // 13 "Valore con Simb",
+                campiD[13] = transizione.ssnAddebito(simbolo);                    // 13 "Valore con Simb",
 
-                campiS[13] = transizione.NegaValore(valoreSimb);                             // 13 "Valore con Simb",
-                campiD[13] = valoreSimb;                                         // 13 "Valore con Simb",
-
-                campiS[14] = transizione.NegaValore(valore);                                 // 14 "Valore Num.",
-                campiD[14] = valore;                                             // 14 "Valore Num.",
+                campiS[14] = transizione.sAddebito;                             // 14 "Valore Num.",
+                campiD[14] = transizione.snAddebito;                              // 14 "Valore Num.",
 
                 campiS[15] = lData.FilteredCellValuesOfTheTrasizioneLine[15];    // 15 "Riconcilia",
                 campiD[15] = campiS[15];
@@ -779,6 +824,7 @@ namespace Transa
         {
             EstraeTagDestinazione();
         }
+        
     }
 }
  

@@ -36,6 +36,7 @@
             this.splitContainer1B_2A = new System.Windows.Forms.SplitContainer();
             this.splitContainer1_2AH = new System.Windows.Forms.SplitContainer();
             this.groupBoxGestioneTransizione = new System.Windows.Forms.GroupBox();
+            this.labelLinee = new System.Windows.Forms.Label();
             this.labelStatoTranzizione = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.radioButtonSkipAccrediti = new System.Windows.Forms.RadioButton();
@@ -70,7 +71,6 @@
             this.groupBoxEsito = new System.Windows.Forms.GroupBox();
             this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.labelLinee = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -224,6 +224,15 @@
             this.groupBoxGestioneTransizione.TabStop = false;
             this.groupBoxGestioneTransizione.Text = "Gestione Transizione";
             // 
+            // labelLinee
+            // 
+            this.labelLinee.AutoSize = true;
+            this.labelLinee.Location = new System.Drawing.Point(165, 28);
+            this.labelLinee.Name = "labelLinee";
+            this.labelLinee.Size = new System.Drawing.Size(25, 13);
+            this.labelLinee.TabIndex = 38;
+            this.labelLinee.Text = "???";
+            // 
             // labelStatoTranzizione
             // 
             this.labelStatoTranzizione.AutoSize = true;
@@ -330,7 +339,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1033, 79);
+            this.label8.Location = new System.Drawing.Point(826, 81);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 38;
@@ -338,16 +347,17 @@
             // 
             // textBoxOffsetNum
             // 
-            this.textBoxOffsetNum.Location = new System.Drawing.Point(1074, 76);
+            this.textBoxOffsetNum.Location = new System.Drawing.Point(867, 78);
             this.textBoxOffsetNum.Name = "textBoxOffsetNum";
             this.textBoxOffsetNum.Size = new System.Drawing.Size(103, 20);
             this.textBoxOffsetNum.TabIndex = 39;
+            this.textBoxOffsetNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dateTimeOperazione
             // 
             this.dateTimeOperazione.CustomFormat = "dd/MM/yyyy";
             this.dateTimeOperazione.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeOperazione.Location = new System.Drawing.Point(865, 23);
+            this.dateTimeOperazione.Location = new System.Drawing.Point(1027, 23);
             this.dateTimeOperazione.Name = "dateTimeOperazione";
             this.dateTimeOperazione.Size = new System.Drawing.Size(150, 20);
             this.dateTimeOperazione.TabIndex = 28;
@@ -355,7 +365,7 @@
             // textBoxValoreOperazione
             // 
             this.textBoxValoreOperazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxValoreOperazione.Location = new System.Drawing.Point(865, 49);
+            this.textBoxValoreOperazione.Location = new System.Drawing.Point(1027, 49);
             this.textBoxValoreOperazione.Name = "textBoxValoreOperazione";
             this.textBoxValoreOperazione.ReadOnly = true;
             this.textBoxValoreOperazione.Size = new System.Drawing.Size(150, 20);
@@ -375,7 +385,7 @@
             // 
             this.textBoxCausaleOperazione.Location = new System.Drawing.Point(152, 23);
             this.textBoxCausaleOperazione.Name = "textBoxCausaleOperazione";
-            this.textBoxCausaleOperazione.Size = new System.Drawing.Size(609, 20);
+            this.textBoxCausaleOperazione.Size = new System.Drawing.Size(818, 20);
             this.textBoxCausaleOperazione.TabIndex = 22;
             // 
             // label5
@@ -390,7 +400,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(814, 23);
+            this.label7.Location = new System.Drawing.Point(976, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 13);
             this.label7.TabIndex = 24;
@@ -408,7 +418,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(814, 81);
+            this.label15.Location = new System.Drawing.Point(976, 78);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(29, 13);
             this.label15.TabIndex = 29;
@@ -425,11 +435,12 @@
             // 
             // textBoxNumOperazione
             // 
-            this.textBoxNumOperazione.Location = new System.Drawing.Point(865, 75);
+            this.textBoxNumOperazione.Location = new System.Drawing.Point(1027, 78);
             this.textBoxNumOperazione.Name = "textBoxNumOperazione";
             this.textBoxNumOperazione.ReadOnly = true;
             this.textBoxNumOperazione.Size = new System.Drawing.Size(150, 20);
             this.textBoxNumOperazione.TabIndex = 30;
+            this.textBoxNumOperazione.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBoxContoSorgente
             // 
@@ -443,7 +454,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(814, 52);
+            this.label2.Location = new System.Drawing.Point(976, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 32;
@@ -549,7 +560,7 @@
             this.splitContainer1B_2B_3B_4.Panel1.Controls.Add(this.groupBoxEsito);
             this.splitContainer1B_2B_3B_4.Panel2MinSize = 5;
             this.splitContainer1B_2B_3B_4.Size = new System.Drawing.Size(1186, 246);
-            this.splitContainer1B_2B_3B_4.SplitterDistance = 237;
+            this.splitContainer1B_2B_3B_4.SplitterDistance = 217;
             this.splitContainer1B_2B_3B_4.TabIndex = 0;
             // 
             // groupBoxEsito
@@ -558,7 +569,7 @@
             this.groupBoxEsito.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxEsito.Location = new System.Drawing.Point(0, 0);
             this.groupBoxEsito.Name = "groupBoxEsito";
-            this.groupBoxEsito.Size = new System.Drawing.Size(1186, 237);
+            this.groupBoxEsito.Size = new System.Drawing.Size(1186, 217);
             this.groupBoxEsito.TabIndex = 0;
             this.groupBoxEsito.TabStop = false;
             this.groupBoxEsito.Text = "Esito";
@@ -568,22 +579,13 @@
             this.richTextBoxLinee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxLinee.Location = new System.Drawing.Point(3, 16);
             this.richTextBoxLinee.Name = "richTextBoxLinee";
-            this.richTextBoxLinee.Size = new System.Drawing.Size(1180, 218);
+            this.richTextBoxLinee.Size = new System.Drawing.Size(1180, 198);
             this.richTextBoxLinee.TabIndex = 0;
             this.richTextBoxLinee.Text = "";
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // labelLinee
-            // 
-            this.labelLinee.AutoSize = true;
-            this.labelLinee.Location = new System.Drawing.Point(165, 28);
-            this.labelLinee.Name = "labelLinee";
-            this.labelLinee.Size = new System.Drawing.Size(25, 13);
-            this.labelLinee.TabIndex = 38;
-            this.labelLinee.Text = "???";
             // 
             // FormFileBea
             // 

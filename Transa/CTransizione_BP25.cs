@@ -57,29 +57,81 @@ namespace Transa
                 return new DateTime(1959, 9, 2);
         }
 
+        ///// <summary>
+        ///// Rende il valore dell'operazione
+        ///// </summary>
+        //public override string Valore { get => GetValore(); }
+        //protected override string GetValore()
+        //{
+        //    if (!Scomponibile())
+        //        return "Non disponibile";
+
+        //    // Estrae addebito
+        //    double addebito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
+
+        //    // Estrae accredito
+        //    double accredito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Accredito]);
+
+        //    // Verifica che non siano entrambi diversi da 0
+        //    if (addebito > 0.0 && accredito > 0.0)
+        //        return "Conflitto";
+
+        //    if (addebito > 0.0)
+        //        return (addebito * -1.0).ToString();
+        //    else
+        //        return (accredito).ToString();
+        //}
+
+
         /// <summary>
         /// Rende il valore dell'operazione
         /// </summary>
-        public override string Valore { get => GetValore(); }
-        protected override string GetValore()
+        public override double Valore { get => GetValore(); }
+
+        protected override double GetValore()
         {
             if (!Scomponibile())
-                return "Non disponibile";
-
-            // Estrae addebito
-            double addebito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
-
-            // Estrae accredito
-            double accredito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Accredito]);
+                return 0.0;
 
             // Verifica che non siano entrambi diversi da 0
-            if (addebito > 0.0 && accredito > 0.0)
-                return "Conflitto";
+            if (Addebito > 0.0 && Accredito > 0.0)
+                return 0;
 
-            if (addebito > 0.0)
-                return (addebito * -1.0).ToString();
+            if (Addebito > 0.0)
+                return (Addebito * -1.0);
             else
-                return (accredito).ToString();
+                return (Accredito);
         }
+
+
+        /// <summary>
+        /// Valore dell'accredito
+        /// </summary>
+        public override double Accredito { get => GetAccredito(); }
+        protected override double GetAccredito()
+        {
+            if (!Scomponibile())
+                return 0.0;
+
+            // Estrae accredito
+            return ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Accredito]);
+        }
+
+
+        /// <summary>
+        /// Valore dell'addebito
+        /// </summary>
+        public override double Addebito { get => GetAddebito(); }
+        protected override double GetAddebito()
+        {
+            if (!Scomponibile())
+                return 0.0;
+
+            // Estrae accredito
+            return ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
+        }
+
+
+
     }
 }

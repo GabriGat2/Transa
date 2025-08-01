@@ -32,6 +32,7 @@ namespace Transa
             Selezionata,            // 2               
             Analizzata,             // 3   
             Assegnata,              // 4
+            NonAssegnata,           // 5
         };
         /// <summary>
         /// Stato della transizione
@@ -86,28 +87,98 @@ namespace Transa
         /// <summary>
         /// Rende il valore dell'operazione
         /// </summary>
-        public virtual string Valore { get => GetValore(); }
-        protected virtual string GetValore()
+        public virtual double Valore { get => GetValore(); }
+
+        protected virtual double GetValore()
         {
             if (!Scomponibile())
-                return "Non disponibile";
-
-            // Estrae addebito
-            double addebito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
-
-            // Estrae accredito
-            double accredito = ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Accredito]);
+                return 0.0;
 
             // Verifica che non siano entrambi diversi da 0
-            if (addebito > 0.0 && accredito > 0.0)
-                return "Conflitto";
+            if (Addebito > 0.0 && Accredito > 0.0)
+                return 0;
 
-            if (addebito > 0.0)
-                return (addebito * -1.0).ToString();
+            if (Addebito > 0.0)
+                return (Addebito * -1.0);
             else
-                return (accredito ).ToString();
+                return (Accredito );
         }
+        /// <summary>
+        /// Rende il valore dell'operazione in formato stringa
+        /// </summary>
+        public string sValore { get => GetValore().ToString("#0.##"); }
+        /// <summary>
+        /// Rende il valore dell'operazione in formato stringa negato
+        /// </summary>
+        public string snValore { get => (GetValore() * -1.0).ToString("#0.##"); }
+        /// <summary>
+        /// Valore del valore in formato string con simbolo
+        /// </summary>
+        public string ssValore(string simbolo) { return sValore + " " + simbolo; }
+        /// <summary>
+        /// Valore del valore negato in formato string con simbolo
+        /// </summary>
+        public string ssnValore(string simbolo) { return snValore + " " + simbolo; }
 
+
+        /// <summary>
+        /// Valore dell'accredito
+        /// </summary>
+        public virtual double Accredito { get => GetAccredito();}
+        protected virtual double GetAccredito()
+        {
+            if (!Scomponibile())
+                return 0.0;
+
+            // Estrae accredito
+            return ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Accredito]);
+        }
+        /// <summary>
+        /// Valore dell'accredito in formato string
+        /// </summary>
+        public string sAccredito { get => GetAccredito().ToString("#0.##"); }
+        /// <summary>
+        /// Valore dell'accredito negato in formato string
+        /// </summary>
+        public string snAccredito { get => (GetAccredito() * -1.0).ToString("#0.##"); }
+        /// <summary>
+        /// Valore dell'Accredito in formato string con simbolo
+        /// </summary>
+        public string ssAccredito(string simbolo) { return sAccredito +" " + simbolo; }
+        /// <summary>
+        /// Valore dell'Accredito negato in formato string con simbolo
+        /// </summary>
+        public string ssnAccredito(string simbolo) { return snAccredito +" " + simbolo; }
+
+
+        /// <summary>
+        /// Valore dell'addebito
+        /// </summary>
+        public virtual double Addebito { get => GetAddebito(); }
+        protected virtual double GetAddebito()
+        {
+            if (!Scomponibile())
+                return 0.0;
+
+            // Estrae accredito
+            return ConvertAG.ToDouble0(CampiTransizione[(int)EColonneTransizione.Addebito]);
+        }
+        /// <summary>
+        /// Valore dell'addebito in formato string
+        /// </summary>
+        public string sAddebito { get => GetAddebito().ToString("#0.##"); }
+        /// <summary>
+        /// Valore dell'addebito negato in formato string
+        /// </summary>
+        public string snAddebito { get => (GetAddebito() * -1.0).ToString("#0.##"); }
+        /// <summary>
+        /// Valore dell'addebito in formato string con simbolo
+        /// </summary>
+        public string ssAddebito (string simbolo) { return sAddebito + " " + simbolo; }
+        /// <summary>
+        /// Valore dell'addebito negato in formato string con simbolo
+        /// </summary>
+        public string ssnAddebito(string simbolo) { return snAddebito + " " + simbolo; }
 
 
         /// <summary>
@@ -127,14 +198,20 @@ namespace Transa
             // assegna la transizione
             transizione = value;
 
-            // scompone i campi della transizione
-            ScomponeTransizione();
-
-            // cambia lo stato della transizione
-            if (Scomponibile())
-                stato = EStatoTransizione.Selezionata;
-            else
+            // verifica il contenuto della transizione
+            if ((transizione == null) || (transizione.Length == 0))
                 stato = EStatoTransizione.Vuota;
+            else
+            {
+                // scompone i campi della transizione
+                ScomponeTransizione();
+
+                // cambia lo stato della transizione
+                if (Scomponibile())
+                    stato = EStatoTransizione.Selezionata;
+                else
+                    stato = EStatoTransizione.Vuota;
+            }
         }
         /// <summary>
         /// Scompone la transione
