@@ -524,7 +524,6 @@
             this.treeViewSorgente.Name = "treeViewSorgente";
             this.treeViewSorgente.Size = new System.Drawing.Size(544, 201);
             this.treeViewSorgente.TabIndex = 0;
-            this.treeViewSorgente.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseClick);
             this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
             // 
             // groupBoxDestinazione
@@ -545,7 +544,6 @@
             this.treeViewDestinazione.Name = "treeViewDestinazione";
             this.treeViewDestinazione.Size = new System.Drawing.Size(626, 201);
             this.treeViewDestinazione.TabIndex = 0;
-            this.treeViewDestinazione.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseClick);
             this.treeViewDestinazione.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseDoubleClick);
             // 
             // splitContainer1B_2B_3B_4

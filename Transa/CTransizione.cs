@@ -106,11 +106,11 @@ namespace Transa
         /// <summary>
         /// Rende il valore dell'operazione in formato stringa
         /// </summary>
-        public string sValore { get => GetValore().ToString("#0.##"); }
+        public string sValore { get => GetValore().ToString("#0.00"); }
         /// <summary>
         /// Rende il valore dell'operazione in formato stringa negato
         /// </summary>
-        public string snValore { get => (GetValore() * -1.0).ToString("#0.##"); }
+        public string snValore { get => (GetValore() * -1.0).ToString("#0.00"); }
         /// <summary>
         /// Valore del valore in formato string con simbolo
         /// </summary>
@@ -136,11 +136,11 @@ namespace Transa
         /// <summary>
         /// Valore dell'accredito in formato string
         /// </summary>
-        public string sAccredito { get => GetAccredito().ToString("#0.##"); }
+        public string sAccredito { get => GetAccredito().ToString("#0.00"); }
         /// <summary>
         /// Valore dell'accredito negato in formato string
         /// </summary>
-        public string snAccredito { get => (GetAccredito() * -1.0).ToString("#0.##"); }
+        public string snAccredito { get => (GetAccredito() * -1.0).ToString("#0.00"); }
         /// <summary>
         /// Valore dell'Accredito in formato string con simbolo
         /// </summary>
@@ -166,11 +166,11 @@ namespace Transa
         /// <summary>
         /// Valore dell'addebito in formato string
         /// </summary>
-        public string sAddebito { get => GetAddebito().ToString("#0.##"); }
+        public string sAddebito { get => GetAddebito().ToString("#0.00"); }
         /// <summary>
         /// Valore dell'addebito negato in formato string
         /// </summary>
-        public string snAddebito { get => (GetAddebito() * -1.0).ToString("#0.##"); }
+        public string snAddebito { get => (GetAddebito() * -1.0).ToString("#0.00"); }
         /// <summary>
         /// Valore dell'addebito in formato string con simbolo
         /// </summary>
@@ -337,8 +337,8 @@ namespace Transa
                         {
                             var result3 = MessageBox.Show(conto,
                                 "Questo conto non è gestito!!!",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Error);
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                             return null;
                         }
                         break;
@@ -357,7 +357,7 @@ namespace Transa
                         return "Uscite:O:Istruzione:Beatrice";
 
                     case "cancelleria":
-                        return "Uscite: O:Istruzione:Beatrice:Cancelleria";
+                        return "Uscite:O:Istruzione:Beatrice:Cancelleria";
 
                     case "corsi":
                         return "Uscite:O:Istruzione:Beatrice:Corsi";
@@ -379,9 +379,6 @@ namespace Transa
 
                     case "patente":
                         return "Uscite:O:Istruzione:Beatrice:Patente";
-
-                    case "tasporti":
-                        return "Uscite:O:Istruzione:Beatrice:Tasporti";
 
                     case "tasse":
                         return "Uscite:O:Istruzione:Beatrice:Tasse";
@@ -409,8 +406,8 @@ namespace Transa
                         {
                             var result3 = MessageBox.Show(conto,
                                 "Questo conto non è gestito!!!",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Error);
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                             return null;
                         }
                         break;
@@ -445,8 +442,8 @@ namespace Transa
                         {
                             var result3 = MessageBox.Show(conto,
                                 "Questo conto non è gestito!!!",
-                                MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Error);
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                             return null;
                         }
                         break;

@@ -360,22 +360,27 @@ namespace Transa
                 return false;
             }
 
-            // verifica che il conto sorgente è stato validato
-            if (!ContoSorgente.EValido())
+            // Se non è una transizione di addebito non esegue il controllo su conti perche,
+            // l'operazione sarà poi annulata.
+            if (transizione.Addebito != 0.0)
             {
-                string messaggio2 = "La transizione non può essere eseguita:";
-                LData.ETransaErrore esito = LData.ETransaErrore.E1210_ContoSorgenteNonValido;
-                lData.StampaMessaggioErrore(esito, messaggio2, true, false);
-                return false;
-            }
+                // verifica che il conto sorgente è stato validato
+                if (!ContoSorgente.EValido())
+                {
+                    string messaggio2 = "La transizione non può essere eseguita:";
+                    LData.ETransaErrore esito = LData.ETransaErrore.E1210_ContoSorgenteNonValido;
+                    lData.StampaMessaggioErrore(esito, messaggio2, true, false);
+                    return false;
+                }
 
-            // verifica che il conto destinazione è stato validato
-            if (!ContoDestinazione.EValido())
-            {
-                string messaggio2 = "La transizione non può essere eseguita:";
-                LData.ETransaErrore esito = LData.ETransaErrore.E1211_ContoDestinazioneNonValido;
-                lData.StampaMessaggioErrore(esito, messaggio2, true, false);
-                return false;
+                // verifica che il conto destinazione è stato validato
+                if (!ContoDestinazione.EValido())
+                {
+                    string messaggio2 = "La transizione non può essere eseguita:";
+                    LData.ETransaErrore esito = LData.ETransaErrore.E1211_ContoDestinazioneNonValido;
+                    lData.StampaMessaggioErrore(esito, messaggio2, true, false);
+                    return false;
+                }
             }
 
             // Aggiorna finestra esito
@@ -817,25 +822,6 @@ namespace Transa
             // Richiede di validare il conto destinazione
             ContoDestinazione.Valida();
         }
-        /// <summary>
-        /// Selezione conto sorgente
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treeViewSorgente_MouseClick(object sender, MouseEventArgs e)
-        {
-            EstraeTagSorgente();
-        }
-        /// <summary>
-        /// Seleziona conto destinazione
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void treeViewDestinazione_MouseClick(object sender, MouseEventArgs e)
-        {
-            EstraeTagDestinazione();
-        }
-        
     }
 }
  
