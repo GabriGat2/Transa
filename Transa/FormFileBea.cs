@@ -99,12 +99,19 @@ namespace Transa
             // Azzera la lista delle transizioni
             transizioni.Clear();
 
+            // Rigenera transizione (va reso dinamico)
+            transizione = new CTransizione();
+
             // Azzera le caselle di testo
+            textBoxLinea.Text = "";
             textBoxNomeFile.Text = "";
             textBoxContoDestinazione.Text = "";
             textBoxNumOperazione.Text = "";
             textBoxValoreOperazione.Text = "";
             textBoxOffsetNum.Text = "6000";
+            labelLinee.Text = "?/??";
+            richTextBoxLinee.Clear();
+
 
             // Crea conto sorgente
             ContoSorgente = new CConto(ref textBoxContoSorgente);

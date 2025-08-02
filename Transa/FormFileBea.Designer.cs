@@ -229,9 +229,9 @@
             this.labelLinee.AutoSize = true;
             this.labelLinee.Location = new System.Drawing.Point(165, 28);
             this.labelLinee.Name = "labelLinee";
-            this.labelLinee.Size = new System.Drawing.Size(25, 13);
+            this.labelLinee.Size = new System.Drawing.Size(30, 13);
             this.labelLinee.TabIndex = 38;
-            this.labelLinee.Text = "???";
+            this.labelLinee.Text = "?/??";
             // 
             // labelStatoTranzizione
             // 
