@@ -111,6 +111,7 @@ namespace Transa
             textBoxOffsetNum.Text = "6000";
             labelLinee.Text = "?/??";
             richTextBoxLinee.Clear();
+            textBoxNota.Text = "";
 
 
             // Crea conto sorgente
@@ -268,6 +269,8 @@ namespace Transa
             // Aggiorna il contatore di linee del file transioni
             labelLinee.Text = transizioni.Indice.ToString() + "\\" +  transizioni.NumeroTransizioni.ToString();
 
+            // Azzera la nota 
+            textBoxNota.Text = "";
 
             // Invalida i conti
             ContoSorgente.Invalida();
@@ -324,8 +327,7 @@ namespace Transa
             }
 
             // assegna causale operazione
-            textBoxCausaleOperazione.Text = "TR: " + transizione.Causale;
-
+            AggiornaCausale();
             // assegna data
             dateTimeOperazione.Value = transizione.Data;
 
@@ -828,6 +830,26 @@ namespace Transa
         {
             // Richiede di validare il conto destinazione
             ContoDestinazione.Valida();
+        }
+        /// <summary>
+        /// Esegue l'aggiornamento della causale quando il testo della nota cambia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxNota_TextChanged(object sender, EventArgs e)
+        {
+            AggiornaCausale();
+        }
+        /// <summary>
+        /// Aggiorna il testo della causale
+        /// </summary>
+        private void AggiornaCausale()
+        {
+            // Aggiorna il testo della causale
+            if (textBoxNota.Text.Length > 0) 
+                textBoxCausaleOperazione.Text = "TR: " + textBoxNota.Text + ": " + transizione.Causale;
+            else
+                textBoxCausaleOperazione.Text = "TR: " + transizione.Causale;
         }
     }
 }

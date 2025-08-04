@@ -71,6 +71,8 @@
             this.groupBoxEsito = new System.Windows.Forms.GroupBox();
             this.richTextBoxLinee = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxNota = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -286,6 +288,8 @@
             // 
             // groupBoxLineeFile
             // 
+            this.groupBoxLineeFile.Controls.Add(this.label9);
+            this.groupBoxLineeFile.Controls.Add(this.textBoxNota);
             this.groupBoxLineeFile.Controls.Add(this.label3);
             this.groupBoxLineeFile.Controls.Add(this.textBoxLinea);
             this.groupBoxLineeFile.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -585,6 +589,23 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 54);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(30, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Nota";
+            // 
+            // textBoxNota
+            // 
+            this.textBoxNota.Location = new System.Drawing.Point(74, 51);
+            this.textBoxNota.Name = "textBoxNota";
+            this.textBoxNota.Size = new System.Drawing.Size(802, 20);
+            this.textBoxNota.TabIndex = 7;
+            this.textBoxNota.TextChanged += new System.EventHandler(this.textBoxNota_TextChanged);
+            // 
             // FormFileBea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -682,5 +703,7 @@
         private System.Windows.Forms.GroupBox groupBoxGestioneTransizione;
         private System.Windows.Forms.GroupBox groupBoxOperazione;
         private System.Windows.Forms.Label labelLinee;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxNota;
     }
 }
