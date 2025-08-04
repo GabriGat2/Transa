@@ -232,7 +232,7 @@ namespace Transa
 
             // ricompone il campo della causale
             string causale = campi[ColonnaCausale];
-            for (int i = ColonnaCausale; i < campi.Length; i++)
+            for (int i = ColonnaCausale + 1; i < campi.Length; i++)
             {
                 causale += ",";
                 causale += campi[i];
