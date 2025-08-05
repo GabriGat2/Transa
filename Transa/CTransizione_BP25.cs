@@ -50,7 +50,7 @@ namespace Transa
                 return new DateTime(1959, 9, 1);
 
             // Scompone la data
-            string[] campiData = CampiTransizione[(int)EColonneTransizione.DataContabile].Split('/');
+            string[] campiData = CampiTransizione[(int)EColonneTransizione.DataValuta].Split('/');
             if (campiData.Length == 3)
                 return new DateTime(Convert.ToInt32(campiData[2]), Convert.ToInt32(campiData[1]), Convert.ToInt32(campiData[0]));
             else

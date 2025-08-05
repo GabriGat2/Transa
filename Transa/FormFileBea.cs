@@ -53,7 +53,7 @@ namespace Transa
         /// <summary>
         /// Transizione attiva
         /// </summary>
-        protected CTransizione transizione = new CTransizione();
+        protected CTransizione transizione = new CTransizione_BP25();
 
         /// <summary>
         /// Conto sorgente
@@ -100,7 +100,7 @@ namespace Transa
             transizioni.Clear();
 
             // Rigenera transizione (va reso dinamico)
-            transizione = new CTransizione();
+            transizione = new CTransizione_BP25();
 
             // Azzera le caselle di testo
             textBoxLinea.Text = "";
