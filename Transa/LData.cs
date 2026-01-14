@@ -173,6 +173,17 @@ namespace Transa
         /// Lista dei conti Passivita
         /// </summary>
         public List<string> contiPassivita = new List<string>();
+        /// <summary>
+        /// Lista dei conti BancoPosta-BG
+        /// </summary>
+        public List<string> contiBancoPostaBG = new List<string>();
+        /// <summary>
+        /// Lista dei conti SpeseBeatrice
+        /// </summary>
+        public List<string> contiSpeseBeatrice = new List<string>();
+        /// Lista dei conti SpeseIstruzioneBeatrice
+        /// </summary>
+        public List<string> contiSpeseIstruzioneBeatrice = new List<string>();
         // =====================================================================================
         // ====== Selezione tipo Conti
         // =====================================================================================
@@ -325,6 +336,17 @@ namespace Transa
 
             // Operazioni
             E1200_UnaOperazioneInCorso,
+            E1201_TransizioneVuota,
+            E1202_TransizioneSelezionata,
+            E1203_TransizioneAnalizzata,
+            E1204_TransizioneNonVuota,
+            E1205_TransizioneNonSelezionata,
+            E1206_TransizioneNonAnalizzata,
+
+
+            E1210_ContoSorgenteNonValido,
+            E1211_ContoDestinazioneNonValido,
+
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte

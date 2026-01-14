@@ -13,7 +13,7 @@ namespace Transa
     public partial class FormNewOperation : Form
     {
         /// <summary>
-        /// SOperazione in corso
+        /// Operazione in corso
         /// </summary>
         private bool lOperazioneValida = false;
         /// <summary>
@@ -1823,8 +1823,10 @@ namespace Transa
 
                 case SezioneConto.ContoBase:
                     porzioniConto = contoCompleto.Split(':');
-                    if (porzioniConto.Length >= indPorzioneBase)
+                    if (porzioniConto.Length > indPorzioneBase)
                         contoReso = porzioniConto[indPorzioneBase];
+                    else
+                        contoReso = porzioniConto[porzioniConto.Length-1];
                     break;
 
                 default:

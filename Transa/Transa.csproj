@@ -74,7 +74,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CConto.cs" />
+    <Compile Include="CListaTransizioni.cs" />
     <Compile Include="ConvertAG.cs" />
+    <Compile Include="CTransizione.cs" />
+    <Compile Include="CTransizione_BP25.cs" />
+    <Compile Include="FormFileBea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFileBea.Designer.cs">
+      <DependentUpon>FormFileBea.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGstValue.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,9 +109,13 @@
     <Compile Include="FormGstStrConti.Designer.cs">
       <DependentUpon>FormGstStrConti.cs</DependentUpon>
     </Compile>
+    <Compile Include="GstErrori.cs" />
     <Compile Include="LData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFileBea.resx">
+      <DependentUpon>FormFileBea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGstValue.resx">
       <DependentUpon>FormGstValue.cs</DependentUpon>
     </EmbeddedResource>

@@ -40,6 +40,7 @@ namespace Transa
             this.butAddRow = new System.Windows.Forms.Button();
             this.butOpenFile = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.butFileBea = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -68,6 +69,7 @@ namespace Transa
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.butFileBea);
             this.panel1.Controls.Add(this.butModificaOperazione);
             this.panel1.Controls.Add(this.butAccounts);
             this.panel1.Controls.Add(this.butNewOperation);
@@ -156,6 +158,16 @@ namespace Transa
             this.butOpenFile.UseVisualStyleBackColor = true;
             this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click);
             // 
+            // butFileBea
+            // 
+            this.butFileBea.Location = new System.Drawing.Point(929, 9);
+            this.butFileBea.Name = "butFileBea";
+            this.butFileBea.Size = new System.Drawing.Size(120, 23);
+            this.butFileBea.TabIndex = 8;
+            this.butFileBea.Text = "File Bea";
+            this.butFileBea.UseVisualStyleBackColor = true;
+            this.butFileBea.Click += new System.EventHandler(this.butFileBea_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +198,7 @@ namespace Transa
         private System.Windows.Forms.Button butNewOperation;
         private System.Windows.Forms.Button butAccounts;
         private System.Windows.Forms.Button butModificaOperazione;
+        private System.Windows.Forms.Button butFileBea;
     }
 }
 

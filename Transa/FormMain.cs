@@ -22,7 +22,11 @@ namespace Transa
         /// Oggetto  per la gestione dei valori transazioni
         /// </summary>
         public FormNewOperation GTransa;
-       
+        /// <summary>
+        /// Oggetto per la gestione dei file Bea con le transazioni di Banco Posta
+        /// </summary>
+        public FormFileBea GTransaBea;
+
         /// <summary>
         /// Tabella transizioni completa
         /// </summary>
@@ -37,6 +41,9 @@ namespace Transa
 
             // Crea l'oggeto per la gestione delle transazioni
             GTransa = new FormNewOperation(ref lData);
+
+            // Crea l'oggetto per la gestione dei file Bea
+            GTransaBea = new FormFileBea(ref lData);
 
             InitializeComponent();
             SetupDataGridView();
@@ -577,6 +584,64 @@ namespace Transa
             }
 
             return fileName;
+        }
+        /// <summary>
+        /// Analizza un file di transizioni generato da Banco Posta di Bea
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butFileBea_Click(object sender, EventArgs e)
+        {
+            GestioneTransazioneBea(true);
+        }
+
+        /// <summary>
+        /// Analizza un file di transizioni generato da Banco Posta di Bea
+        /// </summary>
+        /// <param name="azzera"></param>
+        private void GestioneTransazioneBea(bool azzera)
+        {
+            // Verifica se la struttura dei conti è OK
+            if (!lData.ContiOk)
+            {
+                string messaggio2 = "ContiOk = " + lData.ContiOk.ToString();
+
+                LData.ETransaErrore esito = LData.ETransaErrore.E1103_StrutturaDeiContiNonDisponibile;
+
+                lData.StampaMessaggioErrore(esito, messaggio2, true, false);
+                return;
+            }
+
+
+            // controlla se deve reinizializzare tutto
+            if (!GTransaBea.OperazioneInizializata)
+            {
+                GTransaBea.AzzeraTutto();
+
+                // rigenera la tabella delle transizioni
+                RigeneratransactionDataGridView();
+            }
+            else if (azzera)
+            {
+                string messaggio2 = "Vuoi cancellare l'operazione in corso?";
+
+                LData.ETransaErrore esito = LData.ETransaErrore.E1200_UnaOperazioneInCorso;
+
+                if (lData.StampaMessaggioErrore(esito, messaggio2))
+                {
+                    GTransaBea.AzzeraTutto();
+
+                    // rigenera la tabella delle transizioni
+                    RigeneratransactionDataGridView();
+                }
+            }
+
+            // Assegna il riferimento alla griglia delle transizioni
+            GTransaBea.TransactionDataGridView = transactionDataGridView;
+
+            // apre la dialog per la gestione della transazione
+            GTransaBea.ShowDialog();
+
         }
 
     }
