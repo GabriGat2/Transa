@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5C109A32AA0C3361C19D953ED1421501D6A61335</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>42BFFAB7E373627DB2E2057FBDFAFDF5B9D169AF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Transa_TemporaryKey.pfx</ManifestKeyFile>

@@ -229,7 +229,7 @@ namespace Transa
                     subOperazione[0] = promemoriaSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[1] = contoSrc + ":Dep:Dep-" + lData.sGruppoSottoconti[i];
                     subOperazione[2] = GValori.sValoreSottoContoDepSorgente(i);
-                    if (!(GValori.IsZeroValoreSottoContoCntSorgente(i) && filtra0Src))
+                    if (!(GValori.IsZeroValoreSottoContoDepSorgente(i) && filtra0Src))
                         AddTransizione(ref dataGridViewSorgenteOperazione, subOperazione);
                 }
             }
